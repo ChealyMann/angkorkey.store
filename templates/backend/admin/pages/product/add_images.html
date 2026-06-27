@@ -1,0 +1,254 @@
+{% extends 'backend/admin/master.html' %}
+
+{% block main %}
+<link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    .font-khmer { font-family: 'Kantumruy Pro', 'Inter', sans-serif; }
+
+    .upload-area {
+        border: 2px dashed var(--border-light);
+        background-color: var(--bg-main);
+        transition: all 0.2s ease;
+    }
+
+    .upload-area:hover {
+        border-color: var(--accent-black);
+        background-color: var(--bg-hover);
+        cursor: pointer;
+    }
+
+    .image-container {
+        border: 1px solid var(--border-light);
+        background-color: var(--bg-main);
+    }
+
+    /* Scrollbar Styling */
+    .image-strip {
+        display: flex;
+        gap: 16px;
+        overflow-x: auto;
+        padding-bottom: 15px;
+        white-space: nowrap;
+        scrollbar-width: thin;
+    }
+    .image-strip::-webkit-scrollbar { height: 6px; }
+    .image-strip::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
+    .image-strip::-webkit-scrollbar-track { background: var(--bg-main); }
+</style>
+
+<div class="font-khmer w-auto mx-4 mt-4 mb-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="text-main mb-1" style="font-weight: 500; letter-spacing: -0.02em;">វិចិត្រសាលរូបភាព</h3>
+            <span class="text-muted" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;">Image Gallery: <span class="fw-bold text-main">{{ product.name }}</span></span>
+        </div>
+        <a href="{{ url_for('product.product') }}" class="btn btn-link text-decoration-none d-flex align-items-center" style="color: var(--text-muted); font-weight: 500;">
+            <i class="fa-solid fa-arrow-left me-2"></i> ត្រឡប់ក្រោយ (Back)
+        </a>
+    </div>
+
+    <form action="{{ url_for('product.product_add_image', product_id=product.id) }}" method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="card p-4 p-lg-5 mb-4">
+            <h6 class="text-muted fw-bold mb-3 text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.1em;">រូបភាពថ្មី (Upload New Images)</h6>
+
+            {{ form.images(class="d-none", id="image_upload", accept=".jpg, .png, .webp, .jpeg", multiple=True) }}
+
+            <label for="image_upload" class="upload-area w-100 p-5 text-center rounded-3 mb-4">
+                <div class="mb-2">
+                    <i class="bi bi-images text-muted" style="font-size: 2.5rem;"></i>
+                </div>
+                <h6 class="fw-bold mb-1 text-main" style="font-size: 0.9rem;">ទាញទម្លាក់ ឬ ចុចទីនេះ (Drag & Drop or Click)</h6>
+                <p class="text-muted small mb-0" style="font-size: 0.75rem">JPG, PNG or WEBP accepted</p>
+            </label>
+
+            <div id="new-images-container" class="image-strip">
+                </div>
+        </div>
+
+        <div class="card p-4 p-lg-5">
+            <h6 class="text-muted fw-bold mb-3 text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.1em;">រូបភាពដែលមានស្រាប់ (Existing Gallery)</h6>
+
+            {% if product.images %}
+            <div class="image-strip" id="existing-images-container">
+                {% for img in product.images %}
+                <div class="position-relative d-inline-block flex-shrink-0 p-1 rounded-3 image-container">
+                    <img src="{{ url_for('static',filename='images/'+img.image) }}" alt="Product Image" class="d-block rounded-3" style="height: 160px; width: auto; object-fit: cover;">
+                    <button type="button"
+                        class="btn btn-light border btn-sm position-absolute top-0 end-0 m-2 rounded-circle shadow-sm d-flex align-items-center justify-content-center delete-image-btn"
+                        style="width: 32px; height: 32px; padding: 0; z-index: 10;" title="Delete Image"
+                        data-delete-url="{{ url_for('product.product_image_delete', image_id=img.id) }}">
+                        <i class="fas fa-times text-danger"></i>
+                    </button>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="p-4 border rounded-3 bg-main text-center" style="border-style: dashed !important; border-color: var(--border-light) !important; background-color: var(--bg-main);">
+                <i class="fa-regular fa-image mb-2 text-muted" style="font-size: 1.5rem;"></i>
+                <p class="text-muted small mb-0">មិនទាន់មានរូបភាពនៅឡើយទេ (No existing images found)</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="d-flex justify-content-end mt-4">
+            {{ form.submit(class="btn btn-dark px-5 py-2", id='btn_add', value="រក្សាទុករូបភាព (Save Images)", style="font-weight: 500; border-radius: 8px;") }}
+        </div>
+    </form>
+</div>
+
+<script defer>
+    const image_upload = document.getElementById('image_upload');
+    const container = document.getElementById('new-images-container');
+    let dt = new DataTransfer();
+    let globalIndex = 0;
+
+    image_upload.addEventListener('change', function (e) {
+        let files = e.target.files
+        if (files) {
+            for (let index = 0; index < files.length; index++) {
+                const file = files[index]
+                dt.items.add(file)
+
+                // --- UI CREATION ---
+                const my_div = document.createElement('div')
+                my_div.setAttribute("class", "position-relative flex-shrink-0 rounded-3 p-1 image-container")
+                my_div.style.transition = 'all 0.3s ease';
+
+                const img = document.createElement('img')
+                img.setAttribute("class", "d-block rounded-3")
+                img.setAttribute("id", `preview_img_${globalIndex}`)
+                img.setAttribute("title", "Double click to remove")
+                globalIndex++;
+
+                img.style.width = "auto"
+                img.style.height = "160px"
+                img.style.cursor = "pointer"
+                img.style.border = "1px solid transparent"
+                img.draggable = false
+
+                // Remove Logic
+                img.addEventListener('dblclick', function (e) {
+                    my_div.remove()
+                    for (let loop = 0; loop < dt.files.length; loop++) {
+                        if (file === dt.items[loop].getAsFile()) {
+                            dt.items.remove(loop)
+                            break;
+                        }
+                    }
+                    image_upload.files = dt.files
+                })
+
+                // Hover Effects
+                img.style.transition = 'border-color 0.2s ease';
+                img.addEventListener('mouseout', () => (img.style.borderColor = 'transparent'))
+                img.addEventListener('mouseover', () => (img.style.borderColor = 'var(--accent-black)'))
+
+                my_div.append(img)
+
+                // Add "X" badge
+                const badge = document.createElement('button');
+                badge.innerHTML = '<i class="fas fa-times"></i>';
+                badge.setAttribute('class', 'btn btn-light border btn-sm position-absolute top-0 end-0 rounded-circle d-flex align-items-center justify-content-center shadow-sm text-danger');
+                badge.style.width = '32px';
+                badge.style.height = '32px';
+                badge.style.margin = '8px';
+                badge.style.zIndex = '10';
+
+                // Click event to remove
+                badge.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    my_div.remove();
+                    for (let loop = 0; loop < dt.files.length; loop++) {
+                        if (file === dt.items[loop].getAsFile()) {
+                            dt.items.remove(loop);
+                            break;
+                        }
+                    }
+                    image_upload.files = dt.files;
+                });
+
+                my_div.append(badge);
+
+                const reader = new FileReader()
+                reader.addEventListener('load', function (e) {
+                    img.setAttribute('src', `${reader.result}`)
+                    container.append(my_div)
+                })
+                reader.readAsDataURL(file)
+            }
+        }
+        image_upload.files = dt.files
+    })
+</script>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div id="flash-messages-data" data-messages="{{ messages | tojson | forceescape }}" style="display: none;"></div>
+<script>
+        (function () {
+            const dataDiv = document.getElementById('flash-messages-data');
+            if (dataDiv) {
+                try {
+                    const messages = JSON.parse(dataDiv.getAttribute('data-messages'));
+                    messages.forEach(([category, message]) => {
+                        let title = "Error";
+                        if (category === "success") title = "ជោគជ័យ";
+                        else if (category === "error" || category === "danger") title = "បរាជ័យ";
+
+                        Swal.fire({
+                            title: title,
+                            text: message,
+                            icon: category === "danger" ? "error" : category,
+                            showConfirmButton: false,
+                            timer: 1500,
+                            timerProgressBar: true,
+                            background: "var(--bg-card)",
+                            color: "var(--text-main)"
+                        });
+                    });
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+        })();
+</script>
+{% endif %}
+{% endwith %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('.delete-image-btn');
+        deleteButtons.forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const deleteUrl = this.getAttribute('data-delete-url');
+
+                Swal.fire({
+                    title: "តើអ្នកប្រាកដទេ?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#000000",
+                    cancelButtonColor: "#e5e7eb",
+                    cancelButtonText: "<span style='color: #000'>បោះបង់ (Cancel)</span>",
+                    confirmButtonText: "លុប (Delete)",
+                    background: "var(--bg-card)",
+                    color: "var(--text-main)"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        const form = document.createElement('form');
+                        form.method = 'POST';
+                        form.action = deleteUrl;
+                        document.body.appendChild(form);
+                        form.submit();
+                    }
+                });
+            });
+        });
+    });
+</script>
+{% endblock %}

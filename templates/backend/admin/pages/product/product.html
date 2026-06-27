@@ -1,0 +1,468 @@
+{% extends 'backend/admin/master.html' %}
+
+{% block main %}
+<link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet">
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<style>
+    .font-khmer {
+        font-family: 'Kantumruy Pro', 'Inter', sans-serif;
+    }
+
+    .table-scroll-area {
+        overflow-y: auto;
+        max-height: calc(100vh - 310px);
+    }
+
+    .table-scroll-area thead th {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        background-color: var(--bg-card) !important;
+    }
+
+
+
+    .product-thumb {
+        width: 45px;
+        height: 45px;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 1px solid var(--border-light);
+        background-color: var(--bg-main);
+    }
+
+    .brand-pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 4px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--border-light);
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .action-btn {
+        border-radius: 6px;
+        color: var(--text-main);
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .action-btn i {
+        font-size: 0.8rem;
+    }
+
+    .variant-btn:hover {
+        background-color: #111827 !important;
+        color: #ffffff !important;
+        border-color: #111827 !important;
+    }
+
+    .delete-btn {
+        color: #ef4444 !important;
+    }
+
+    .delete-btn:hover {
+        background-color: #fee2e2 !important;
+        border-color: #fecaca !important;
+    }
+
+    .search-box {
+        border-radius: 10px;
+        border: 1px solid var(--border-light);
+        background-color: var(--bg-card);
+        color: var(--text-main);
+        font-size: 0.9rem;
+        padding: 10px 14px;
+    }
+
+    .search-box:focus {
+        box-shadow: none;
+        border-color: #111827;
+        background-color: var(--bg-card);
+        color: var(--text-main);
+    }
+
+    .filter-select {
+        border-radius: 10px;
+        border: 1px solid var(--border-light);
+        background-color: var(--bg-card);
+        color: var(--text-main);
+        font-size: 0.85rem;
+        padding: 10px 14px;
+    }
+
+    .empty-state {
+        padding: 70px 20px;
+        text-align: center;
+        color: var(--text-muted);
+    }
+
+    .empty-state i {
+        font-size: 2.4rem;
+        color: var(--border-light);
+        margin-bottom: 12px;
+    }
+
+    [v-cloak] {
+        display: none;
+    }
+</style>
+
+<div id="productApp" v-cloak class="font-khmer w-auto mx-4 mt-4 mb-4">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <h3 class="text-main mb-1" style="font-weight: 500; letter-spacing: -0.02em;">
+                ការគ្រប់គ្រងផលិតផល
+            </h3>
+            <span class="text-muted"
+                  style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;">
+                Product Management
+            </span>
+        </div>
+
+        <div class="d-flex gap-2">
+            <a href="{{ url_for('product.variant_settings') }}" class="text-decoration-none">
+                <button class="btn btn-outline-dark shadow-sm px-4" style="border-radius: 8px; font-weight: 500;">
+                    <i class="fa-solid fa-sliders me-2"></i> Variant Settings
+                </button>
+            </a>
+
+            <a href="{{ url_for('product.product_add') }}" class="text-decoration-none">
+                <button class="btn btn-dark shadow-sm px-4" style="border-radius: 8px; font-weight: 500;">
+                    <i class="fa-solid fa-plus me-2"></i> បង្កើតថ្មី (Add New)
+                </button>
+            </a>
+        </div>
+    </div>
+
+    <!-- Search + Filters -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="row g-3 align-items-center">
+
+                <div class="col-12 col-lg-6">
+                    <input
+                        v-model="search"
+                        type="text"
+                        class="form-control search-box"
+                        placeholder="Search product by name, category, brand, price..."
+                    >
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-3">
+                    <select v-model="selectedBrand" class="form-select filter-select">
+                        <option value="">All Brands</option>
+                        <option v-for="brand in brands" :key="brand" :value="brand">
+                            [[ brand ]]
+                        </option>
+                    </select>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-3">
+                    <select v-model="selectedStatus" class="form-select filter-select">
+                        <option value="">All Status</option>
+                        <option value="true">Active</option>
+                        <option value="false">Inactive</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Table -->
+    <div class="card overflow-hidden">
+        <div class="card-body p-0">
+            <div class="table-scroll-area scrollbar-hidden">
+                <table class="table table-hover mb-0 align-middle">
+                    <thead>
+                    <tr>
+                        <th class="text-center py-3 ps-4" style="width: 80px;">ID</th>
+                        <th class="py-3" style="width: 80px;">IMAGE</th>
+                        <th class="py-3" style="width: 250px;">NAME</th>
+                        <th class="py-3" style="width: 160px;">CATEGORY</th>
+                        <th class="py-3" style="width: 140px;">BRAND</th>
+                        <th class="text-end py-3" style="width: 120px;">PRICE</th>
+                        <th class="text-end py-3" style="width: 120px;">COST</th>
+                        <th class="text-center py-3" style="width: 120px;">STATUS</th>
+                        <th class="text-end py-3 pe-4" style="width: 210px;">ACTION</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr v-for="product in filteredProducts" :key="product.id">
+                        <td class="text-center text-muted font-12 ps-4">
+                            #[[ product.id ]]
+                        </td>
+
+                        <td>
+                            <a :href="getImageManageUrl(product.id)"
+                               class="d-inline-block position-relative"
+                               title="Manage Images">
+
+                                <img :src="getImageUrl(product.image)"
+                                     class="product-thumb"
+                                     :alt="product.name">
+
+                                <div class="position-absolute bottom-0 end-0 bg-dark text-white rounded-circle d-flex align-items-center justify-content-center border border-white"
+                                     style="width: 16px; height: 16px; font-size: 8px; transform: translate(20%, 20%);">
+                                    <i class="fa-solid fa-images"></i>
+                                </div>
+                            </a>
+                        </td>
+
+                        <td class="text-main" style="font-weight: 500;">
+                            [[ product.name ]]
+                            <div v-if="product.best_selling" class="mt-1">
+                                <span class="badge bg-warning text-dark" style="font-size: 10px; font-weight: 600;">
+                                    <i class="fa-solid fa-star me-1"></i>Best Seller
+                                </span>
+                            </div>
+                        </td>
+
+                        <td class="text-muted font-14">
+                            [[ product.category_name || '-' ]]
+                        </td>
+
+                        <td class="text-muted font-14">
+                            <span v-if="product.brand_name && product.brand_name !== '-'" class="brand-pill">
+                                [[ product.brand_name ]]
+                            </span>
+                            <span v-else class="text-muted">-</span>
+                        </td>
+
+                        <td class="text-end text-main" style="font-weight: 600;">
+                            $[[ formatMoney(product.price) ]]
+                        </td>
+
+                        <td class="text-end text-muted font-14">
+                            $[[ formatMoney(product.cost) ]]
+                        </td>
+
+                        <td class="text-center">
+                            <span v-if="product.status === 'false'" class="badge bg-danger">
+                                Inactive
+                            </span>
+                            <span v-else class="badge bg-success">
+                                Active
+                            </span>
+                        </td>
+
+                        <td class="text-end pe-4">
+                            <div class="d-flex justify-content-end gap-2">
+
+                                <a :href="getVariantUrl(product.id)"
+                                   class="btn btn-light btn-sm border action-btn variant-btn"
+                                   title="Manage Variants">
+                                    <i class="fa-solid fa-layer-group"></i>
+                                </a>
+
+                                <a :href="getImageManageUrl(product.id)"
+                                   class="btn btn-light btn-sm border action-btn"
+                                   title="Manage Images">
+                                    <i class="fa-solid fa-images"></i>
+                                </a>
+
+                                <a :href="getEditUrl(product.id)"
+                                   class="btn btn-light btn-sm border action-btn"
+                                   title="Edit Product">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+
+                                <form :action="getDeleteUrl(product.id)"
+                                      method="post"
+                                      class="m-0 delete-form">
+                                    <button type="button"
+                                            class="btn btn-light btn-sm border action-btn delete-btn"
+                                            title="Delete Product"
+                                            @click="confirmDelete($event)">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </form>
+
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr v-if="filteredProducts.length === 0">
+                        <td colspan="9">
+                            <div class="empty-state">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <p class="mb-1 fw-semibold">No products found</p>
+                                <small>Try another search keyword or filter.</small>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card-footer bg-transparent border-top py-3 px-4 d-flex justify-content-between align-items-center">
+            <span class="text-muted"
+                  style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;">
+                Showing:
+                <span class="text-main fw-bold">[[ filteredProducts.length ]]</span>
+                /
+                <span class="text-main fw-bold">[[ productList.length ]]</span>
+            </span>
+
+            <button v-if="search || selectedBrand || selectedStatus"
+                    class="btn btn-sm btn-outline-dark"
+                    style="border-radius: 8px;"
+                    @click="clearFilters">
+                Clear Search
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const { createApp } = Vue;
+
+    createApp({
+        delimiters: ['[[', ']]'],
+
+        data() {
+            return {
+                search: '',
+                selectedBrand: '',
+                selectedStatus: '',
+                productList: {{ output | tojson }}
+            };
+        },
+
+        computed: {
+            brands() {
+                const brandSet = new Set();
+
+                this.productList.forEach(product => {
+                    if (product.brand_name && product.brand_name !== '-') {
+                        brandSet.add(product.brand_name);
+                    }
+                });
+
+                return Array.from(brandSet).sort();
+            },
+
+            filteredProducts() {
+                const keyword = this.search.toLowerCase().trim();
+
+                return this.productList.filter(product => {
+                    const searchableText = `
+                        ${product.id}
+                        ${product.name}
+                        ${product.category_name}
+                        ${product.brand_name}
+                        ${product.price}
+                        ${product.cost}
+                    `.toLowerCase();
+
+                    const matchSearch = searchableText.includes(keyword);
+
+                    const matchBrand =
+                        this.selectedBrand === '' ||
+                        product.brand_name === this.selectedBrand;
+
+                    const matchStatus =
+                        this.selectedStatus === '' ||
+                        product.status === this.selectedStatus;
+
+                    return matchSearch && matchBrand && matchStatus;
+                });
+            }
+        },
+
+        methods: {
+            formatMoney(value) {
+                return Number(value || 0).toFixed(2);
+            },
+
+            clearFilters() {
+                this.search = '';
+                this.selectedBrand = '';
+                this.selectedStatus = '';
+            },
+
+            getImageUrl(imageName) {
+                if (!imageName || imageName === 'none.jpg') {
+                    return "{{ url_for('static', filename='images/none.jpg') }}";
+                }
+
+                return "{{ url_for('static', filename='images/') }}" + imageName;
+            },
+
+            getVariantUrl(id) {
+                return "/admin/product/variant/" + id;
+            },
+
+            getImageManageUrl(id) {
+                return "/admin/product/add_image/" + id;
+            },
+
+            getEditUrl(id) {
+                return "/admin/product/edit/" + id;
+            },
+
+            getDeleteUrl(id) {
+                return "/admin/product/delete/" + id;
+            },
+
+            confirmDelete(event) {
+                event.preventDefault();
+
+                const form = event.target.closest('form');
+
+                Swal.fire({
+                    title: "តើអ្នកប្រាកដទេ?",
+                    text: "ទិន្នន័យដែលលុបហើយមិនអាចយកមកវិញបានទេ!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#000000",
+                    cancelButtonColor: "#e5e7eb",
+                    cancelButtonText: "<span style='color: #000'>បោះបង់ (Cancel)</span>",
+                    confirmButtonText: "លុប (Delete)",
+                    background: "var(--bg-card)",
+                    color: "var(--text-main)"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            }
+        }
+    }).mount('#productApp');
+</script>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <script>
+            {% for category, message in messages %}
+                Swal.fire({
+                    title: '{{ "ជោគជ័យ" if category == "success" else "បរាជ័យ" }}',
+                    text: '{{ message }}',
+                    icon: '{{ "error" if category == "error" else category }}',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true,
+                    background: "var(--bg-card)",
+                    color: "var(--text-main)"
+                });
+            {% endfor %}
+        </script>
+    {% endif %}
+{% endwith %}
+
+{% endblock %}

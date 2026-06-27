@@ -1,0 +1,680 @@
+{% extends "frontend/main.html" %}
+
+{% block head %}
+    <!-- ====================================== -->
+    <!-- PRELOAD FIRST 5 VISIBLE PRODUCT IMAGES -->
+    <!-- Eagerly fetch above-the-fold images    -->
+    <!-- so they appear instantly on page load  -->
+    <!-- ====================================== -->
+    {% set preload_count = namespace(value=0) %}
+    {% for group in brand_groups %}
+        {% for product in group.products %}
+            {% if preload_count.value < 5 and product.image %}
+                <link
+                    rel="preload"
+                    as="image"
+                    href="{{ url_for('static', filename='images/resized_' + product.image) }}"
+                    fetchpriority="high"
+                >
+                {% set preload_count.value = preload_count.value + 1 %}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+    <!-- dotLottie Web Player for dynamic category switching -->
+    <script type="module" src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"></script>
+{% endblock %}
+
+{% block content %}
+
+    <!-- ====================================== -->
+    <!-- PAGE STYLES -->
+    <!-- ====================================== -->
+    <style>
+        /* Fade-in animation for product sections */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        /* Main loading overlay */
+        .loading-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.72);
+            z-index: 50;
+            backdrop-filter: blur(3px);
+        }
+
+        .dark .loading-overlay {
+            background: rgba(9, 9, 11, 0.72) !important;
+        }
+
+        /* Brand section title line */
+        .brand-title-line {
+            width: 95px;
+            height: 3px;
+            background: linear-gradient(to right, var(--accent), rgba(9, 9, 11, 0.15));
+            border-radius: 0px;
+        }
+
+        .dark .brand-title-line {
+            background: linear-gradient(to right, var(--accent), rgba(244, 244, 245, 0.15)) !important;
+        }
+
+        /* Hide horizontal scrollbar */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* ====================================== */
+        /* IMAGE SKELETON SHIMMER                 */
+        /* Shows while product images are loading */
+        /* ====================================== */
+        @keyframes shimmer {
+            0%   { background-position: -700px 0; }
+            100% { background-position:  700px 0; }
+        }
+
+        .img-skeleton {
+            background: linear-gradient(
+                90deg,
+                rgba(0,0,0,0.03) 25%,
+                rgba(0,0,0,0.08) 50%,
+                rgba(0,0,0,0.03) 75%
+            );
+            background-size: 700px 100%;
+            animation: shimmer 1.4s infinite linear;
+        }
+
+        .dark .img-skeleton {
+            background: linear-gradient(
+                90deg,
+                rgba(255,255,255,0.02) 25%,
+                rgba(255,255,255,0.07) 50%,
+                rgba(255,255,255,0.02) 75%
+            ) !important;
+        }
+
+        @keyframes skeleton-shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .shimmer-effect {
+            background-color: #f4f4f5;
+            background-image: linear-gradient(90deg, #f4f4f5 25%, #e4e4e7 50%, #f4f4f5 75%);
+            background-size: 200% 100%;
+            animation: skeleton-shimmer 1.5s infinite linear;
+        }
+
+        .dark .shimmer-effect {
+            background-color: #27272a !important;
+            background-image: linear-gradient(90deg, #27272a 25%, #3f3f46 50%, #27272a 75%) !important;
+            background-size: 200% 100% !important;
+        }
+
+        /* Fade image in once it has loaded */
+        .product-img {
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+
+        .product-img.loaded {
+            opacity: 1;
+        }
+    </style>
+
+    <!-- ====================================== -->
+    <!-- PRODUCTS PAGE CONTAINER -->
+    <!-- ====================================== -->
+    <div class="px-4 sm:px-6 lg:px-8 py-8 max-w-[1800px] mx-auto">
+
+        <!-- ====================================== -->
+        <!-- FILTERS SECTION -->
+        <!-- Search + Categories -->
+        <!-- ====================================== -->
+        <div id="filtersContainer" class="mb-5 space-y-4">
+
+            <!-- ====================================== -->
+            <!-- SEARCH INPUT -->
+            <!-- ====================================== -->
+            <!-- ====================================== -->
+            <!-- SEARCH & SORT CONTAINER -->
+            <!-- ====================================== -->
+            <div class="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto md:mx-0">
+                <!-- Search Box -->
+                <div class="relative flex-1">
+                    <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Search products..."
+                            class="w-full bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-none py-2.5 pl-10 pr-4 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-zinc-200 dark:focus:ring-zinc-800 focus:border-zinc-950 dark:focus:border-zinc-50 transition-all shadow-xs"
+                    >
+
+                    <!-- Search icon -->
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                             />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Sort Dropdown -->
+                <div class="relative w-full sm:w-56">
+                    <select
+                            id="sortSelect"
+                            class="w-full bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-none py-2.5 pl-4 pr-10 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-zinc-200 dark:focus:ring-zinc-800 focus:border-zinc-950 dark:focus:border-zinc-50 transition-all shadow-xs appearance-none cursor-pointer"
+                    >
+                        <option value="featured" {% if sort_by == 'featured' %}selected{% endif %}>Default</option>
+                        <option value="price_asc" {% if sort_by == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
+                        <option value="price_desc" {% if sort_by == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
+                        <option value="newest" {% if sort_by == 'newest' %}selected{% endif %}>Newest Drops</option>
+                    </select>
+                    <!-- Custom chevron -->
+                    <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                        <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ====================================== -->
+            <!-- CATEGORY BUTTONS -->
+            <!-- ====================================== -->
+            <div class="relative max-w-full">
+                <div
+                        class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide"
+                        id="categoryContainer"
+                >
+                    <!-- All category button -->
+                    <button
+                            type="button"
+                            onclick="filterCategory(null, this)"
+                            class="category-btn whitespace-nowrap px-5 py-2 rounded-none text-xs font-medium border border-transparent transition-all duration-300 {{ 'bg-zinc-950 dark:bg-zinc-50 text-white dark:text-zinc-950 scale-105 shadow-sm font-semibold' if not current_category else 'bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-white' }}"
+                    >
+                        All
+                    </button>
+
+                    <!-- Dynamic category buttons -->
+                    {% for cat in categories %}
+                        <button
+                                type="button"
+                                onclick="filterCategory({{ cat.id }}, this)"
+                                class="category-btn whitespace-nowrap px-5 py-2 rounded-none text-xs font-medium border border-transparent transition-all duration-300 {{ 'bg-zinc-950 dark:bg-zinc-50 text-white dark:text-zinc-950 scale-105 shadow-sm font-semibold' if current_category == cat.id else 'bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-white' }}"
+                        >
+                            {{ cat.name }}
+                        </button>
+                    {% endfor %}
+                </div>
+
+                <!-- Swipe edge indicator matching body bg-white / bg-zinc-950 -->
+                <div id="scroll-fade-indicator" class="absolute right-0 top-0 bottom-1 w-12 bg-gradient-to-l from-white dark:from-zinc-950 to-transparent pointer-events-none transition-opacity duration-300 opacity-0 sm:hidden"></div>
+            </div>
+        </div>
+
+        <!-- ====================================== -->
+        <!-- PRODUCTS + LOADING SECTION -->
+        <!-- ====================================== -->
+        <div class="relative min-h-[300px]">
+
+
+
+            <!-- ====================================== -->
+            <!-- PRODUCT GRID SECTIONS -->
+            <!-- Product cards are loaded from product_grid.html -->
+            <!-- ====================================== -->
+            <div
+                    id="productSections"
+                    class="space-y-12 transition-opacity duration-300"
+            >
+                {% include 'frontend/layouts/product_grid.html' %}
+            </div>
+
+            <!-- ====================================== -->
+            <!-- INFINITE SCROLL TRIGGER -->
+            <!-- Used to detect bottom scroll and load more products -->
+            <!-- ====================================== -->
+            <div
+                    id="infiniteScrollTrigger"
+                    class="flex justify-center items-center w-full mt-2 py-0 lg:py-8 opacity-0 transition-opacity duration-300"
+            ></div>
+        </div>
+    </div>
+
+    <!-- ====================================== -->
+    <!-- PRODUCTS PAGE JAVASCRIPT -->
+    <!-- Search, category filter, AJAX loading, infinite scroll -->
+    <!-- ====================================== -->
+    <script>
+        (function() {
+        // ======================================
+        // Global State Variables
+        // ======================================
+        let currentCategory = {{ current_category|tojson }};
+        let currentPage = 1;
+        let hasNext = {{ pagination.has_next|tojson }};
+        let isLoading = false;
+        let searchTimeout = null;
+        let loadedProductCount = {{ products|length }};
+
+        // ======================================
+        // DOM Elements
+        // ======================================
+        const trigger = document.getElementById("infiniteScrollTrigger");
+        const productSections = document.getElementById("productSections");
+        const searchInput = document.getElementById("searchInput");
+        const sortSelect = document.getElementById("sortSelect");
+
+        // ======================================
+        // Dynamic Skeleton Card HTML Generator
+        // ======================================
+        function getSkeletonCardHtml() {
+            return `
+            <div class="flex flex-col border border-zinc-200 dark:border-zinc-800 overflow-hidden">
+                <div class="aspect-square shimmer-effect"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between min-h-[110px] bg-white dark:bg-zinc-900">
+                    <div class="space-y-2.5">
+                        <div class="h-2.5 w-1/3 shimmer-effect"></div>
+                        <div class="h-4 w-5/6 shimmer-effect"></div>
+                    </div>
+                    <div class="flex justify-between items-center mt-5">
+                        <div class="h-4 w-1/4 shimmer-effect"></div>
+                        <div class="h-7 w-7 shimmer-effect"></div>
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+
+        // ======================================
+        // IntersectionObserver — lazy image loader
+        // ======================================
+        // Images in product_card.html use data-src instead of src.
+        // The observer watches each img; when it scrolls within
+        // 300 px of the viewport it swaps data-src → src, waits for
+        // load, then fades the image in and removes the skeleton.
+        // ======================================
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+
+                const img = entry.target;
+                const src = img.dataset.src;
+
+                if (src) {
+                    img.src = src;
+
+                    img.onload = () => {
+                        img.classList.add("loaded");
+                        img.closest(".img-skeleton")?.classList.remove("img-skeleton");
+                    };
+
+                    img.onerror = () => {
+                        // Still reveal on error so the alt text shows
+                        img.classList.add("loaded");
+                    };
+
+                    imageObserver.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: "300px"  // load 300 px before entering viewport
+        });
+
+        // ======================================
+        // Observe all [data-src] images inside a container
+        // Called after initial render and after every AJAX inject
+        // ======================================
+        function observeImages(container = document) {
+            container.querySelectorAll("img[data-src]").forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+
+        // Observe images already on the page from server-side render
+        observeImages();
+
+        // ======================================
+        // Bottom Loading Spinner HTML
+        // Used when infinite scroll loads more products
+        // ======================================
+        function bottomSpinnerHtml() {
+            return `
+            <div class="flex justify-center items-center w-full">
+                <dotlottie-player
+                    src="{{ url_for('static', filename='assets/Preloader.lottie') }}"
+                    background="transparent"
+                    speed="1"
+                    style="width: 48px; height: 48px;"
+                    loop
+                    autoplay>
+                </dotlottie-player>
+            </div>
+        `;
+        }
+
+        // ======================================
+        // Hide Infinite Scroll Trigger
+        // ======================================
+        function hideTrigger() {
+            trigger.innerHTML = "";
+            trigger.classList.add("opacity-0");
+        }
+
+        // ======================================
+        // Show Bottom Spinner
+        // ======================================
+        function showBottomSpinner() {
+            trigger.innerHTML = bottomSpinnerHtml();
+            trigger.classList.remove("opacity-0");
+        }
+
+        // ======================================
+        // Show No More Products Message
+        // ======================================
+        function showNoMoreProducts() {
+            trigger.innerHTML = `
+            <span class="text-zinc-500 text-sm font-medium">
+                No more products to load
+            </span>
+        `;
+            trigger.classList.remove("opacity-0");
+        }
+
+        // ======================================
+        // Set Active Category Button
+        // Reset all buttons, then highlight the clicked one
+        // ======================================
+        function setActiveCategoryButton(activeButton) {
+            document.querySelectorAll(".category-btn").forEach((btn) => {
+                btn.className =
+                    "category-btn whitespace-nowrap px-5 py-2 rounded-none text-xs font-medium border border-transparent transition-all duration-300 bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-white";
+            });
+
+            activeButton.className =
+                "category-btn whitespace-nowrap px-5 py-2 rounded-none text-xs font-medium border border-transparent transition-all duration-300 bg-zinc-950 dark:bg-zinc-50 text-white dark:text-zinc-950 scale-105 shadow-sm font-semibold";
+        }
+
+        // ======================================
+        // Infinite Scroll Listener
+        // Loads more products when user scrolls near bottom
+        // ======================================
+        const scrollHandler = () => {
+            if (!document.getElementById("infiniteScrollTrigger")) {
+                window.removeEventListener("scroll", scrollHandler);
+                return;
+            }
+            if (isLoading || !hasNext) return;
+
+            const rect = trigger.getBoundingClientRect();
+
+            if (rect.top <= window.innerHeight + 250) {
+                loadProducts(true);
+            }
+        };
+        window.addEventListener("scroll", scrollHandler);
+
+        // ======================================
+        // Search Input Debounce
+        // Waits 400ms after typing before searching
+        // ======================================
+        searchInput.addEventListener("input", () => {
+            clearTimeout(searchTimeout);
+
+            searchTimeout = setTimeout(() => {
+                resetAndLoad();
+            }, 400);
+        });
+
+        if (sortSelect) {
+            sortSelect.addEventListener("change", () => {
+                resetAndLoad();
+            });
+        }
+
+        // ======================================
+        // Category Filtering
+        // Updates selected category and reloads products
+        // ======================================
+        function filterCategory(catId, btnElement) {
+            currentCategory = catId;
+            setActiveCategoryButton(btnElement);
+
+            // Center selected category button inside horizontal scroll container
+            if (btnElement && typeof btnElement.scrollIntoView === "function") {
+                btnElement.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+            }
+
+            resetAndLoad();
+        }
+
+        // ======================================
+        // Reset Products & Reload
+        // Used when searching or changing category
+        // ======================================
+        function resetAndLoad() {
+            currentPage = 1;
+            hasNext = true;
+            loadedProductCount = 0;
+            hideTrigger();
+
+            const container = document.getElementById("filtersContainer");
+
+            if (container) {
+                const y = container.getBoundingClientRect().top + window.pageYOffset - 100;
+
+                window.scrollTo({
+                    top: y,
+                    behavior: "smooth"
+                });
+            }
+
+            loadProducts(false);
+        }
+
+        // ======================================
+        // ======================================
+        // AJAX Product Loader
+        // isAppend = true  → load next page (infinite scroll)
+        // isAppend = false → replace current products (search/filter)
+        // ======================================
+        async function loadProducts(isAppend = false) {
+            if (isLoading) return;
+
+            isLoading = true;
+
+            // ======================================
+            // Show Correct Loader
+            // ======================================
+            if (isAppend) {
+                showBottomSpinner();
+            } else {
+                // Generate 8 skeleton cards in responsive grid layout matching real card grid
+                const skeletonGrid = `
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 animate-fade-in">
+                        ${Array(8).fill(getSkeletonCardHtml()).join('')}
+                    </div>
+                `;
+                productSections.innerHTML = skeletonGrid;
+                productSections.style.opacity = "1";
+                hideTrigger();
+            }
+
+            try {
+                // ======================================
+                // Build Request URL
+                // ======================================
+                const query = searchInput.value.trim();
+                const requestPage = isAppend ? currentPage + 1 : 1;
+                const sortVal = sortSelect ? sortSelect.value : "featured";
+
+                let url = `{{ url_for('home.products') }}?ajax=1&page=${requestPage}`;
+
+                if (query) {
+                    url += `&search=${encodeURIComponent(query)}`;
+                }
+
+                if (currentCategory) {
+                    url += `&category_id=${currentCategory}`;
+                }
+
+                if (sortVal && sortVal !== "featured") {
+                    url += `&sort=${sortVal}`;
+                }
+
+                // ======================================
+                // Fetch Products From Backend
+                // ======================================
+                const response = await fetch(url);
+
+                if (!response.ok) {
+                    throw new Error("Failed to load products");
+                }
+
+                const data = await response.json();
+
+                // ======================================
+                // Read Response Data
+                // ======================================
+                const html = data.html || "";
+                const productCount = Number(data.product_count || 0);
+
+                // ======================================
+                // Render Products
+                // ======================================
+                if (isAppend) {
+                    if (productCount > 0) {
+                        const grid = productSections.querySelector("#flatProductsGrid");
+                        if (grid) {
+                            const parser = new DOMParser();
+                            const doc = parser.parseFromString(html, "text/html");
+                            const newGrid = doc.getElementById("flatProductsGrid");
+                            if (newGrid) {
+                                grid.insertAdjacentHTML("beforeend", newGrid.innerHTML);
+                                observeImages(grid);
+                            }
+                        }
+                        loadedProductCount += productCount;
+                    }
+                } else {
+                    productSections.innerHTML = html;
+                    loadedProductCount = productCount;
+
+                    // Observe images in the freshly replaced content
+                    observeImages(productSections);
+                }
+
+                // ======================================
+                // Update Pagination State
+                // ======================================
+                currentPage = Number(data.page || requestPage);
+                hasNext = Boolean(data.has_next);
+
+                // ======================================
+                // Update Bottom Trigger Message
+                // ======================================
+                if (loadedProductCount === 0) {
+                    hideTrigger();
+                } else if (isAppend && !hasNext) {
+                    showNoMoreProducts();
+                } else {
+                    hideTrigger();
+                }
+
+            } catch (error) {
+                // ======================================
+                // Error Handling
+                // ======================================
+                console.error(error);
+
+                if (!isAppend) {
+                    productSections.innerHTML = `
+                        <div class="text-center py-20 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 mt-8 rounded-none">
+                            <p class="text-zinc-500 text-sm font-bold uppercase tracking-widest mb-4">Failed to load products.</p>
+                            <button onclick="resetAndLoad()" class="border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-6 py-2.5 rounded-none text-xs font-bold uppercase tracking-widest hover:bg-zinc-950 dark:hover:bg-zinc-50 hover:text-white dark:hover:text-zinc-950 transition-colors">Retry Fetch</button>
+                        </div>
+                    `;
+                } else {
+                    trigger.innerHTML = `
+                    <span class="text-red-400 text-sm font-medium">
+                        Failed to load products
+                    </span>
+                `;
+                    trigger.classList.remove("opacity-0");
+                }
+
+            } finally {
+                // ======================================
+                // Cleanup Loader State
+                // ======================================
+                isLoading = false;
+
+                if (!isAppend) {
+                    productSections.style.opacity = "1";
+                }
+            }
+        }
+
+        // ======================================
+        // Mobile Category Scroll Fade Indicator
+        // ======================================
+        const catContainer = document.getElementById("categoryContainer");
+        const scrollIndicator = document.getElementById("scroll-fade-indicator");
+
+        if (catContainer && scrollIndicator) {
+            function updateFadeIndicator() {
+                const hasOverflow = catContainer.scrollWidth > catContainer.clientWidth;
+                const isAtEnd = catContainer.scrollLeft + catContainer.clientWidth >= catContainer.scrollWidth - 8;
+                if (hasOverflow && !isAtEnd) {
+                    scrollIndicator.classList.remove("opacity-0");
+                    scrollIndicator.classList.add("opacity-100");
+                } else {
+                    scrollIndicator.classList.remove("opacity-100");
+                    scrollIndicator.classList.add("opacity-0");
+                }
+            }
+
+            catContainer.addEventListener("scroll", updateFadeIndicator);
+            
+            const resizeHandler = () => {
+                if (!document.getElementById("categoryContainer")) {
+                    window.removeEventListener("resize", resizeHandler);
+                    return;
+                }
+                updateFadeIndicator();
+            };
+            window.addEventListener("resize", resizeHandler);
+            
+            // Check overflow state once layout loads
+            setTimeout(updateFadeIndicator, 300);
+        }
+
+        // Export functions to window for inline HTML onclick attributes
+        window.filterCategory = filterCategory;
+        window.resetAndLoad = resetAndLoad;
+        })();
+    </script>
+
+{% endblock %}

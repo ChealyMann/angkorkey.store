@@ -1,0 +1,169 @@
+{% extends 'backend/admin/master.html' %}
+
+{% block main %}
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+        .font-khmer {
+            font-family: 'Kantumruy Pro', 'Inter', sans-serif;
+        }
+
+        /* SCROLLABLE TABLE AREA */
+        .table-scroll-area {
+            overflow-y: auto;
+            max-height: calc(100vh - 250px);
+        }
+
+        .table-scroll-area thead th {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            background-color: var(--bg-card) !important;
+        }
+
+
+
+        .promotion-thumb {
+            width: 120px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+            background-color: var(--bg-main);
+        }
+    </style>
+
+    <div class="font-khmer w-auto mx-4 mt-4 mb-4">
+
+        <div class="d-flex justify-content-between align-items-end mb-4">
+            <div>
+                <h3 class="text-main mb-1" style="font-weight: 500; letter-spacing: -0.02em;">ការគ្រប់គ្រងប្រូម៉ូសិន</h3>
+                <span class="text-muted" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;">Promotion Management</span>
+            </div>
+            <a href="{{ url_for('promotion.promotion_add') }}" class="text-decoration-none">
+                <button class="btn btn-dark shadow-sm px-4" style="border-radius: 8px; font-weight: 500; background-color: var(--text-main); color: var(--bg-main);">
+                    <i class="fa-solid fa-plus me-2"></i> បង្កើតថ្មី (Add New)
+                </button>
+            </a>
+        </div>
+
+        <div class="card overflow-hidden border-0 bg-card">
+            <div class="card-body p-0">
+                <div class="table-scroll-area scrollbar-hidden">
+                    <table class="table table-hover mb-0 align-middle">
+                        <thead>
+                        <tr>
+                            <th class="text-center py-3 ps-4" style="width: 80px;">ID</th>
+                            <th class="py-3 text-center" style="width: 150px;">IMAGE</th>
+                            <th class="py-3" style="width: 250px;">TITLE</th>
+                            <th class="py-3">SUBTITLE</th>
+                            <th class="text-center py-3" style="width: 120px;">STATUS</th>
+                            <th class="text-end py-3 pe-4" style="width: 120px;">ACTION</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for promotion in promotions %}
+                            <tr>
+                                <td class="text-center text-muted font-12 ps-4">
+                                    #{{ loop.index }}
+                                </td>
+                                <td class="text-center py-2">
+                                    <img src="{{ url_for('static', filename='images/' + promotion.image) if promotion.image else url_for('static', filename='images/none.jpg') }}"
+                                         class="promotion-thumb" alt="Promo Image">
+                                </td>
+                                <td class="text-main" style="font-weight: 500;">
+                                    {{ promotion.title }}
+                                </td>
+                                <td class="text-muted font-14">
+                                    {{ promotion.subtitle if promotion.subtitle else "—" }}
+                                </td>
+                                <td class="text-center">
+                                    {% if promotion.is_active %}
+                                        <span class="badge bg-success text-white">Active</span>
+                                    {% else %}
+                                        <span class="badge bg-danger text-white">Inactive</span>
+                                    {% endif %}
+                                </td>
+                                <td class="text-end pe-4">
+                                    <div class="d-flex justify-content-end gap-2">
+                                        <a href="{{ url_for('promotion.promotion_edit', promotion_id=promotion.id) }}" class="btn btn-light btn-sm border bg-transparent" style="border-radius: 6px; color: var(--text-main); border-color: var(--border-light) !important;" title="Edit">
+                                            <i class="fa-solid fa-pen-to-square" style="font-size: 0.8rem;"></i>
+                                        </a>
+                                        <form action="{{ url_for('promotion.promotion_delete', promotion_id=promotion.id) }}" method="get" class="m-0">
+                                            <button type="button" class="btn btn-light btn-sm border bg-transparent btn-delete" style="border-radius: 6px; color: #ef4444; border-color: var(--border-light) !important;" title="Delete">
+                                                <i class="fa-solid fa-trash-can" style="font-size: 0.8rem;"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="6" class="text-center py-5 text-muted">
+                                    <i class="fa-solid fa-rectangle-ad mb-3" style="font-size: 2rem; color: var(--border-light);"></i>
+                                    <p class="mb-0">មិនមានទិន្នន័យ (No promotions found)</p>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer bg-transparent border-top py-3 px-4 d-flex justify-content-between align-items-center" style="border-color: var(--border-light) !important;">
+                <span class="text-muted" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;">
+                    Total Promotions: <span class="text-main fw-bold">{{ promotions|length }}</span>
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const deleteButtons = document.querySelectorAll('.btn-delete');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                const form = this.closest('form');
+
+                Swal.fire({
+                    title: "តើអ្នកប្រាកដទេ?",
+                    text: "ទិន្នន័យដែលលុបហើយមិនអាចយកមកវិញបានទេ!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "var(--text-main)",
+                    cancelButtonColor: "#3f3f46",
+                    cancelButtonText: "<span style='color: #fff'>បោះបង់ (Cancel)</span>",
+                    confirmButtonText: "<span style='color: var(--bg-main)'>លុប (Delete)</span>",
+                    background: "var(--bg-card)",
+                    color: "var(--text-main)"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <script>
+                {% for category, message in messages %}
+                    Swal.fire({
+                        title: '{{ "ជោគជ័យ" if category == "success" else "បរាជ័យ" }}',
+                        text: '{{ message }}',
+                        icon: '{{ category }}',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        timerProgressBar: true,
+                        background: "var(--bg-card)",
+                        color: "var(--text-main)"
+                    });
+                {% endfor %}
+            </script>
+        {% endif %}
+    {% endwith %}
+
+{% endblock %}

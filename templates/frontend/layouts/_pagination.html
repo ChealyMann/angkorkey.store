@@ -1,0 +1,56 @@
+{% if pagination and pagination.pages > 1 %}
+<nav class="flex justify-center items-center gap-2 mt-12 animate-fade-in" aria-label="Pagination">
+    {# Previous Button #}
+    {% if pagination.has_prev %}
+    <button onclick="changePage('{{ pagination.prev_num }}')"
+        class="flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 bg-white text-gray-600 hover:border-red-600 hover:text-red-600 shadow-xs transition-all duration-300">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+    </button>
+    {% else %}
+    <button disabled
+        class="flex items-center justify-center w-10 h-10 rounded-full border border-gray-100 bg-white text-gray-300 cursor-not-allowed">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+    </button>
+    {% endif %}
+
+    {# Page Numbers #}
+    {% for page_num in pagination.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=1) %}
+    {% if page_num %}
+    {% if page_num == pagination.page %}
+    <button
+        class="flex items-center justify-center w-10 h-10 rounded-full bg-red-600 text-white font-bold text-xs uppercase tracking-widest shadow-md scale-105 transition-transform">
+        {{ page_num }}
+    </button>
+    {% else %}
+    <button onclick="changePage('{{ page_num }}')"
+        class="flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 bg-white text-gray-600 hover:border-red-600 hover:text-red-600 shadow-xs transition-all duration-300 font-bold text-xs uppercase tracking-widest">
+        {{ page_num }}
+    </button>
+    {% endif %}
+    {% else %}
+    <span class="text-gray-400 px-2 text-xs tracking-widest">...</span>
+    {% endif %}
+    {% endfor %}
+
+    {# Next Button #}
+    {% if pagination.has_next %}
+    <button onclick="changePage('{{ pagination.next_num }}')"
+        class="flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 bg-white text-gray-600 hover:border-red-600 hover:text-red-600 shadow-xs transition-all duration-300">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+    </button>
+    {% else %}
+    <button disabled
+        class="flex items-center justify-center w-10 h-10 rounded-full border border-gray-100 bg-white text-gray-300 cursor-not-allowed">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+    </button>
+    {% endif %}
+</nav>
+{% endif %}

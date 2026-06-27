@@ -1,0 +1,68 @@
+<section class="px-0 sm:px-6 lg:px-8 py-0 sm:py-6">
+    <div id="carousel-container"
+         class="relative w-full overflow-hidden sm:rounded-2xl shadow-sm border-b sm:border border-gray-200 bg-white">
+        <!-- Carousel Wrapper -->
+        <div id="carousel" class="flex transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]">
+
+            {% if promotions %}
+                {% for promotion in promotions %}
+                    <!-- Dynamic Slide -->
+                    <div class="min-w-full relative aspect-[3/1] md:aspect-[5/1]">
+                        <img src="{{ url_for('static', filename='images/' + promotion.image) }}"
+                             class="w-full h-full object-cover opacity-90 md:opacity-85" alt="{{ promotion.title }}">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent"></div>
+                        <!-- Slide Content (Desktop Only) -->
+                        <div class="hidden md:flex absolute inset-0 flex-col justify-end items-start p-16">
+                            <h3 class="text-3xl font-black text-white mb-2 tracking-tight">{{ promotion.title }}</h3>
+                            <p class="text-xl text-gray-200 mb-8 font-light">{{ promotion.subtitle }}</p>
+                            <a href="{{ promotion.link }}"
+                               class="px-8 py-3 bg-red-600 text-white font-bold rounded-full hover:bg-red-700 transition transform hover:scale-105 shadow-md">{{ promotion.button_text }}</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <!-- Slide 1 -->
+                <div class="min-w-full relative aspect-[16/9] md:aspect-[21/9]">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop"
+                         class="w-full h-full object-cover opacity-90 md:opacity-80" alt="Tech">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent"></div>
+                    <!-- Slide Content (Desktop Only) -->
+                    <div class="hidden md:flex absolute inset-0 flex-col justify-end items-start p-16">
+                        <h3 class="text-3xl font-black text-white mb-2 tracking-tight">DARK MODE <br>ENABLED.</h3>
+                        <p class="text-xl text-gray-200 mb-8 font-light">Experience electronics in a new light.</p>
+                        <a href="#"
+                           class="px-8 py-3 bg-red-600 text-white font-bold rounded-full hover:bg-red-700 transition transform hover:scale-105 shadow-md">Shop
+                            Collection</a>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="min-w-full relative aspect-[16/9] md:aspect-[21/9]">
+                    <img src="https://images.unsplash.com/photo-1595225476474-87563907a212?q=80&w=2071&auto=format&fit=crop"
+                         class="w-full h-full object-cover opacity-90 md:opacity-80" alt="Setup">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent"></div>
+                    <!-- Slide Content (Desktop Only) -->
+                    <div class="hidden md:flex absolute inset-0 flex-col justify-end items-start p-16">
+                        <h3 class="text-3xl font-black text-white mb-2 tracking-tight">PRECISION <br>AUDIO.</h3>
+                        <p class="text-xl text-gray-200 mb-8 font-light">Hear every detail with our IEMs.</p>
+                        <a href="#"
+                           class="px-8 py-3 bg-red-600 text-white font-bold rounded-full hover:bg-red-700 transition transform hover:scale-105 shadow-md">Explore
+                            Audio</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Carousel Navigation Buttons -->
+        <div class="absolute bottom-4 right-4 md:bottom-6 md:right-6 flex gap-2">
+            <button id="prev-btn"
+                    class="bg-white/80 dark:bg-zinc-900/80 hover:bg-zinc-950 dark:hover:bg-zinc-50 hover:text-white dark:hover:text-zinc-950 backdrop-blur-md p-2 md:p-3 rounded-full text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800/80 transition shadow-sm cursor-pointer">
+                <i class="h-4 w-4 md:h-5 md:w-5" data-lucide="chevron-left"></i>
+            </button>
+            <button id="next-btn"
+                    class="bg-white/80 dark:bg-zinc-900/80 hover:bg-zinc-950 dark:hover:bg-zinc-50 hover:text-white dark:hover:text-zinc-950 backdrop-blur-md p-2 md:p-3 rounded-full text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800/80 transition shadow-sm cursor-pointer">
+                <i class="h-4 w-4 md:h-5 md:w-5" data-lucide="chevron-right"></i>
+            </button>
+        </div>
+    </div>
+</section>

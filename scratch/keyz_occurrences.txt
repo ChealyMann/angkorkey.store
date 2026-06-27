@@ -1,0 +1,213 @@
+templates\backend\admin\index.html:199: &copy; 2026 Keyzstore. All Rights Reserved.
+templates\backend\admin\master.html:8: <meta name="description" content="Keyzstore Admin Dashboard">
+templates\backend\admin\master.html:11: <title>{% block page_title %}{{ config['title'] }} | Keyzstore{% endblock %}</title>
+templates\backend\admin\master.html:254: style="font-size: 1.1rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;">Keyzstore</span>
+templates\backend\admin\pages\brand\add.html:11: .keyz-label {
+templates\backend\admin\pages\brand\add.html:21: .keyz-input {
+templates\backend\admin\pages\brand\add.html:31: .keyz-input:focus {
+templates\backend\admin\pages\brand\add.html:76: <label for="inputName" class="keyz-label">ឈ្មោះម៉ាក (Brand Name)</label>
+templates\backend\admin\pages\brand\add.html:77: {{ form.name(class="form-control keyz-input", id="inputName", placeholder="Example: QKZ, KZ, Xinmeng") }}
+templates\backend\admin\pages\brand\add.html:87: <label for="selectStatus" class="keyz-label">ស្ថានភាព (Status)</label>
+templates\backend\admin\pages\brand\add.html:88: {{ form.status(class="form-select keyz-input", id="selectStatus") }}
+templates\backend\admin\pages\brand\add.html:92: <label class="keyz-label">រូបភាពម៉ាក (Brand Image)</label>
+templates\backend\admin\pages\brand\add.html:138: <label for="inputDesc" class="keyz-label">ការពិពណ៌នា (Description)</label>
+templates\backend\admin\pages\brand\add.html:139: {{ form.desc(class="form-control keyz-input", id="inputDesc", rows="8", placeholder="Short brand description...") }}
+templates\backend\admin\pages\brand\edit.html:11: .keyz-label {
+templates\backend\admin\pages\brand\edit.html:21: .keyz-input {
+templates\backend\admin\pages\brand\edit.html:31: .keyz-input:focus {
+templates\backend\admin\pages\brand\edit.html:76: <label for="inputName" class="keyz-label">ឈ្មោះម៉ាក (Brand Name)</label>
+templates\backend\admin\pages\brand\edit.html:77: {{ form.name(class="form-control keyz-input", id="inputName", placeholder="Brand Name") }}
+templates\backend\admin\pages\brand\edit.html:87: <label for="selectStatus" class="keyz-label">ស្ថានភាព (Status)</label>
+templates\backend\admin\pages\brand\edit.html:88: {{ form.status(class="form-select keyz-input", id="selectStatus") }}
+templates\backend\admin\pages\brand\edit.html:92: <label class="keyz-label">រូបភាពម៉ាក (Brand Image)</label>
+templates\backend\admin\pages\brand\edit.html:137: <label for="inputDesc" class="keyz-label">ការពិពណ៌នា (Description)</label>
+templates\backend\admin\pages\brand\edit.html:138: {{ form.desc(class="form-control keyz-input", id="inputDesc", rows="8", placeholder="Short brand description...") }}
+templates\backend\admin\pages\category\add.html:16: .keyz-label {
+templates\backend\admin\pages\category\add.html:27: .keyz-input {
+templates\backend\admin\pages\category\add.html:37: .keyz-input:focus {
+templates\backend\admin\pages\category\add.html:80: <label for="inputName" class="keyz-label">ឈ្មោះប្រភេទ (Category Name)</label>
+templates\backend\admin\pages\category\add.html:81: {{ form.name(class="form-control keyz-input", id="inputName", placeholder="Enter category name") }}
+templates\backend\admin\pages\category\add.html:88: <label for="selectStatus" class="keyz-label">ស្ថានភាព (Status)</label>
+templates\backend\admin\pages\category\add.html:89: {{ form.status(class="form-select keyz-input", id="selectStatus") }}
+templates\backend\admin\pages\category\add.html:93: <label class="keyz-label">រូបភាព (Image)</label>
+templates\backend\admin\pages\category\add.html:130: <label for="inputDesc" class="keyz-label">ការពិពណ៌នា (Description)</label>
+templates\backend\admin\pages\category\add.html:131: {{ form.desc(class="form-control keyz-input flex-grow-1", placeholder="Enter description...", id="inputDesc", style="min-height: 120px; resize: none;") }}
+templates\backend\admin\pages\category\edit.html:13: .keyz-label {
+templates\backend\admin\pages\category\edit.html:24: .keyz-input {
+templates\backend\admin\pages\category\edit.html:34: .keyz-input:focus {
+templates\backend\admin\pages\category\edit.html:76: <label for="inputName" class="keyz-label">ឈ្មោះប្រភេទ (Category Name)</label>
+templates\backend\admin\pages\category\edit.html:77: {{ form.name(class="form-control keyz-input", id="inputName", placeholder="Enter category name") }}
+templates\backend\admin\pages\category\edit.html:85: <label for="selectStatus" class="keyz-label">ស្ថានភាព (Status)</label>
+templates\backend\admin\pages\category\edit.html:86: {{ form.status(class="form-select keyz-input", id="selectStatus") }}
+templates\backend\admin\pages\category\edit.html:92: <label for="inputDesc" class="keyz-label">ការពិពណ៌នា (Description)</label>
+templates\backend\admin\pages\category\edit.html:93: {{ form.desc(class="form-control keyz-input flex-grow-1", placeholder="Enter description...", id="inputDesc", style="min-height: 120px; resize: none;") }}
+templates\backend\admin\pages\category\edit.html:98: <label class="keyz-label mb-3">រូបភាព (Image)</label>
+templates\backend\admin\pages\product\add.html:12: .keyz-label {
+templates\backend\admin\pages\product\add.html:22: .keyz-input {
+templates\backend\admin\pages\product\add.html:32: .keyz-input:focus {
+templates\backend\admin\pages\product\add.html:123: <label for="inputName" class="keyz-label">ឈ្មោះផលិតផល (Product Name)</label>
+templates\backend\admin\pages\product\add.html:124: {{ form.name(class="form-control keyz-input", id="inputName", placeholder="Enter product name") }}
+templates\backend\admin\pages\product\add.html:136: <label for="selectCat" class="keyz-label">ប្រភេទ (Category)</label>
+templates\backend\admin\pages\product\add.html:137: {{ form.category(class="form-select keyz-input", id="selectCat") }}
+templates\backend\admin\pages\product\add.html:149: <label for="selectBrand" class="keyz-label">ម៉ាក (Brand)</label>
+templates\backend\admin\pages\product\add.html:150: {{ form.brand(class="form-select keyz-input", id="selectBrand") }}
+templates\backend\admin\pages\product\add.html:162: <label for="selectStatus" class="keyz-label">ស្ថានភាព (Status)</label>
+templates\backend\admin\pages\product\add.html:163: {{ form.status(class="form-select keyz-input", id="selectStatus") }}
+templates\backend\admin\pages\product\add.html:167: <label class="keyz-label">រូបភាពចម្បង (Main Image)</label>
+templates\backend\admin\pages\product\add.html:215: <label for="inputPrice" class="keyz-label">តម្លៃលក់ ($ Price)</label>
+templates\backend\admin\pages\product\add.html:216: {{ form.price(class="form-control keyz-input", id="inputPrice", placeholder="0.00") }}
+templates\backend\admin\pages\product\add.html:226: <label for="inputOldPrice" class="keyz-label">តម្លៃដើម ($ Old)</label>
+templates\backend\admin\pages\product\add.html:227: {{ form.old_price(class="form-control keyz-input", id="inputOldPrice", placeholder="0.00") }}
+templates\backend\admin\pages\product\add.html:237: <label for="inputCost" class="keyz-label">តម្លៃទុន ($ Cost)</label>
+templates\backend\admin\pages\product\add.html:238: {{ form.cost(class="form-control keyz-input", id="inputCost", placeholder="0.00") }}
+templates\backend\admin\pages\product\add.html:249: <label class="keyz-label">ការពិពណ៌នា (Description)</label>
+templates\backend\admin\pages\product\edit.html:12: .keyz-label {
+templates\backend\admin\pages\product\edit.html:22: .keyz-input {
+templates\backend\admin\pages\product\edit.html:32: .keyz-input:focus {
+templates\backend\admin\pages\product\edit.html:123: <label for="inputName" class="keyz-label">ឈ្មោះផលិតផល (Name)</label>
+templates\backend\admin\pages\product\edit.html:124: {{ form.name(class="form-control keyz-input", id="inputName", placeholder="Product Name") }}
+templates\backend\admin\pages\product\edit.html:136: <label for="selectCat" class="keyz-label">ប្រភេទ (Category)</label>
+templates\backend\admin\pages\product\edit.html:137: {{ form.category(class="form-select keyz-input", id="selectCat") }}
+templates\backend\admin\pages\product\edit.html:149: <label for="selectBrand" class="keyz-label">ម៉ាក (Brand)</label>
+templates\backend\admin\pages\product\edit.html:150: {{ form.brand(class="form-select keyz-input", id="selectBrand") }}
+templates\backend\admin\pages\product\edit.html:162: <label for="selectStatus" class="keyz-label">ស្ថានភាព (Status)</label>
+templates\backend\admin\pages\product\edit.html:163: {{ form.status(class="form-select keyz-input", id="selectStatus") }}
+templates\backend\admin\pages\product\edit.html:167: <label class="keyz-label">រូបភាពចម្បង (Main Image)</label>
+templates\backend\admin\pages\product\edit.html:213: <label for="inputPrice" class="keyz-label">តម្លៃលក់ ($ Price)</label>
+templates\backend\admin\pages\product\edit.html:214: {{ form.price(class="form-control keyz-input", id="inputPrice", placeholder="0.00") }}
+templates\backend\admin\pages\product\edit.html:224: <label for="inputOldPrice" class="keyz-label">តម្លៃដើម ($ Old)</label>
+templates\backend\admin\pages\product\edit.html:225: {{ form.old_price(class="form-control keyz-input", id="inputOldPrice", placeholder="0.00") }}
+templates\backend\admin\pages\product\edit.html:235: <label for="inputCost" class="keyz-label">តម្លៃទុន ($ Cost)</label>
+templates\backend\admin\pages\product\edit.html:236: {{ form.cost(class="form-control keyz-input", id="inputCost", placeholder="0.00") }}
+templates\backend\admin\pages\product\edit.html:247: <label class="keyz-label">ការពិពណ៌នា (Description)</label>
+templates\backend\admin\pages\product\variant_add.html:9: .keyz-label {
+templates\backend\admin\pages\product\variant_add.html:19: .keyz-input {
+templates\backend\admin\pages\product\variant_add.html:119: <label class="keyz-label">
+templates\backend\admin\pages\product\variant_add.html:124: class="form-select keyz-input">
+templates\backend\admin\pages\product\variant_add.html:154: <label class="keyz-label">SKU</label>
+templates\backend\admin\pages\product\variant_add.html:157: class="form-control keyz-input"
+templates\backend\admin\pages\product\variant_add.html:162: <label class="keyz-label">Status</label>
+templates\backend\admin\pages\product\variant_add.html:163: <select name="status" class="form-select keyz-input">
+templates\backend\admin\pages\product\variant_add.html:170: <label class="keyz-label">Price</label>
+templates\backend\admin\pages\product\variant_add.html:175: class="form-control keyz-input"
+templates\backend\admin\pages\product\variant_add.html:181: <label class="keyz-label">Old Price</label>
+templates\backend\admin\pages\product\variant_add.html:186: class="form-control keyz-input"
+templates\backend\admin\pages\product\variant_add.html:191: <label class="keyz-label">Cost</label>
+templates\backend\admin\pages\product\variant_add.html:196: class="form-control keyz-input"
+templates\backend\admin\pages\product\variant_add.html:201: <label class="keyz-label">Stock Status</label>
+templates\backend\admin\pages\product\variant_add.html:202: <select name="stock" class="form-select keyz-input">
+templates\backend\admin\pages\product\variant_edit.html:9: .keyz-label {
+templates\backend\admin\pages\product\variant_edit.html:19: .keyz-input {
+templates\backend\admin\pages\product\variant_edit.html:90: <label class="keyz-label">{{ variant_type.name }}</label>
+templates\backend\admin\pages\product\variant_edit.html:92: <select name="option_{{ variant_type.slug }}" class="form-select keyz-input">
+templates\backend\admin\pages\product\variant_edit.html:113: <label class="keyz-label">SKU</label>
+templates\backend\admin\pages\product\variant_edit.html:114: <input type="text" name="sku" class="form-control keyz-input" value="{{ variant.sku or '' }}">
+templates\backend\admin\pages\product\variant_edit.html:118: <label class="keyz-label">Status</label>
+templates\backend\admin\pages\product\variant_edit.html:119: <select name="status" class="form-select keyz-input">
+templates\backend\admin\pages\product\variant_edit.html:126: <label class="keyz-label">Price</label>
+templates\backend\admin\pages\product\variant_edit.html:127: <input type="number" name="price" step="0.01" min="0" class="form-control keyz-input" value="{{ variant.price }}" required>
+templates\backend\admin\pages\product\variant_edit.html:131: <label class="keyz-label">Old Price</label>
+templates\backend\admin\pages\product\variant_edit.html:132: <input type="number" name="old_price" step="0.01" min="0" class="form-control keyz-input" value="{{ variant.old_price or '' }}">
+templates\backend\admin\pages\product\variant_edit.html:136: <label class="keyz-label">Cost</label>
+templates\backend\admin\pages\product\variant_edit.html:137: <input type="number" name="cost" step="0.01" min="0" class="form-control keyz-input" value="{{ variant.cost or '' }}">
+templates\backend\admin\pages\product\variant_edit.html:141: <label class="keyz-label">Stock Status</label>
+templates\backend\admin\pages\product\variant_edit.html:142: <select name="stock" class="form-select keyz-input">
+templates\backend\admin\pages\product\variant_settings.html:9: .keyz-label {
+templates\backend\admin\pages\product\variant_settings.html:19: .keyz-input {
+templates\backend\admin\pages\product\variant_settings.html:77: <label class="keyz-label">Name</label>
+templates\backend\admin\pages\product\variant_settings.html:78: <input type="text" name="name" class="form-control keyz-input" placeholder="Color" required>
+templates\backend\admin\pages\product\variant_settings.html:82: <label class="keyz-label">Slug</label>
+templates\backend\admin\pages\product\variant_settings.html:83: <input type="text" name="slug" class="form-control keyz-input" placeholder="color">
+templates\backend\admin\pages\product\variant_settings.html:113: <input type="text" name="name" value="{{ type.name }}" class="form-control keyz-input" required>
+templates\backend\admin\pages\product\variant_settings.html:118: <input form="type-edit-{{ type.id }}" type="text" name="slug" value="{{ type.slug }}" class="form-control keyz-input" required>
+templates\backend\admin\pages\product\variant_settings.html:153: <label class="keyz-label">Type</label>
+templates\backend\admin\pages\product\variant_settings.html:154: <select name="variant_type_id" class="form-select keyz-input" required>
+templates\backend\admin\pages\product\variant_settings.html:163: <label class="keyz-label">Value</label>
+templates\backend\admin\pages\product\variant_settings.html:164: <input type="text" name="value" class="form-control keyz-input" placeholder="Black" required>
+templates\backend\admin\pages\product\variant_settings.html:168: <label class="keyz-label">Meta</label>
+templates\backend\admin\pages\product\variant_settings.html:169: <input type="text" name="meta" class="form-control keyz-input" placeholder="#000000">
+templates\backend\admin\pages\product\variant_settings.html:202: <select name="variant_type_id" class="form-select keyz-input" required>
+templates\backend\admin\pages\product\variant_settings.html:213: <input form="option-edit-{{ option.id }}" type="text" name="value" value="{{ option.value }}" class="form-control keyz-input" required>
+templates\backend\admin\pages\product\variant_settings.html:217: <input form="option-edit-{{ option.id }}" type="text" name="meta" value="{{ option.meta or '' }}" class="form-control keyz-input" placeholder="#000000">
+templates\backend\admin\pages\promotion\add.html:10: .keyz-group { margin-bottom: 2.5rem; }
+templates\backend\admin\pages\promotion\add.html:12: .keyz-label {
+templates\backend\admin\pages\promotion\add.html:22: .keyz-input {
+templates\backend\admin\pages\promotion\add.html:35: .keyz-input:focus {
+templates\backend\admin\pages\promotion\add.html:41: .keyz-input::placeholder { color: #52525b; font-weight: 300; }
+templates\backend\admin\pages\promotion\add.html:88: <div class="keyz-group">
+templates\backend\admin\pages\promotion\add.html:89: <label for="inputTitle" class="keyz-label">ចំណងជើង (Title)</label>
+templates\backend\admin\pages\promotion\add.html:90: {{ form.title(class="keyz-input", id="inputTitle", placeholder="Promotion Title") }}
+templates\backend\admin\pages\promotion\add.html:93: <div class="keyz-group">
+templates\backend\admin\pages\promotion\add.html:94: <label for="inputSubtitle" class="keyz-label">ចំណងជើងរង (Subtitle)</label>
+templates\backend\admin\pages\promotion\add.html:95: {{ form.subtitle(class="keyz-input", id="inputSubtitle", placeholder="Subtitle/Details") }}
+templates\backend\admin\pages\promotion\add.html:98: <div class="keyz-group">
+templates\backend\admin\pages\promotion\add.html:99: <label for="inputLink" class="keyz-label">តំណភ្ជាប់ (Link)</label>
+templates\backend\admin\pages\promotion\add.html:100: {{ form.link(class="keyz-input", id="inputLink", placeholder="https://") }}
+templates\backend\admin\pages\promotion\add.html:103: <div class="keyz-group">
+templates\backend\admin\pages\promotion\add.html:104: <label for="inputButtonText" class="keyz-label">អត្ថបទប៊ូតុង (Button Text)</label>
+templates\backend\admin\pages\promotion\add.html:105: {{ form.button_text(class="keyz-input", id="inputButtonText", placeholder="e.g. Shop Now") }}
+templates\backend\admin\pages\promotion\add.html:111: <label class="keyz-label mb-3">រូបភាព (Promo Image)</label>
+templates\backend\admin\pages\promotion\edit.html:10: .keyz-group { margin-bottom: 2.5rem; }
+templates\backend\admin\pages\promotion\edit.html:12: .keyz-label {
+templates\backend\admin\pages\promotion\edit.html:17: .keyz-input {
+templates\backend\admin\pages\promotion\edit.html:23: .keyz-input:focus { box-shadow: none !important; border-bottom: 1px solid var(--text-main) !important; outline: none; }
+templates\backend\admin\pages\promotion\edit.html:24: .keyz-input::placeholder { color: #52525b; font-weight: 300; }
+templates\backend\admin\pages\promotion\edit.html:63: <div class="keyz-group">
+templates\backend\admin\pages\promotion\edit.html:64: <label for="inputTitle" class="keyz-label">ចំណងជើង (Title)</label>
+templates\backend\admin\pages\promotion\edit.html:65: {{ form.title(class="keyz-input", id="inputTitle", placeholder="Promotion Title") }}
+templates\backend\admin\pages\promotion\edit.html:68: <div class="keyz-group">
+templates\backend\admin\pages\promotion\edit.html:69: <label for="inputSubtitle" class="keyz-label">ចំណងជើងរង (Subtitle)</label>
+templates\backend\admin\pages\promotion\edit.html:70: {{ form.subtitle(class="keyz-input", id="inputSubtitle", placeholder="Subtitle/Details") }}
+templates\backend\admin\pages\promotion\edit.html:73: <div class="keyz-group">
+templates\backend\admin\pages\promotion\edit.html:74: <label for="inputLink" class="keyz-label">តំណភ្ជាប់ (Link)</label>
+templates\backend\admin\pages\promotion\edit.html:75: {{ form.link(class="keyz-input", id="inputLink", placeholder="https://") }}
+templates\backend\admin\pages\promotion\edit.html:78: <div class="keyz-group">
+templates\backend\admin\pages\promotion\edit.html:79: <label for="inputButtonText" class="keyz-label">អត្ថបទប៊ូតុង (Button Text)</label>
+templates\backend\admin\pages\promotion\edit.html:80: {{ form.button_text(class="keyz-input", id="inputButtonText", placeholder="e.g. Shop Now") }}
+templates\backend\admin\pages\promotion\edit.html:86: <label class="keyz-label mb-3">រូបភាព (Promo Image)</label>
+templates\backend\admin\pages\user\add.html:10: .keyz-group { margin-bottom: 2.5rem; }
+templates\backend\admin\pages\user\add.html:12: .keyz-label {
+templates\backend\admin\pages\user\add.html:22: .keyz-input {
+templates\backend\admin\pages\user\add.html:35: .keyz-input:focus {
+templates\backend\admin\pages\user\add.html:41: .keyz-input::placeholder { color: #52525b; font-weight: 300; }
+templates\backend\admin\pages\user\add.html:79: <div class="keyz-group">
+templates\backend\admin\pages\user\add.html:80: <label for="inputUsername" class="keyz-label">ឈ្មោះអ្នកប្រើប្រាស់ (Username)</label>
+templates\backend\admin\pages\user\add.html:81: {{ form.username(class="keyz-input", id="inputUsername", placeholder="e.g. john_doe") }}
+templates\backend\admin\pages\user\add.html:88: <label class="keyz-label mb-3">រូបភាព (Profile Image)</label>
+templates\backend\admin\pages\user\add.html:109: <div class="keyz-group">
+templates\backend\admin\pages\user\add.html:110: <label for="inputPassword" class="keyz-label">ពាក្យសម្ងាត់ (Password)</label>
+templates\backend\admin\pages\user\add.html:111: {{ form.password(class="keyz-input", id="inputPassword", placeholder="••••••••") }}
+templates\backend\admin\pages\user\edit.html:10: .keyz-group { margin-bottom: 2.5rem; }
+templates\backend\admin\pages\user\edit.html:12: .keyz-label {
+templates\backend\admin\pages\user\edit.html:17: .keyz-input {
+templates\backend\admin\pages\user\edit.html:23: .keyz-input:focus { box-shadow: none !important; border-bottom: 1px solid var(--text-main) !important; outline: none; }
+templates\backend\admin\pages\user\edit.html:24: .keyz-input::placeholder { color: #52525b; font-weight: 300; }
+templates\backend\admin\pages\user\edit.html:52: <div class="keyz-group">
+templates\backend\admin\pages\user\edit.html:53: <label for="inputUsername" class="keyz-label">ឈ្មោះអ្នកប្រើប្រាស់ (Username)</label>
+templates\backend\admin\pages\user\edit.html:54: {{ form.username(class="keyz-input", id="inputUsername", placeholder="Username") }}
+templates\backend\admin\pages\user\edit.html:61: <label class="keyz-label mb-3">រូបភាព (Profile Image)</label>
+templates\backend\admin\pages\user\edit.html:83: <div class="keyz-group">
+templates\backend\admin\pages\user\edit.html:84: <label for="inputPassword" class="keyz-label">ពាក្យសម្ងាត់ថ្មី (New Password)</label>
+templates\backend\admin\pages\user\edit.html:85: {{ form.password(class="keyz-input", id="inputPassword", placeholder="Leave blank to keep current") }}
+templates\backend\auth\base.html:6: <title>Keyzstore - Authentication</title>
+templates\backend\auth\base.html:8: <link rel="icon" type="image/jpg" href="{{ url_for('static', filename='logo/keyz.jpg') }}">
+templates\backend\auth\login.html:23: <img src="{{ url_for('static', filename='logo/keyz.jpg') }}" alt="Keyzstore Logo"
+templates\backend\auth\login.html:31: <p class="text-xs text-zinc-500 mt-2 uppercase tracking-widest">Welcome back to Keyzstore</p>
+templates\backend\auth\register.html:14: <img src="{{ url_for('static', filename='logo/keyz.jpg') }}" alt="Keyzstore Logo" class="h-16 w-auto object-contain grayscale opacity-90">
+templates\backend\auth\register.html:21: <p class="text-xs text-zinc-500 mt-2 uppercase tracking-widest">Create your Keyzstore account</p>
+templates\frontend\main.html:8: <title>Keyz Store - Clean Black Mobile</title>
+templates\frontend\main.html:9: <link rel="icon" type="image/jpg" href="{{ url_for('static', filename='logo/keyz.jpg') }}">
+templates\frontend\layouts\footer.html:8: &copy; 2026 Keyz Store. All rights reserved.
+templates\frontend\layouts\footer.html:26: <a href="https://www.tiktok.com/@keyzstore1?_r=1&_t=ZS-96JtYC1k0ay"
+templates\frontend\layouts\footer.html:36: <a href="http://t.me/Keyz_Store"
+templates\frontend\layouts\header.html:34: Keyz<span class="text-red-600 group-hover:text-red-700 transition duration-300">.</span>
+templates\frontend\layouts\header.html:206: let cart = JSON.parse(localStorage.getItem('keyz_cart')) || [];
+templates\frontend\layouts\products.html:106: <button onclick="window.keyzStore.clearFilters()" class="border border-gray-300 text-gray-700 bg-white px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors shadow-sm">Clear Filters</button>
+templates\frontend\pages\cart.html:248: let cart = JSON.parse(localStorage.getItem('keyz_cart')) || [];
+templates\frontend\pages\cart.html:371: localStorage.setItem('keyz_cart', JSON.stringify(cart));
+templates\frontend\pages\cart.html:512: let message = `🛒 KEYZ STORE ORDER\n`;
+templates\frontend\pages\cart.html:576: Change Keyz_Store to your real Telegram username if needed.
+templates\frontend\pages\cart.html:578: const telegramUsername = 'Keyz_Store';
+templates\frontend\pages\index.html:173: onclick="window.keyzStore && window.keyzStore.clearFilters ? window.keyzStore.clearFilters() : window.location.reload()"
+templates\frontend\pages\product-detail.html:1019: let cart = JSON.parse(localStorage.getItem('keyz_cart')) || [];
+templates\frontend\pages\product-detail.html:1032: localStorage.setItem('keyz_cart', JSON.stringify(cart));

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <script>
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Angkorkey Admin Dashboard">
+    <link rel="icon" type="image/jpg" href="{{ url_for('static',filename='logo/icon.jpg') }}">
+
+    <title>{% block page_title %}{{ config['title'] }} | Angkorkey{% endblock %}</title>
+
+    <link href="{{ url_for('static',filename='admin/dist/css/style.min.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://kit.fontawesome.com/4038e64837.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        /* Premium Light Theme */
+        :root {
+            --bg-main: #ffffff; /* Clean off-white background */
+            --bg-card: #ffffff; /* Pure white cards */
+            --bg-hover: #f1f5f9; /* Subtle hover state */
+            --border-light: #e5e7eb; /* Soft gray borders */
+            --text-main: #111827; /* Deep black for primary text */
+            --text-muted: #6b7280; /* Medium gray for secondary text */
+            --accent-black: #000000;
+            --accent-primary: #3b82f6; /* Modern Blue for subtle accents */
+            --accent-success: #10b981; /* Fresh Green */
+        }
+
+        .dark {
+            --bg-main: #09090b; /* zinc-950 */
+            --bg-card: #141416; /* zinc-900 */
+            --bg-hover: #222227; /* zinc-800 */
+            --border-light: #222226; /* zinc-800 border */
+            --text-main: #f4f4f5; /* zinc-100 */
+            --text-muted: #82828b; /* zinc-500 */
+            --accent-black: #ffffff;
+        }
+
+        /* SVG Chart Custom Overrides */
+        .dark .c3 text,
+        .dark .ct-label {
+            fill: var(--text-muted) !important;
+            color: var(--text-muted) !important;
+        }
+        .dark .c3-axis path,
+        .dark .c3-axis line,
+        .dark .ct-grid {
+            stroke: var(--border-light) !important;
+        }
+
+        body, html {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main) !important;
+            color: var(--text-main) !important;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Utility overrides to replace hardcoded dark theme classes */
+        .text-main, .text-main svg {
+            color: var(--text-main) !important;
+            stroke: var(--text-main) !important;
+        }
+
+        .text-muted, .text-muted svg {
+            color: var(--text-muted) !important;
+            stroke: var(--text-muted) !important;
+        }
+
+        /* Layout Structure */
+        .page-wrapper {
+            background-color: var(--bg-main) !important;
+        }
+
+        .topbar, .navbar-header, .left-sidebar {
+            background-color: var(--bg-card) !important;
+            border-color: var(--border-light) !important;
+        }
+
+        .topbar {
+            border-bottom: 1px solid var(--border-light) !important;
+            box-shadow: none;
+        }
+
+        .left-sidebar, .navbar-header {
+            border-right: 1px solid var(--border-light) !important;
+        }
+
+        /* Minimalist Cards */
+        .card {
+            background-color: var(--bg-card) !important;
+            border: 1px solid var(--border-light) !important;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04) !important; /* Soft premium shadow */
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease !important;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-black) !important;
+            box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.08) !important;
+        }
+
+        .card-body {
+            padding: 1.5rem !important;
+        }
+
+        .card-title {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 0.8rem;
+            color: var(--text-main) !important;
+        }
+
+        /* Typography Overrides */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-main) !important;
+            font-weight: 400;
+        }
+
+        h2 {
+            font-size: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .border-end, .border-bottom, .border-top {
+            border-color: var(--border-light) !important;
+        }
+
+        /* Sidebar Links */
+        .sidebar-nav ul .sidebar-item > .sidebar-link {
+            transition: all 0.2s ease-in-out;
+            border: 1px solid transparent;
+        }
+
+        .sidebar-nav ul .sidebar-item > .sidebar-link span,
+        .sidebar-nav ul .sidebar-item > .sidebar-link i,
+        .sidebar-nav ul .sidebar-item > .sidebar-link svg {
+            color: var(--text-muted) !important;
+            stroke: var(--text-muted) !important;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .sidebar-nav ul .sidebar-item:hover > .sidebar-link,
+        .sidebar-link:hover {
+            background-color: var(--bg-hover) !important;
+            border-radius: 8px !important;
+        }
+
+        .sidebar-nav ul .sidebar-item:hover > .sidebar-link span,
+        .sidebar-nav ul .sidebar-item:hover > .sidebar-link i,
+        .sidebar-nav ul .sidebar-item:hover > .sidebar-link svg,
+        .sidebar-link:hover span,
+        .sidebar-link:hover svg {
+            color: var(--accent-primary) !important;
+            stroke: var(--accent-primary) !important;
+        }
+
+        .sidebar-nav ul .sidebar-item.selected > .sidebar-link {
+            background-color: var(--bg-hover) !important;
+            border-radius: 8px !important;
+            border: 1px solid var(--border-light) !important;
+        }
+
+        .sidebar-nav ul .sidebar-item.selected > .sidebar-link span,
+        .sidebar-nav ul .sidebar-item.selected > .sidebar-link i,
+        .sidebar-nav ul .sidebar-item.selected > .sidebar-link svg {
+            color: var(--text-main) !important;
+            stroke: var(--text-main) !important;
+            font-weight: 600;
+        }
+
+        /* Tables - Clean & Spaced */
+        .table th, .table td {
+            border-color: var(--border-light) !important;
+            color: var(--text-main) !important;
+            vertical-align: middle;
+            padding: 1.25rem 1rem !important;
+        }
+
+        .table thead th {
+            background-color: var(--bg-hover) !important;
+            color: var(--text-muted) !important;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 0.7rem;
+            border-bottom: 1px solid var(--border-light) !important;
+            border-top: none !important;
+        }
+
+        .table tbody tr {
+            transition: background-color 0.2s;
+        }
+
+        .table-hover > tbody > tr:hover > *,
+        .table-hover tbody tr:hover td,
+        .table tbody tr:hover td,
+        .table-hover tbody tr:hover,
+        .table tbody tr:hover {
+            background-color: var(--bg-hover) !important;
+            box-shadow: none !important;
+            color: var(--text-main) !important;
+        }
+
+        .table-hover tbody tr:hover td *,
+        .table tbody tr:hover td * {
+            color: var(--text-main) !important;
+        }
+
+        /* Action buttons overrides for dark mode */
+        .dark .bg-light,
+        .dark .btn-light,
+        .dark .action-btn {
+            background-color: var(--bg-hover) !important;
+            border-color: var(--border-light) !important;
+            color: var(--text-main) !important;
+        }
+
+        .dark .action-btn:hover {
+            background-color: var(--border-light) !important;
+            border-color: var(--text-muted) !important;
+            color: var(--accent-primary) !important;
+        }
+
+        .dark .delete-btn:hover {
+            background-color: rgba(239, 68, 68, 0.15) !important;
+            border-color: rgba(239, 68, 68, 0.3) !important;
+            color: #ef4444 !important;
+        }
+
+        /* Inputs & Dropdowns */
+        .form-control, .form-select, .custom-select, .customize-input input {
+            background-color: var(--bg-card) !important;
+            border: 1px solid var(--border-light) !important;
+            color: var(--text-main) !important;
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+        }
+
+        .form-select option {
+            background-color: var(--bg-card) !important;
+            color: var(--text-main) !important;
+        }
+
+        .form-control:focus, .custom-select:focus {
+            border-color: var(--accent-black) !important;
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .dropdown-menu {
+            background-color: var(--bg-card) !important;
+            border: 1px solid var(--border-light) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .dropdown-item {
+            color: var(--text-main) !important;
+            padding: 10px 20px;
+            transition: all 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--bg-hover) !important;
+            color: var(--accent-primary) !important;
+        }
+
+        /* Buttons & Badges */
+        .badge {
+            padding: 0.4em 0.8em;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            border-radius: 4px;
+        }
+
+        .badge.bg-dark {
+            background-color: var(--accent-black) !important;
+            color: #ffffff !important;
+        }
+
+        .badge.bg-success {
+            background-color: rgba(16, 185, 129, 0.1) !important;
+            color: var(--accent-success) !important;
+            border: 1px solid var(--accent-success) !important;
+        }
+
+        .badge.bg-primary {
+            background-color: rgba(59, 130, 246, 0.1) !important;
+            color: var(--accent-primary) !important;
+            border: 1px solid var(--accent-primary) !important;
+        }
+
+        .scrollbar-hidden::-webkit-scrollbar {
+            display: none;
+        }
+        .lds-pos {
+            border-color: var(--accent-black) !important;
+        }
+
+        /* Premium Adaptive Preloader */
+        .preloader {
+            background-color: var(--bg-main) !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .preloader .lds-ripple {
+            display: none !important;
+        }
+        
+        .dashboard-loader {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+        }
+        
+        .dashboard-spinner {
+            width: 28px;
+            height: 28px;
+            border: 2px solid var(--border-light);
+            border-top: 2px solid var(--text-main);
+            border-radius: 50%;
+            animation: dashboard-spin 0.8s linear infinite;
+        }
+        
+        @keyframes dashboard-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+
+<body>
+<div class="preloader">
+    <div class="dashboard-loader">
+        <div class="dashboard-spinner"></div>
+        <span class="text-main font-weight-bold text-uppercase" style="font-size: 0.65rem; letter-spacing: 0.15em;">Angkorkey</span>
+    </div>
+</div>
+
+<div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+
+    <header class="topbar" data-navbarbg="skin6">
+        {% block header %}
+            <nav class="navbar top-navbar navbar-expand-lg">
+                <div class="navbar-header" data-logobg="skin6">
+                    <a class="nav-toggler waves-effect waves-light d-block d-lg-none" href="javascript:void(0)">
+                        <i class="ti-menu ti-close text-main"></i>
+                    </a>
+
+                    <div class="navbar-brand justify-content-center">
+                        <a href="{{ url_for('admin.admin') }}" class="d-flex align-items-center">
+                            <span class="text-main"
+                                  style="font-size: 1.1rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;">Angkorkey</span>
+                        </a>
+                    </div>
+
+                    <a class="topbartoggler d-block d-lg-none waves-effect waves-light" href="javascript:void(0)"
+                       data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                        <i class="ti-more text-main"></i>
+                    </a>
+                </div>
+
+                <div class="navbar-collapse collapse" id="navbarSupportedContent"
+                     style="background-color: transparent;">
+                    <ul class="navbar-nav float-left me-auto ms-3 ps-1"></ul>
+
+                    <ul class="navbar-nav float-end d-flex align-items-center flex-row">
+                        <!-- Theme Toggle Switch -->
+                        <li class="nav-item me-3">
+                            <button id="theme-toggle" class="btn btn-link nav-link p-0 border-0 bg-transparent flex items-center justify-center" style="cursor: pointer; outline: none; box-shadow: none;">
+                                <i id="theme-sun" data-feather="sun" class="svg-icon" style="display: none; width: 18px; height: 18px; color: #fbbf24;"></i>
+                                <i id="theme-moon" data-feather="moon" class="svg-icon" style="display: none; width: 18px; height: 18px; color: #71717a;"></i>
+                            </button>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown">
+                                <img src="{{ url_for('static', filename='images/' ~ (session.get('image') if (session.get('image') and session.get('image') != 'none.jpg') else 'default-user.png')) }}"
+                                     alt="user"
+                                     class="rounded-circle"
+                                     width="40"
+                                     height="40"
+                                     style="border: 2px solid #e5e7eb; object-fit: cover;">
+                                <span class="ms-2 d-none d-lg-inline-block">
+                                    <span class="text-main font-weight-bold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.1em;">
+                                        {{ session.get('username', 'Admin') }}
+                                    </span>
+                                    <i data-feather="chevron-down" class="svg-icon text-muted ms-1" style="width: 14px;"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-right user-dd animated flipInY">
+                                <a class="dropdown-item font-weight-bold" href="{{ url_for('auth.logout') }}"
+                                   style="font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase;">
+                                    <i data-feather="power" class="svg-icon me-2 ms-1" style="width: 14px;"></i> Logout
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        {% endblock %}
+    </header>
+
+    <aside class="left-sidebar" data-sidebarbg="skin6">
+        {% block left_sidebar %}
+            {% include('backend/admin/layouts/left_side.html') %}
+        {% endblock %}
+    </aside>
+
+    <div class="page-wrapper">
+        {% block main %}{% endblock %}
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='admin/assets/libs/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='admin/dist/js/app-style-switcher.min.js') }}"></script>
+<script src="{{ url_for('static', filename='admin/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='admin/dist/js/sidebarmenu.min.js') }}"></script>
+<script src="{{ url_for('static', filename='admin/dist/js/custom.js') }}"></script>
+<script src="{{ url_for('static', filename='admin/assets/extra-libs/c3/d3.min.js') }}"></script>
+<script src="{{ url_for('static', filename='admin/assets/extra-libs/c3/c3.min.js') }}"></script>
+<script src="{{ url_for('static', filename='admin/assets/libs/chartist/dist/chartist.min.js') }}"></script>
+<script src="{{ url_for('static', filename='admin/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js') }}"></script>
+<script>
+    feather.replace();
+
+    // Fade out preloader on load
+    window.addEventListener("load", () => {
+        const preloader = document.querySelector(".preloader");
+        if (preloader) {
+            preloader.style.opacity = "0";
+            preloader.style.pointerEvents = "none";
+            setTimeout(() => {
+                preloader.style.display = "none";
+            }, 300);
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const toggleBtn = document.getElementById("theme-toggle");
+        const sunIcon = document.getElementById("theme-sun");
+        const moonIcon = document.getElementById("theme-moon");
+
+        function updateToggleIcons() {
+            const isDark = document.documentElement.classList.contains("dark");
+            if (sunIcon && moonIcon) {
+                sunIcon.style.display = isDark ? "inline-block" : "none";
+                moonIcon.style.display = isDark ? "none" : "inline-block";
+            }
+        }
+
+        if (toggleBtn) {
+            toggleBtn.addEventListener("click", () => {
+                const isDark = document.documentElement.classList.toggle("dark");
+                localStorage.setItem("theme", isDark ? "dark" : "light");
+                updateToggleIcons();
+            });
+        }
+        updateToggleIcons();
+    });
+</script>
+</body>
+</html>

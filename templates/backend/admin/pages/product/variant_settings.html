@@ -1,0 +1,302 @@
+{% extends 'backend/admin/master.html' %}
+
+{% block main %}
+<link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    .font-khmer { font-family: 'Kantumruy Pro', 'Inter', sans-serif; }
+
+    .keyz-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-muted);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .keyz-input {
+        border: 1px solid var(--border-light);
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        border-radius: 8px;
+        padding: 0.65rem 0.9rem;
+        font-size: 0.9rem;
+    }
+
+    .color-dot {
+        width: 16px;
+        height: 16px;
+        border-radius: 999px;
+        border: 1px solid rgba(0,0,0,0.2);
+        display: inline-block;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: var(--bg-hover) !important;
+    }
+
+    .action-btn {
+        border-radius: 6px;
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+<div class="font-khmer w-auto mx-4 mt-4 mb-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="text-main mb-1" style="font-weight: 500; letter-spacing: -0.02em;">
+                Variant Settings
+            </h3>
+            <span class="text-muted" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;">
+                Manage Color, Size, Type and their options
+            </span>
+        </div>
+
+        <a href="{{ url_for('product.product') }}"
+           class="btn btn-link text-decoration-none d-flex align-items-center"
+           style="color: var(--text-muted); font-weight: 500;">
+            <i class="fa-solid fa-arrow-left me-2"></i> Back
+        </a>
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-lg-5">
+            <div class="card p-4 mb-4">
+                <h6 class="text-main mb-3">Add Variant Type</h6>
+
+                <form action="{{ url_for('product.variant_type_add') }}" method="post">
+                    <div class="mb-3">
+                        <label class="keyz-label">Name</label>
+                        <input type="text" name="name" class="form-control keyz-input" placeholder="Color" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="keyz-label">Slug</label>
+                        <input type="text" name="slug" class="form-control keyz-input" placeholder="color">
+                        <small class="text-muted">Leave empty to auto-generate.</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-dark w-100" style="border-radius: 8px;">
+                        Add Type
+                    </button>
+                </form>
+            </div>
+
+            <div class="card p-4">
+                <h6 class="text-main mb-3">Variant Types</h6>
+
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Slug</th>
+                                <th class="text-end">Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for type in variant_types %}
+                            <tr>
+                                <td>
+                                    <form id="type-edit-{{ type.id }}"
+                                          action="{{ url_for('product.variant_type_edit', type_id=type.id) }}"
+                                          method="post">
+                                        <input type="text" name="name" value="{{ type.name }}" class="form-control keyz-input" required>
+                                    </form>
+                                </td>
+
+                                <td>
+                                    <input form="type-edit-{{ type.id }}" type="text" name="slug" value="{{ type.slug }}" class="form-control keyz-input" required>
+                                </td>
+
+                                <td class="text-end">
+                                    <div class="d-flex justify-content-end gap-2">
+                                        <button form="type-edit-{{ type.id }}" type="submit" class="btn btn-light border action-btn" title="Update">
+                                            <i class="fa-solid fa-check"></i>
+                                        </button>
+
+                                        <form action="{{ url_for('product.variant_type_delete', type_id=type.id) }}" method="post" class="m-0">
+                                            <button type="button" class="btn btn-light border action-btn text-danger btn-confirm-delete" title="Delete">
+                                                <i class="fa-solid fa-trash-can"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="3" class="text-center text-muted py-4">No variant types yet</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7">
+            <div class="card p-4 mb-4">
+                <h6 class="text-main mb-3">Add Variant Option</h6>
+
+                <form action="{{ url_for('product.variant_option_add') }}" method="post">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="keyz-label">Type</label>
+                            <select name="variant_type_id" class="form-select keyz-input" required>
+                                <option value="">Choose Type</option>
+                                {% for type in variant_types %}
+                                    <option value="{{ type.id }}">{{ type.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="keyz-label">Value</label>
+                            <input type="text" name="value" class="form-control keyz-input" placeholder="Black" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="keyz-label">Meta</label>
+                            <input type="text" name="meta" class="form-control keyz-input" placeholder="#000000">
+                            <small class="text-muted">Use hex for color.</small>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-dark mt-3 px-4" style="border-radius: 8px;">
+                        Add Option
+                    </button>
+                </form>
+            </div>
+
+            <div class="card p-4">
+                <h6 class="text-main mb-3">Variant Options</h6>
+
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Value</th>
+                                <th>Meta</th>
+                                <th>Preview</th>
+                                <th class="text-end">Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for option in variant_options %}
+                            <tr>
+                                <td>
+                                    <form id="option-edit-{{ option.id }}"
+                                          action="{{ url_for('product.variant_option_edit', option_id=option.id) }}"
+                                          method="post">
+                                        <select name="variant_type_id" class="form-select keyz-input" required>
+                                            {% for type in variant_types %}
+                                                <option value="{{ type.id }}" {% if type.id == option.variant_type_id %}selected{% endif %}>
+                                                    {{ type.name }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </form>
+                                </td>
+
+                                <td>
+                                    <input form="option-edit-{{ option.id }}" type="text" name="value" value="{{ option.value }}" class="form-control keyz-input" required>
+                                </td>
+
+                                <td>
+                                    <input form="option-edit-{{ option.id }}" type="text" name="meta" value="{{ option.meta or '' }}" class="form-control keyz-input" placeholder="#000000">
+                                </td>
+
+                                <td>
+                                    {% if option.variant_type.slug == 'color' and option.meta %}
+                                        <span class="color-dot" style="background-color: {{ option.meta }};"></span>
+                                    {% else %}
+                                        <span class="text-muted small">-</span>
+                                    {% endif %}
+                                </td>
+
+                                <td class="text-end">
+                                    <div class="d-flex justify-content-end gap-2">
+                                        <button form="option-edit-{{ option.id }}" type="submit" class="btn btn-light border action-btn" title="Update">
+                                            <i class="fa-solid fa-check"></i>
+                                        </button>
+
+                                        <form action="{{ url_for('product.variant_option_delete', option_id=option.id) }}" method="post" class="m-0">
+                                            <button type="button" class="btn btn-light border action-btn text-danger btn-confirm-delete" title="Delete">
+                                                <i class="fa-solid fa-trash-can"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center text-muted py-4">No variant options yet</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.btn-confirm-delete').forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            const form = this.closest('form');
+
+            Swal.fire({
+                title: "តើអ្នកប្រាកដទេ?",
+                text: "This item will be deleted.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#000000",
+                cancelButtonColor: "#e5e7eb",
+                cancelButtonText: "<span style='color: #000'>Cancel</span>",
+                confirmButtonText: "Delete",
+                background: "var(--bg-card)",
+                color: "var(--text-main)"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<script>
+    {% for category, message in messages %}
+        Swal.fire({
+            title: '{{ "ជោគជ័យ" if category == "success" else "បរាជ័យ" }}',
+            text: '{{ message }}',
+            icon: '{{ "error" if category == "error" else category }}',
+            showConfirmButton: false,
+            timer: 1800,
+            timerProgressBar: true,
+            background: "var(--bg-card)",
+            color: "var(--text-main)"
+        });
+    {% endfor %}
+</script>
+{% endif %}
+{% endwith %}
+
+{% endblock %}

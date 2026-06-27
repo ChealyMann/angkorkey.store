@@ -1,0 +1,235 @@
+<header class="sticky top-0 z-40 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl border-b border-gray-200 dark:border-zinc-800 shadow-sm transition-colors duration-300">
+    <style>
+        /* Mobile burger active states */
+        #mobile-menu-button.active .burger-line-top {
+            transform: translateY(7px) rotate(45deg);
+        }
+        #mobile-menu-button.active .burger-line-mid {
+            opacity: 0;
+            transform: scale(0);
+        }
+        #mobile-menu-button.active .burger-line-bot {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* Mobile menu transition container */
+        #mobile-menu {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+        }
+        #mobile-menu.active-menu {
+            max-height: 350px;
+            opacity: 1;
+        }
+    </style>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 md:h-20">
+
+            <!-- Logo -->
+            <div class="flex-shrink-0">
+                <a href="{{ url_for('home.home') }}" class="flex items-center gap-2 group">
+                    <span class="text-xl md:text-2xl font-black text-gray-900 dark:text-white tracking-tight">
+                        Angkorkey<span class="text-zinc-400 group-hover:text-zinc-650 dark:text-zinc-500 dark:group-hover:text-zinc-300 transition duration-300">.</span>
+                    </span>
+                </a>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex flex-1 justify-center">
+                <ul class="flex items-center space-x-8 text-xs font-bold uppercase tracking-widest">
+
+                    <li>
+                        <a href="{{ url_for('home.products') }}"
+                           class="pb-1 border-b-2 transition-all duration-300
+                           {{ 'text-zinc-950 dark:text-white border-zinc-950 dark:border-white' if request.endpoint == 'home.products' and not request.view_args.get('category_id') else 'text-zinc-500 dark:text-zinc-400 border-transparent hover:text-zinc-950 dark:hover:text-white' }}">
+                            Products
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ url_for('home.promotions') }}"
+                           class="pb-1 border-b-2 transition-all duration-300
+                           {{ 'text-zinc-950 dark:text-white border-zinc-950 dark:border-white' if request.endpoint == 'home.promotions' else 'text-zinc-500 dark:text-zinc-400 border-transparent hover:text-zinc-950 dark:hover:text-white' }}">
+                            Promotions
+                        </a>
+                    </li>
+
+                    <li class="relative dropdown group py-4">
+                        <a href="{{ url_for('home.all_categories') }}"
+                           class="flex items-center gap-1 pb-1 border-b-2 transition-all duration-300
+                           {{ 'text-zinc-950 dark:text-white border-zinc-950 dark:border-white' if request.endpoint == 'home.all_categories' or request.view_args.get('category_id') else 'text-zinc-500 dark:text-zinc-400 border-transparent hover:text-zinc-950 dark:hover:text-white' }}">
+                            Categories
+
+                            <i class="h-4 w-4 bg-transparent group-hover:rotate-180 transition-transform duration-300" data-lucide="chevron-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu absolute hidden group-hover:block bg-white dark:bg-zinc-900 shadow-xl rounded-xl w-56 p-2 z-50 origin-top top-full mt-0 border border-gray-100 dark:border-zinc-800">
+                            {% for category in categories %}
+                            <li>
+                                <a href="{{ url_for('home.products', category_id=category.id) }}"
+                                   class="block px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-zinc-650 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:text-zinc-950 dark:hover:text-white rounded-lg transition-colors">
+                                    {{ category.name }}
+                                </a>
+                            </li>
+                            {% else %}
+                            <li>
+                                <span class="block px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-650">
+                                    No Categories
+                                </span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+
+                    <li class="relative dropdown group py-4">
+                        <a href="{{ url_for('home.all_brands') }}"
+                           class="flex items-center gap-1 pb-1 border-b-2 transition-all duration-300
+                           {{ 'text-zinc-950 dark:text-white border-zinc-950 dark:border-white' if request.endpoint == 'home.all_brands' or request.endpoint == 'home.brand_products' else 'text-zinc-500 dark:text-zinc-400 border-transparent hover:text-zinc-950 dark:hover:text-white' }}">
+                            Brands
+
+                            <i class="h-4 w-4 bg-transparent group-hover:rotate-180 transition-transform duration-300" data-lucide="chevron-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu absolute hidden group-hover:block bg-white dark:bg-zinc-900 shadow-xl rounded-xl w-56 p-2 z-50 origin-top top-full mt-0 border border-gray-100 dark:border-zinc-800">
+                            {% for brand in brands %}
+                            <li>
+                                <a href="{{ url_for('home.brand_products', brand_id=brand.id) }}"
+                                   class="block px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-zinc-650 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:text-zinc-950 dark:hover:text-white rounded-lg transition-colors">
+                                    {{ brand.name }}
+                                </a>
+                            </li>
+                            {% else %}
+                            <li>
+                                <span class="block px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-650">
+                                    No Brands
+                                </span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+
+                </ul>
+            </nav>
+
+            <!-- Theme Toggle, Cart & Mobile Trigger -->
+            <div class="flex items-center gap-4">
+
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="p-2 text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white transition-colors focus:outline-none cursor-pointer" aria-label="Toggle theme">
+                    <!-- Sun Icon (visible in dark mode) -->
+                    <i id="theme-toggle-sun" class="h-6 w-6" data-lucide="sun"></i>
+                    <!-- Moon Icon (visible in light mode) -->
+                    <i id="theme-toggle-moon" class="h-6 w-6" data-lucide="moon"></i>
+                </button>
+
+                <a href="{{ url_for('home.cart') }}" class="relative p-2 text-zinc-500 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors group">
+                    <i class="h-6 w-6 group-hover:scale-110 transition-transform" data-lucide="shopping-cart"></i>
+                    <span id="global-cart-badge" class="absolute -top-1 -right-1 bg-zinc-950 dark:bg-white text-white dark:text-black text-[9px] rounded-full w-4 h-4 flex items-center justify-center font-bold hidden border border-zinc-200 dark:border-zinc-800">
+                        0
+                    </span>
+                </a>
+
+                <div class="md:hidden">
+                    <button id="mobile-menu-button"
+                            class="relative w-10 h-10 text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white focus:outline-none cursor-pointer">
+                        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-4 flex flex-col justify-between">
+                            <span class="w-full h-0.5 bg-current rounded-full transition-all duration-300 transform burger-line-top"></span>
+                            <span class="w-full h-0.5 bg-current rounded-full transition-all duration-300 transform burger-line-mid"></span>
+                            <span class="w-full h-0.5 bg-current rounded-full transition-all duration-300 transform burger-line-bot"></span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu"
+         class="md:hidden border-t border-gray-100 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-lg">
+
+        <div class="px-4 py-4 space-y-2">
+
+            <a href="{{ url_for('home.products') }}"
+               class="block rounded-xl px-4 py-3 text-sm font-bold uppercase tracking-widest
+               {{ 'bg-zinc-100 dark:bg-zinc-800 text-zinc-950 dark:text-white' if request.endpoint == 'home.products' else 'text-zinc-500 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 hover:text-zinc-950 dark:hover:text-white' }}">
+                Products
+            </a>
+
+            <a href="{{ url_for('home.promotions') }}"
+               class="block rounded-xl px-4 py-3 text-sm font-bold uppercase tracking-widest
+               {{ 'bg-zinc-100 dark:bg-zinc-800 text-zinc-950 dark:text-white' if request.endpoint == 'home.promotions' else 'text-zinc-500 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 hover:text-zinc-950 dark:hover:text-white' }}">
+                Promotions
+            </a>
+
+            <a href="{{ url_for('home.all_categories') }}"
+               class="block rounded-xl px-4 py-3 text-sm font-bold uppercase tracking-widest
+               {{ 'bg-zinc-100 dark:bg-zinc-800 text-zinc-950 dark:text-white' if request.endpoint == 'home.all_categories' else 'text-zinc-500 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 hover:text-zinc-950 dark:hover:text-white' }}">
+                Categories
+            </a>
+
+            <a href="{{ url_for('home.all_brands') }}"
+               class="block rounded-xl px-4 py-3 text-sm font-bold uppercase tracking-widest
+               {{ 'bg-zinc-100 dark:bg-zinc-800 text-zinc-950 dark:text-white' if request.endpoint == 'home.all_brands' or request.endpoint == 'home.brand_products' else 'text-zinc-500 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 hover:text-zinc-950 dark:hover:text-white' }}">
+                Brands
+            </a>
+
+        </div>
+    </div>
+</header>
+
+<script>
+    const mobileMenuButton = document.getElementById("mobile-menu-button");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener("click", function () {
+            mobileMenuButton.classList.toggle("active");
+            mobileMenu.classList.toggle("active-menu");
+        });
+    }
+
+    // Theme toggle button logic
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            const isDarkNow = !document.documentElement.classList.contains('dark');
+            if (isDarkNow) {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+            if (typeof window.applyTheme === 'function') {
+                window.applyTheme();
+            }
+        });
+    }
+
+    // Function to update the cart badge across all pages
+    window.updateGlobalCartBadge = function() {
+        let cart = JSON.parse(localStorage.getItem('angkorkey_cart')) || [];
+        let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const badge = document.getElementById('global-cart-badge');
+
+        if (badge) {
+            if (totalItems > 0) {
+                badge.textContent = totalItems;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+    };
+
+    // Run on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        window.updateGlobalCartBadge();
+        if (typeof window.applyTheme === 'function') {
+            window.applyTheme();
+        }
+    });
+</script>

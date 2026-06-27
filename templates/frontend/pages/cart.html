@@ -1,0 +1,519 @@
+{% extends "frontend/main.html" %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-24 font-sans text-zinc-900 dark:text-zinc-100">
+
+    <!-- Header -->
+    <div class="flex items-center gap-3 mb-10 border-b border-zinc-100 dark:border-zinc-900 pb-5">
+        <h1 class="serif text-4xl font-bold tracking-tight">Your Cart</h1>
+        <span id="cart-item-count" class="bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 text-xs font-bold px-3 py-1 rounded-none border border-zinc-200 dark:border-zinc-700 hidden">
+        </span>
+    </div>
+
+    <!-- Main List Panel -->
+    <div id="empty-cart-msg" class="text-center py-20 bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 rounded-none hidden">
+        <i class="w-12 h-12 mx-auto text-zinc-400 dark:text-zinc-650 mb-4" data-lucide="shopping-bag"></i>
+        <h2 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Your cart is empty</h2>
+        <p class="text-zinc-550 dark:text-zinc-400 text-xs mb-6">Looks like you haven't added any products yet.</p>
+        <a href="{{ url_for('home.products') }}" class="inline-block bg-zinc-950 text-white dark:bg-zinc-50 dark:text-zinc-950 font-semibold px-6 py-3 rounded-none text-xs uppercase tracking-wider hover:opacity-90 transition-all">
+            Continue Shopping
+        </a>
+    </div>
+
+    <div id="cart-items-container" class="space-y-4"></div>
+
+    <!-- Proceed Button Container -->
+    <div id="cart-actions-box" class="mt-8 flex justify-end hidden">
+        <button id="open-checkout-btn" class="w-full sm:w-auto bg-zinc-950 text-white dark:bg-zinc-50 dark:text-zinc-950 font-bold text-xs uppercase tracking-wider px-8 py-4 hover:opacity-90 active:scale-98 transition-all cursor-pointer flex items-center justify-center gap-2">
+            <i class="w-4 h-4" data-lucide="send"></i>
+            Proceed to Checkout
+        </button>
+    </div>
+
+</div>
+
+<!-- Checkout Modal (Order Summary) -->
+<div id="checkout-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4" role="dialog" aria-modal="true">
+    <!-- Modal Overlay -->
+    <div id="checkout-modal-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity duration-300 opacity-0"></div>
+
+    <!-- Modal Content Box -->
+    <div id="checkout-modal-box" class="relative bg-white dark:bg-zinc-950 w-full max-w-md rounded-none shadow-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden p-6 md:p-8 flex flex-col max-h-[90vh] scale-95 opacity-0 transition-all duration-300">
+        
+        <!-- Close Button -->
+        <button id="close-checkout-modal" class="absolute top-4 right-4 text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors p-1.5 cursor-pointer">
+            <i class="w-5 h-5" data-lucide="x"></i>
+        </button>
+
+        <h3 class="text-zinc-900 dark:text-zinc-100 mb-6 uppercase tracking-widest text-xs font-bold border-b border-zinc-100 dark:border-zinc-900 pb-4">
+            Order Summary
+        </h3>
+
+        <!-- Modal Content (Scrollable if needed) -->
+        <div class="overflow-y-auto pr-1 flex-1 scroll-hide mb-6">
+            <div class="flex justify-between items-center mb-4 text-sm">
+                <span class="text-zinc-550 dark:text-zinc-400">Subtotal</span>
+                <span id="cart-subtotal" class="text-zinc-950 dark:text-zinc-100 font-bold">$0.00</span>
+            </div>
+
+            <!-- Delivery Options -->
+            <div class="mb-6">
+                <p class="text-zinc-500 dark:text-zinc-400 text-sm mb-3">Delivery Option</p>
+                <div class="space-y-3">
+                    <!-- Standard Delivery -->
+                    <label class="delivery-option flex items-center justify-between gap-3 border border-zinc-200 dark:border-zinc-850 rounded-none p-3.5 cursor-pointer transition-all hover:bg-zinc-50 dark:hover:bg-zinc-900/60 select-none">
+                        <div class="flex items-center gap-3">
+                            <input type="radio" name="delivery_option" value="standard" checked class="delivery-radio accent-zinc-950 dark:accent-zinc-50">
+                            <div>
+                                <p class="text-zinc-900 dark:text-zinc-100 text-sm font-semibold flex items-center gap-1.5">
+                                    <i class="w-3.5 h-3.5 text-zinc-500" data-lucide="truck"></i> Standard Delivery
+                                </p>
+                                <p class="text-zinc-400 dark:text-zinc-500 text-xs">ដឹកធម្មតា</p>
+                            </div>
+                        </div>
+                        <span class="text-zinc-900 dark:text-zinc-100 text-sm font-bold">$2.00</span>
+                    </label>
+
+                    <!-- Grab Delivery -->
+                    <label class="delivery-option flex items-center justify-between gap-3 border border-zinc-200 dark:border-zinc-850 rounded-none p-3.5 cursor-pointer transition-all hover:bg-zinc-50 dark:hover:bg-zinc-900/60 select-none">
+                        <div class="flex items-center gap-3">
+                            <input type="radio" name="delivery_option" value="grab" class="delivery-radio accent-zinc-950 dark:accent-zinc-50">
+                            <div>
+                                <p class="text-zinc-900 dark:text-zinc-100 text-sm font-semibold flex items-center gap-1.5">
+                                    <i class="w-3.5 h-3.5 text-zinc-500" data-lucide="zap"></i> Grab Delivery
+                                </p>
+                                <p class="text-zinc-400 dark:text-zinc-500 text-xs">តម្លៃគិតតាម Grab</p>
+                            </div>
+                        </div>
+                        <span class="text-emerald-600 dark:text-emerald-400 text-xs font-bold">Confirm Later</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center mb-4 text-sm">
+                <span class="text-zinc-550 dark:text-zinc-400">Delivery Fee</span>
+                <span id="delivery-fee" class="text-zinc-955 dark:text-zinc-100 font-bold">$2.00</span>
+            </div>
+
+            <div class="border-t border-zinc-100 dark:border-zinc-900 pt-4 flex justify-between items-end">
+                <span class="text-zinc-955 dark:text-zinc-100 font-bold">Total</span>
+                <span id="cart-total" class="text-xl font-bold text-zinc-955 dark:text-white">$0.00</span>
+            </div>
+        </div>
+
+        <button id="checkout-btn" class="w-full py-4 rounded-none bg-zinc-950 text-white dark:bg-zinc-50 dark:text-zinc-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:opacity-90 active:scale-98 transition-all cursor-pointer">
+            <i class="w-4 h-4" data-lucide="send"></i>
+            Confirm & Order via Telegram
+        </button>
+    </div>
+</div>
+
+<style>
+    .delivery-option.is-selected {
+        border-color: currentColor !important;
+        background-color: rgba(24, 24, 27, 0.04) !important;
+    }
+    .dark .delivery-option.is-selected {
+        background-color: rgba(255, 255, 255, 0.04) !important;
+    }
+    .qty-btn {
+        width: 26px;
+        height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0;
+        background: transparent;
+        border: 1px solid currentColor;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .qty-btn:hover {
+        background: rgba(0, 0, 0, 0.05);
+    }
+    .dark .qty-btn:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const container = document.getElementById('cart-items-container');
+        const emptyMsg = document.getElementById('empty-cart-msg');
+        const actionsBox = document.getElementById('cart-actions-box');
+        const countBadge = document.getElementById('cart-item-count');
+        const subtotalEl = document.getElementById('cart-subtotal');
+        const totalEl = document.getElementById('cart-total');
+        const deliveryFeeEl = document.getElementById('delivery-fee');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const deliveryRadios = document.querySelectorAll('.delivery-radio');
+
+        // Modal triggers
+        const checkoutModal = document.getElementById('checkout-modal');
+        const checkoutModalOverlay = document.getElementById('checkout-modal-overlay');
+        const openCheckoutBtn = document.getElementById('open-checkout-btn');
+        const closeCheckoutModal = document.getElementById('close-checkout-modal');
+
+        let cart = JSON.parse(localStorage.getItem('angkorkey_cart')) || [];
+
+        function money(value) {
+            const number = Number(value) || 0;
+            return `$${number.toFixed(2)}`;
+        }
+
+        function safeText(value, fallback = '') {
+            if (value === null || value === undefined || value === 'None') {
+                return fallback;
+            }
+            return String(value).trim() || fallback;
+        }
+
+        function getSelectedDelivery() {
+            const selected = document.querySelector('input[name="delivery_option"]:checked');
+
+            if (!selected) {
+                return {
+                    type: 'standard',
+                    nameEn: 'Standard Delivery',
+                    nameKh: 'ដឹកជញ្ជូនធម្មតា',
+                    fee: 2.0,
+                    feeText: '$2.00',
+                    mapUrl: ''
+                };
+            }
+
+            if (selected.value === 'grab') {
+                return {
+                    type: 'grab',
+                    nameEn: 'Grab Delivery',
+                    nameKh: 'ដឹកជញ្ជូនតាម Grab',
+                    fee: 0,
+                    feeText: 'គិតតាម Grab',
+                    mapUrl: ''
+                };
+            }
+
+            return {
+                type: 'standard',
+                nameEn: 'Standard Delivery',
+                nameKh: 'ដឹកជញ្ជូនធម្មតា',
+                fee: 2.0,
+                feeText: '$2.00',
+                mapUrl: ''
+            };
+        }
+
+        function getCartSubtotal() {
+            let subtotal = 0;
+            cart.forEach(item => {
+                const price = Number(item.price) || 0;
+                const quantity = Number(item.quantity) || 1;
+                subtotal += price * quantity;
+            });
+            return subtotal;
+        }
+
+        function updateDeliveryUI() {
+            const selected = document.querySelector('input[name="delivery_option"]:checked');
+
+            document.querySelectorAll('.delivery-option').forEach(option => {
+                option.classList.remove('is-selected');
+            });
+
+            if (!selected) return;
+
+            const selectedCard = selected.closest('.delivery-option');
+            if (selectedCard) {
+                selectedCard.classList.add('is-selected');
+            }
+        }
+
+        function updateSummary() {
+            const subtotal = getCartSubtotal();
+            const delivery = getSelectedDelivery();
+            let finalTotal = subtotal;
+
+            if (delivery.type === 'standard') {
+                finalTotal += delivery.fee;
+                deliveryFeeEl.textContent = money(delivery.fee);
+                totalEl.textContent = money(finalTotal);
+            } else if (delivery.type === 'grab') {
+                deliveryFeeEl.textContent = delivery.feeText;
+                totalEl.textContent = `${money(subtotal)} + Grab`;
+            }
+
+            subtotalEl.textContent = money(subtotal);
+            updateDeliveryUI();
+        }
+
+        function saveCart() {
+            localStorage.setItem('angkorkey_cart', JSON.stringify(cart));
+            if (window.updateGlobalCartBadge) {
+                window.updateGlobalCartBadge();
+            }
+            renderCart();
+        }
+
+        function getImageSrc(image) {
+            let imgSrc = safeText(image);
+            if (!imgSrc) {
+                return 'https://via.placeholder.com/400x400?text=No+Image';
+            }
+            if (imgSrc.startsWith('http') || imgSrc.startsWith('/')) {
+                return imgSrc;
+            }
+            return `/static/images/${imgSrc}`;
+        }
+
+        function renderCart() {
+            container.innerHTML = '';
+
+            if (cart.length === 0) {
+                emptyMsg.classList.remove('hidden');
+                actionsBox.classList.add('hidden');
+                countBadge.classList.add('hidden');
+                hideCheckoutModal();
+                return;
+            }
+
+            emptyMsg.classList.add('hidden');
+            actionsBox.classList.remove('hidden');
+
+            let totalItems = 0;
+
+            cart.forEach((item, index) => {
+                const name = safeText(item.name, 'Unnamed Product');
+                const optionsText = safeText(item.optionsText, 'Standard');
+                const price = Number(item.price) || 0;
+                const quantity = Number(item.quantity) || 1;
+
+                totalItems += quantity;
+
+                const imgSrc = getImageSrc(item.image);
+
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'bg-white dark:bg-zinc-900/20 p-4 rounded-none flex flex-col sm:flex-row items-start sm:items-center gap-4 border border-zinc-200 dark:border-zinc-800/80';
+
+                itemDiv.innerHTML = `
+                    <div class="w-20 h-20 bg-white dark:bg-zinc-900 rounded-none overflow-hidden flex-shrink-0 border border-zinc-200 dark:border-zinc-800">
+                        <img src="${imgSrc}" class="w-full h-full object-cover" alt="${name}">
+                    </div>
+
+                    <div class="flex-1 min-w-0">
+                        <a href="/product_detail/${item.productId}" class="text-zinc-900 dark:text-zinc-100 font-bold hover:opacity-80 transition-opacity line-clamp-1">
+                            ${name}
+                        </a>
+                        <p class="text-[10px] text-zinc-400 dark:text-zinc-500 mt-1 uppercase tracking-wider font-semibold">
+                            ${optionsText}
+                        </p>
+                        <p class="text-zinc-950 dark:text-zinc-100 font-bold mt-1 text-sm">
+                            ${money(price)}
+                        </p>
+                    </div>
+
+                    <div class="flex items-center gap-6 w-full sm:w-auto justify-between sm:justify-end mt-2 sm:mt-0 pt-3 sm:pt-0 border-t border-zinc-100 dark:border-zinc-900 sm:border-0">
+                        <div class="flex items-center gap-3">
+                            <button class="qty-btn dec-btn text-zinc-500 hover:text-zinc-955 dark:hover:text-white" data-index="${index}">
+                                <i class="w-3.5 h-3.5" data-lucide="minus"></i>
+                            </button>
+                            <span class="text-zinc-900 dark:text-zinc-100 font-semibold text-sm w-6 text-center select-none">
+                                ${quantity}
+                            </span>
+                            <button class="qty-btn inc-btn text-zinc-500 hover:text-zinc-955 dark:hover:text-white" data-index="${index}">
+                                <i class="w-3.5 h-3.5" data-lucide="plus"></i>
+                            </button>
+                        </div>
+
+                        <button class="remove-btn text-zinc-400 hover:text-zinc-955 dark:text-zinc-600 dark:hover:text-white transition-colors p-2" data-index="${index}">
+                            <i class="w-4 h-4" data-lucide="trash-2"></i>
+                        </button>
+                    </div>
+                `;
+
+                container.appendChild(itemDiv);
+            });
+
+            countBadge.textContent = `${totalItems} ${totalItems > 1 ? 'Items' : 'Item'}`;
+            countBadge.classList.remove('hidden');
+
+            updateSummary();
+
+            // Setup button listeners
+            container.querySelectorAll('.inc-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const idx = Number(e.currentTarget.dataset.index);
+                    cart[idx].quantity = (Number(cart[idx].quantity) || 1) + 1;
+                    saveCart();
+                });
+            });
+
+            container.querySelectorAll('.dec-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const idx = Number(e.currentTarget.dataset.index);
+                    if ((Number(cart[idx].quantity) || 1) > 1) {
+                        cart[idx].quantity = (Number(cart[idx].quantity) || 1) - 1;
+                    } else {
+                        cart.splice(idx, 1);
+                    }
+                    saveCart();
+                });
+            });
+
+            container.querySelectorAll('.remove-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const idx = Number(e.currentTarget.dataset.index);
+                    cart.splice(idx, 1);
+                    saveCart();
+                });
+            });
+
+            // Re-render dynamically injected Lucide icons
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        }
+
+        function buildTelegramMessage() {
+            let subtotal = 0;
+            const delivery = getSelectedDelivery();
+
+            let message = `🛒 ANGKORKEY STORE ORDER\n`;
+            message += `━━━━━━━━━━━━━━\n\n`;
+
+            cart.forEach((item, index) => {
+                const name = safeText(item.name, 'Name Unavailable');
+                const optionsText = safeText(item.optionsText, 'Standard');
+                const price = Number(item.price) || 0;
+                const quantity = Number(item.quantity) || 1;
+                const itemTotal = price * quantity;
+
+                subtotal += itemTotal;
+
+                message += `${index + 1}. ${name}\n`;
+                if (optionsText && optionsText !== 'Standard') {
+                    message += `   Option: ${optionsText}\n`;
+                }
+                message += `   Qty: ${quantity}\n`;
+                message += `   Price: ${money(price)}\n`;
+                message += `   Total: ${money(itemTotal)}\n\n`;
+            });
+
+            message += `━━━━━━━━━━━━━━\n`;
+            message += `Subtotal: ${money(subtotal)}\n`;
+
+            if (delivery.type === 'standard') {
+                const finalTotal = subtotal + delivery.fee;
+                message += `Delivery: ${delivery.nameKh}\n`;
+                message += `Delivery Fee: ${money(delivery.fee)}\n`;
+                message += `Grand Total: ${money(finalTotal)}\n`;
+            } else if (delivery.type === 'grab') {
+                message += `Delivery: ${delivery.nameKh}\n`;
+                message += `Grand Total: ${money(subtotal)} + Grab Fee\n`;
+            }
+
+            message += `━━━━━━━━━━━━━━\n`;
+            message += `🙏 Thank you for your order!`;
+
+            return message;
+        }
+
+        // Modal triggers
+        function showCheckoutModal() {
+            checkoutModal.classList.remove('hidden');
+            checkoutModal.offsetHeight; // force reflow
+            checkoutModalOverlay.classList.remove('opacity-0');
+            document.getElementById('checkout-modal-box').classList.remove('scale-95', 'opacity-0');
+            document.body.style.overflow = 'hidden';
+            updateSummary();
+        }
+
+        function hideCheckoutModal() {
+            checkoutModalOverlay.classList.add('opacity-0');
+            document.getElementById('checkout-modal-box').classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                checkoutModal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        // Clear cart modal triggers
+        const clearCartModal = document.getElementById('clear-cart-modal');
+        const clearCartModalOverlay = document.getElementById('clear-cart-modal-overlay');
+        const confirmClearCartBtn = document.getElementById('confirm-clear-cart-btn');
+        const cancelClearCartBtn = document.getElementById('cancel-clear-cart-btn');
+
+        function showClearCartModal() {
+            clearCartModal.classList.remove('hidden');
+            clearCartModal.offsetHeight; // force reflow
+            clearCartModalOverlay.classList.remove('opacity-0');
+            document.getElementById('clear-cart-modal-box').classList.remove('scale-95', 'opacity-0');
+            document.body.style.overflow = 'hidden';
+            
+            // Re-render icons inside custom modal
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        }
+
+        function hideClearCartModal() {
+            clearCartModalOverlay.classList.add('opacity-0');
+            document.getElementById('clear-cart-modal-box').classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                clearCartModal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        if (openCheckoutBtn) {
+            openCheckoutBtn.addEventListener('click', showCheckoutModal);
+        }
+        if (closeCheckoutModal) {
+            closeCheckoutModal.addEventListener('click', hideCheckoutModal);
+        }
+        if (checkoutModalOverlay) {
+            checkoutModalOverlay.addEventListener('click', hideCheckoutModal);
+        }
+
+        if (confirmClearCartBtn) {
+            confirmClearCartBtn.addEventListener('click', () => {
+                cart = [];
+                saveCart();
+                hideClearCartModal();
+            });
+        }
+        if (cancelClearCartBtn) {
+            cancelClearCartBtn.addEventListener('click', hideClearCartModal);
+        }
+        if (clearCartModalOverlay) {
+            clearCartModalOverlay.addEventListener('click', hideClearCartModal);
+        }
+
+        deliveryRadios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                updateSummary();
+                updateDeliveryUI();
+            });
+        });
+
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) return;
+
+            const message = buildTelegramMessage();
+            const telegramUsername = '{{ telegram_username }}';
+            const tgUrl = `https://t.me/${telegramUsername}?text=${encodeURIComponent(message)}`;
+
+            window.open(tgUrl, '_blank');
+
+            // Close order summary modal
+            hideCheckoutModal();
+
+            // Open custom clear-cart modal
+            setTimeout(() => {
+                showClearCartModal();
+            }, 400);
+        });
+
+        renderCart();
+    });
+</script>
+{% endblock %}

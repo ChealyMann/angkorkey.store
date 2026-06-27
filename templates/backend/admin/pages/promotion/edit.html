@@ -1,0 +1,150 @@
+{% extends 'backend/admin/master.html' %}
+
+{% block main %}
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        .font-khmer { font-family: 'Kantumruy Pro', 'Inter', sans-serif; }
+
+        /* ULTRA MINIMALIST INPUTS */
+        .keyz-group { margin-bottom: 2.5rem; }
+
+        .keyz-label {
+            font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.15em;
+            color: var(--text-muted); font-weight: 600; margin-bottom: 0.5rem; display: block;
+        }
+
+        .keyz-input {
+            display: block; width: 100%; border: none; border-bottom: 1px solid var(--border-light);
+            background-color: transparent !important; color: var(--text-main) !important;
+            border-radius: 0; padding: 0.5rem 0; font-size: 1rem; transition: border-color 0.3s ease;
+        }
+
+        .keyz-input:focus { box-shadow: none !important; border-bottom: 1px solid var(--text-main) !important; outline: none; }
+        .keyz-input::placeholder { color: #52525b; font-weight: 300; }
+
+        /* Switch Form Customization */
+        .form-switch .form-check-input {
+            background-color: var(--border-light);
+            border-color: transparent;
+            cursor: pointer;
+        }
+        .form-switch .form-check-input:checked {
+            background-color: var(--text-main);
+            border-color: var(--text-main);
+        }
+
+        .upload-area { border: 1px dashed var(--border-light); background-color: transparent; transition: all 0.3s ease; border-radius: 12px; }
+        .upload-area:hover { border-color: var(--text-main); background-color: var(--bg-hover); }
+
+        .btn-primary-custom { background-color: var(--text-main); color: var(--bg-main); border: none; font-weight: 700; border-radius: 8px; }
+        .btn-primary-custom:hover { background-color: #e4e4e7; color: var(--bg-main); }
+        .btn-outline-custom { border: 1px solid var(--border-light); color: var(--text-muted); font-weight: 600; border-radius: 8px; background: transparent; }
+        .btn-outline-custom:hover { background-color: var(--bg-hover); color: var(--text-main); border-color: var(--text-muted); }
+    </style>
+
+    <div class="font-khmer w-auto mx-4 mt-4 mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h3 class="text-main mb-1" style="font-weight: 500; letter-spacing: -0.02em;">កែប្រែប្រូម៉ូសិន</h3>
+                <span class="text-muted" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;">Edit Promotion</span>
+            </div>
+            <a href="{{ url_for('promotion.promotion') }}" class="btn btn-link text-decoration-none d-flex align-items-center" style="color: var(--text-muted); font-weight: 500;">
+                <i class="fa-solid fa-arrow-left me-2"></i> ត្រឡប់ក្រោយ (Back)
+            </a>
+        </div>
+
+        <form action="{{ url_for('promotion.promotion_edit', promotion_id=promotion.id) }}" method="post" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+
+            <div class="card p-4 p-lg-5 border-0 bg-card">
+                <div class="row g-5">
+                    <div class="col-lg-6">
+                        <div class="keyz-group">
+                            <label for="inputTitle" class="keyz-label">ចំណងជើង (Title)</label>
+                            {{ form.title(class="keyz-input", id="inputTitle", placeholder="Promotion Title") }}
+                        </div>
+
+                        <div class="keyz-group">
+                            <label for="inputSubtitle" class="keyz-label">ចំណងជើងរង (Subtitle)</label>
+                            {{ form.subtitle(class="keyz-input", id="inputSubtitle", placeholder="Subtitle/Details") }}
+                        </div>
+
+                        <div class="keyz-group">
+                            <label for="inputLink" class="keyz-label">តំណភ្ជាប់ (Link)</label>
+                            {{ form.link(class="keyz-input", id="inputLink", placeholder="https://") }}
+                        </div>
+
+                        <div class="keyz-group">
+                            <label for="inputButtonText" class="keyz-label">អត្ថបទប៊ូតុង (Button Text)</label>
+                            {{ form.button_text(class="keyz-input", id="inputButtonText", placeholder="e.g. Shop Now") }}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div>
+                            <label class="keyz-label mb-3">រូបភាព (Promo Image)</label>
+                            {{ form.image(class="d-none", id="image_upload", onchange="previewImage(event)", accept=".jpg, .png, .webp, .jpeg") }}
+
+                            <div class="d-flex flex-column gap-4">
+                                <div id="preview-container" class="{{ '' if promotion.image else 'd-none' }}">
+                                    <div class="d-inline-block position-relative border rounded p-2 bg-main shadow-sm" style="border-color: var(--border-light) !important;">
+                                        <img id="image-preview" data-original-src="{{ url_for('static', filename='images/' + promotion.image) if promotion.image else '' }}" src="{{ url_for('static', filename='images/' + promotion.image) if promotion.image else url_for('static', filename='images/none.jpg') }}" alt="Preview" class="d-block rounded" style="width: 250px; height: auto; max-height: 150px; object-fit: cover;">
+                                        <button type="button" id="btn-delete-image" onclick="removeImage()" class="btn btn-dark position-absolute top-0 end-0 m-2 rounded-circle shadow-sm border d-none" style="width:28px; height:28px; padding: 0; display: flex; align-items: center; justify-content: center; border-color: rgba(255,255,255,0.1) !important;">
+                                            <i class="fas fa-times text-danger small"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <label for="image_upload" class="upload-area w-100 p-4 text-center shadow-sm" style="cursor: pointer;">
+                                    <div class="mb-2"><i class="bi bi-image text-muted" style="font-size: 1.5rem;"></i></div>
+                                    <span class="text-main fw-bold" style="font-size: 0.9rem;">ចុចដើម្បីប្តូររូបភាព (Change Image)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-check form-switch mt-5 d-flex align-items-center">
+                            {{ form.is_active(class="form-check-input", id="flexSwitchCheckChecked", checked=promotion.is_active) }}
+                            <label class="form-check-label ms-3 text-main font-weight-bold" for="flexSwitchCheckChecked" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">បង្ហាញ (Active)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex gap-3 mt-4 justify-content-end">
+                <button type="submit" class="btn btn-primary-custom px-5 py-2">រក្សាទុកការកែប្រែ (Update)</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                if (reader.readyState == 2) {
+                    document.getElementById("image-preview").src = reader.result;
+                    document.getElementById("preview-container").classList.remove("d-none");
+                    document.getElementById("btn-delete-image").classList.remove("d-none");
+                }
+            }
+            if (event.target.files[0]) reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function removeImage() {
+            var imageField = document.getElementById("image-preview");
+            var deleteBtn = document.getElementById("btn-delete-image");
+            document.getElementById("image_upload").value = "";
+
+            var originalSrc = imageField.getAttribute('data-original-src');
+
+            if (originalSrc && originalSrc !== "") {
+                imageField.src = originalSrc;
+                deleteBtn.classList.add("d-none");
+            } else {
+                imageField.src = "#";
+                document.getElementById("preview-container").classList.add("d-none");
+                deleteBtn.classList.add("d-none");
+            }
+        }
+    </script>
+{% endblock %}

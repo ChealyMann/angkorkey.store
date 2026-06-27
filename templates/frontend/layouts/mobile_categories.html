@@ -1,0 +1,38 @@
+<div id="mobile-category-menu" class="fixed inset-0 z-[100] hidden">
+    <div id="category-overlay" class="fixed inset-0 bg-black/50 backdrop-blur-xs opacity-0 transition-opacity duration-500">
+    </div>
+
+    <div class="fixed right-0 top-0 h-full w-[85%] max-w-sm bg-white dark:bg-zinc-900 shadow-2xl transform translate-x-full offcanvas-transition flex flex-col border-l border-gray-200 dark:border-zinc-800 transition-colors duration-300">
+
+        <div class="flex justify-between items-center p-6 border-b border-gray-100 dark:border-zinc-800">
+            <h2 class="text-xl font-black text-gray-900 dark:text-white tracking-tight">Categories</h2>
+            <button id="close-category-button" class="group p-2 rounded-full border border-gray-200 dark:border-zinc-800 hover:border-zinc-950 dark:hover:border-zinc-50 text-gray-500 hover:text-zinc-950 dark:text-zinc-400 transition-all duration-300">
+                <i class="w-5 h-5 transition-transform duration-300 group-hover:rotate-90" data-lucide="x"></i>
+            </button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-6 no-scrollbar">
+            <div class="grid grid-cols-2 gap-4">
+                {% for category in categories %}
+                <a href="{{ url_for('home.products', category_id=category.id) }}" class="group relative block aspect-square overflow-hidden rounded-xl bg-white dark:bg-zinc-850 border border-gray-200 dark:border-zinc-800 hover:border-zinc-950 dark:hover:border-zinc-50 transition-all">
+                    {% if category.image %}
+                    <img src="{{ url_for('static', filename='images/' + category.image) }}"
+                          alt="{{ category.name }}"
+                          class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100">
+                    {% else %}
+                    <div class="absolute inset-0 flex items-center justify-center bg-gray-50 dark:bg-zinc-800 text-gray-300 dark:text-zinc-650">
+                        <i class="w-8 h-8" data-lucide="image"></i>
+                    </div>
+                    {% endif %}
+
+                    <div class="absolute inset-x-0 bottom-0 h-full bg-gradient-to-t from-black/80 via-black/15 to-transparent"></div>
+
+                    <div class="absolute bottom-4 left-0 right-0 text-center px-2">
+                        <span class="block text-xs font-bold text-white uppercase tracking-widest leading-tight break-words">{{ category.name }}</span>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

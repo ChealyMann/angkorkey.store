@@ -1,0 +1,451 @@
+{% extends 'backend/admin/master.html' %}
+
+{% block main %}
+<link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    .font-khmer {
+        font-family: 'Kantumruy Pro', 'Inter', sans-serif;
+    }
+    
+    .category-card {
+        border: 1px solid var(--border-light);
+        border-radius: 12px;
+        background-color: var(--bg-card);
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -1px rgba(0,0,0,0.01);
+        overflow: hidden;
+    }
+
+    .custom-pills .nav-link {
+        color: var(--text-muted);
+        background-color: var(--bg-main);
+        border: 1px solid var(--border-light);
+        border-radius: 8px;
+        padding: 0.6rem 1.25rem;
+        font-weight: 500;
+        font-size: 0.85rem;
+        transition: all 0.2s ease;
+    }
+    
+    .custom-pills .nav-link.active {
+        color: #ffffff !important;
+        background-color: #111827 !important;
+        border-color: #111827 !important;
+    }
+    
+    .custom-pills .nav-link:hover:not(.active) {
+        background-color: var(--bg-hover);
+        color: var(--text-main);
+    }
+
+    .product-row {
+        transition: background-color 0.2s ease;
+    }
+
+    .product-row:hover {
+        background-color: var(--bg-hover);
+    }
+
+    .product-thumb {
+        width: 45px;
+        height: 45px;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 1px solid var(--border-light);
+        background-color: var(--bg-main);
+    }
+
+    .badge-best-seller {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+</style>
+
+<div class="font-khmer w-auto mx-4 mt-4 mb-4">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-3">
+        <div>
+            <h3 class="text-main mb-1" style="font-weight: 500; letter-spacing: -0.02em;">
+                គ្រប់គ្រងផលិតផលលក់ដាច់បំផុត (Bulk Best Sellers)
+            </h3>
+            <span class="text-muted" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;">
+                Bulk best sellers management with category tabs and filters
+            </span>
+        </div>
+        <div>
+            <a href="{{ url_for('product.product') }}" class="text-decoration-none">
+                <button class="btn btn-outline-dark shadow-sm px-4" style="border-radius: 8px; font-weight: 500;">
+                    <i class="fa-solid fa-arrow-left me-2"></i> Back to Products
+                </button>
+            </a>
+        </div>
+    </div>
+
+    <!-- Category Tabs Navigation -->
+    {% if category_data %}
+        <ul class="nav nav-pills custom-pills gap-2 mb-4" id="categoryTabs" role="tablist">
+            {% for cat_group in category_data %}
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link {% if loop.first %}active{% endif %} shadow-xs" 
+                            id="tab-{{ cat_group.category.id }}" 
+                            data-bs-toggle="pill" 
+                            data-bs-target="#pane-{{ cat_group.category.id }}" 
+                            type="button" 
+                            role="tab" 
+                            aria-controls="pane-{{ cat_group.category.id }}" 
+                            aria-selected="{% if loop.first %}true{% else %}false{% endif %}">
+                        {{ cat_group.category.name }}
+                        <span class="badge bg-light-danger text-main ms-2 border" style="font-size: 0.7rem; padding: 3px 6px;">{{ cat_group.products | length }}</span>
+                    </button>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Category Tab Panes -->
+        <div class="tab-content" id="categoryTabContent">
+            {% for cat_group in category_data %}
+                <div class="tab-pane fade {% if loop.first %}show active{% endif %}" 
+                     id="pane-{{ cat_group.category.id }}" 
+                     role="tabpanel" 
+                     aria-labelledby="tab-{{ cat_group.category.id }}">
+                    
+                    <div class="category-card" id="cat-card-{{ cat_group.category.id }}">
+                        
+                        <!-- Search, Filter & Bulk Actions Bar -->
+                        <div class="category-header border-bottom p-3 bg-light">
+                            <div class="row g-3 align-items-center justify-content-between">
+                                
+                                <!-- Search and Filters (Left) -->
+                                <div class="col-12 col-xl-8 d-flex align-items-center gap-2 flex-wrap">
+                                    <div class="input-group" style="max-width: 300px;">
+                                        <span class="input-group-text bg-white border-end-0 text-muted"><i class="fa-solid fa-magnifying-glass"></i></span>
+                                        <input type="text" 
+                                               class="form-control border-start-0 search-input" 
+                                               placeholder="Search products..." 
+                                               style="font-size: 0.85rem; border-radius: 0 8px 8px 0;"
+                                               data-category-id="{{ cat_group.category.id }}"
+                                               onkeyup="filterCategoryProducts({{ cat_group.category.id }})">
+                                    </div>
+                                    
+                                    <select class="form-select filter-best-seller" 
+                                            style="width: auto; max-width: 180px; font-size: 0.85rem;"
+                                            data-category-id="{{ cat_group.category.id }}"
+                                            onchange="filterCategoryProducts({{ cat_group.category.id }})">
+                                        <option value="all">All Best Sellers</option>
+                                        <option value="best">Best Sellers Only</option>
+                                        <option value="regular">Regular Only</option>
+                                    </select>
+
+                                    <select class="form-select filter-status" 
+                                            style="width: auto; max-width: 150px; font-size: 0.85rem;"
+                                            data-category-id="{{ cat_group.category.id }}"
+                                            onchange="filterCategoryProducts({{ cat_group.category.id }})">
+                                        <option value="all">All Status</option>
+                                        <option value="true">Active Only</option>
+                                        <option value="false">Inactive Only</option>
+                                    </select>
+                                </div>
+
+                                <!-- Bulk Buttons (Right) -->
+                                <div class="col-12 col-xl-4 d-flex justify-content-xl-end gap-2">
+                                    <button class="btn btn-light btn-sm border px-3"
+                                            style="border-radius: 6px; font-weight: 600; font-size: 0.8rem;"
+                                            onclick="triggerBulkToggle({{ cat_group.category.id }}, true)">
+                                        <i class="fa-solid fa-check-double me-1"></i> Select All
+                                    </button>
+                                    <button class="btn btn-light btn-sm border px-3 text-danger"
+                                            style="border-radius: 6px; font-weight: 600; font-size: 0.8rem;"
+                                            onclick="triggerBulkToggle({{ cat_group.category.id }}, false)">
+                                        <i class="fa-solid fa-xmark me-1"></i> Clear All
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Products Table -->
+                        <div class="card-body p-0">
+                            {% if cat_group.products %}
+                                <div class="table-responsive">
+                                    <table class="table table-borderless align-middle mb-0">
+                                        <thead>
+                                            <tr style="border-bottom: 1px solid var(--border-light); font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">
+                                                <th class="ps-4 py-3" style="width: 80px;">Image</th>
+                                                <th class="py-3">Product Name</th>
+                                                <th class="text-end py-3" style="width: 150px;">Price</th>
+                                                <th class="text-center py-3" style="width: 150px;">Status</th>
+                                                <th class="text-center py-3" style="width: 150px;">Best Selling</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for prod in cat_group.products %}
+                                                <tr class="product-row" 
+                                                    style="border-bottom: 1px dashed var(--border-light);"
+                                                    data-product-id="{{ prod.id }}"
+                                                    data-name="{{ prod.name | lower }}"
+                                                    data-best-seller="{{ 'true' if prod.best_selling else 'false' }}"
+                                                    data-status="{{ prod.status }}">
+                                                    
+                                                    <td class="ps-4 py-3">
+                                                        <img src="{{ url_for('static', filename='images/thumb_' + prod.image) if prod.image and prod.image != 'none.jpg' else 'https://via.placeholder.com/100x100?text=No+Image' }}"
+                                                             class="product-thumb"
+                                                             alt="{{ prod.name }}">
+                                                    </td>
+                                                    
+                                                    <td class="py-3">
+                                                        <span class="text-main" style="font-weight: 600;">{{ prod.name }}</span>
+                                                        <span class="ms-2 badge bg-warning text-dark badge-best-seller badge-star-{{ prod.id }} {% if not prod.best_selling %}d-none{% endif %}">
+                                                            <i class="fa-solid fa-star"></i>
+                                                        </span>
+                                                    </td>
+                                                    
+                                                    <td class="text-end py-3 text-main font-weight-bold">
+                                                        ${{ "%.2f"|format(prod.price) }}
+                                                    </td>
+                                                    
+                                                    <td class="text-center py-3">
+                                                        {% if prod.status == "true" %}
+                                                            <span class="badge bg-light-success text-success border px-2 py-1" style="font-size: 0.7rem;">Active</span>
+                                                        {% else %}
+                                                            <span class="badge bg-light-danger text-danger border px-2 py-1" style="font-size: 0.7rem;">Inactive</span>
+                                                        {% endif %}
+                                                    </td>
+                                                    
+                                                    <td class="text-center py-3">
+                                                        <div class="form-check form-switch d-inline-block">
+                                                            <input class="form-check-input best-seller-switch" 
+                                                                   type="checkbox" 
+                                                                   role="switch"
+                                                                   data-product-id="{{ prod.id }}"
+                                                                   data-category-id="{{ cat_group.category.id }}"
+                                                                   {% if prod.best_selling %}checked{% endif %}
+                                                                   onchange="toggleProductBestSeller({{ prod.id }}, this.checked)">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <!-- Empty Filter State (Hidden by default) -->
+                                <div class="empty-filter-state d-none text-center py-5 text-muted">
+                                    <i class="fa-solid fa-magnifying-glass d-block mb-2" style="font-size: 2rem; opacity: 0.3;"></i>
+                                    <span>No products match the selected filters.</span>
+                                </div>
+                            {% else %}
+                                <div class="text-center py-5 text-muted">
+                                    <i class="fa-regular fa-folder-open d-block mb-2" style="font-size: 2rem; opacity: 0.3;"></i>
+                                    <span>No products in this category.</span>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="card text-center py-5">
+            <div class="card-body">
+                <i class="fa-solid fa-layers-list d-block mb-3 text-muted" style="font-size: 3rem; opacity: 0.3;"></i>
+                <h4 class="text-muted">No categories found</h4>
+            </div>
+        </div>
+    {% endif %}
+
+</div>
+
+<script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    });
+
+    // Client-side instant filtering logic
+    function filterCategoryProducts(categoryId) {
+        const card = document.getElementById(`cat-card-${categoryId}`);
+        if (!card) return;
+
+        const searchVal = card.querySelector('.search-input').value.toLowerCase().trim();
+        const bestSellerVal = card.querySelector('.filter-best-seller').value;
+        const statusVal = card.querySelector('.filter-status').value;
+        
+        const rows = card.querySelectorAll('.product-row');
+        const emptyState = card.querySelector('.empty-filter-state');
+        
+        let visibleCount = 0;
+
+        rows.forEach(row => {
+            const name = row.dataset.name;
+            const isBestSeller = row.dataset.bestSeller === 'true';
+            const status = row.dataset.status;
+
+            // Search Match
+            const matchesSearch = !searchVal || name.includes(searchVal);
+
+            // Best Seller Match
+            let matchesBestSeller = true;
+            if (bestSellerVal === 'best') matchesBestSeller = isBestSeller;
+            else if (bestSellerVal === 'regular') matchesBestSeller = !isBestSeller;
+
+            // Status Match
+            let matchesStatus = true;
+            if (statusVal !== 'all') matchesStatus = status === statusVal;
+
+            if (matchesSearch && matchesBestSeller && matchesStatus) {
+                row.classList.remove('d-none');
+                visibleCount++;
+            } else {
+                row.classList.add('d-none');
+            }
+        });
+
+        // Toggle Empty Filter State visibility
+        if (emptyState) {
+            if (visibleCount === 0 && rows.length > 0) {
+                emptyState.classList.remove('d-none');
+            } else {
+                emptyState.classList.add('d-none');
+            }
+        }
+    }
+
+    function toggleProductBestSeller(productId, isChecked) {
+        fetch(`/admin/product/toggle-best-seller/${productId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ best_selling: isChecked })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                // Update row dataset attribute for client-side filtering
+                const row = document.querySelector(`.product-row[data-product-id="${productId}"]`);
+                if (row) {
+                    row.dataset.bestSeller = data.best_selling ? 'true' : 'false';
+                }
+
+                // Update Star Badge next to the name
+                const starBadge = document.querySelector(`.badge-star-${productId}`);
+                if (starBadge) {
+                    if (data.best_selling) {
+                        starBadge.classList.remove('d-none');
+                    } else {
+                        starBadge.classList.add('d-none');
+                    }
+                }
+                
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Status updated successfully'
+                });
+            } else {
+                Toast.fire({
+                    icon: 'error',
+                    title: data.error || 'Failed to update status'
+                });
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            Toast.fire({
+                icon: 'error',
+                title: 'Network error occurred'
+            });
+        });
+    }
+
+    function triggerBulkToggle(categoryId, selectAll) {
+        Swal.fire({
+            title: selectAll ? 'Mark All as Best Selling?' : 'Clear All Best Selling?',
+            text: selectAll ? 'All products in this category will be marked as Best Sellers.' : 'All products in this category will be cleared from Best Sellers.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#111827',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, proceed',
+            background: 'var(--bg-card)',
+            color: 'var(--text-main)'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch('/admin/product/bulk-toggle-best-seller-category', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        category_id: categoryId,
+                        best_selling: selectAll
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        // Update all inputs in this category card
+                        const card = document.getElementById(`cat-card-${categoryId}`);
+                        const switches = card.querySelectorAll('.best-seller-switch');
+                        switches.forEach(sw => {
+                            sw.checked = selectAll;
+                            const prodId = sw.dataset.productId;
+                            
+                            const row = card.querySelector(`.product-row[data-product-id="${prodId}"]`);
+                            if (row) {
+                                row.dataset.bestSeller = selectAll ? 'true' : 'false';
+                            }
+
+                            const starBadge = card.querySelector(`.badge-star-${prodId}`);
+                            if (starBadge) {
+                                if (selectAll) {
+                                    starBadge.classList.remove('d-none');
+                                } else {
+                                    starBadge.classList.add('d-none');
+                                }
+                            }
+                        });
+
+                        // Re-run filter in case they had custom filters on
+                        filterCategoryProducts(categoryId);
+
+                        Swal.fire({
+                            title: 'Success!',
+                            text: `${data.count} products updated successfully.`,
+                            icon: 'success',
+                            confirmButtonColor: '#111827',
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: data.error || 'Failed to update category products.',
+                            icon: 'error',
+                            confirmButtonColor: '#111827',
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Network error occurred.',
+                        icon: 'error',
+                        confirmButtonColor: '#111827',
+                    });
+                });
+            }
+        });
+    }
+</script>
+{% endblock %}

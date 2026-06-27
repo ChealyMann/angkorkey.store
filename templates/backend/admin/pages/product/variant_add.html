@@ -1,0 +1,494 @@
+{% extends 'backend/admin/master.html' %}
+
+{% block main %}
+<link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    .font-khmer { font-family: 'Kantumruy Pro', 'Inter', sans-serif; }
+
+    .keyz-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-muted);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .keyz-input {
+        border: 1px solid var(--border-light);
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        transition: all 0.2s ease-in-out;
+        font-size: 0.9rem;
+    }
+
+    .upload-area {
+        border: 2px dashed var(--border-light);
+        background-color: var(--bg-main);
+        transition: all 0.2s ease;
+    }
+
+    .upload-area:hover {
+        border-color: var(--accent-black);
+        background-color: var(--bg-hover);
+        cursor: pointer;
+    }
+
+    .image-strip {
+        display: flex;
+        gap: 16px;
+        overflow-x: auto;
+        padding-bottom: 12px;
+        white-space: nowrap;
+        scrollbar-width: thin;
+    }
+
+    .preview-card {
+        border: 1px solid var(--border-light);
+        background-color: var(--bg-main);
+    }
+
+    .variant-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--border-light);
+        background: var(--bg-main);
+        font-size: 0.75rem;
+        color: var(--text-main);
+        margin: 2px;
+    }
+
+    .color-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 1px solid rgba(0,0,0,0.15);
+        display: inline-block;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: var(--bg-hover) !important;
+    }
+</style>
+
+<div class="font-khmer w-auto mx-4 mt-4 mb-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="text-main mb-1" style="font-weight: 500; letter-spacing: -0.02em;">
+                បន្ថែម Variant
+            </h3>
+
+            <span class="text-muted" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;">
+                Product Variant:
+                <span class="fw-bold text-main">{{ product.name }}</span>
+                <span class="text-muted">#{{ product.id }}</span>
+            </span>
+        </div>
+
+        <a href="{{ url_for('product.product') }}"
+           class="btn btn-link text-decoration-none d-flex align-items-center"
+           style="color: var(--text-muted); font-weight: 500;">
+            <i class="fa-solid fa-arrow-left me-2"></i> ត្រឡប់ក្រោយ (Back)
+        </a>
+    </div>
+
+    <form action="{{ url_for('product.product_variant_add', product_id=product.id) }}"
+          method="post"
+          enctype="multipart/form-data">
+
+        <div class="card p-4 p-lg-5 mb-4">
+            <div class="row g-4">
+
+                <div class="col-lg-5">
+                    <h6 class="text-muted fw-bold mb-3 text-uppercase"
+                        style="font-size: 0.75rem; letter-spacing: 0.1em;">
+                        1. ជ្រើស Option
+                    </h6>
+
+                    {% if variant_types %}
+                        {% for variant_type in variant_types %}
+                            <div class="mb-4">
+                                <label class="keyz-label">
+                                    {{ variant_type.name }}
+                                </label>
+
+                                <select name="option_{{ variant_type.slug }}"
+                                        class="form-select keyz-input">
+                                    <option value="">-- No {{ variant_type.name }} --</option>
+
+                                    {% for option in variant_type.options %}
+                                        <option value="{{ option.id }}">
+                                            {{ option.value }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+
+                                <small class="text-muted d-block mt-1">
+                                    Choose only if this product uses {{ variant_type.name }}.
+                                </small>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="alert alert-warning">
+                            No variant types found. Please insert Color, Size, or Type first.
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="col-lg-7">
+                    <h6 class="text-muted fw-bold mb-3 text-uppercase"
+                        style="font-size: 0.75rem; letter-spacing: 0.1em;">
+                        2. Variant Info
+                    </h6>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label class="keyz-label">SKU</label>
+                            <input type="text"
+                                   name="sku"
+                                   class="form-control keyz-input"
+                                   placeholder="P12-BLACK-MIC">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="keyz-label">Status</label>
+                            <select name="status" class="form-select keyz-input">
+                                <option value="true">Active</option>
+                                <option value="false">Inactive</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="keyz-label">Price</label>
+                            <input type="number"
+                                   name="price"
+                                   step="0.01"
+                                   min="0"
+                                   class="form-control keyz-input"
+                                   placeholder="8.99"
+                                   required>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="keyz-label">Old Price</label>
+                            <input type="number"
+                                   name="old_price"
+                                   step="0.01"
+                                   min="0"
+                                   class="form-control keyz-input"
+                                   placeholder="10.99">
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="keyz-label">Cost</label>
+                            <input type="number"
+                                   name="cost"
+                                   step="0.01"
+                                   min="0"
+                                   class="form-control keyz-input"
+                                   placeholder="5.00">
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="keyz-label">Stock Status</label>
+                            <select name="stock" class="form-select keyz-input">
+                                <option value="in_stock">In Stock</option>
+                                <option value="low_stock">Low Stock</option>
+                                <option value="out_of_stock" selected>Out of Stock</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <h6 class="text-muted fw-bold mb-3 text-uppercase"
+                        style="font-size: 0.75rem; letter-spacing: 0.1em;">
+                        3. Variant Images
+                    </h6>
+
+                    <input type="file"
+                           name="images"
+                           id="variant_images"
+                           class="d-none"
+                           accept=".jpg,.jpeg,.png,.webp"
+                           multiple>
+
+                    <label for="variant_images"
+                           class="upload-area w-100 p-4 text-center rounded-3 mb-3">
+                        <div class="mb-2">
+                            <i class="bi bi-images text-muted" style="font-size: 2rem;"></i>
+                        </div>
+
+                        <h6 class="fw-bold mb-1 text-main" style="font-size: 0.9rem;">
+                            ចុចដើម្បីដាក់រូប Variant
+                        </h6>
+
+                        <p class="text-muted small mb-0" style="font-size: 0.75rem">
+                            JPG, PNG, WEBP accepted
+                        </p>
+                    </label>
+
+                    <div id="new-images-container" class="image-strip"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-3 mb-5">
+            <button type="reset"
+                    class="btn btn-outline-dark px-4 py-2"
+                    style="font-weight: 500; border-radius: 8px;">
+                Clear
+            </button>
+
+            <button type="submit"
+                    class="btn btn-dark px-5 py-2"
+                    style="font-weight: 500; border-radius: 8px;">
+                Save Variant
+            </button>
+        </div>
+    </form>
+
+    <div class="card p-4 p-lg-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+                <h6 class="text-main mb-1">Existing Variants</h6>
+                <span class="text-muted" style="font-size: 0.75rem;">
+                    All variants for {{ product.name }}
+                </span>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Image</th>
+                        <th>Options</th>
+                        <th>SKU</th>
+                        <th class="text-end">Price</th>
+                        <th class="text-center">Stock Status</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-end">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for variant in existing_variants %}
+                    <tr>
+                        <td class="text-muted">#{{ variant.id }}</td>
+
+                        <td>
+                            {% if variant.images %}
+                                <img src="{{ url_for('static', filename='images/' + variant.images[0].image) }}"
+                                     class="rounded"
+                                     style="width: 50px; height: 50px; object-fit: cover; border: 1px solid var(--border-light);">
+                            {% elif product.image %}
+                                <img src="{{ url_for('static', filename='images/' + product.image) }}"
+                                     class="rounded"
+                                     style="width: 50px; height: 50px; object-fit: cover; border: 1px solid var(--border-light);">
+                            {% else %}
+                                <div class="rounded d-flex align-items-center justify-content-center text-muted"
+                                     style="width: 50px; height: 50px; border: 1px solid var(--border-light);">
+                                    <i class="fa-regular fa-image"></i>
+                                </div>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% for selected in variant.selected_options %}
+                                <span class="variant-chip">
+                                    {% if selected.option.variant_type.slug == "color" and selected.option.meta %}
+                                        <span class="color-dot"
+                                              style="background-color: {{ selected.option.meta }};"></span>
+                                    {% endif %}
+
+                                    {{ selected.option.variant_type.name }}:
+                                    <strong>{{ selected.option.value }}</strong>
+                                </span>
+                            {% endfor %}
+                        </td>
+
+                        <td class="text-muted">
+                            {{ variant.sku or '-' }}
+                        </td>
+
+                        <td class="text-end fw-bold">
+                            ${{ "%.2f"|format(variant.price) }}
+                        </td>
+
+                        <td class="text-center">
+                            {% set stock_val = variant.stock.value if variant.stock.value else variant.stock %}
+                            {% if stock_val == 'in_stock' %}
+                                <span class="badge bg-success">In Stock</span>
+                            {% elif stock_val == 'low_stock' %}
+                                <span class="badge bg-warning">Low Stock</span>
+                            {% else %}
+                                <span class="badge bg-danger">Out of Stock</span>
+                            {% endif %}
+                        </td>
+
+                        <td class="text-center">
+                            {% if variant.status == 'true' %}
+                                <span class="badge bg-success">Active</span>
+                            {% else %}
+                                <span class="badge bg-danger">Inactive</span>
+                            {% endif %}
+                        </td>
+
+                        <td class="text-end">
+                            <div class="d-flex justify-content-end gap-2">
+                                <a href="{{ url_for('product.product_variant_edit', variant_id=variant.id) }}"
+                                   class="btn btn-light btn-sm border"
+                                   style="border-radius: 6px; color: var(--text-main);"
+                                   title="Edit Variant / Images">
+                                    <i class="fa-solid fa-pen-to-square" style="font-size: 0.8rem;"></i>
+                                </a>
+
+                                <form action="{{ url_for('product.product_variant_delete', variant_id=variant.id) }}"
+                                      method="post"
+                                      class="m-0">
+                                    <button type="button"
+                                            class="btn btn-light btn-sm border btn-delete-variant"
+                                            style="border-radius: 6px; color: #ef4444;"
+                                            title="Delete Variant">
+                                        <i class="fa-solid fa-trash-can" style="font-size: 0.8rem;"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="8" class="text-center py-5 text-muted">
+                            <i class="fa-solid fa-box-open mb-3"
+                               style="font-size: 2rem; color: var(--border-light);"></i>
+                            <p class="mb-0">No variants yet</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const imageInput = document.getElementById('variant_images');
+    const previewContainer = document.getElementById('new-images-container');
+
+    if (imageInput) {
+        let dt = new DataTransfer();
+
+        imageInput.addEventListener('change', function (event) {
+            const files = event.target.files;
+
+            if (!files) return;
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+
+                dt.items.add(file);
+
+                const wrapper = document.createElement('div');
+                wrapper.className = 'position-relative flex-shrink-0 rounded-3 p-1 preview-card';
+
+                const img = document.createElement('img');
+                img.className = 'd-block rounded-3';
+                img.style.width = 'auto';
+                img.style.height = '150px';
+                img.style.objectFit = 'cover';
+
+                const removeBtn = document.createElement('button');
+                removeBtn.type = 'button';
+                removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+                removeBtn.className = 'btn btn-light border btn-sm position-absolute top-0 end-0 rounded-circle d-flex align-items-center justify-content-center shadow-sm text-danger';
+                removeBtn.style.width = '32px';
+                removeBtn.style.height = '32px';
+                removeBtn.style.margin = '8px';
+                removeBtn.style.zIndex = '10';
+
+                removeBtn.addEventListener('click', function () {
+                    wrapper.remove();
+
+                    for (let index = 0; index < dt.files.length; index++) {
+                        if (file === dt.items[index].getAsFile()) {
+                            dt.items.remove(index);
+                            break;
+                        }
+                    }
+
+                    imageInput.files = dt.files;
+                });
+
+                wrapper.appendChild(img);
+                wrapper.appendChild(removeBtn);
+
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    img.src = e.target.result;
+                    previewContainer.appendChild(wrapper);
+                };
+
+                reader.readAsDataURL(file);
+            }
+
+            imageInput.files = dt.files;
+        });
+    }
+
+    document.querySelectorAll('.btn-delete-variant').forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            const form = this.closest('form');
+
+            Swal.fire({
+                title: "តើអ្នកប្រាកដទេ?",
+                text: "This variant will be deleted.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#000000",
+                cancelButtonColor: "#e5e7eb",
+                cancelButtonText: "<span style='color: #000'>Cancel</span>",
+                confirmButtonText: "Delete",
+                background: "var(--bg-card)",
+                color: "var(--text-main)"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<script>
+    {% for category, message in messages %}
+        Swal.fire({
+            title: '{{ "ជោគជ័យ" if category == "success" else "បរាជ័យ" }}',
+            text: '{{ message }}',
+            icon: '{{ "error" if category == "error" else category }}',
+            showConfirmButton: false,
+            timer: 1800,
+            timerProgressBar: true,
+            background: "var(--bg-card)",
+            color: "var(--text-main)"
+        });
+    {% endfor %}
+</script>
+{% endif %}
+{% endwith %}
+
+{% endblock %}

@@ -1,0 +1,80 @@
+<div class="animate-fade-in h-full">
+    <a
+        href="{{ url_for('home.product_detail', product_id=product.id) }}"
+        class="group flex flex-col h-full overflow-hidden bg-transparent transition-all duration-300 hover:scale-[1.01]"
+    >
+        <!-- ====================================== -->
+        <!-- PRODUCT IMAGE (White/light gray square container) -->
+        <!-- ====================================== -->
+        <div class="relative w-full aspect-square bg-white dark:bg-zinc-900/40 overflow-hidden rounded-none border border-zinc-200/50 dark:border-zinc-800/50">
+
+            <!-- ====================================== -->
+            <!-- BEST SELLER BADGE (Futuristic Radar HUD Capsule) -->
+            <!-- ====================================== -->
+            {% if product.best_selling %}
+                <div class="absolute top-3 left-3 z-10 flex items-center gap-2 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/80 px-2.5 py-1 rounded-full shadow-xs select-none">
+                    <span class="relative flex h-1.5 w-1.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
+                    </span>
+                    <span class="text-[8px] font-black uppercase tracking-widest text-zinc-800 dark:text-zinc-200">Best Seller</span>
+                </div>
+            {% endif %}
+
+            <img
+                src="{{ url_for('static', filename='images/resized_' + product.image) if product.image else 'https://via.placeholder.com/500x500?text=No+Image' }}"
+                alt="{{ product.name }}"
+                loading="lazy"
+                class="w-full h-full object-cover transition-transform duration-700 cubic-bezier(0.16, 1, 0.3, 1) group-hover:scale-105"
+            >
+
+            <!-- ====================================== -->
+            <!-- SALE BADGE (Top-Right Monochrome Badge) -->
+            <!-- ====================================== -->
+            {% if product.has_discount %}
+                {% set price_val = product.promotion_min_price if product.discounted_variants else product.price %}
+                {% set old_price_val = product.promotion_min_old_price if product.discounted_variants else product.old_price %}
+                {% if old_price_val and old_price_val|float > price_val|float %}
+                    {% set discount_pct = (((old_price_val|float - price_val|float) / old_price_val|float) * 100) | round | int %}
+                {% else %}
+                    {% set discount_pct = 0 %}
+                {% endif %}
+                {% if discount_pct > 0 %}
+                    <div class="absolute top-0 right-0 z-10 bg-zinc-950 dark:bg-zinc-50 text-white dark:text-zinc-950 text-[9px] font-bold px-3 py-1.5 uppercase tracking-widest">
+                        {{ discount_pct }}% OFF
+                    </div>
+                {% endif %}
+            {% endif %}
+
+        </div>
+
+        <!-- ====================================== -->
+        <!-- PRODUCT INFO (Slides up slightly on hover) -->
+        <!-- ====================================== -->
+        <div class="pt-4 pb-2 px-1 flex flex-col flex-1 bg-transparent text-left futuristic-card-info">
+
+            <!-- Product Name -->
+            <h3 class="text-sm md:text-base font-semibold text-zinc-900 dark:text-zinc-100 leading-tight mb-1 group-hover:text-zinc-950 dark:group-hover:text-white transition-colors line-clamp-1">
+                {{ product.name }}
+            </h3>
+
+            <!-- Price (Muted Gray Text, "from ... to ..." format for discounts) -->
+            <div class="flex items-center gap-2 mt-1">
+                {% if product.has_discount %}
+                    <span class="text-xs sm:text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                        from {{ product.promotion_old_price_text }} to {{ product.promotion_price_text }}
+                    </span>
+                {% else %}
+                    <span class="text-xs sm:text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                        {% if product.price_text %}
+                            {{ product.price_text }}
+                        {% else %}
+                            ${{ "%.2f"|format(product.price) }}
+                        {% endif %}
+                    </span>
+                {% endif %}
+            </div>
+
+        </div>
+    </a>
+</div>

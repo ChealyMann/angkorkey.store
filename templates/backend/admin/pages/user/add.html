@@ -1,0 +1,167 @@
+{% extends 'backend/admin/master.html' %}
+
+{% block main %}
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        .font-khmer { font-family: 'Kantumruy Pro', 'Inter', sans-serif; }
+
+        /* ULTRA MINIMALIST INPUTS (Flushed / Underline Style) */
+        .keyz-group { margin-bottom: 2.5rem; }
+
+        .keyz-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .keyz-input {
+            display: block;
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid var(--border-light);
+            background-color: transparent !important;
+            color: var(--text-main) !important;
+            border-radius: 0;
+            padding: 0.5rem 0;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .keyz-input:focus {
+            box-shadow: none !important;
+            border-bottom: 1px solid var(--text-main) !important;
+            outline: none;
+        }
+
+        .keyz-input::placeholder { color: #52525b; font-weight: 300; }
+
+        /* Minimal Upload Area */
+        .upload-area {
+            border: 1px dashed var(--border-light);
+            background-color: transparent;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+        }
+        .upload-area:hover {
+            border-color: var(--text-main);
+            background-color: var(--bg-hover);
+        }
+
+        /* Refined Dark Buttons */
+        .btn-primary-custom { background-color: var(--text-main); color: var(--bg-main); border: none; font-weight: 700; border-radius: 8px; }
+        .btn-primary-custom:hover { background-color: #e4e4e7; color: var(--bg-main); }
+        .btn-outline-custom { border: 1px solid var(--border-light); color: var(--text-muted); font-weight: 600; border-radius: 8px; background: transparent; }
+        .btn-outline-custom:hover { background-color: var(--bg-hover); color: var(--text-main); border-color: var(--text-muted); }
+    </style>
+
+    <div class="font-khmer w-auto mx-4 mt-4 mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h3 class="text-main mb-1" style="font-weight: 500; letter-spacing: -0.02em;">បន្ថែមអ្នកប្រើប្រាស់ថ្មី</h3>
+                <span class="text-muted" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;">Add New User</span>
+            </div>
+            <a href="{{ url_for('user.admin_user') }}" class="btn btn-link text-decoration-none d-flex align-items-center" style="color: var(--text-muted); font-weight: 500;">
+                <i class="fa-solid fa-arrow-left me-2"></i> ត្រឡប់ក្រោយ (Back)
+            </a>
+        </div>
+
+        <form action="{{ url_for('user.admin_user_add') }}" method="post" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+
+            <div class="card p-4 p-lg-5 border-0 bg-card">
+                <div class="row g-5">
+                    <div class="col-lg-6">
+                        <div class="keyz-group">
+                            <label for="inputUsername" class="keyz-label">ឈ្មោះអ្នកប្រើប្រាស់ (Username)</label>
+                            {{ form.username(class="keyz-input", id="inputUsername", placeholder="e.g. john_doe") }}
+                            {% for error in form.username.errors %}
+                                <span class="text-danger small mt-1 d-block"><i class="fa-solid fa-circle-exclamation me-1"></i>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="keyz-group">
+                            <label for="inputPhone" class="keyz-label">លេខទូរស័ព្ទ (Phone Number)</label>
+                            {{ form.phone(class="keyz-input", id="inputPhone", placeholder="e.g. 0964246058") }}
+                            {% for error in form.phone.errors %}
+                                <span class="text-danger small mt-1 d-block"><i class="fa-solid fa-circle-exclamation me-1"></i>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mt-4">
+                            <label class="keyz-label mb-3">រូបភាព (Profile Image)</label>
+                            {{ form.image(class="d-none", id="image_upload", onchange="previewImage(event)", accept=".jpg, .png, .webp, .jpeg") }}
+
+                            <label for="image_upload" class="upload-area w-100 p-4 text-center shadow-sm" style="cursor: pointer;">
+                                <div class="mb-2"><i class="bi bi-person-bounding-box text-muted" style="font-size: 2rem;"></i></div>
+                                <h6 class="fw-bold mb-1 text-main" style="font-size: 0.9rem;">ចុចដើម្បីដាក់រូបភាព (Upload Image)</h6>
+                                <p class="text-muted small mb-0" style="font-size: 0.75rem">JPG, PNG or WEBP</p>
+                            </label>
+
+                            <div id="preview-container" class="mt-4 text-center d-none">
+                                <div class="d-inline-block position-relative border rounded p-2 bg-main shadow-sm" style="border-color: var(--border-light) !important;">
+                                    <img id="image-preview" src="#" alt="Preview" class="d-block rounded" style="width: 150px; height: 150px; object-fit: cover;">
+                                    <button type="button" onclick="removeImage()" class="btn btn-dark position-absolute top-0 end-0 m-2 rounded-circle shadow-sm border" style="width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center; border-color: rgba(255,255,255,0.1) !important;" title="Delete Image">
+                                        <i class="fas fa-times text-danger small"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="keyz-group">
+                            <label for="inputPassword" class="keyz-label">ពាក្យសម្ងាត់ (Password)</label>
+                            {{ form.password(class="keyz-input", id="inputPassword", placeholder="••••••••") }}
+                            {% for error in form.password.errors %}
+                                <span class="text-danger small mt-1 d-block"><i class="fa-solid fa-circle-exclamation me-1"></i>{{ error }}</span>
+                            {% endfor %}
+                            <div class="form-text mt-2 text-muted" style="font-size: 0.75rem;">
+                                <i class="fa-solid fa-circle-info me-1"></i> Password must be at least 8 characters long.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex gap-3 mt-4 justify-content-end">
+                <button class="btn btn-outline-custom px-4 py-2" id="btnClear" type="button">សម្អាត (Clear)</button>
+                <button type="submit" id="btn_add" class="btn btn-primary-custom px-5 py-2">រក្សាទុក (Save User)</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function previewImage(event) {
+            var input = event.target;
+            var reader = new FileReader();
+            var previewContainer = document.getElementById("preview-container");
+            var imageField = document.getElementById("image-preview");
+
+            reader.onload = function () {
+                if (reader.readyState == 2) {
+                    imageField.src = reader.result;
+                    previewContainer.classList.remove("d-none");
+                }
+            }
+            if (input.files && input.files[0]) reader.readAsDataURL(input.files[0]);
+        }
+
+        function removeImage() {
+            document.getElementById("image_upload").value = "";
+            document.getElementById("image-preview").src = "#";
+            document.getElementById("preview-container").classList.add("d-none");
+        }
+
+        document.getElementById('btnClear')?.addEventListener('click', function() {
+            document.getElementById('inputUsername').value = '';
+            document.getElementById('inputPhone').value = '';
+            document.getElementById('inputPassword').value = '';
+            removeImage();
+        });
+    </script>
+{% endblock %}

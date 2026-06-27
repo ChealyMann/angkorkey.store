@@ -1,0 +1,382 @@
+{% extends 'backend/admin/master.html' %}
+
+{% block main %}
+<link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+
+<style>
+    .font-khmer {
+        font-family: 'Kantumruy Pro', 'Inter', sans-serif;
+    }
+
+    .keyz-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-muted);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .keyz-input {
+        border: 1px solid var(--border-light);
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        transition: all 0.2s ease-in-out;
+        font-size: 0.9rem;
+    }
+
+    .keyz-input:focus {
+        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+        background-color: var(--bg-card) !important;
+        border-color: var(--accent-black) !important;
+        outline: none;
+    }
+
+    .upload-area {
+        border: 1px dashed var(--border-light);
+        background-color: var(--bg-main);
+        transition: all 0.3s ease;
+    }
+
+    .upload-area:hover {
+        border-color: var(--accent-black);
+        background-color: var(--bg-hover);
+    }
+
+    .note-editor.note-frame {
+        border: 1px solid var(--border-light) !important;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .note-toolbar {
+        background-color: var(--bg-hover) !important;
+        border-bottom: 1px solid var(--border-light) !important;
+    }
+
+    .note-editable ul {
+        list-style: disc !important;
+        list-style-position: inside !important;
+        padding-left: 20px !important;
+    }
+
+    .note-editable ol {
+        list-style: decimal !important;
+        list-style-position: inside !important;
+        padding-left: 20px !important;
+    }
+
+    .note-editor.note-frame.fullscreen {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        z-index: 99999 !important;
+        background-color: #fff !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    .note-editor.note-frame.fullscreen .note-editable {
+        height: 100% !important;
+        background-color: #fff !important;
+    }
+
+    .note-editable b,
+    .note-editable strong {
+        font-weight: bold !important;
+    }
+</style>
+
+<div class="font-khmer w-auto mx-4 mt-4 mb-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="text-main mb-1" style="font-weight: 500; letter-spacing: -0.02em;">
+                បន្ថែមផលិតផលថ្មី
+            </h3>
+            <span class="text-muted" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;">
+                Add New Product
+            </span>
+        </div>
+
+        <a href="{{ url_for('product.product') }}"
+           class="btn btn-link text-decoration-none d-flex align-items-center"
+           style="color: var(--text-muted); font-weight: 500;">
+            <i class="fa-solid fa-arrow-left me-2"></i> ត្រឡប់ក្រោយ (Back)
+        </a>
+    </div>
+
+    <form action="{{ url_for('product.product_add') }}" method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="card p-4 p-lg-5">
+            <div class="row g-5">
+
+                <div class="col-lg-6">
+                    <div class="mb-4">
+                        <label for="inputName" class="keyz-label">ឈ្មោះផលិតផល (Product Name)</label>
+                        {{ form.name(class="form-control keyz-input", id="inputName", placeholder="Enter product name") }}
+
+                        {% if form.name.errors %}
+                            <span class="text-danger small mt-1 d-block">
+                                <i class="fa-solid fa-circle-exclamation me-1"></i>{{ form.name.errors[0] }}
+                            </span>
+                        {% endif %}
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label for="selectCat" class="keyz-label">ប្រភេទ (Category)</label>
+                                {{ form.category(class="form-select keyz-input", id="selectCat") }}
+
+                                {% if form.category.errors %}
+                                    <span class="text-danger small mt-1 d-block">
+                                        <i class="fa-solid fa-circle-exclamation me-1"></i>{{ form.category.errors[0] }}
+                                    </span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label for="selectBrand" class="keyz-label">ម៉ាក (Brand)</label>
+                                {{ form.brand(class="form-select keyz-input", id="selectBrand") }}
+
+                                {% if form.brand.errors %}
+                                    <span class="text-danger small mt-1 d-block">
+                                        <i class="fa-solid fa-circle-exclamation me-1"></i>{{ form.brand.errors[0] }}
+                                    </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="selectStatus" class="keyz-label">ស្ថានភាព (Status)</label>
+                        {{ form.status(class="form-select keyz-input", id="selectStatus") }}
+                    </div>
+
+                    <div class="form-check form-switch mb-4 d-flex align-items-center">
+                        {{ form.best_selling(class="form-check-input", id="flexSwitchCheckBestSelling") }}
+                        <label class="form-check-label ms-3 keyz-label mb-0" for="flexSwitchCheckBestSelling">លក់ដាច់បំផុត (Best Selling)</label>
+                    </div>
+
+                    <div class="mt-4">
+                        <label class="keyz-label">រូបភាពចម្បង (Main Image)</label>
+
+                        {{ form.image(class="d-none", id="image_upload", onchange="previewImage(event)", accept=".jpg, .png, .webp, .jpeg") }}
+
+                        <label for="image_upload"
+                               class="upload-area w-100 p-4 text-center rounded-3 shadow-sm"
+                               style="cursor: pointer;">
+                            <div class="mb-2">
+                                <i class="bi bi-camera text-muted" style="font-size: 2rem;"></i>
+                            </div>
+                            <h6 class="fw-bold mb-1 text-main" style="font-size: 0.9rem;">
+                                ចុចដើម្បីដាក់រូបភាព (Upload Image)
+                            </h6>
+                            <p class="text-muted small mb-0" style="font-size: 0.75rem">
+                                JPG, PNG, JPEG or WEBP
+                            </p>
+                        </label>
+
+                        <div id="preview-container" class="mt-4 text-center d-none">
+                            <div class="d-inline-block position-relative border rounded p-2 bg-white shadow-sm"
+                                 style="border-color: var(--border-light) !important;">
+                                <img id="image-preview"
+                                     src="#"
+                                     alt="Preview"
+                                     class="d-block rounded"
+                                     style="width: 150px; height: 150px; object-fit: cover;">
+
+                                <button type="button"
+                                        onclick="removeImage()"
+                                        class="btn btn-light position-absolute top-0 end-0 m-2 rounded-circle shadow-sm border"
+                                        style="width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center;"
+                                        title="Delete Image">
+                                    <i class="fas fa-times text-danger small"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        {% if form.image.errors %}
+                            <span class="text-danger small mt-2 d-block">
+                                <i class="fa-solid fa-circle-exclamation me-1"></i>{{ form.image.errors[0] }}
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="row g-3 mb-4">
+                        <div class="col-sm-4">
+                            <label for="inputPrice" class="keyz-label">តម្លៃលក់ ($ Price)</label>
+                            {{ form.price(class="form-control keyz-input", id="inputPrice", placeholder="0.00") }}
+
+                            {% if form.price.errors %}
+                                <span class="text-danger small mt-1 d-block">
+                                    <i class="fa-solid fa-circle-exclamation me-1"></i>{{ form.price.errors[0] }}
+                                </span>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label for="inputOldPrice" class="keyz-label">តម្លៃដើម ($ Old)</label>
+                            {{ form.old_price(class="form-control keyz-input", id="inputOldPrice", placeholder="0.00") }}
+
+                            {% if form.old_price.errors %}
+                                <span class="text-danger small mt-1 d-block">
+                                    <i class="fa-solid fa-circle-exclamation me-1"></i>{{ form.old_price.errors[0] }}
+                                </span>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label for="inputCost" class="keyz-label">តម្លៃទុន ($ Cost)</label>
+                            {{ form.cost(class="form-control keyz-input", id="inputCost", placeholder="0.00") }}
+
+                            {% if form.cost.errors %}
+                                <span class="text-danger small mt-1 d-block">
+                                    <i class="fa-solid fa-circle-exclamation me-1"></i>{{ form.cost.errors[0] }}
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="keyz-label">ការពិពណ៌នា (Description)</label>
+                        {{ form.desc(id="floatingTextareaDesc") }}
+
+                        {% if form.desc.errors %}
+                            <span class="text-danger small mt-1 d-block">
+                                <i class="fa-solid fa-circle-exclamation me-1"></i>{{ form.desc.errors[0] }}
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="d-flex gap-3 mt-4 justify-content-end">
+            <button class="btn btn-outline-dark px-4 py-2"
+                    id="btnClear"
+                    type="button"
+                    style="font-weight: 500; border-radius: 8px;">
+                សម្អាត (Clear)
+            </button>
+
+            <button type="submit"
+                    id="btn_add"
+                    class="btn btn-dark px-5 py-2"
+                    style="font-weight: 500; border-radius: 8px;">
+                រក្សាទុក (Save Product)
+            </button>
+        </div>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<script>
+    var MarkdownButton = function (context) {
+        var ui = $.summernote.ui;
+
+        var button = ui.button({
+            contents: '<i class="fa fa-clipboard"></i> Paste MD',
+            tooltip: 'Paste Markdown from Clipboard',
+            click: function () {
+                navigator.clipboard.readText().then(function(text) {
+                    try {
+                        const html = marked.parse(text);
+                        context.invoke('editor.pasteHTML', html);
+                    } catch (e) {
+                        alert("Failed to parse Markdown.");
+                    }
+                }).catch(function() {
+                    alert("Permission to read clipboard denied or failed.");
+                });
+            }
+        });
+
+        return button.render();
+    }
+
+    $('#floatingTextareaDesc').summernote({
+        placeholder: 'Enter product description...',
+        tabsize: 2,
+        height: 250,
+        fontNames: ['Inter', 'Kantumruy Pro', 'Arial', 'Courier New'],
+        fontNamesIgnoreCheck: ['Inter', 'Kantumruy Pro'],
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear', 'fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']],
+            ['custom', ['markdown']]
+        ],
+        buttons: {
+            markdown: MarkdownButton
+        }
+    });
+
+    function clearFormFields() {
+        const fields = ['inputName', 'inputPrice', 'inputCost', 'inputOldPrice'];
+
+        fields.forEach(id => {
+            let el = document.getElementById(id);
+            if (el) el.value = '';
+        });
+
+        ['selectCat', 'selectBrand', 'selectStatus'].forEach(id => {
+            let el = document.getElementById(id);
+            if (el) el.selectedIndex = 0;
+        });
+
+        $('#floatingTextareaDesc').summernote('reset');
+        removeImage();
+    }
+
+    document.getElementById('btnClear').addEventListener('click', clearFormFields);
+
+    function previewImage(event) {
+        var input = event.target;
+        var reader = new FileReader();
+        var previewContainer = document.getElementById("preview-container");
+        var imageField = document.getElementById("image-preview");
+
+        reader.onload = function () {
+            if (reader.readyState === 2) {
+                imageField.src = reader.result;
+                previewContainer.classList.remove("d-none");
+            }
+        }
+
+        if (input.files && input.files[0]) {
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function removeImage() {
+        var input = document.getElementById("image_upload");
+        var previewContainer = document.getElementById("preview-container");
+        var imageField = document.getElementById("image-preview");
+
+        input.value = "";
+        imageField.src = "#";
+        previewContainer.classList.add("d-none");
+    }
+</script>
+{% endblock %}

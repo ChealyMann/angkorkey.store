@@ -1,0 +1,156 @@
+{% extends 'backend/admin/master.html' %}
+
+{% block main %}
+<link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    .font-khmer {
+        font-family: 'Kantumruy Pro', 'Inter', sans-serif;
+    }
+
+    .keyz-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-muted);
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .keyz-input {
+        border: 1px solid var(--border-light);
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        transition: all 0.2s ease-in-out;
+        font-size: 0.9rem;
+        width: 100%;
+    }
+
+    .keyz-input:focus {
+        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+        background-color: var(--bg-card) !important;
+        border-color: var(--accent-black) !important;
+        outline: none;
+    }
+
+    .dark .keyz-input:focus {
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+        border-color: var(--text-main) !important;
+    }
+</style>
+
+<div class="font-khmer w-auto mx-4 mt-4 mb-4">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <h3 class="text-main mb-1" style="font-weight: 500; letter-spacing: -0.02em;">
+                ការកំណត់ប្រព័ន្ធ (General Settings)
+            </h3>
+            <span class="text-muted" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;">
+                Configure store-wide variables and credentials
+            </span>
+        </div>
+    </div>
+
+    <form action="{{ url_for('admin.settings') }}" method="POST">
+
+        <!-- Telegram Settings -->
+        <div class="card border shadow-xs mb-4" style="border-radius: 12px; background-color: var(--bg-card); overflow: hidden;">
+            <div class="card-header bg-light border-bottom p-4">
+                <h4 class="mb-0 text-main font-weight-bold" style="font-size: 1rem;">
+                    Telegram Integration
+                </h4>
+                <span class="text-muted" style="font-size: 0.75rem;">
+                    Configure the target destination for storefront checkout links
+                </span>
+            </div>
+            <div class="card-body p-4">
+                <div class="row g-4">
+                    <div class="col-12 col-md-6">
+                        <label for="telegram_username" class="keyz-label">Telegram Username</label>
+                        <input type="text" id="telegram_username" name="telegram_username"
+                               class="keyz-input" placeholder="e.g. Angkorkey_Store" value="{{ telegram_username }}">
+                        <small class="text-muted mt-2 d-block" style="font-size: 0.75rem;">
+                            Orders will be sent to <strong>t.me/{{ telegram_username or '&lt;username&gt;' }}</strong> at checkout. Do not include the <code>@</code> prefix.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer / Social Media Settings -->
+        <div class="card border shadow-xs mb-4" style="border-radius: 12px; background-color: var(--bg-card); overflow: hidden;">
+            <div class="card-header bg-light border-bottom p-4">
+                <h4 class="mb-0 text-main font-weight-bold" style="font-size: 1rem;">
+                    Footer & Social Media
+                </h4>
+                <span class="text-muted" style="font-size: 0.75rem;">
+                    Manage the social links and phone numbers shown in the store footer
+                </span>
+            </div>
+            <div class="card-body p-4">
+                <div class="row g-4">
+
+                    <!-- Facebook URL -->
+                    <div class="col-12 col-md-6">
+                        <label for="facebook_url" class="keyz-label">Facebook URL</label>
+                        <input type="url" id="facebook_url" name="facebook_url"
+                               class="keyz-input" placeholder="https://www.facebook.com/yourpage"
+                               value="{{ facebook_url }}">
+                        <small class="text-muted mt-2 d-block" style="font-size: 0.75rem;">
+                            Full Facebook profile or page URL
+                        </small>
+                    </div>
+
+                    <!-- TikTok URL -->
+                    <div class="col-12 col-md-6">
+                        <label for="tiktok_url" class="keyz-label">TikTok URL</label>
+                        <input type="url" id="tiktok_url" name="tiktok_url"
+                               class="keyz-input" placeholder="https://www.tiktok.com/@username"
+                               value="{{ tiktok_url }}">
+                        <small class="text-muted mt-2 d-block" style="font-size: 0.75rem;">
+                            Full TikTok profile URL
+                        </small>
+                    </div>
+
+                    <!-- Phone 1 -->
+                    <div class="col-12 col-md-6">
+                        <label for="phone1" class="keyz-label">Phone Number 1</label>
+                        <input type="tel" id="phone1" name="phone1"
+                               class="keyz-input" placeholder="e.g. 097 261 4272"
+                               value="{{ phone1 }}">
+                        <small class="text-muted mt-2 d-block" style="font-size: 0.75rem;">
+                            Primary contact phone number
+                        </small>
+                    </div>
+
+                    <!-- Phone 2 -->
+                    <div class="col-12 col-md-6">
+                        <label for="phone2" class="keyz-label">Phone Number 2</label>
+                        <input type="tel" id="phone2" name="phone2"
+                               class="keyz-input" placeholder="e.g. 016 805 828"
+                               value="{{ phone2 }}">
+                        <small class="text-muted mt-2 d-block" style="font-size: 0.75rem;">
+                            Secondary contact phone number (optional)
+                        </small>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Save Button -->
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-dark px-4 py-2" style="border-radius: 8px; font-weight: 500;">
+                <i class="fa-solid fa-floppy-disk me-2"></i> Save Settings
+            </button>
+        </div>
+
+    </form>
+
+</div>
+{% endblock %}

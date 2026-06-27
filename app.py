@@ -1,0 +1,165 @@
+import os
+from datetime import timedelta
+
+import click
+from flask import Flask, render_template, request, redirect, url_for, flash, session
+from werkzeug.security import generate_password_hash
+from flask_migrate import Migrate
+
+from extensions import db, cache, limiter
+
+from blueprint.admin.admin import admin_bp
+from blueprint.admin.brand.brand import brand_bp
+from blueprint.home import home_bp
+from blueprint.auth import auth_bp
+from blueprint.admin.product.product import product_bp
+from blueprint.admin.category.category import category_bp
+from blueprint.admin.user.user import user_bp
+from blueprint.admin.promotion.promotion import promotion_bp
+
+from models import User, Category, Brand, Setting
+
+
+app = Flask(__name__)
+
+# ------------------------------------------------------------
+# Base folders
+# ------------------------------------------------------------
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+INSTANCE_DIR = os.path.join(BASE_DIR, "instance")
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+UPLOAD_DIR = os.path.join(STATIC_DIR, "images")
+
+os.makedirs(INSTANCE_DIR, exist_ok=True)
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+# ------------------------------------------------------------
+# Config
+# ------------------------------------------------------------
+app.config["SECRET_KEY"] = os.environ.get(
+    "SECRET_KEY",
+    "change-this-secret-key-now"
+)
+
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(INSTANCE_DIR, "app.db")
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=30)
+
+# Upload folder
+app.config["UPLOAD_FOLDER"] = UPLOAD_DIR
+
+# Safe cache config for cPanel
+app.config["CACHE_TYPE"] = "SimpleCache"
+app.config["CACHE_DEFAULT_TIMEOUT"] = 300
+
+# Safe limiter config for small cPanel hosting
+app.config["RATELIMIT_STORAGE_URI"] = "memory://"
+
+# ------------------------------------------------------------
+# Initialize extensions
+# ------------------------------------------------------------
+db.init_app(app)
+migrate = Migrate(app, db)
+cache.init_app(app)
+limiter.init_app(app)
+
+# ------------------------------------------------------------
+# Register blueprints
+# ------------------------------------------------------------
+app.register_blueprint(home_bp)
+app.register_blueprint(product_bp)
+app.register_blueprint(admin_bp)
+app.register_blueprint(auth_bp)
+app.register_blueprint(category_bp)
+app.register_blueprint(user_bp)
+app.register_blueprint(promotion_bp)
+app.register_blueprint(brand_bp)
+
+# ------------------------------------------------------------
+# App branding
+# ------------------------------------------------------------
+app.config["logo"] = "sql_logo.jpg"
+app.config["title"] = "Angkorkey"
+app.config["icon"] = "static/admin/assets/images/icon_logo.jpg"
+
+
+@app.before_request
+def before_request():
+    url = request.path
+
+    if url.startswith("/admin/"):
+        if not session.get("user_id"):
+            flash("Please Login", "danger")
+            return redirect(url_for("auth.login"))
+
+    return None
+
+
+@app.route("/upload")
+def upload_page():
+    return render_template("upload.html")
+
+
+@app.route("/loop")
+def loop_marketplace():
+    return render_template("loop_marketplace.html")
+
+
+@app.context_processor
+def inject_nav_data():
+    try:
+        categories = Category.query.all()
+        brands = Brand.query.filter_by(status="true").order_by(Brand.name.asc()).all()
+        telegram_username = Setting.get_val('telegram_username', 'Angkorkey_Store')
+        facebook_url = Setting.get_val('facebook_url', '')
+        tiktok_url = Setting.get_val('tiktok_url', '')
+        phone1 = Setting.get_val('phone1', '')
+        phone2 = Setting.get_val('phone2', '')
+    except Exception:
+        categories = []
+        brands = []
+        telegram_username = 'Angkorkey_Store'
+        facebook_url = ''
+        tiktok_url = ''
+        phone1 = ''
+        phone2 = ''
+
+    return {
+        "categories": categories,
+        "brands": brands,
+        "telegram_username": telegram_username,
+        "facebook_url": facebook_url,
+        "tiktok_url": tiktok_url,
+        "phone1": phone1,
+        "phone2": phone2,
+    }
+
+
+@app.cli.command("create-admin")
+@click.argument("name")
+@click.argument("password")
+def create_user(name, password):
+    """Creates a new user. Usage: flask create-admin <name> <password>"""
+    hashed_pw = generate_password_hash(password)
+
+    user = User(username=name, password=hashed_pw)
+
+    db.session.add(user)
+    db.session.commit()
+
+    print(f"Successfully created user: {name}")
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template("frontend/error/404.html"), 404
+
+
+@app.errorhandler(429)
+def too_many_requests(error):
+    return render_template("frontend/error/429.html"), 429
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
