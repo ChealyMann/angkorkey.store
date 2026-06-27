@@ -462,7 +462,7 @@
                     text: "ទិន្នន័យដែលលុបហើយមិនអាចយកមកវិញបានទេ!",
                     icon: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: "#000000",
+                    confirmButtonColor: "#dc3545",
                     cancelButtonColor: "#e5e7eb",
                     cancelButtonText: "<span style='color: #000'>បោះបង់ (Cancel)</span>",
                     confirmButtonText: "លុប (Delete)",
@@ -500,18 +500,7 @@
                         .then(res => res.json())
                         .then(data => {
                             if (data.success) {
-                                Swal.fire({
-                                    title: "ជោគជ័យ",
-                                    text: data.message,
-                                    icon: "success",
-                                    timer: 1500,
-                                    timerProgressBar: true,
-                                    showConfirmButton: false,
-                                    background: "var(--bg-card)",
-                                    color: "var(--text-main)"
-                                }).then(() => {
-                                    window.location.reload();
-                                });
+                                window.location.reload();
                             } else {
                                 Swal.fire({
                                     title: "បរាជ័យ",

@@ -220,6 +220,38 @@
             color: var(--text-main) !important;
         }
 
+        /* Monochromatic Custom Checkboxes */
+        .form-check-input {
+            cursor: pointer;
+            border-color: #9ca3af !important;
+            background-color: var(--bg-main) !important;
+            transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .dark .form-check-input {
+            border-color: #4b5563 !important;
+        }
+
+        .form-check-input:checked {
+            background-color: var(--text-main) !important;
+            border-color: var(--text-main) !important;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e") !important;
+        }
+
+        .dark .form-check-input:checked {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e") !important;
+        }
+
+        .form-check-input:focus {
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1) !important;
+            border-color: var(--text-main) !important;
+            outline: none;
+        }
+
+        .dark .form-check-input:focus {
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.15) !important;
+        }
+
         /* Action buttons overrides for dark mode */
         .dark .bg-light,
         .dark .btn-light,
