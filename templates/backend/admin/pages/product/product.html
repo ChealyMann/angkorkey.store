@@ -132,6 +132,13 @@
         </div>
 
         <div class="d-flex gap-2">
+            <button v-if="selectedIds.length > 0"
+                    @click="deleteSelected"
+                    class="btn btn-danger shadow-sm px-4"
+                    style="border-radius: 8px; font-weight: 500;">
+                <i class="fa-solid fa-trash-can me-2"></i> លុបដែលបានជ្រើសរើស ([[ selectedIds.length ]])
+            </button>
+
             <a href="{{ url_for('product.variant_settings') }}" class="text-decoration-none">
                 <button class="btn btn-outline-dark shadow-sm px-4" style="border-radius: 8px; font-weight: 500;">
                     <i class="fa-solid fa-sliders me-2"></i> Variant Settings
@@ -188,7 +195,10 @@
                 <table class="table table-hover mb-0 align-middle">
                     <thead>
                     <tr>
-                        <th class="text-center py-3 ps-4" style="width: 80px;">ID</th>
+                        <th class="text-center py-3 ps-4" style="width: 50px;">
+                            <input type="checkbox" :checked="isAllSelected" @change="toggleSelectAll" class="form-check-input" style="cursor: pointer;">
+                        </th>
+                        <th class="text-center py-3" style="width: 80px;">ID</th>
                         <th class="py-3" style="width: 80px;">IMAGE</th>
                         <th class="py-3" style="width: 250px;">NAME</th>
                         <th class="py-3" style="width: 160px;">CATEGORY</th>
@@ -202,7 +212,10 @@
 
                     <tbody>
                     <tr v-for="product in filteredProducts" :key="product.id">
-                        <td class="text-center text-muted font-12 ps-4">
+                        <td class="text-center ps-4">
+                            <input type="checkbox" :value="product.id" v-model="selectedIds" class="form-check-input" style="cursor: pointer;">
+                        </td>
+                        <td class="text-center text-muted font-12">
                             #[[ product.id ]]
                         </td>
 
@@ -296,7 +309,7 @@
                     </tr>
 
                     <tr v-if="filteredProducts.length === 0">
-                        <td colspan="9">
+                        <td colspan="10">
                             <div class="empty-state">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                                 <p class="mb-1 fw-semibold">No products found</p>
@@ -340,11 +353,17 @@
                 search: '',
                 selectedBrand: '',
                 selectedStatus: '',
+                selectedIds: [],
                 productList: {{ output | tojson }}
             };
         },
 
         computed: {
+            isAllSelected() {
+                if (this.filteredProducts.length === 0) return false;
+                return this.filteredProducts.every(p => this.selectedIds.includes(p.id));
+            },
+
             brands() {
                 const brandSet = new Set();
 
@@ -396,6 +415,19 @@
                 this.selectedStatus = '';
             },
 
+            toggleSelectAll() {
+                if (this.isAllSelected) {
+                    const filteredIds = this.filteredProducts.map(p => p.id);
+                    this.selectedIds = this.selectedIds.filter(id => !filteredIds.includes(id));
+                } else {
+                    this.filteredProducts.forEach(p => {
+                        if (!this.selectedIds.includes(p.id)) {
+                            this.selectedIds.push(p.id);
+                        }
+                    });
+                }
+            },
+
             getImageUrl(imageName) {
                 if (!imageName || imageName === 'none.jpg') {
                     return "{{ url_for('static', filename='images/none.jpg') }}";
@@ -439,6 +471,66 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         form.submit();
+                    }
+                });
+            },
+
+            deleteSelected() {
+                Swal.fire({
+                    title: "តើអ្នកប្រាកដទេ?",
+                    text: `ទិន្នន័យផលិតផលទាំង ${this.selectedIds.length} ដែលលុបហើយមិនអាចយកមកវិញបានទេ!`,
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#dc3545",
+                    cancelButtonColor: "#e5e7eb",
+                    cancelButtonText: "<span style='color: #000'>បោះបង់ (Cancel)</span>",
+                    confirmButtonText: "លុបទាំងអស់ (Delete All)",
+                    background: "var(--bg-card)",
+                    color: "var(--text-main)"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.showLoading();
+                        fetch("/admin/product/bulk_delete", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({ ids: this.selectedIds })
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire({
+                                    title: "ជោគជ័យ",
+                                    text: data.message,
+                                    icon: "success",
+                                    timer: 1500,
+                                    timerProgressBar: true,
+                                    showConfirmButton: false,
+                                    background: "var(--bg-card)",
+                                    color: "var(--text-main)"
+                                }).then(() => {
+                                    window.location.reload();
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: "បរាជ័យ",
+                                    text: data.message || "Error deleting products",
+                                    icon: "error",
+                                    background: "var(--bg-card)",
+                                    color: "var(--text-main)"
+                                });
+                            }
+                        })
+                        .catch(err => {
+                            Swal.fire({
+                                title: "បរាជ័យ",
+                                text: "Network error occurred",
+                                icon: "error",
+                                background: "var(--bg-card)",
+                                color: "var(--text-main)"
+                            });
+                        });
                     }
                 });
             }

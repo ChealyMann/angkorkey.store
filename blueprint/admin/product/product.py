@@ -285,6 +285,40 @@ def product_delete(product_id):
     return redirect(url_for("product.product"))
 
 
+@product_bp.route("/admin/product/bulk_delete", methods=["POST"])
+def product_bulk_delete():
+    from flask import jsonify
+    data = request.get_json() or {}
+    product_ids = data.get("ids", [])
+
+    if not product_ids:
+        return jsonify({"success": False, "message": "No products selected"}), 400
+
+    try:
+        products = Product.query.filter(Product.id.in_(product_ids)).all()
+        for _product in products:
+            delete_image_files(_product.image)
+
+            for image in _product.images:
+                delete_image_files(image.image)
+
+            if hasattr(_product, "variants"):
+                for variant in _product.variants:
+                    for img in variant.images:
+                        delete_image_files(img.image)
+
+            db.session.delete(_product)
+
+        db.session.commit()
+        flash(f"Successfully deleted {len(products)} products", "success")
+        return jsonify({"success": True, "message": f"Successfully deleted {len(products)} products"})
+
+    except Exception as e:
+        db.session.rollback()
+        print("Bulk Delete Error:", e)
+        return jsonify({"success": False, "message": "Error deleting products"}), 500
+
+
 # ============================================================
 # Product normal gallery images
 # ============================================================
