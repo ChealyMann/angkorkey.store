@@ -77,6 +77,20 @@ app.register_blueprint(promotion_bp)
 app.register_blueprint(brand_bp)
 
 # ------------------------------------------------------------
+# Database Auto-Initialization for deploys (e.g. Render)
+# ------------------------------------------------------------
+with app.app_context():
+    db.create_all()
+    # Auto-create default admin if user table is empty
+    if not User.query.first():
+        default_admin = User(
+            username="chealy",
+            password=generate_password_hash("zxnmtt123789")
+        )
+        db.session.add(default_admin)
+        db.session.commit()
+
+# ------------------------------------------------------------
 # App branding
 # ------------------------------------------------------------
 app.config["logo"] = "sql_logo.jpg"
