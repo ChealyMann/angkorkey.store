@@ -18,6 +18,7 @@ from blueprint.admin.user.user import user_bp
 from blueprint.admin.promotion.promotion import promotion_bp
 
 from models import User, Category, Brand, Setting
+from translations import TRANSLATIONS
 
 
 app = Flask(__name__)
@@ -108,6 +109,22 @@ def before_request():
             return redirect(url_for("auth.login"))
 
     return None
+
+
+@app.route("/set_lang/<lang>")
+def set_lang(lang):
+    if lang in ["en", "km"]:
+        session["lang"] = lang
+        session.permanent = True
+    return redirect(request.referrer or url_for("home.home"))
+
+
+@app.context_processor
+def inject_translations():
+    lang = session.get("lang", "en")
+    def get_text(key):
+        return TRANSLATIONS.get(lang, TRANSLATIONS["en"]).get(key, key)
+    return {"_": get_text, "current_lang": lang}
 
 
 @app.route("/upload")

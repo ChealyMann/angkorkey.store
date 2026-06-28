@@ -6,7 +6,7 @@
         <div class="flex items-center gap-3">
             <img src="{{ url_for('static', filename='logo/logo.jpg') }}" alt="Angkorkey Logo" class="h-6 w-6 rounded-full object-cover border border-gray-200/50 dark:border-zinc-800/50 shadow-sm">
             <span class="text-gray-400 dark:text-zinc-400 font-medium">
-                &copy; 2026 Angkorkey Store. All rights reserved.
+                &copy; 2026 Angkorkey Store. {{ _('all_rights_reserved') }}
             </span>
         </div>
 
@@ -105,10 +105,10 @@
             class="flex flex-col items-center justify-center relative group h-full w-full py-1 text-decoration-none select-none">
             {% if request.endpoint == 'home.home' %}
             <i class="h-5 w-5 text-red-600 dark:text-white transition-all duration-300 scale-105" data-lucide="home"></i>
-            <span class="text-[9px] font-bold text-red-600 dark:text-white mt-1 uppercase tracking-wider">Home</span>
+            <span class="text-[9px] font-bold text-red-600 dark:text-white mt-1 uppercase tracking-wider">{{ _('home') }}</span>
             {% else %}
             <i class="h-5 w-5 text-gray-400 dark:text-zinc-500 hover:text-gray-600 dark:hover:text-zinc-400 group-active:scale-95 transition-all duration-200" data-lucide="home"></i>
-            <span class="text-[9px] font-medium text-gray-400 dark:text-zinc-500 mt-1 uppercase tracking-wider">Home</span>
+            <span class="text-[9px] font-medium text-gray-400 dark:text-zinc-500 mt-1 uppercase tracking-wider">{{ _('home') }}</span>
             {% endif %}
         </a>
 
@@ -117,10 +117,10 @@
             class="flex flex-col items-center justify-center relative group h-full w-full py-1 text-decoration-none select-none">
             {% if request.endpoint == 'home.products' %}
             <i class="h-5 w-5 text-red-600 dark:text-white transition-all duration-300 scale-105" data-lucide="store"></i>
-            <span class="text-[9px] font-bold text-red-600 dark:text-white mt-1 uppercase tracking-wider">Shop</span>
+            <span class="text-[9px] font-bold text-red-600 dark:text-white mt-1 uppercase tracking-wider">{{ _('shop') }}</span>
             {% else %}
             <i class="h-5 w-5 text-gray-400 dark:text-zinc-500 hover:text-gray-600 dark:hover:text-zinc-400 group-active:scale-95 transition-all duration-200" data-lucide="store"></i>
-            <span class="text-[9px] font-medium text-gray-400 dark:text-zinc-500 mt-1 uppercase tracking-wider">Shop</span>
+            <span class="text-[9px] font-medium text-gray-400 dark:text-zinc-500 mt-1 uppercase tracking-wider">{{ _('shop') }}</span>
             {% endif %}
         </a>
 
@@ -129,10 +129,10 @@
            class="flex flex-col items-center justify-center relative group h-full w-full py-1 text-decoration-none select-none">
             {% if request.endpoint == 'home.promotions' %}
             <i class="h-5 w-5 text-red-600 dark:text-white transition-all duration-300 scale-105" data-lucide="tag"></i>
-            <span class="text-[9px] font-bold text-red-600 dark:text-white mt-1 uppercase tracking-wider">Promotion</span>
+            <span class="text-[9px] font-bold text-red-600 dark:text-white mt-1 uppercase tracking-wider">{{ _('promotions') }}</span>
             {% else %}
             <i class="h-5 w-5 text-gray-400 dark:text-zinc-500 hover:text-gray-600 dark:hover:text-zinc-400 group-active:scale-95 transition-all duration-200" data-lucide="tag"></i>
-            <span class="text-[9px] font-medium text-gray-400 dark:text-zinc-500 mt-1 uppercase tracking-wider">Promotion</span>
+            <span class="text-[9px] font-medium text-gray-400 dark:text-zinc-500 mt-1 uppercase tracking-wider">{{ _('promotions') }}</span>
             {% endif %}
         </a>
 
@@ -141,10 +141,10 @@
            class="flex flex-col items-center justify-center relative group h-full w-full py-1 text-decoration-none select-none">
             {% if request.endpoint == 'home.all_categories' %}
             <i class="h-5 w-5 text-red-600 dark:text-white transition-all duration-300 scale-105" data-lucide="layout-grid"></i>
-            <span class="text-[9px] font-bold text-red-600 dark:text-white mt-1 uppercase tracking-wider">Category</span>
+            <span class="text-[9px] font-bold text-red-600 dark:text-white mt-1 uppercase tracking-wider">{{ _('categories') }}</span>
             {% else %}
             <i class="h-5 w-5 text-gray-400 dark:text-zinc-500 hover:text-gray-600 dark:hover:text-zinc-400 group-active:scale-95 transition-all duration-200" data-lucide="layout-grid"></i>
-            <span class="text-[9px] font-medium text-gray-400 dark:text-zinc-500 mt-1 uppercase tracking-wider">Category</span>
+            <span class="text-[9px] font-medium text-gray-400 dark:text-zinc-500 mt-1 uppercase tracking-wider">{{ _('categories') }}</span>
             {% endif %}
         </a>
     </div>

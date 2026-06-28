@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ session.get('lang', 'en') }}">
 <!-- ==================== HEAD SECTION ==================== -->
 
 <head>
@@ -44,7 +44,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,300..700;1,300..700&family=Outfit:wght@300;400;500;700;900&display=swap"
         rel="stylesheet"
     />
 
@@ -59,6 +59,10 @@
             overflow: hidden;
             word-break: break-word;
             color: var(--text-base);
+        }
+
+        html[lang="km"] {
+            --font-sans: 'Kantumruy Pro', 'Outfit', sans-serif !important;
         }
 
         :root {

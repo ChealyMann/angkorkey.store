@@ -531,8 +531,7 @@
                     </svg>
                 </button>
 
-                <div class="absolute bottom-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span class="text-[10px] text-gray-400 font-medium tracking-widest uppercase bg-white/80 backdrop-blur-sm border border-gray-200 px-2 py-1 rounded-md">Click to zoom</span>
+                <div class="a                    <span class="text-[10px] text-gray-400 font-medium tracking-widest uppercase bg-white/80 backdrop-blur-sm border border-gray-200 px-2 py-1 rounded-md">{{ _('click_to_zoom') }}</span>
                 </div>
 
                 <div id="dot-container" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
@@ -542,7 +541,9 @@
                 </div>
 
                 <!-- Floating Description Button -->
-                <button id="open-desc-modal-btn" class="absolute right-4 bottom-4 z-20 flex items-center justify-center bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border border-gray-200/80 dark:border-zinc-800 text-[10px] font-bold px-3 py-1.5 rounded-none uppercase tracking-wider text-zinc-900 dark:text-white shadow-sm cursor-pointer hover:bg-zinc-950 dark:hover:bg-zinc-50 hover:text-white dark:hover:text-zinc-950 hover:border-zinc-950 dark:hover:border-zinc-50 transition-all duration-300 hover:scale-105 active:scale-95" title="View Description & Specs">
+                <button id="open-desc-modal-btn" class="absolute right-4 bottom-4 z-20 flex items-center justify-center bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border border-gray-200/80 dark:border-zinc-800 text-[10px] font-bold px-3 py-1.5 rounded-none uppercase tracking-wider text-zinc-900 dark:text-white shadow-sm cursor-pointer hover:bg-zinc-950 dark:hover:bg-zinc-50 hover:text-white dark:hover:text-zinc-950 hover:border-zinc-950 dark:hover:border-zinc-50 transition-all duration-300 hover:scale-105 active:scale-95" title="{{ _('view_desc_specs') }}">
+                    <span>{{ _('description') }}</span>
+                </button>escription & Specs">
                     <span>Desc</span>
                 </button>
             </div>
@@ -570,7 +571,7 @@
                     
                     <button id="copy-link-btn" class="share-btn select-none">
                         <i class="w-3.5 h-3.5" data-lucide="link-2"></i>
-                        <span>Share Link</span>
+                        <span>{{ _('share_link') }}</span>
                     </button>
                 </div>
                 <h1 class="serif text-3xl lg:text-[2.35rem] text-gray-900 leading-tight tracking-tight">
@@ -682,7 +683,7 @@
             <div class="hidden lg:block mt-6">
                 <button id="add-to-cart-btn" class="buy-btn w-full h-13 py-3.5 flex items-center justify-center gap-2 text-sm cursor-pointer border-0 shadow-sm">
                     <i class="w-5 h-5" data-lucide="shopping-cart"></i>
-                    <span id="atc-button-text">Add to Cart</span>
+                    <span id="atc-button-text">{{ _('add_to_cart') }}</span>
                 </button>
             </div>
 
@@ -700,7 +701,7 @@
             
             <!-- Modal Header -->
             <div class="flex items-center justify-between p-6 md:p-8 border-b border-gray-100 dark:border-zinc-800 flex-shrink-0">
-                <h2 class="text-lg font-bold text-gray-900 dark:text-white tracking-tight">Product Information</h2>
+                <h2 class="text-lg font-bold text-gray-900 dark:text-white tracking-tight">{{ _('product_information') }}</h2>
                 <button id="close-desc-modal" class="group p-2 rounded-none border border-gray-200 dark:border-zinc-800 hover:border-zinc-950 dark:hover:border-zinc-50 text-gray-500 hover:text-zinc-950 dark:hover:text-white transition-all duration-300 cursor-pointer">
                     <svg class="w-5 h-5 transition-transform duration-300 group-hover:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
@@ -713,14 +714,14 @@
                 {% if product.desc %}
                     {{ product.desc | safe }}
                 {% else %}
-                    <p class="text-gray-400 italic">No additional details provided for this item.</p>
+                    <p class="text-gray-400 italic">{{ _('no_details_provided') }}</p>
                 {% endif %}
             </div>
 
             <!-- Modal Footer -->
             <div class="p-4 border-t border-gray-100 dark:border-zinc-800 flex justify-end flex-shrink-0 bg-gray-50/50 dark:bg-zinc-900/50">
                 <button id="close-desc-modal-btn" class="bg-zinc-950 dark:bg-zinc-50 text-white dark:text-zinc-950 font-bold text-xs px-5 py-2.5 rounded-none hover:bg-zinc-900 dark:hover:bg-zinc-200 transition shadow-sm cursor-pointer active:scale-95 futuristic-btn">
-                    Close Window
+                    {{ _('close_window') }}
                 </button>
             </div>
         </div>
@@ -730,10 +731,10 @@
     <div class="mt-16 lg:mt-12 lg:mb-12">
         <div class="flex items-end justify-between mb-8">
             <div>
-                <div class="section-label mb-2">Related</div>
-                <h2 class="serif text-2xl text-gray-900">You might also like</h2>
+                <div class="section-label mb-2">{{ _('related') }}</div>
+                <h2 class="serif text-2xl text-gray-900">{{ _('you_might_also_like') }}</h2>
             </div>
-            <a href="{{ url_for('home.products', category_id=product.category_id) }}" class="text-xs font-semibold text-gray-500 hover:text-red-600 transition-colors tracking-wide uppercase">View all →</a>
+            <a href="{{ url_for('home.products', category_id=product.category_id) }}" class="text-xs font-semibold text-gray-500 hover:text-red-600 transition-colors tracking-wide uppercase">{{ _('view_all') }} &rarr;</a>
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
@@ -749,16 +750,16 @@
 <div id="mobile-bar" class="fixed bottom-0 left-0 right-0 z-40 p-4 lg:hidden pb-[calc(1rem+env(safe-area-inset-bottom))] border-t border-gray-200">
     <div class="flex items-center justify-between gap-6">
         <div class="flex flex-col flex-shrink-0">
-            <span class="text-[10px] text-gray-400 font-medium uppercase tracking-wider">Total</span>
+            <span class="text-[10px] text-gray-400 font-medium uppercase tracking-wider">{{ _('total') }}</span>
             <span id="mobile-variant-price" class="text-xl font-bold text-gray-900 dark:text-white leading-none">
                 ${{ "%.2f"|format(initial_price) }}
             </span>
-            <span id="mobile-variant-desc" class="text-[9px] text-zinc-500 dark:text-zinc-400 mt-1 max-w-[120px] truncate">Standard</span>
+            <span id="mobile-variant-desc" class="text-[9px] text-zinc-500 dark:text-zinc-400 mt-1 max-w-[120px] truncate">{{ _('standard') }}</span>
         </div>
 
         <button id="add-to-cart-btn-mobile" class="buy-btn flex-1 h-12 flex items-center justify-center gap-2 text-sm cursor-pointer border-0 shadow-sm">
             <i class="w-5 h-5" data-lucide="shopping-cart"></i>
-            Add to Cart
+            {{ _('add_to_cart') }}
         </button>
     </div>
 </div>
@@ -771,6 +772,12 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+    const currentLang = "{{ session.get('lang', 'en') }}";
+    const translations = {
+        'add_to_cart': currentLang === 'km' ? 'បន្ថែមទៅកន្ត្រក' : 'Add to Cart',
+        'out_of_stock': currentLang === 'km' ? 'អស់ពីស្តុក' : 'Out of Stock',
+        'in_stock': currentLang === 'km' ? 'មានក្នុងស្តុក' : 'In Stock'
+    };
     // ── Data ──────────────────────────────────────────────────────────────
     const variants     = JSON.parse(document.getElementById('variants-json').textContent || '[]');
     const baseProduct  = JSON.parse(document.getElementById('base-product-json').textContent || '{}');
@@ -991,13 +998,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!b) return;
             b.classList.toggle('disabled', !enabled);
         });
-        if (atcBtnText) atcBtnText.textContent = enabled ? 'Add to Cart' : 'Out of Stock';
+        if (atcBtnText) atcBtnText.textContent = enabled ? translations.add_to_cart : translations.out_of_stock;
     }
 
     function setStockBadge(inStock) {
         if (!stockDot || !stockText) return;
         stockDot.className = 'w-1.5 h-1.5 rounded-full ' + (inStock ? 'bg-emerald-600 animate-pulse' : 'bg-red-600');
-        stockText.textContent = inStock ? 'In Stock' : 'Out of Stock';
+        stockText.textContent = inStock ? translations.in_stock : translations.out_of_stock;
     }
 
     function updateDiscountBadge(price, oldPrice) {
@@ -1044,13 +1051,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (stockEl) {
             if (normalizedStock === 'in_stock') {
-                stockEl.textContent = 'In stock';
+                stockEl.textContent = translations.in_stock;
                 stockEl.className = 'text-sm font-bold text-emerald-600';
             } else if (normalizedStock === 'low_stock') {
-                stockEl.textContent = 'Low stock';
+                stockEl.textContent = currentLang === 'km' ? 'ស្តុកតិច' : 'Low stock';
                 stockEl.className = 'text-sm font-bold text-amber-500';
             } else {
-                stockEl.textContent = 'Out of stock';
+                stockEl.textContent = translations.out_of_stock;
                 stockEl.className = 'text-sm font-bold text-red-600';
             }
         }

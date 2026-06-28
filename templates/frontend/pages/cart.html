@@ -5,7 +5,7 @@
 
     <!-- Header -->
     <div class="flex items-center gap-3 mb-10 border-b border-zinc-100 dark:border-zinc-900 pb-5">
-        <h1 class="serif text-4xl font-bold tracking-tight">Your Cart</h1>
+        <h1 class="serif text-4xl font-bold tracking-tight">{{ _('your_cart') }}</h1>
         <span id="cart-item-count" class="bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 text-xs font-bold px-3 py-1 rounded-none border border-zinc-200 dark:border-zinc-700 hidden">
         </span>
     </div>
@@ -13,10 +13,10 @@
     <!-- Main List Panel -->
     <div id="empty-cart-msg" class="text-center py-20 bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 rounded-none hidden">
         <i class="w-12 h-12 mx-auto text-zinc-400 dark:text-zinc-650 mb-4" data-lucide="shopping-bag"></i>
-        <h2 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Your cart is empty</h2>
-        <p class="text-zinc-550 dark:text-zinc-400 text-xs mb-6">Looks like you haven't added any products yet.</p>
+        <h2 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">{{ _('cart_empty') }}</h2>
+        <p class="text-zinc-550 dark:text-zinc-400 text-xs mb-6">{{ _('cart_empty_desc') }}</p>
         <a href="{{ url_for('home.products') }}" class="inline-block bg-zinc-950 text-white dark:bg-zinc-50 dark:text-zinc-950 font-semibold px-6 py-3 rounded-none text-xs uppercase tracking-wider hover:opacity-90 transition-all">
-            Continue Shopping
+            {{ _('continue_shopping') }}
         </a>
     </div>
 
@@ -26,7 +26,7 @@
     <div id="cart-actions-box" class="mt-8 flex justify-end hidden">
         <button id="open-checkout-btn" class="w-full sm:w-auto bg-zinc-950 text-white dark:bg-zinc-50 dark:text-zinc-950 font-bold text-xs uppercase tracking-wider px-8 py-4 hover:opacity-90 active:scale-98 transition-all cursor-pointer flex items-center justify-center gap-2">
             <i class="w-4 h-4" data-lucide="send"></i>
-            Proceed to Checkout
+            {{ _('proceed_checkout') }}
         </button>
     </div>
 
@@ -46,19 +46,19 @@
         </button>
 
         <h3 class="text-zinc-900 dark:text-zinc-100 mb-6 uppercase tracking-widest text-xs font-bold border-b border-zinc-100 dark:border-zinc-900 pb-4">
-            Order Summary
+            {{ _('order_summary') }}
         </h3>
 
         <!-- Modal Content (Scrollable if needed) -->
         <div class="overflow-y-auto pr-1 flex-1 scroll-hide mb-6">
             <div class="flex justify-between items-center mb-4 text-sm">
-                <span class="text-zinc-550 dark:text-zinc-400">Subtotal</span>
-                <span id="cart-subtotal" class="text-zinc-950 dark:text-zinc-100 font-bold">$0.00</span>
+                <span class="text-zinc-550 dark:text-zinc-400">{{ _('subtotal') }}</span>
+                <span id="cart-subtotal" class="text-zinc-955 dark:text-zinc-100 font-bold">$0.00</span>
             </div>
 
             <!-- Delivery Options -->
             <div class="mb-6">
-                <p class="text-zinc-500 dark:text-zinc-400 text-sm mb-3">Delivery Option</p>
+                <p class="text-zinc-500 dark:text-zinc-400 text-sm mb-3">{{ _('delivery_option') }}</p>
                 <div class="space-y-3">
                     <!-- Standard Delivery -->
                     <label class="delivery-option flex items-center justify-between gap-3 border border-zinc-200 dark:border-zinc-850 rounded-none p-3.5 cursor-pointer transition-all hover:bg-zinc-50 dark:hover:bg-zinc-900/60 select-none">
@@ -66,9 +66,9 @@
                             <input type="radio" name="delivery_option" value="standard" checked class="delivery-radio accent-zinc-950 dark:accent-zinc-50">
                             <div>
                                 <p class="text-zinc-900 dark:text-zinc-100 text-sm font-semibold flex items-center gap-1.5">
-                                    <i class="w-3.5 h-3.5 text-zinc-500" data-lucide="truck"></i> Standard Delivery
+                                    <i class="w-3.5 h-3.5 text-zinc-500" data-lucide="truck"></i> {{ _('standard_delivery') }}
                                 </p>
-                                <p class="text-zinc-400 dark:text-zinc-500 text-xs">ដឹកធម្មតា</p>
+                                <p class="text-zinc-400 dark:text-zinc-500 text-xs">{{ _('standard_delivery_sub') }}</p>
                             </div>
                         </div>
                         <span class="text-zinc-900 dark:text-zinc-100 text-sm font-bold">$2.00</span>
@@ -80,30 +80,30 @@
                             <input type="radio" name="delivery_option" value="grab" class="delivery-radio accent-zinc-950 dark:accent-zinc-50">
                             <div>
                                 <p class="text-zinc-900 dark:text-zinc-100 text-sm font-semibold flex items-center gap-1.5">
-                                    <i class="w-3.5 h-3.5 text-zinc-500" data-lucide="zap"></i> Grab Delivery
+                                    <i class="w-3.5 h-3.5 text-zinc-500" data-lucide="zap"></i> {{ _('grab_delivery') }}
                                 </p>
-                                <p class="text-zinc-400 dark:text-zinc-500 text-xs">តម្លៃគិតតាម Grab</p>
+                                <p class="text-zinc-400 dark:text-zinc-500 text-xs">{{ _('grab_delivery_sub') }}</p>
                             </div>
                         </div>
-                        <span class="text-emerald-600 dark:text-emerald-400 text-xs font-bold">Confirm Later</span>
+                        <span class="text-emerald-600 dark:text-emerald-400 text-xs font-bold">{{ _('confirm_later') }}</span>
                     </label>
                 </div>
             </div>
 
             <div class="flex justify-between items-center mb-4 text-sm">
-                <span class="text-zinc-550 dark:text-zinc-400">Delivery Fee</span>
+                <span class="text-zinc-550 dark:text-zinc-400">{{ _('delivery_fee') }}</span>
                 <span id="delivery-fee" class="text-zinc-955 dark:text-zinc-100 font-bold">$2.00</span>
             </div>
 
             <div class="border-t border-zinc-100 dark:border-zinc-900 pt-4 flex justify-between items-end">
-                <span class="text-zinc-955 dark:text-zinc-100 font-bold">Total</span>
+                <span class="text-zinc-955 dark:text-zinc-100 font-bold">{{ _('total') }}</span>
                 <span id="cart-total" class="text-xl font-bold text-zinc-955 dark:text-white">$0.00</span>
             </div>
         </div>
 
         <button id="checkout-btn" class="w-full py-4 rounded-none bg-zinc-950 text-white dark:bg-zinc-50 dark:text-zinc-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:opacity-90 active:scale-98 transition-all cursor-pointer">
             <i class="w-4 h-4" data-lucide="send"></i>
-            Confirm & Order via Telegram
+            {{ _('confirm_order_tg') }}
         </button>
     </div>
 </div>
@@ -138,6 +138,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        const currentLang = "{{ session.get('lang', 'en') }}";
         const container = document.getElementById('cart-items-container');
         const emptyMsg = document.getElementById('empty-cart-msg');
         const actionsBox = document.getElementById('cart-actions-box');
@@ -283,7 +284,10 @@
 
             cart.forEach((item, index) => {
                 const name = safeText(item.name, 'Unnamed Product');
-                const optionsText = safeText(item.optionsText, 'Standard');
+                let optionsText = safeText(item.optionsText, 'Standard');
+                if (optionsText === 'Standard') {
+                    optionsText = currentLang === 'km' ? 'ធម្មតា' : 'Standard';
+                }
                 const price = Number(item.price) || 0;
                 const quantity = Number(item.quantity) || 1;
 
@@ -333,7 +337,8 @@
                 container.appendChild(itemDiv);
             });
 
-            countBadge.textContent = `${totalItems} ${totalItems > 1 ? 'Items' : 'Item'}`;
+            const itemText = currentLang === 'km' ? "{{ _('items_count') }}" : (totalItems > 1 ? 'Items' : 'Item');
+            countBadge.textContent = `${totalItems} ${itemText}`;
             countBadge.classList.remove('hidden');
 
             updateSummary();
@@ -377,12 +382,26 @@
             let subtotal = 0;
             const delivery = getSelectedDelivery();
 
-            let message = `🛒 ANGKORKEY STORE ORDER\n`;
+            const orderTitle = currentLang === 'km' ? '🛒 ការបញ្ជាទិញពី ANGKORKEY STORE' : '🛒 ANGKORKEY STORE ORDER';
+            const optionLabel = currentLang === 'km' ? 'ជម្រើស' : 'Option';
+            const qtyLabel = currentLang === 'km' ? 'ចំនួន' : 'Qty';
+            const priceLabel = currentLang === 'km' ? 'តម្លៃ' : 'Price';
+            const totalLabel = currentLang === 'km' ? 'សរុប' : 'Total';
+            const subtotalLabel = currentLang === 'km' ? 'សរុបរង' : 'Subtotal';
+            const deliveryLabel = currentLang === 'km' ? 'ដឹកជញ្ជូន' : 'Delivery';
+            const deliveryFeeLabel = currentLang === 'km' ? 'ថ្លៃដឹកជញ្ជូន' : 'Delivery Fee';
+            const grandTotalLabel = currentLang === 'km' ? 'សរុបរួម' : 'Grand Total';
+            const thankYouMsg = currentLang === 'km' ? '🙏 សូមអរគុណសម្រាប់ការបញ្ជាទិញរបស់អ្នក!' : '🙏 Thank you for your order!';
+
+            let message = `${orderTitle}\n`;
             message += `━━━━━━━━━━━━━━\n\n`;
 
             cart.forEach((item, index) => {
                 const name = safeText(item.name, 'Name Unavailable');
-                const optionsText = safeText(item.optionsText, 'Standard');
+                let optionsText = safeText(item.optionsText, 'Standard');
+                if (optionsText === 'Standard') {
+                    optionsText = currentLang === 'km' ? 'ធម្មតា' : 'Standard';
+                }
                 const price = Number(item.price) || 0;
                 const quantity = Number(item.quantity) || 1;
                 const itemTotal = price * quantity;
@@ -390,29 +409,31 @@
                 subtotal += itemTotal;
 
                 message += `${index + 1}. ${name}\n`;
-                if (optionsText && optionsText !== 'Standard') {
-                    message += `   Option: ${optionsText}\n`;
+                if (optionsText) {
+                    message += `   ${optionLabel}: ${optionsText}\n`;
                 }
-                message += `   Qty: ${quantity}\n`;
-                message += `   Price: ${money(price)}\n`;
-                message += `   Total: ${money(itemTotal)}\n\n`;
+                message += `   ${qtyLabel}: ${quantity}\n`;
+                message += `   ${priceLabel}: ${money(price)}\n`;
+                message += `   ${totalLabel}: ${money(itemTotal)}\n\n`;
             });
 
             message += `━━━━━━━━━━━━━━\n`;
-            message += `Subtotal: ${money(subtotal)}\n`;
+            message += `${subtotalLabel}: ${money(subtotal)}\n`;
+
+            const deliveryName = currentLang === 'km' ? delivery.nameKh : delivery.nameEn;
 
             if (delivery.type === 'standard') {
                 const finalTotal = subtotal + delivery.fee;
-                message += `Delivery: ${delivery.nameKh}\n`;
-                message += `Delivery Fee: ${money(delivery.fee)}\n`;
-                message += `Grand Total: ${money(finalTotal)}\n`;
+                message += `${deliveryLabel}: ${deliveryName}\n`;
+                message += `${deliveryFeeLabel}: ${money(delivery.fee)}\n`;
+                message += `${grandTotalLabel}: ${money(finalTotal)}\n`;
             } else if (delivery.type === 'grab') {
-                message += `Delivery: ${delivery.nameKh}\n`;
-                message += `Grand Total: ${money(subtotal)} + Grab Fee\n`;
+                message += `${deliveryLabel}: ${deliveryName}\n`;
+                message += `${grandTotalLabel}: ${money(subtotal)} + Grab Fee\n`;
             }
 
             message += `━━━━━━━━━━━━━━\n`;
-            message += `🙏 Thank you for your order!`;
+            message += `${thankYouMsg}`;
 
             return message;
         }

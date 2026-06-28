@@ -44,7 +44,7 @@
                         <a href="{{ url_for('home.products') }}"
                            class="pb-1 border-b-2 transition-all duration-300
                            {{ 'text-zinc-950 dark:text-white border-zinc-950 dark:border-white' if request.endpoint == 'home.products' and not request.view_args.get('category_id') else 'text-zinc-500 dark:text-zinc-400 border-transparent hover:text-zinc-950 dark:hover:text-white' }}">
-                            Products
+                            {{ _('products') }}
                         </a>
                     </li>
 
@@ -52,7 +52,7 @@
                         <a href="{{ url_for('home.promotions') }}"
                            class="pb-1 border-b-2 transition-all duration-300
                            {{ 'text-zinc-950 dark:text-white border-zinc-950 dark:border-white' if request.endpoint == 'home.promotions' else 'text-zinc-500 dark:text-zinc-400 border-transparent hover:text-zinc-950 dark:hover:text-white' }}">
-                            Promotions
+                            {{ _('promotions') }}
                         </a>
                     </li>
 
@@ -60,7 +60,7 @@
                         <a href="{{ url_for('home.all_categories') }}"
                            class="flex items-center gap-1 pb-1 border-b-2 transition-all duration-300
                            {{ 'text-zinc-950 dark:text-white border-zinc-950 dark:border-white' if request.endpoint == 'home.all_categories' or request.view_args.get('category_id') else 'text-zinc-500 dark:text-zinc-400 border-transparent hover:text-zinc-950 dark:hover:text-white' }}">
-                            Categories
+                            {{ _('categories') }}
 
                             <i class="h-4 w-4 bg-transparent group-hover:rotate-180 transition-transform duration-300" data-lucide="chevron-down"></i>
                         </a>
@@ -76,7 +76,7 @@
                             {% else %}
                             <li>
                                 <span class="block px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-650">
-                                    No Categories
+                                    {{ _('no_categories_menu') }}
                                 </span>
                             </li>
                             {% endfor %}
@@ -87,7 +87,7 @@
                         <a href="{{ url_for('home.all_brands') }}"
                            class="flex items-center gap-1 pb-1 border-b-2 transition-all duration-300
                            {{ 'text-zinc-950 dark:text-white border-zinc-950 dark:border-white' if request.endpoint == 'home.all_brands' or request.endpoint == 'home.brand_products' else 'text-zinc-500 dark:text-zinc-400 border-transparent hover:text-zinc-950 dark:hover:text-white' }}">
-                            Brands
+                            {{ _('brands') }}
 
                             <i class="h-4 w-4 bg-transparent group-hover:rotate-180 transition-transform duration-300" data-lucide="chevron-down"></i>
                         </a>
@@ -103,7 +103,7 @@
                             {% else %}
                             <li>
                                 <span class="block px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-650">
-                                    No Brands
+                                    {{ _('no_brands') }}
                                 </span>
                             </li>
                             {% endfor %}
@@ -123,6 +123,26 @@
                     <!-- Moon Icon (visible in light mode) -->
                     <i id="theme-toggle-moon" class="h-6 w-6" data-lucide="moon"></i>
                 </button>
+
+                <!-- Language Selector -->
+                <div class="relative dropdown group py-4 hidden md:block">
+                    <button class="p-2 text-xs font-bold uppercase tracking-widest text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white transition-colors focus:outline-none flex items-center gap-1 cursor-pointer">
+                        {{ 'KM' if session.get('lang', 'en') == 'km' else 'EN' }}
+                        <i class="h-3 w-3 bg-transparent group-hover:rotate-180 transition-transform duration-300" data-lucide="chevron-down"></i>
+                    </button>
+                    <ul class="dropdown-menu absolute hidden group-hover:block bg-white dark:bg-zinc-900 shadow-xl rounded-xl w-32 p-2 z-50 origin-top-right right-0 top-full mt-0 border border-gray-100 dark:border-zinc-800">
+                        <li>
+                            <a href="/set_lang/en" class="block px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-zinc-650 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:text-zinc-950 dark:hover:text-white rounded-lg transition-colors {{ 'bg-zinc-100 dark:bg-zinc-800 text-zinc-950 dark:text-white' if session.get('lang', 'en') == 'en' }}">
+                                English
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/set_lang/km" class="block px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-zinc-650 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:text-zinc-950 dark:hover:text-white rounded-lg transition-colors {{ 'bg-zinc-100 dark:bg-zinc-800 text-zinc-950 dark:text-white' if session.get('lang', 'en') == 'km' }}">
+                                ភាសាខ្មែរ
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
                 <a href="{{ url_for('home.cart') }}" class="relative p-2 text-zinc-500 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors group">
                     <i class="h-6 w-6 group-hover:scale-110 transition-transform" data-lucide="shopping-cart"></i>
@@ -155,25 +175,25 @@
             <a href="{{ url_for('home.products') }}"
                class="block rounded-xl px-4 py-3 text-sm font-bold uppercase tracking-widest
                {{ 'bg-zinc-100 dark:bg-zinc-800 text-zinc-950 dark:text-white' if request.endpoint == 'home.products' else 'text-zinc-500 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 hover:text-zinc-950 dark:hover:text-white' }}">
-                Products
+                {{ _('products') }}
             </a>
 
             <a href="{{ url_for('home.promotions') }}"
                class="block rounded-xl px-4 py-3 text-sm font-bold uppercase tracking-widest
                {{ 'bg-zinc-100 dark:bg-zinc-800 text-zinc-950 dark:text-white' if request.endpoint == 'home.promotions' else 'text-zinc-500 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 hover:text-zinc-950 dark:hover:text-white' }}">
-                Promotions
+                {{ _('promotions') }}
             </a>
 
             <a href="{{ url_for('home.all_categories') }}"
                class="block rounded-xl px-4 py-3 text-sm font-bold uppercase tracking-widest
                {{ 'bg-zinc-100 dark:bg-zinc-800 text-zinc-950 dark:text-white' if request.endpoint == 'home.all_categories' else 'text-zinc-500 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 hover:text-zinc-950 dark:hover:text-white' }}">
-                Categories
+                {{ _('categories') }}
             </a>
 
             <a href="{{ url_for('home.all_brands') }}"
                class="block rounded-xl px-4 py-3 text-sm font-bold uppercase tracking-widest
                {{ 'bg-zinc-100 dark:bg-zinc-800 text-zinc-950 dark:text-white' if request.endpoint == 'home.all_brands' or request.endpoint == 'home.brand_products' else 'text-zinc-500 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 hover:text-zinc-950 dark:hover:text-white' }}">
-                Brands
+                {{ _('brands') }}
             </a>
 
         </div>
