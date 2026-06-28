@@ -546,7 +546,6 @@
         };
 
         // SPA-like tab switcher for mobile bottom navigation bar with cache
-        const mobileLinks = document.querySelectorAll('.fixed.bottom-4 a');
         const contentMain = document.getElementById('content-main');
         const pageCache = {};
         let currentLang = localStorage.getItem('lang') || document.documentElement.getAttribute('lang') || 'en';
@@ -596,6 +595,17 @@
                 oldFooter.outerHTML = newFooter.outerHTML;
             }
             
+            // Swap Bottom Nav Container
+            const oldNav = document.getElementById('bottom-nav-container');
+            const newNav = doc.getElementById('bottom-nav-container');
+            if (oldNav && newNav) {
+                oldNav.innerHTML = newNav.innerHTML;
+                const newMobileLinks = oldNav.querySelectorAll('a');
+                newMobileLinks.forEach(link => {
+                    link.addEventListener('click', handleBottomNavClick);
+                });
+            }
+            
             // Swap Mobile Menu
             const oldMenu = document.getElementById('mobile-menu');
             const newMenu = doc.getElementById('mobile-menu');
@@ -629,29 +639,79 @@
             }
         }
 
-        // Mobile bottom navigation bar links handler
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', async (e) => {
-                const href = link.getAttribute('href');
-                if (href && href.startsWith('/') && !href.includes('#')) {
-                    e.preventDefault();
-                    
-                    if (contentMain) {
-                        contentMain.style.opacity = '0.5';
-                        contentMain.style.transition = 'opacity 0.15s ease-in-out';
-                    }
-                    
-                    await navigateTo(href);
-                    
-                    history.pushState(null, '', href);
-                    updateActiveNavbarTab(href);
-                    
-                    if (contentMain) {
-                        contentMain.style.opacity = '1';
-                    }
+        async function handleBottomNavClick(e) {
+            const link = e.currentTarget;
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('/') && !href.includes('#')) {
+                e.preventDefault();
+                
+                if (contentMain) {
+                    contentMain.style.opacity = '0.5';
+                    contentMain.style.transition = 'opacity 0.15s ease-in-out';
                 }
-            });
+                
+                await navigateTo(href);
+                
+                history.pushState(null, '', href);
+                updateActiveNavbarTab(href);
+                
+                if (contentMain) {
+                    contentMain.style.opacity = '1';
+                }
+            }
+        }
+
+        // Mobile bottom navigation bar links handler
+        const initialMobileLinks = document.querySelectorAll('#bottom-nav-container a');
+        initialMobileLinks.forEach(link => {
+            link.addEventListener('click', handleBottomNavClick);
         });
+
+        // Intercept clicks on product detail links for instant AJAX load
+        document.body.addEventListener('click', async (e) => {
+            const productLink = e.target.closest('a[href^="/product_detail/"]');
+            if (productLink) {
+                e.preventDefault();
+                const href = productLink.getAttribute('href');
+                
+                if (contentMain) {
+                    contentMain.style.opacity = '0.5';
+                    contentMain.style.transition = 'opacity 0.15s ease-in-out';
+                }
+                
+                await navigateTo(href);
+                
+                history.pushState(null, '', href);
+                
+                if (contentMain) {
+                    contentMain.style.opacity = '1';
+                }
+            }
+        });
+
+        // Background prefetch on hover or touchstart
+        const prefetchLink = (href) => {
+            const cacheKey = `${href}::${currentLang}`;
+            if (!pageCache[cacheKey]) {
+                fetch(href).then(res => res.text()).then(html => {
+                    pageCache[cacheKey] = html;
+                }).catch(() => {});
+            }
+        };
+
+        document.body.addEventListener('mouseover', (e) => {
+            const link = e.target.closest('a[href^="/product_detail/"]');
+            if (link) {
+                prefetchLink(link.getAttribute('href'));
+            }
+        });
+
+        document.body.addEventListener('touchstart', (e) => {
+            const link = e.target.closest('a[href^="/product_detail/"]');
+            if (link) {
+                prefetchLink(link.getAttribute('href'));
+            }
+        }, { passive: true });
 
         // AJAX Language Switcher (No full page reload, uses caching)
         document.body.addEventListener('click', async (e) => {
@@ -672,7 +732,8 @@
         });
 
         function updateActiveNavbarTab(currentPath) {
-            mobileLinks.forEach(link => {
+            const currentMobileLinks = document.querySelectorAll('#bottom-nav-container a');
+            currentMobileLinks.forEach(link => {
                 const href = link.getAttribute('href');
                 const isActive = (href === currentPath) || (currentPath === '/' && href === '/home') || (currentPath === '/home' && href === '/');
                 
