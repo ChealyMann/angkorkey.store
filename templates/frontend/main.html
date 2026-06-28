@@ -757,6 +757,12 @@
                 const bottomNav = document.getElementById('bottom-nav-container');
                 if (bottomNav) {
                     bottomNav.classList.remove('hidden');
+                    const navBar = bottomNav.querySelector('.fixed.bottom-4');
+                    if (navBar) {
+                        navBar.classList.remove('nav-pop-in');
+                        void navBar.offsetWidth;
+                        navBar.classList.add('nav-pop-in');
+                    }
                 }
 
                 // Restore main page's mobile bar visibility only after drawer is fully closed
@@ -851,6 +857,12 @@
                 const bottomNav = document.getElementById('bottom-nav-container');
                 if (bottomNav) {
                     bottomNav.classList.remove('hidden');
+                    const navBar = bottomNav.querySelector('.fixed.bottom-4');
+                    if (navBar) {
+                        navBar.classList.remove('nav-pop-in');
+                        void navBar.offsetWidth;
+                        navBar.classList.add('nav-pop-in');
+                    }
                 }
             }
             const cacheKey = `${url}::${currentLang}`;
