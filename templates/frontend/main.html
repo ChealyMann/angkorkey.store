@@ -609,6 +609,56 @@
 </div>
 `;
 
+        const CATALOG_SKELETON_TEMPLATE = `
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-pulse">
+    <!-- Banner / Header Skeleton -->
+    <div class="h-28 sm:h-40 bg-zinc-150 dark:bg-zinc-800 rounded-none mb-8"></div>
+    
+    <!-- Section Title Skeleton -->
+    <div class="h-6 w-48 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-8"></div>
+    
+    <!-- Grid Skeleton -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+        <div class="flex flex-col">
+            <div class="aspect-square bg-zinc-150 dark:bg-zinc-800 rounded-none mb-4"></div>
+            <div class="h-3 w-16 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
+            <div class="h-4 w-3/4 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
+            <div class="h-4 w-1/4 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+        </div>
+        <div class="flex flex-col">
+            <div class="aspect-square bg-zinc-150 dark:bg-zinc-800 rounded-none mb-4"></div>
+            <div class="h-3 w-16 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
+            <div class="h-4 w-3/4 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
+            <div class="h-4 w-1/4 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+        </div>
+        <div class="flex flex-col">
+            <div class="aspect-square bg-zinc-150 dark:bg-zinc-800 rounded-none mb-4"></div>
+            <div class="h-3 w-16 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
+            <div class="h-4 w-3/4 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
+            <div class="h-4 w-1/4 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+        </div>
+        <div class="flex flex-col">
+            <div class="aspect-square bg-zinc-150 dark:bg-zinc-800 rounded-none mb-4"></div>
+            <div class="h-3 w-16 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
+            <div class="h-4 w-3/4 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
+            <div class="h-4 w-1/4 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+        </div>
+        <div class="flex flex-col">
+            <div class="aspect-square bg-zinc-150 dark:bg-zinc-800 rounded-none mb-4"></div>
+            <div class="h-3 w-16 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
+            <div class="h-4 w-3/4 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
+            <div class="h-4 w-1/4 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+        </div>
+        <div class="flex flex-col">
+            <div class="aspect-square bg-zinc-150 dark:bg-zinc-800 rounded-none mb-4"></div>
+            <div class="h-3 w-16 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
+            <div class="h-4 w-3/4 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
+            <div class="h-4 w-1/4 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+        </div>
+    </div>
+</div>
+`;
+
         // SPA-like tab switcher for mobile bottom navigation bar with cache
         const contentMain = document.getElementById('content-main');
         const pageCache = {};
@@ -765,8 +815,12 @@
             if (pageCache[cacheKey]) {
                 htmlText = pageCache[cacheKey];
             } else {
-                if (url.includes('/product_detail/') && contentMain) {
-                    contentMain.innerHTML = SKELETON_TEMPLATE;
+                if (contentMain) {
+                    if (url.includes('/product_detail/')) {
+                        contentMain.innerHTML = SKELETON_TEMPLATE;
+                    } else {
+                        contentMain.innerHTML = CATALOG_SKELETON_TEMPLATE;
+                    }
                     contentMain.style.opacity = '1';
                     window.scrollTo({ top: 0, behavior: 'instant' });
                 }
@@ -862,9 +916,14 @@
             if (href && href.startsWith('/') && !href.includes('#')) {
                 e.preventDefault();
                 
-                if (contentMain) {
+                const cacheKey = `${href}::${currentLang}`;
+                if (!pageCache[cacheKey] && contentMain) {
+                    contentMain.innerHTML = CATALOG_SKELETON_TEMPLATE;
+                    contentMain.style.opacity = '1';
+                    window.scrollTo({ top: 0, behavior: 'instant' });
+                } else if (contentMain) {
                     contentMain.style.opacity = '0.5';
-                    contentMain.style.transition = 'opacity 0.15s ease-in-out';
+                    contentMain.style.transition = 'opacity 0.1s ease-in-out';
                 }
                 
                 await navigateTo(href);
