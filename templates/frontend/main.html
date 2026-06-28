@@ -592,6 +592,7 @@
                 if (url.includes('/product_detail/') && contentMain) {
                     contentMain.innerHTML = SKELETON_TEMPLATE;
                     contentMain.style.opacity = '1';
+                    window.scrollTo({ top: 0, behavior: 'instant' });
                 }
                 try {
                     const res = await fetch(url);
