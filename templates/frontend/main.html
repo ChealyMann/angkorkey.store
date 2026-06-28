@@ -583,6 +583,53 @@
         const scrollCache = {};
         let currentLang = localStorage.getItem('lang') || document.documentElement.getAttribute('lang') || 'en';
 
+        // Drawer elements & controller
+        const drawer = document.getElementById('product-detail-drawer');
+        const drawerContent = document.getElementById('drawer-content');
+        let drawerOpen = false;
+
+        function openDrawer(htmlText) {
+            if (!drawer || !drawerContent) return;
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlText, 'text/html');
+            const newContent = doc.getElementById('content-main');
+            if (newContent) {
+                drawerContent.innerHTML = newContent.innerHTML;
+            } else {
+                drawerContent.innerHTML = htmlText;
+            }
+            const scripts = drawerContent.querySelectorAll('script');
+            scripts.forEach(script => {
+                const newScript = document.createElement('script');
+                Array.from(script.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                newScript.appendChild(document.createTextNode(script.innerHTML));
+                script.parentNode.replaceChild(newScript, script);
+            });
+            window.translatePage(currentLang);
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+            drawer.classList.remove('hidden');
+            drawer.offsetHeight;
+            drawer.classList.remove('translate-x-full');
+            drawer.classList.add('translate-x-0');
+            drawer.scrollTo({ top: 0, behavior: 'instant' });
+            drawerOpen = true;
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDrawer() {
+            if (!drawer) return;
+            drawer.classList.remove('translate-x-0');
+            drawer.classList.add('translate-x-full');
+            setTimeout(() => {
+                drawer.classList.add('hidden');
+                if (drawerContent) drawerContent.innerHTML = '';
+            }, 300);
+            drawerOpen = false;
+            document.body.style.overflow = '';
+        }
+
         // Keep scroll restoring working perfectly for browser history navigation
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
@@ -722,25 +769,44 @@
             link.addEventListener('click', handleBottomNavClick);
         });
 
-        // Intercept clicks on product detail links for instant AJAX load
+        // Intercept clicks on product detail links for dynamic slide-in drawer load
         document.body.addEventListener('click', async (e) => {
             const productLink = e.target.closest('a[href^="/product_detail/"]');
             if (productLink) {
                 e.preventDefault();
                 const href = productLink.getAttribute('href');
                 
-                if (contentMain) {
-                    contentMain.style.opacity = '0.5';
-                    contentMain.style.transition = 'opacity 0.15s ease-in-out';
+                // Open drawer with skeleton loading state immediately
+                if (drawer && drawerContent) {
+                    drawerContent.innerHTML = SKELETON_TEMPLATE;
+                    drawer.classList.remove('hidden');
+                    drawer.offsetHeight;
+                    drawer.classList.remove('translate-x-full');
+                    drawer.classList.add('translate-x-0');
+                    drawer.scrollTo({ top: 0, behavior: 'instant' });
+                    drawerOpen = true;
+                    document.body.style.overflow = 'hidden';
                 }
                 
-                await navigateTo(href);
+                const cacheKey = `${href}::${currentLang}`;
+                let htmlText;
                 
-                history.pushState(null, '', href);
-                
-                if (contentMain) {
-                    contentMain.style.opacity = '1';
+                if (pageCache[cacheKey]) {
+                    htmlText = pageCache[cacheKey];
+                } else {
+                    try {
+                        const res = await fetch(href);
+                        htmlText = await res.text();
+                        pageCache[cacheKey] = htmlText;
+                    } catch (err) {
+                        console.error('Failed to load product detail:', err);
+                        window.location.href = href;
+                        return;
+                    }
                 }
+                
+                openDrawer(htmlText);
+                history.pushState({ isDrawer: true }, '', href);
             }
         });
 
@@ -794,10 +860,35 @@
             }
         }
 
-        // Intercept popstate (browser back/forward button clicks) to navigate dynamically
+        // Intercept popstate (browser back/forward button clicks) to handle drawer toggle and dynamic nav
         window.addEventListener('popstate', async () => {
             const path = window.location.pathname;
             
+            // If the drawer is currently open and we are going back to a non-detail page
+            if (drawerOpen && !path.includes('/product_detail/')) {
+                closeDrawer();
+                return;
+            }
+            
+            // If we are going forward/back to a product detail page and the drawer is not open
+            if (path.includes('/product_detail/')) {
+                const cacheKey = `${path}::${currentLang}`;
+                let htmlText = pageCache[cacheKey];
+                if (!htmlText) {
+                    try {
+                        const res = await fetch(path);
+                        htmlText = await res.text();
+                        pageCache[cacheKey] = htmlText;
+                    } catch (err) {
+                        window.location.href = path;
+                        return;
+                    }
+                }
+                openDrawer(htmlText);
+                return;
+            }
+            
+            // Default SPA route swap fallback
             if (contentMain) {
                 contentMain.style.opacity = '0.5';
                 contentMain.style.transition = 'opacity 0.15s ease-in-out';
@@ -821,6 +912,11 @@
         }
     });
 </script>
-</body>
+    <!-- Slide-in Product Detail Drawer Overlay -->
+    <div id="product-detail-drawer" class="fixed inset-0 z-50 overflow-y-auto bg-white dark:bg-zinc-955 translate-x-full transition-transform duration-300 ease-out hidden">
+        <div id="drawer-content" class="min-h-screen"></div>
+    </div>
+    
+    </body>
 
 </html>

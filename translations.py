@@ -63,6 +63,7 @@ TRANSLATIONS = {
         'related': 'Related',
         'you_might_also_like': 'You might also like',
         'all': 'All',
+        'back': 'Back',
     },
     'km': {
         'products': 'ផលិតផល',
@@ -128,5 +129,6 @@ TRANSLATIONS = {
         'related': 'ផលិតផលស្រដៀងគ្នា',
         'you_might_also_like': 'អ្នកក៏អាចនឹងចូលចិត្ត',
         'all': 'ទាំងអស់',
+        'back': 'ត្រឡប់ក្រោយ',
     }
 }
