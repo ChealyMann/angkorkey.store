@@ -675,6 +675,12 @@
         function openDrawer(htmlText) {
             if (!drawer || !drawerContent) return;
             
+            // Clean up any existing dynamically appended mobile bar first
+            const oldMobBar = drawer.querySelector(':scope > #mobile-bar');
+            if (oldMobBar) {
+                oldMobBar.remove();
+            }
+
             drawerContent.style.opacity = '0';
             drawerContent.style.transition = 'opacity 0.15s ease-in-out';
             
@@ -711,11 +717,18 @@
                     mainMobileBar.classList.add('hidden');
                 }
 
+                // Move mobile checkout bar to drawer container root to animate together during closing/opening
+                const mobBar = drawerContent.querySelector('#mobile-bar');
+                if (mobBar) {
+                    mobBar.style.setProperty('position', 'absolute', 'important');
+                    drawer.appendChild(mobBar);
+                }
+
                 drawer.classList.remove('hidden');
                 drawer.offsetHeight;
                 drawer.classList.remove('left-full');
                 drawer.classList.add('left-0');
-                drawer.scrollTo({ top: 0, behavior: 'instant' });
+                drawerContent.scrollTo({ top: 0, behavior: 'instant' });
                 drawerOpen = true;
                 document.body.style.overflow = 'hidden';
                 
@@ -733,6 +746,12 @@
             setTimeout(() => {
                 drawer.classList.add('hidden');
                 if (drawerContent) drawerContent.innerHTML = '';
+                
+                // Clean up dynamically appended mobile bar
+                const oldMobBar = drawer.querySelector(':scope > #mobile-bar');
+                if (oldMobBar) {
+                    oldMobBar.remove();
+                }
                 
                 // Restore bottom navigation bar visibility only after drawer is fully closed
                 const bottomNav = document.getElementById('bottom-nav-container');
@@ -969,7 +988,7 @@
                     drawer.offsetHeight;
                     drawer.classList.remove('left-full');
                     drawer.classList.add('left-0');
-                    drawer.scrollTo({ top: 0, behavior: 'instant' });
+                    drawerContent.scrollTo({ top: 0, behavior: 'instant' });
                     drawerOpen = true;
                     document.body.style.overflow = 'hidden';
 
@@ -1090,6 +1109,7 @@
                     drawer.offsetHeight;
                     drawer.classList.remove('left-full');
                     drawer.classList.add('left-0');
+                    drawerContent.scrollTo({ top: 0, behavior: 'instant' });
                     drawerOpen = true;
                     document.body.style.overflow = 'hidden';
                     const bottomNav = document.getElementById('bottom-nav-container');
@@ -1138,8 +1158,8 @@
     });
 </script>
     <!-- Slide-in Product Detail Drawer Overlay -->
-    <div id="product-detail-drawer" class="fixed left-full w-full bottom-0 top-16 md:top-20 z-30 overflow-y-auto bg-gray-50 dark:bg-zinc-950 transition-[left] duration-300 ease-out hidden">
-        <div id="drawer-content" class="min-h-screen"></div>
+    <div id="product-detail-drawer" class="fixed left-full w-full bottom-0 top-16 md:top-20 z-30 bg-gray-50 dark:bg-zinc-950 transition-[left] duration-300 ease-out hidden">
+        <div id="drawer-content" class="h-full overflow-y-auto pb-24"></div>
     </div>
 
     <!-- Global Description & Specs Modal -->
