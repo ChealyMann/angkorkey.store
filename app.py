@@ -3,7 +3,7 @@ import json
 from datetime import timedelta
 
 import click
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, send_from_directory, make_response
 from werkzeug.security import generate_password_hash
 from flask_migrate import Migrate
 
@@ -130,6 +130,14 @@ def inject_translations():
         "current_lang": lang,
         "translations_json": json.dumps(TRANSLATIONS)
     }
+
+
+@app.route("/sw.js")
+def service_worker():
+    response = make_response(send_from_directory(app.static_folder, "js/sw.js"))
+    response.headers["Content-Type"] = "application/javascript"
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    return response
 
 
 @app.route("/upload")
