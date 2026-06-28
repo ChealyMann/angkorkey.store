@@ -1,4 +1,5 @@
 import os
+import json
 from datetime import timedelta
 
 import click
@@ -124,7 +125,11 @@ def inject_translations():
     lang = session.get("lang", "en")
     def get_text(key):
         return TRANSLATIONS.get(lang, TRANSLATIONS["en"]).get(key, key)
-    return {"_": get_text, "current_lang": lang}
+    return {
+        "_": get_text, 
+        "current_lang": lang,
+        "translations_json": json.dumps(TRANSLATIONS)
+    }
 
 
 @app.route("/upload")

@@ -236,6 +236,9 @@
             display: none !important;
         }
     </style>
+    <script id="translations-json" type="application/json">
+        {{ translations_json | safe }}
+    </script>
 </head>
 <body class="bg-gray-50 text-gray-900 dark:bg-zinc-950 dark:text-zinc-50 antialiased selection:bg-red-500 selection:text-white min-h-screen transition-colors duration-300">
 {% include("frontend/layouts/header.html") %}
@@ -378,31 +381,180 @@
 
             if (categoryOverlay) {
                 categoryOverlay.addEventListener("click", () => toggleCategoryMenu(false));
-            }
         }
+
+        const TRANSLATIONS = JSON.parse(document.getElementById('translations-json').textContent || '{}');
+
+        window.translatePage = function(lang) {
+            const enStrings = TRANSLATIONS['en'] || {};
+            const kmStrings = TRANSLATIONS['km'] || {};
+            
+            // Map of English text to Khmer text
+            const enToKm = {};
+            const kmToEn = {};
+            for (const key in enStrings) {
+                const enVal = enStrings[key].trim();
+                const kmVal = kmStrings[key].trim();
+                enToKm[enVal] = kmVal;
+                kmToEn[kmVal] = enVal;
+            }
+            
+            // Set html lang attribute
+            document.documentElement.setAttribute('lang', lang);
+            
+            // Recursive function to traverse DOM text nodes
+            function traverse(node) {
+                // Skip script and style tags
+                if (['SCRIPT', 'STYLE', 'TEXTAREA'].includes(node.tagName)) {
+                    return;
+                }
+                
+                if (node.nodeType === Node.TEXT_NODE) {
+                    const originalVal = node.nodeValue;
+                    const trimmed = originalVal.trim();
+                    if (trimmed) {
+                        if (lang === 'km') {
+                            if (enToKm[trimmed]) {
+                                if (node._originalText === undefined) {
+                                    node._originalText = originalVal;
+                                }
+                                node.nodeValue = originalVal.replace(trimmed, enToKm[trimmed]);
+                            }
+                        } else {
+                            if (node._originalText !== undefined) {
+                                node.nodeValue = node._originalText;
+                            } else if (kmToEn[trimmed]) {
+                                node.nodeValue = originalVal.replace(trimmed, kmToEn[trimmed]);
+                            }
+                        }
+                    }
+                } else {
+                    // Translate inputs
+                    if (node.tagName === 'INPUT' && (node.type === 'text' || node.type === 'search')) {
+                        const placeholder = node.placeholder;
+                        if (placeholder) {
+                            const trimmedPh = placeholder.trim();
+                            if (lang === 'km') {
+                                if (enToKm[trimmedPh]) {
+                                    if (node._originalPlaceholder === undefined) {
+                                        node._originalPlaceholder = placeholder;
+                                    }
+                                    node.placeholder = enToKm[trimmedPh];
+                                }
+                            } else {
+                                if (node._originalPlaceholder !== undefined) {
+                                    node.placeholder = node._originalPlaceholder;
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Translate titles
+                    if (node.hasAttribute && node.hasAttribute('title')) {
+                        const title = node.getAttribute('title');
+                        if (title) {
+                            const trimmedTitle = title.trim();
+                            if (lang === 'km') {
+                                if (enToKm[trimmedTitle]) {
+                                    if (node._originalTitle === undefined) {
+                                        node._originalTitle = title;
+                                    }
+                                    node.setAttribute('title', enToKm[trimmedTitle]);
+                                }
+                            } else {
+                                if (node._originalTitle !== undefined) {
+                                    node.setAttribute('title', node._originalTitle);
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Recurse children
+                    for (let child of node.childNodes) {
+                        traverse(child);
+                    }
+                }
+            }
+            
+            traverse(document.body);
+            
+            // Update sliding language switchers UI
+            const backdrops = document.querySelectorAll('.bg-zinc-100 .absolute, .bg-zinc-800 .absolute');
+            backdrops.forEach(bd => {
+                if (lang === 'km') {
+                    bd.classList.remove('translate-x-0');
+                    bd.classList.add('translate-x-[42px]');
+                } else {
+                    bd.classList.remove('translate-x-[42px]');
+                    bd.classList.add('translate-x-0');
+                }
+            });
+            
+            // Update sliding switcher flag opacities
+            const enFlagImg = document.querySelector('header img[alt="English"]');
+            const kmFlagImg = document.querySelector('header img[alt="Khmer"]');
+            if (enFlagImg && kmFlagImg) {
+                if (lang === 'en') {
+                    enFlagImg.classList.remove('opacity-50', 'hover:opacity-80');
+                    kmFlagImg.classList.add('opacity-50', 'hover:opacity-80');
+                } else {
+                    kmFlagImg.classList.remove('opacity-50', 'hover:opacity-80');
+                    enFlagImg.classList.add('opacity-50', 'hover:opacity-80');
+                }
+            }
+            
+            // Update mobile single flag toggle button
+            const mobToggleLink = document.querySelector('.md\:hidden.flex.items-center a[href^="/set_lang/"]');
+            if (mobToggleLink) {
+                if (lang === 'km') {
+                    mobToggleLink.setAttribute('href', '/set_lang/en');
+                    mobToggleLink.setAttribute('title', 'Switch to English');
+                    const img = mobToggleLink.querySelector('img');
+                    if (img) {
+                        img.setAttribute('src', 'https://flagcdn.com/24x18/gb.png');
+                        img.setAttribute('alt', 'English');
+                    }
+                } else {
+                    mobToggleLink.setAttribute('href', '/set_lang/km');
+                    mobToggleLink.setAttribute('title', 'ប្តូរទៅភាសាខ្មែរ');
+                    const img = mobToggleLink.querySelector('img');
+                    if (img) {
+                        img.setAttribute('src', 'https://flagcdn.com/24x18/kh.png');
+                        img.setAttribute('alt', 'Khmer');
+                    }
+                }
+            }
+            
+            // Update mobile menu switcher buttons active state
+            const mobEnBtn = document.querySelector('#mobile-menu a[href="/set_lang/en"]');
+            const mobKmBtn = document.querySelector('#mobile-menu a[href="/set_lang/km"]');
+            if (mobEnBtn && mobKmBtn) {
+                const activeClasses = ['bg-zinc-100', 'dark:bg-zinc-800', 'border', 'border-gray-200', 'dark:border-zinc-700'];
+                if (lang === 'en') {
+                    mobEnBtn.classList.add(...activeClasses);
+                    mobEnBtn.classList.remove('opacity-60');
+                    mobKmBtn.classList.remove(...activeClasses);
+                    mobKmBtn.classList.add('opacity-60');
+                } else {
+                    mobKmBtn.classList.add(...activeClasses);
+                    mobKmBtn.classList.remove('opacity-60');
+                    mobEnBtn.classList.remove(...activeClasses);
+                    mobEnBtn.classList.add('opacity-60');
+                }
+            }
+        };
 
         // SPA-like tab switcher for mobile bottom navigation bar with cache
         const mobileLinks = document.querySelectorAll('.fixed.bottom-4 a');
         const contentMain = document.getElementById('content-main');
         const pageCache = {};
-        let currentLang = document.documentElement.getAttribute('lang') || 'en';
+        let currentLang = localStorage.getItem('lang') || document.documentElement.getAttribute('lang') || 'en';
 
-        // Prepopulate current page in cache so switching back feels instant!
-        pageCache[`${window.location.pathname}${window.location.search}::${currentLang}`] = document.documentElement.outerHTML;
+        // Initial translation on page load
+        window.translatePage(currentLang);
 
-        async function navigateTo(url, targetLang = null) {
-            const activeLang = targetLang || currentLang;
-            const cacheKey = `${url}::${activeLang}`;
-            
-            // If setting a new language, update the session on the server
-            if (targetLang && targetLang !== currentLang) {
-                try {
-                    await fetch(`/set_lang/${targetLang}`);
-                    currentLang = targetLang;
-                } catch (err) {
-                    console.error('Failed to set language on server:', err);
-                }
-            }
+        async function navigateTo(url) {
+            const cacheKey = `${url}::${currentLang}`;
             
             let htmlText;
             if (pageCache[cacheKey]) {
@@ -414,20 +566,13 @@
                     pageCache[cacheKey] = htmlText;
                 } catch (err) {
                     console.error('Failed to load page:', err);
-                    if (targetLang) {
-                        window.location.reload();
-                    } else {
-                        window.location.href = url;
-                    }
+                    window.location.href = url;
                     return;
                 }
             }
             
             const parser = new DOMParser();
             const doc = parser.parseFromString(htmlText, 'text/html');
-            
-            // Update document lang
-            document.documentElement.setAttribute('lang', activeLang);
             
             // Swap Header
             const oldHeader = document.querySelector('header');
@@ -465,6 +610,9 @@
                 newScript.appendChild(document.createTextNode(script.innerHTML));
                 script.parentNode.replaceChild(newScript, script);
             });
+            
+            // Translate the page to the active language
+            window.translatePage(currentLang);
             
             // Re-initialize Lucide Icons
             if (typeof lucide !== 'undefined') {
@@ -512,16 +660,13 @@
                 const href = langLink.getAttribute('href');
                 const targetLang = href.split('/').pop(); // 'en' or 'km'
                 
-                if (contentMain) {
-                    contentMain.style.opacity = '0.5';
-                    contentMain.style.transition = 'opacity 0.15s ease-in-out';
-                }
+                // Switch language client-side instantly!
+                window.translatePage(targetLang);
+                currentLang = targetLang;
+                localStorage.setItem('lang', targetLang);
                 
-                await navigateTo(window.location.pathname + window.location.search, targetLang);
-                
-                if (contentMain) {
-                    contentMain.style.opacity = '1';
-                }
+                // Fire server-side update asynchronously in background
+                fetch(href).catch(err => console.error('Failed to sync language to server:', err));
             }
         });
 

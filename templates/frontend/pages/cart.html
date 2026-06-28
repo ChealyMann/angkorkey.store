@@ -138,7 +138,7 @@
 
 <script>
     function initCartPage() {
-        const currentLang = "{{ session.get('lang', 'en') }}";
+        const getLang = () => document.documentElement.getAttribute('lang') || 'en';
         const container = document.getElementById('cart-items-container');
         const emptyMsg = document.getElementById('empty-cart-msg');
         const actionsBox = document.getElementById('cart-actions-box');
@@ -267,6 +267,7 @@
         }
 
         function renderCart() {
+            const currentLang = getLang();
             container.innerHTML = '';
 
             if (cart.length === 0) {
@@ -379,6 +380,7 @@
         }
 
         function buildTelegramMessage() {
+            const currentLang = getLang();
             let subtotal = 0;
             const delivery = getSelectedDelivery();
 

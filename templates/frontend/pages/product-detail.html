@@ -772,11 +772,11 @@
 
 <script>
 function initProductDetailPage() {
-    const currentLang = "{{ session.get('lang', 'en') }}";
+    const getLang = () => document.documentElement.getAttribute('lang') || 'en';
     const translations = {
-        'add_to_cart': currentLang === 'km' ? 'បន្ថែមទៅកន្ត្រក' : 'Add to Cart',
-        'out_of_stock': currentLang === 'km' ? 'អស់ពីស្តុក' : 'Out of Stock',
-        'in_stock': currentLang === 'km' ? 'មានក្នុងស្តុក' : 'In Stock'
+        get add_to_cart() { return getLang() === 'km' ? 'បន្ថែមទៅកន្ត្រក' : 'Add to Cart'; },
+        get out_of_stock() { return getLang() === 'km' ? 'អស់ពីស្តុក' : 'Out of Stock'; },
+        get in_stock() { return getLang() === 'km' ? 'មានក្នុងស្តុក' : 'In Stock'; }
     };
     // ── Data ──────────────────────────────────────────────────────────────
     const variants     = JSON.parse(document.getElementById('variants-json').textContent || '[]');
@@ -1054,7 +1054,7 @@ function initProductDetailPage() {
                 stockEl.textContent = translations.in_stock;
                 stockEl.className = 'text-sm font-bold text-emerald-600';
             } else if (normalizedStock === 'low_stock') {
-                stockEl.textContent = currentLang === 'km' ? 'ស្តុកតិច' : 'Low stock';
+                stockEl.textContent = getLang() === 'km' ? 'ស្តុកតិច' : 'Low stock';
                 stockEl.className = 'text-sm font-bold text-amber-500';
             } else {
                 stockEl.textContent = translations.out_of_stock;
@@ -1100,7 +1100,7 @@ function initProductDetailPage() {
             // Check stock
             const normalizedStock = variant.stock?.toLowerCase();
             if (!['in_stock', 'low_stock'].includes(normalizedStock)) {
-                alert("Sorry, this variant is currently out of stock.");
+                alert(getLang() === 'km' ? "សូមទោស ជម្រើសនេះមិនទាន់មានក្នុងស្តុកនៅឡើយទេ។" : "Sorry, this variant is currently out of stock.");
                 return;
             }
         }
