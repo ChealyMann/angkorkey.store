@@ -531,7 +531,8 @@
                     </svg>
                 </button>
 
-                <div class="a                    <span class="text-[10px] text-gray-400 font-medium tracking-widest uppercase bg-white/80 backdrop-blur-sm border border-gray-200 px-2 py-1 rounded-md">{{ _('click_to_zoom') }}</span>
+                <div class="absolute bottom-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span class="text-[10px] text-gray-400 font-medium tracking-widest uppercase bg-white/80 backdrop-blur-sm border border-gray-200 px-2 py-1 rounded-md">{{ _('click_to_zoom') }}</span>
                 </div>
 
                 <div id="dot-container" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
@@ -539,13 +540,6 @@
                     <button class="dot {% if loop.first %}active{% endif %}" data-index="{{ loop.index0 }}"></button>
                     {% endfor %}
                 </div>
-
-                <!-- Floating Description Button -->
-                <button id="open-desc-modal-btn" class="absolute right-4 bottom-4 z-20 flex items-center justify-center bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border border-gray-200/80 dark:border-zinc-800 text-[10px] font-bold px-3 py-1.5 rounded-none uppercase tracking-wider text-zinc-900 dark:text-white shadow-sm cursor-pointer hover:bg-zinc-950 dark:hover:bg-zinc-50 hover:text-white dark:hover:text-zinc-950 hover:border-zinc-950 dark:hover:border-zinc-50 transition-all duration-300 hover:scale-105 active:scale-95" title="{{ _('view_desc_specs') }}">
-                    <span>{{ _('description') }}</span>
-                </button>escription & Specs">
-                    <span>Desc</span>
-                </button>
             </div>
 
             <div class="flex gap-2.5 mt-3 overflow-x-auto scroll-hide py-1" id="thumbnail-container">
@@ -676,8 +670,17 @@
             </div>
             {% endif %}
 
-
-
+            <!-- Description & Specifications Trigger Row -->
+            <div class="mt-8 border-t border-gray-200 dark:border-zinc-800">
+                <button id="open-desc-modal-btn" class="w-full flex items-center justify-between py-4 text-zinc-650 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white transition-colors group cursor-pointer text-left focus:outline-none bg-transparent border-0">
+                    <span class="text-xs font-bold uppercase tracking-widest text-zinc-850 dark:text-zinc-200 flex items-center gap-2">
+                        <i data-lucide="file-text" class="w-4 h-4"></i>
+                        {{ _('product_information') }}
+                    </span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-zinc-450 group-hover:translate-x-0.5 transition-transform"></i>
+                </button>
+                <div class="border-b border-gray-200 dark:border-zinc-800"></div>
+            </div>
 
             <!-- Desktop Add to Cart Button (PC only) -->
             <div class="hidden lg:block mt-6">
@@ -686,44 +689,17 @@
                     <span id="atc-button-text">{{ _('add_to_cart') }}</span>
                 </button>
             </div>
-
-        </div>
-        </div>
-    </div>
-
-    <!-- Description & Specs Modal -->
-    <div id="desc-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4" role="dialog" aria-modal="true">
-        <!-- Modal Overlay -->
-        <div id="desc-modal-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-xs opacity-0 transition-opacity duration-300"></div>
-
-        <!-- Modal Content Box -->
-        <div id="desc-modal-box" class="relative bg-white dark:bg-zinc-900 w-full max-w-2xl rounded-none shadow-2xl transform scale-95 opacity-0 transition-all duration-300 flex flex-col max-h-[85vh] border border-gray-100 dark:border-zinc-800 overflow-hidden">
             
-            <!-- Modal Header -->
-            <div class="flex items-center justify-between p-6 md:p-8 border-b border-gray-100 dark:border-zinc-800 flex-shrink-0">
-                <h2 class="text-lg font-bold text-gray-900 dark:text-white tracking-tight">{{ _('product_information') }}</h2>
-                <button id="close-desc-modal" class="group p-2 rounded-none border border-gray-200 dark:border-zinc-800 hover:border-zinc-950 dark:hover:border-zinc-50 text-gray-500 hover:text-zinc-950 dark:hover:text-white transition-all duration-300 cursor-pointer">
-                    <svg class="w-5 h-5 transition-transform duration-300 group-hover:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Modal Body (Scrollable) -->
-            <div class="p-6 md:p-8 overflow-y-auto prose-dark text-sm sm:text-base leading-relaxed flex-1 scroll-hide">
+            <!-- Hidden Description & Specs Content Wrapper -->
+            <div id="raw-description-content" class="hidden">
                 {% if product.desc %}
                     {{ product.desc | safe }}
                 {% else %}
-                    <p class="text-gray-400 italic">{{ _('no_details_provided') }}</p>
+                    <p class="text-zinc-400 italic text-center py-8">{{ _('no_details_provided') }}</p>
                 {% endif %}
             </div>
 
-            <!-- Modal Footer -->
-            <div class="p-4 border-t border-gray-100 dark:border-zinc-800 flex justify-end flex-shrink-0 bg-gray-50/50 dark:bg-zinc-900/50">
-                <button id="close-desc-modal-btn" class="bg-zinc-950 dark:bg-zinc-50 text-white dark:text-zinc-950 font-bold text-xs px-5 py-2.5 rounded-none hover:bg-zinc-900 dark:hover:bg-zinc-200 transition shadow-sm cursor-pointer active:scale-95 futuristic-btn">
-                    {{ _('close_window') }}
-                </button>
-            </div>
+        </div>
         </div>
     </div>
 
@@ -1315,56 +1291,7 @@ function initProductDetailPage() {
         });
     }
 
-    // ── Description Modal Trigger ─────────────────────────────────────────
-    const descModal = document.getElementById('desc-modal');
-    const descModalOverlay = document.getElementById('desc-modal-overlay');
-    const descModalBox = document.getElementById('desc-modal-box');
-    const openDescBtn = document.getElementById('open-desc-modal-btn');
-    const closeDescBtns = [
-        document.getElementById('close-desc-modal'),
-        document.getElementById('close-desc-modal-btn'),
-        descModalOverlay
-    ];
-
-    if (openDescBtn && descModal) {
-        function openModal() {
-            descModal.classList.remove('hidden');
-            requestAnimationFrame(() => {
-                descModalOverlay.classList.remove('opacity-0');
-                descModalOverlay.classList.add('opacity-100');
-                descModalBox.classList.remove('scale-95', 'opacity-0');
-                descModalBox.classList.add('scale-100', 'opacity-100');
-            });
-            document.body.style.overflow = 'hidden'; // Lock background scroll
-        }
-
-        function closeModal() {
-            descModalOverlay.classList.remove('opacity-100');
-            descModalOverlay.classList.add('opacity-0');
-            descModalBox.classList.remove('scale-100', 'opacity-100');
-            descModalBox.classList.add('scale-95', 'opacity-0');
-            
-            setTimeout(() => {
-                descModal.classList.add('hidden');
-                document.body.style.overflow = ''; // Unlock background scroll
-            }, 300);
-        }
-
-        openDescBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            openModal();
-        });
-        closeDescBtns.forEach(btn => {
-            if (btn) btn.addEventListener('click', closeModal);
-        });
-
-        // Close on ESC key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !descModal.classList.contains('hidden')) {
-                closeModal();
-            }
-        });
-    }
+    // Description Modal trigger handled globally in main.html via event delegation
 
     // ── Init ──────────────────────────────────────────────────────────────
     bindThumbs();
