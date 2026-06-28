@@ -381,141 +381,146 @@
             }
         }
 
-        // SPA-like tab switcher for mobile bottom navigation bar
+        // SPA-like tab switcher for mobile bottom navigation bar with cache
         const mobileLinks = document.querySelectorAll('.fixed.bottom-4 a');
         const contentMain = document.getElementById('content-main');
+        const pageCache = {};
+        let currentLang = document.documentElement.getAttribute('lang') || 'en';
 
+        // Prepopulate current page in cache so switching back feels instant!
+        pageCache[`${window.location.pathname}${window.location.search}::${currentLang}`] = document.documentElement.outerHTML;
+
+        async function navigateTo(url, targetLang = null) {
+            const activeLang = targetLang || currentLang;
+            const cacheKey = `${url}::${activeLang}`;
+            
+            // If setting a new language, update the session on the server
+            if (targetLang && targetLang !== currentLang) {
+                try {
+                    await fetch(`/set_lang/${targetLang}`);
+                    currentLang = targetLang;
+                } catch (err) {
+                    console.error('Failed to set language on server:', err);
+                }
+            }
+            
+            let htmlText;
+            if (pageCache[cacheKey]) {
+                htmlText = pageCache[cacheKey];
+            } else {
+                try {
+                    const res = await fetch(url);
+                    htmlText = await res.text();
+                    pageCache[cacheKey] = htmlText;
+                } catch (err) {
+                    console.error('Failed to load page:', err);
+                    if (targetLang) {
+                        window.location.reload();
+                    } else {
+                        window.location.href = url;
+                    }
+                    return;
+                }
+            }
+            
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlText, 'text/html');
+            
+            // Update document lang
+            document.documentElement.setAttribute('lang', activeLang);
+            
+            // Swap Header
+            const oldHeader = document.querySelector('header');
+            const newHeader = doc.querySelector('header');
+            if (oldHeader && newHeader) {
+                oldHeader.outerHTML = newHeader.outerHTML;
+            }
+            
+            // Swap Main Content
+            const oldContent = document.getElementById('content-main');
+            const newContent = doc.getElementById('content-main');
+            if (oldContent && newContent) {
+                oldContent.innerHTML = newContent.innerHTML;
+            }
+            
+            // Swap Footer
+            const oldFooter = document.querySelector('footer');
+            const newFooter = doc.querySelector('footer');
+            if (oldFooter && newFooter) {
+                oldFooter.outerHTML = newFooter.outerHTML;
+            }
+            
+            // Swap Mobile Menu
+            const oldMenu = document.getElementById('mobile-menu');
+            const newMenu = doc.getElementById('mobile-menu');
+            if (oldMenu && newMenu) {
+                oldMenu.outerHTML = newMenu.outerHTML;
+            }
+            
+            // Re-run script tags inside content-main
+            const scripts = document.getElementById('content-main').querySelectorAll('script');
+            scripts.forEach(script => {
+                const newScript = document.createElement('script');
+                Array.from(script.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                newScript.appendChild(document.createTextNode(script.innerHTML));
+                script.parentNode.replaceChild(newScript, script);
+            });
+            
+            // Re-initialize Lucide Icons
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+            
+            // Re-bind theme toggles and mobile menu events
+            if (typeof window.initHeaderLogic === 'function') {
+                window.initHeaderLogic();
+            }
+            if (typeof window.initMobileMenuLogic === 'function') {
+                window.initMobileMenuLogic();
+            }
+        }
+
+        // Mobile bottom navigation bar links handler
         mobileLinks.forEach(link => {
             link.addEventListener('click', async (e) => {
                 const href = link.getAttribute('href');
                 if (href && href.startsWith('/') && !href.includes('#')) {
                     e.preventDefault();
                     
-                    // Add temporary loading indicator
-                    contentMain.style.opacity = '0.5';
-                    contentMain.style.transition = 'opacity 0.15s ease-in-out';
-
-                    try {
-                        const res = await fetch(href);
-                        const htmlText = await res.text();
-                        
-                        const parser = new DOMParser();
-                        const doc = parser.parseFromString(htmlText, 'text/html');
-                        const newContent = doc.getElementById('content-main');
-
-                        if (newContent) {
-                            // Swap main content
-                            contentMain.innerHTML = newContent.innerHTML;
-                            
-                            // Update address bar
-                            history.pushState(null, '', href);
-                            
-                            // Re-initialize Lucide icons in the new content
-                            if (typeof lucide !== 'undefined') {
-                                lucide.createIcons();
-                            }
-                            
-                            // Run any scripts found inside the new content
-                            const scripts = contentMain.querySelectorAll('script');
-                            scripts.forEach(script => {
-                                const newScript = document.createElement('script');
-                                Array.from(script.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
-                                newScript.appendChild(document.createTextNode(script.innerHTML));
-                                script.parentNode.replaceChild(newScript, script);
-                            });
-
-                            // Scroll to top
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-                            // Update the active state in bottom navbar
-                            updateActiveNavbarTab(href);
-                        }
-                    } catch (err) {
-                        console.error('Failed to load page dynamically:', err);
-                        window.location.href = href;
-                    } finally {
+                    if (contentMain) {
+                        contentMain.style.opacity = '0.5';
+                        contentMain.style.transition = 'opacity 0.15s ease-in-out';
+                    }
+                    
+                    await navigateTo(href);
+                    
+                    history.pushState(null, '', href);
+                    updateActiveNavbarTab(href);
+                    
+                    if (contentMain) {
                         contentMain.style.opacity = '1';
                     }
                 }
             });
         });
 
-        // AJAX Language Switcher (No full page reload)
+        // AJAX Language Switcher (No full page reload, uses caching)
         document.body.addEventListener('click', async (e) => {
             const langLink = e.target.closest('a[href^="/set_lang/"]');
             if (langLink) {
                 e.preventDefault();
                 const href = langLink.getAttribute('href');
+                const targetLang = href.split('/').pop(); // 'en' or 'km'
                 
-                try {
-                    // Set language session on server
-                    await fetch(href);
-                    
-                    // Fetch the current page content in the new language
-                    const currentUrl = window.location.href;
-                    const res = await fetch(currentUrl);
-                    const htmlText = await res.text();
-                    
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(htmlText, 'text/html');
-                    
-                    // Update HTML lang attribute (switches font-family instantly via CSS selector!)
-                    const newLang = doc.documentElement.getAttribute('lang') || 'en';
-                    document.documentElement.setAttribute('lang', newLang);
-                    
-                    // Replace Header
-                    const oldHeader = document.querySelector('header');
-                    const newHeader = doc.querySelector('header');
-                    if (oldHeader && newHeader) {
-                        oldHeader.outerHTML = newHeader.outerHTML;
-                    }
-                    
-                    // Replace Main Content
-                    const oldContent = document.getElementById('content-main');
-                    const newContent = doc.getElementById('content-main');
-                    if (oldContent && newContent) {
-                        oldContent.innerHTML = newContent.innerHTML;
-                    }
-                    
-                    // Replace Footer
-                    const oldFooter = document.querySelector('footer');
-                    const newFooter = doc.querySelector('footer');
-                    if (oldFooter && newFooter) {
-                        oldFooter.outerHTML = newFooter.outerHTML;
-                    }
-                    
-                    // Replace Mobile Menu
-                    const oldMenu = document.getElementById('mobile-menu');
-                    const newMenu = doc.getElementById('mobile-menu');
-                    if (oldMenu && newMenu) {
-                        oldMenu.outerHTML = newMenu.outerHTML;
-                    }
-
-                    // Re-run script tags inside content-main
-                    const scripts = document.getElementById('content-main').querySelectorAll('script');
-                    scripts.forEach(script => {
-                        const newScript = document.createElement('script');
-                        Array.from(script.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
-                        newScript.appendChild(document.createTextNode(script.innerHTML));
-                        script.parentNode.replaceChild(newScript, script);
-                    });
-                    
-                    // Re-initialize Lucide Icons
-                    if (typeof lucide !== 'undefined') {
-                        lucide.createIcons();
-                    }
-                    
-                    // Re-bind theme toggles and mobile menu events
-                    if (typeof window.initHeaderLogic === 'function') {
-                        window.initHeaderLogic();
-                    }
-                    if (typeof window.initMobileMenuLogic === 'function') {
-                        window.initMobileMenuLogic();
-                    }
-                    
-                } catch (err) {
-                    console.error('Failed to swap language dynamically:', err);
-                    window.location.reload();
+                if (contentMain) {
+                    contentMain.style.opacity = '0.5';
+                    contentMain.style.transition = 'opacity 0.15s ease-in-out';
+                }
+                
+                await navigateTo(window.location.pathname + window.location.search, targetLang);
+                
+                if (contentMain) {
+                    contentMain.style.opacity = '1';
                 }
             }
         });
