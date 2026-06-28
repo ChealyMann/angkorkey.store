@@ -644,6 +644,9 @@
         window.translatePage(currentLang);
 
         async function navigateTo(url, isBack = false) {
+            if (drawerOpen && !url.includes('/product_detail/')) {
+                closeDrawer();
+            }
             const cacheKey = `${url}::${currentLang}`;
             
             let htmlText;
@@ -913,7 +916,7 @@
     });
 </script>
     <!-- Slide-in Product Detail Drawer Overlay -->
-    <div id="product-detail-drawer" class="fixed inset-0 z-50 overflow-y-auto bg-white dark:bg-zinc-955 translate-x-full transition-transform duration-300 ease-out hidden">
+    <div id="product-detail-drawer" class="fixed inset-x-0 bottom-0 top-16 md:top-20 z-30 overflow-y-auto bg-gray-50 dark:bg-zinc-950 translate-x-full transition-transform duration-300 ease-out hidden">
         <div id="drawer-content" class="min-h-screen"></div>
     </div>
     
