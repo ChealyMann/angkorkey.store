@@ -62,7 +62,7 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
+    function initAllCategoriesPage() {
         const searchInput = document.getElementById("categorySearchInput");
         const clearBtn = document.getElementById("clear-category-search");
         const cards = document.querySelectorAll(".category-card");
@@ -102,6 +102,12 @@
                 searchInput.focus();
             });
         }
-    });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAllCategoriesPage);
+    } else {
+        initAllCategoriesPage();
+    }
 </script>
 {% endblock %}

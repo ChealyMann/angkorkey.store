@@ -137,7 +137,7 @@
 </style>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    function initCartPage() {
         const currentLang = "{{ session.get('lang', 'en') }}";
         const container = document.getElementById('cart-items-container');
         const emptyMsg = document.getElementById('empty-cart-msg');
@@ -535,6 +535,12 @@
         });
 
         renderCart();
-    });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCartPage);
+    } else {
+        initCartPage();
+    }
 </script>
 {% endblock %}

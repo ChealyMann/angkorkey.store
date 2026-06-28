@@ -771,7 +771,7 @@
 }}</script>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+function initProductDetailPage() {
     const currentLang = "{{ session.get('lang', 'en') }}";
     const translations = {
         'add_to_cart': currentLang === 'km' ? 'បន្ថែមទៅកន្ត្រក' : 'Add to Cart',
@@ -1388,6 +1388,12 @@ document.addEventListener('DOMContentLoaded', () => {
             updateDiscountBadge(baseProduct.price, baseProduct.old_price);
         }
     }
-});
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initProductDetailPage);
+} else {
+    initProductDetailPage();
+}
 </script>
 {% endblock %}
