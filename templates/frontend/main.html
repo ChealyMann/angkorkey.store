@@ -641,6 +641,13 @@
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
             }
+            
+            // Hide bottom navigation bar to avoid overlays/collisions
+            const bottomNav = document.getElementById('bottom-nav-container');
+            if (bottomNav) {
+                bottomNav.classList.add('hidden');
+            }
+
             drawer.classList.remove('hidden');
             drawer.offsetHeight;
             drawer.classList.remove('translate-x-full');
@@ -652,6 +659,13 @@
 
         function closeDrawer() {
             if (!drawer) return;
+            
+            // Restore bottom navigation bar visibility
+            const bottomNav = document.getElementById('bottom-nav-container');
+            if (bottomNav) {
+                bottomNav.classList.remove('hidden');
+            }
+
             drawer.classList.remove('translate-x-0');
             drawer.classList.add('translate-x-full');
             setTimeout(() => {
@@ -737,6 +751,13 @@
         async function navigateTo(url, isBack = false) {
             if (drawerOpen && !url.includes('/product_detail/')) {
                 closeDrawer();
+            }
+            // Ensure bottom navigation bar is shown on all other catalog pages
+            if (!url.includes('/product_detail/')) {
+                const bottomNav = document.getElementById('bottom-nav-container');
+                if (bottomNav) {
+                    bottomNav.classList.remove('hidden');
+                }
             }
             const cacheKey = `${url}::${currentLang}`;
             
