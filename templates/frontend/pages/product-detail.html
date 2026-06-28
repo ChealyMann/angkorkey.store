@@ -685,16 +685,23 @@
                     <i class="w-5 h-5" data-lucide="shopping-cart"></i>
                     <span id="atc-button-text">{{ _('add_to_cart') }}</span>
                 </button>
-            </div>    <div id="desc-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-2 sm:p-4" role="dialog" aria-modal="true">
+            </div>
+
+        </div>
+        </div>
+    </div>
+
+    <!-- Description & Specs Modal -->
+    <div id="desc-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4" role="dialog" aria-modal="true">
         <!-- Modal Overlay -->
         <div id="desc-modal-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-xs opacity-0 transition-opacity duration-300"></div>
 
         <!-- Modal Content Box -->
-        <div id="desc-modal-box" class="relative bg-white dark:bg-zinc-900 w-full max-w-2xl rounded-none shadow-2xl transform scale-95 opacity-0 transition-all duration-300 flex flex-col max-h-[calc(100%-1rem)] sm:max-h-[calc(100%-2rem)] lg:max-h-[80vh] border border-gray-100 dark:border-zinc-800 overflow-hidden">
+        <div id="desc-modal-box" class="relative bg-white dark:bg-zinc-900 w-full max-w-2xl rounded-none shadow-2xl transform scale-95 opacity-0 transition-all duration-300 flex flex-col max-h-[85vh] border border-gray-100 dark:border-zinc-800 overflow-hidden">
             
             <!-- Modal Header -->
-            <div class="flex items-center justify-between p-4 sm:p-6 md:p-8 border-b border-gray-100 dark:border-zinc-800 flex-shrink-0">
-                <h2 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white tracking-tight">{{ _('product_information') }}</h2>
+            <div class="flex items-center justify-between p-6 md:p-8 border-b border-gray-100 dark:border-zinc-800 flex-shrink-0">
+                <h2 class="text-lg font-bold text-gray-900 dark:text-white tracking-tight">{{ _('product_information') }}</h2>
                 <button id="close-desc-modal" class="group p-2 rounded-none border border-gray-200 dark:border-zinc-800 hover:border-zinc-950 dark:hover:border-zinc-50 text-gray-500 hover:text-zinc-950 dark:hover:text-white transition-all duration-300 cursor-pointer">
                     <svg class="w-5 h-5 transition-transform duration-300 group-hover:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
@@ -703,7 +710,7 @@
             </div>
 
             <!-- Modal Body (Scrollable) -->
-            <div class="p-4 sm:p-6 md:p-8 overflow-y-auto prose-dark text-xs sm:text-sm md:text-base leading-relaxed flex-1 scroll-hide">
+            <div class="p-6 md:p-8 overflow-y-auto prose-dark text-sm sm:text-base leading-relaxed flex-1 scroll-hide">
                 {% if product.desc %}
                     {{ product.desc | safe }}
                 {% else %}
@@ -712,8 +719,8 @@
             </div>
 
             <!-- Modal Footer -->
-            <div class="p-3 sm:p-4 border-t border-gray-100 dark:border-zinc-800 flex justify-end flex-shrink-0 bg-gray-50/50 dark:bg-zinc-900/50">
-                <button id="close-desc-modal-btn" class="bg-zinc-950 dark:bg-zinc-50 text-white dark:text-zinc-955 font-bold text-[10px] sm:text-xs px-4 py-2 sm:px-5 sm:py-2.5 rounded-none hover:bg-zinc-900 dark:hover:bg-zinc-200 transition shadow-sm cursor-pointer active:scale-95 futuristic-btn">
+            <div class="p-4 border-t border-gray-100 dark:border-zinc-800 flex justify-end flex-shrink-0 bg-gray-50/50 dark:bg-zinc-900/50">
+                <button id="close-desc-modal-btn" class="bg-zinc-950 dark:bg-zinc-50 text-white dark:text-zinc-950 font-bold text-xs px-5 py-2.5 rounded-none hover:bg-zinc-900 dark:hover:bg-zinc-200 transition shadow-sm cursor-pointer active:scale-95 futuristic-btn">
                     {{ _('close_window') }}
                 </button>
             </div>
