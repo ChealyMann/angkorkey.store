@@ -550,28 +550,60 @@
 
         const SKELETON_TEMPLATE = `
 <div class="animate-pulse px-4 py-6 md:py-10 max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+    <!-- Back Button Placeholder -->
+    <div class="mb-10 flex items-center">
+        <div class="w-20 h-8 bg-zinc-200 dark:bg-zinc-800 rounded-full"></div>
+    </div>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20">
         <!-- Left: Image Gallery Skeleton -->
-        <div class="space-y-4">
-            <div class="w-full aspect-square bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
-            <div class="flex gap-2">
-                <div class="w-20 h-20 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
-                <div class="w-20 h-20 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
-                <div class="w-20 h-20 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+        <div class="lg:col-span-7 space-y-4">
+            <div class="w-full aspect-square bg-zinc-200 dark:bg-zinc-800 border border-gray-200/50 dark:border-zinc-800/50 rounded-none shadow-xs animate-pulse"></div>
+            <div class="flex gap-2.5 mt-3 overflow-x-auto py-1">
+                <div class="w-[76px] h-[76px] bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+                <div class="w-[76px] h-[76px] bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+                <div class="w-[76px] h-[76px] bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
             </div>
         </div>
+        
         <!-- Right: Detail Info Skeleton -->
-        <div class="space-y-6">
-            <div class="h-8 bg-zinc-200 dark:bg-zinc-800 rounded-none w-3/4"></div>
-            <div class="h-6 bg-zinc-200 dark:bg-zinc-800 rounded-none w-1/4"></div>
-            <div class="space-y-2 pt-4">
-                <div class="h-4 bg-zinc-200 dark:bg-zinc-800 rounded-none w-1/3"></div>
-                <div class="flex gap-2">
-                    <div class="w-16 h-8 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
-                    <div class="w-16 h-8 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+        <div class="lg:col-span-5 space-y-6">
+            <div>
+                <div class="flex items-center justify-between mb-4">
+                    <div class="h-4 bg-zinc-200 dark:bg-zinc-800 rounded-none w-1/4"></div>
+                    <div class="w-16 h-4 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+                </div>
+                <div class="h-10 bg-zinc-200 dark:bg-zinc-800 rounded-none w-3/4"></div>
+            </div>
+            
+            <div class="flex items-center justify-between gap-4 mt-4">
+                <div class="h-8 bg-zinc-200 dark:bg-zinc-800 rounded-none w-1/3"></div>
+                <div class="w-24 h-8 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+            </div>
+            
+            <div class="border-t border-gray-200 dark:border-zinc-800"></div>
+            
+            <div class="space-y-6 pt-2">
+                <div class="space-y-2">
+                    <div class="h-3 bg-zinc-200 dark:bg-zinc-800 rounded-none w-1/6"></div>
+                    <div class="flex gap-3">
+                        <div class="w-16 h-8 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+                        <div class="w-16 h-8 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <div class="h-3 bg-zinc-200 dark:bg-zinc-800 rounded-none w-1/6"></div>
+                    <div class="flex gap-3">
+                        <div class="w-16 h-8 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+                        <div class="w-16 h-8 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+                    </div>
                 </div>
             </div>
-            <div class="h-12 bg-zinc-200 dark:bg-zinc-800 rounded-none w-full mt-8"></div>
+            
+            <div class="flex gap-3 pt-6">
+                <div class="flex-1 h-12 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+                <div class="flex-1 h-12 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+            </div>
         </div>
     </div>
 </div>
