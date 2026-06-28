@@ -120,6 +120,11 @@ app.config["icon"] = "static/admin/assets/images/icon_logo.jpg"
 
 @app.before_request
 def before_request():
+    # Force HTTPS redirect in production if requested over http
+    if not app.debug and request.scheme == "http":
+        url = request.url.replace("http://", "https://", 1)
+        return redirect(url, code=301)
+
     url = request.path
 
     if url.startswith("/admin/"):
@@ -128,6 +133,7 @@ def before_request():
             return redirect(url_for("auth.login"))
 
     return None
+
 
 
 @app.route("/set_lang/<lang>")
