@@ -244,6 +244,8 @@
     </script>
 </head>
 <body class="bg-gray-50 text-gray-900 dark:bg-zinc-950 dark:text-zinc-50 antialiased selection:bg-red-500 selection:text-white min-h-screen transition-colors duration-300">
+    <!-- Top Progress Bar Loader -->
+    <div id="top-loading-bar" class="fixed top-0 left-0 h-[3px] bg-red-600 dark:bg-white z-[60] w-0 transition-all duration-300 ease-out opacity-0 pointer-events-none"></div>
 {% include("frontend/layouts/header.html") %}
 
 <!-- ==================== MAIN CONTENT CONTAINER ==================== -->
@@ -609,61 +611,61 @@
 </div>
 `;
 
-        const CATALOG_SKELETON_TEMPLATE = `
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-pulse">
-    <!-- Banner / Header Skeleton -->
-    <div class="h-28 sm:h-40 bg-zinc-150 dark:bg-zinc-800 rounded-none mb-8"></div>
-    
-    <!-- Section Title Skeleton -->
-    <div class="h-6 w-48 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-8"></div>
-    
-    <!-- Grid Skeleton -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-        <div class="flex flex-col">
-            <div class="aspect-square bg-zinc-150 dark:bg-zinc-800 rounded-none mb-4"></div>
-            <div class="h-3 w-16 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
-            <div class="h-4 w-3/4 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
-            <div class="h-4 w-1/4 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
-        </div>
-        <div class="flex flex-col">
-            <div class="aspect-square bg-zinc-150 dark:bg-zinc-800 rounded-none mb-4"></div>
-            <div class="h-3 w-16 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
-            <div class="h-4 w-3/4 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
-            <div class="h-4 w-1/4 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
-        </div>
-        <div class="flex flex-col">
-            <div class="aspect-square bg-zinc-150 dark:bg-zinc-800 rounded-none mb-4"></div>
-            <div class="h-3 w-16 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
-            <div class="h-4 w-3/4 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
-            <div class="h-4 w-1/4 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
-        </div>
-        <div class="flex flex-col">
-            <div class="aspect-square bg-zinc-150 dark:bg-zinc-800 rounded-none mb-4"></div>
-            <div class="h-3 w-16 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
-            <div class="h-4 w-3/4 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
-            <div class="h-4 w-1/4 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
-        </div>
-        <div class="flex flex-col">
-            <div class="aspect-square bg-zinc-150 dark:bg-zinc-800 rounded-none mb-4"></div>
-            <div class="h-3 w-16 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
-            <div class="h-4 w-3/4 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
-            <div class="h-4 w-1/4 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
-        </div>
-        <div class="flex flex-col">
-            <div class="aspect-square bg-zinc-150 dark:bg-zinc-800 rounded-none mb-4"></div>
-            <div class="h-3 w-16 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
-            <div class="h-4 w-3/4 bg-zinc-200 dark:bg-zinc-800 rounded-none mb-2"></div>
-            <div class="h-4 w-1/4 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
-        </div>
-    </div>
-</div>
-`;
-
         // SPA-like tab switcher for mobile bottom navigation bar with cache
         const contentMain = document.getElementById('content-main');
         const pageCache = {};
         const scrollCache = {};
         let currentLang = localStorage.getItem('lang') || document.documentElement.getAttribute('lang') || 'en';
+
+        // Top Loading Progress Bar Controller
+        let loadingProgressInterval;
+        
+        window.startLoadingBar = function() {
+            const bar = document.getElementById('top-loading-bar');
+            if (!bar) return;
+            
+            clearInterval(loadingProgressInterval);
+            bar.style.transition = 'width 0.4s ease-out, opacity 0.2s';
+            bar.style.opacity = '1';
+            bar.style.width = '0%';
+            
+            let currentProgress = 0;
+            loadingProgressInterval = setInterval(() => {
+                if (currentProgress < 70) {
+                    currentProgress += Math.random() * 12 + 3;
+                } else if (currentProgress < 90) {
+                    currentProgress += Math.random() * 3 + 0.5;
+                }
+                bar.style.width = `${Math.min(currentProgress, 92)}%`;
+            }, 100);
+        };
+
+        window.finishLoadingBar = function() {
+            const bar = document.getElementById('top-loading-bar');
+            if (!bar) return;
+            
+            clearInterval(loadingProgressInterval);
+            bar.style.transition = 'width 0.2s ease-out, opacity 0.2s';
+            bar.style.width = '100%';
+            
+            setTimeout(() => {
+                bar.style.opacity = '0';
+                setTimeout(() => {
+                    bar.style.width = '0%';
+                }, 200);
+            }, 250);
+        };
+
+        window.cancelLoadingBar = function() {
+            const bar = document.getElementById('top-loading-bar');
+            if (!bar) return;
+            
+            clearInterval(loadingProgressInterval);
+            bar.style.opacity = '0';
+            setTimeout(() => {
+                bar.style.width = '0%';
+            }, 200);
+        };
 
         // Drawer elements & controller
         const drawer = document.getElementById('product-detail-drawer');
@@ -799,6 +801,7 @@
         window.translatePage(currentLang);
 
         async function navigateTo(url, isBack = false) {
+            window.startLoadingBar();
             if (drawerOpen && !url.includes('/product_detail/')) {
                 closeDrawer();
             }
@@ -815,12 +818,8 @@
             if (pageCache[cacheKey]) {
                 htmlText = pageCache[cacheKey];
             } else {
-                if (contentMain) {
-                    if (url.includes('/product_detail/')) {
-                        contentMain.innerHTML = SKELETON_TEMPLATE;
-                    } else {
-                        contentMain.innerHTML = CATALOG_SKELETON_TEMPLATE;
-                    }
+                if (url.includes('/product_detail/') && contentMain) {
+                    contentMain.innerHTML = SKELETON_TEMPLATE;
                     contentMain.style.opacity = '1';
                     window.scrollTo({ top: 0, behavior: 'instant' });
                 }
@@ -830,6 +829,7 @@
                     pageCache[cacheKey] = htmlText;
                 } catch (err) {
                     console.error('Failed to load page:', err);
+                    window.cancelLoadingBar();
                     window.location.href = url;
                     return;
                 }
@@ -908,6 +908,7 @@
             if (typeof window.initMobileMenuLogic === 'function') {
                 window.initMobileMenuLogic();
             }
+            window.finishLoadingBar();
         }
 
         async function handleBottomNavClick(e) {
@@ -916,24 +917,10 @@
             if (href && href.startsWith('/') && !href.includes('#')) {
                 e.preventDefault();
                 
-                const cacheKey = `${href}::${currentLang}`;
-                if (!pageCache[cacheKey] && contentMain) {
-                    contentMain.innerHTML = CATALOG_SKELETON_TEMPLATE;
-                    contentMain.style.opacity = '1';
-                    window.scrollTo({ top: 0, behavior: 'instant' });
-                } else if (contentMain) {
-                    contentMain.style.opacity = '0.5';
-                    contentMain.style.transition = 'opacity 0.1s ease-in-out';
-                }
-                
                 await navigateTo(href);
                 
                 history.pushState(null, '', href);
                 updateActiveNavbarTab(href);
-                
-                if (contentMain) {
-                    contentMain.style.opacity = '1';
-                }
             }
         }
 
@@ -950,6 +937,8 @@
                 e.preventDefault();
                 const href = productLink.getAttribute('href');
                 
+                window.startLoadingBar();
+
                 // Open drawer with skeleton loading state immediately
                 if (drawer && drawerContent) {
                     drawerContent.innerHTML = SKELETON_TEMPLATE;
@@ -974,6 +963,7 @@
                         pageCache[cacheKey] = htmlText;
                     } catch (err) {
                         console.error('Failed to load product detail:', err);
+                        window.cancelLoadingBar();
                         window.location.href = href;
                         return;
                     }
@@ -981,6 +971,7 @@
                 
                 openDrawer(htmlText);
                 history.pushState({ isDrawer: true }, '', href);
+                window.finishLoadingBar();
             }
         });
 
