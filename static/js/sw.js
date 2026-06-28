@@ -66,9 +66,13 @@ self.addEventListener('fetch', (event) => {
       })
     );
   } else {
-    // Network-first for dynamic content (fall back to cache if offline/slow)
+    // Network-first with 2-second timeout fallback to cache for dynamic content (F5/refreshes)
+    const timeoutPromise = new Promise((_, reject) => {
+      setTimeout(() => reject(new Error('Network timeout')), 2000);
+    });
+
     event.respondWith(
-      fetch(event.request)
+      Promise.race([fetch(event.request), timeoutPromise])
         .then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200) {
             const responseToCache = networkResponse.clone();
@@ -79,6 +83,7 @@ self.addEventListener('fetch', (event) => {
           return networkResponse;
         })
         .catch(() => {
+          // If network is completely offline OR takes longer than 2 seconds, load instantly from cache
           return caches.match(event.request);
         })
     );
