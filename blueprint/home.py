@@ -325,15 +325,30 @@ def products(category_id=None):
     brand_groups = list(brand_groups_map.values())
 
     if is_ajax:
-        html = render_template(
-            "frontend/layouts/product_grid.html",
-            brand_groups=brand_groups,
-            products=products_list,
-            sort_by=sort_by
-        )
+        serialized_products = []
+        for product in products_list:
+            has_discount = bool(product.has_discount)
+            discount_pct = 0
+            price_val = product.promotion_min_price if getattr(product, 'discounted_variants', False) else product.price
+            old_price_val = product.promotion_min_old_price if getattr(product, 'discounted_variants', False) else product.old_price
+            if has_discount and old_price_val and float(old_price_val) > float(price_val):
+                discount_pct = int(round(((float(old_price_val) - float(price_val)) / float(old_price_val)) * 100))
 
-        return jsonify({
-            "html": html,
+            serialized_products.append({
+                "id": product.id,
+                "name": product.name,
+                "image": product.image,
+                "best_selling": bool(product.best_selling),
+                "has_discount": has_discount,
+                "discount_pct": discount_pct,
+                "price": float(product.price),
+                "price_text": product.price_text or f"${product.price:.2f}",
+                "promotion_old_price_text": product.promotion_old_price_text,
+                "promotion_price_text": product.promotion_price_text
+            })
+
+        response = jsonify({
+            "products": serialized_products,
             "has_next": pagination.has_next,
             "page": pagination.page,
             "next_page": pagination.next_num if pagination.has_next else None,
@@ -341,6 +356,9 @@ def products(category_id=None):
             "total": pagination.total,
             "pages": pagination.pages
         })
+        
+        response.headers["Cache-Control"] = "public, max-age=3600"
+        return response
 
     categories = Category.query.all()
 

@@ -555,11 +555,71 @@
 
                 const data = await response.json();
 
-                // ======================================
-                // Read Response Data
-                // ======================================
-                const html = data.html || "";
+                const products = data.products || [];
                 const productCount = Number(data.product_count || 0);
+
+                // Helper to render product card (1-to-1 match with product_card.html)
+                const renderProductCard = (product) => {
+                    const detailUrl = `/product_detail/${product.id}`;
+                    const imageUrl = product.image ? `/static/images/resized_${product.image}` : 'https://via.placeholder.com/500x500?text=No+Image';
+                    
+                    let bestSellerBadge = '';
+                    if (product.best_selling) {
+                        bestSellerBadge = `
+                            <div class="absolute top-3 left-3 z-10 flex items-center gap-2 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/80 px-2.5 py-1 rounded-full shadow-xs select-none">
+                                <span class="relative flex h-1.5 w-1.5">
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
+                                </span>
+                                <span class="text-[8px] font-black uppercase tracking-widest text-zinc-800 dark:text-zinc-200">Best Seller</span>
+                            </div>
+                        `;
+                    }
+
+                    let discountBadge = '';
+                    if (product.has_discount && product.discount_pct > 0) {
+                        discountBadge = `
+                            <div class="absolute top-0 right-0 z-10 bg-zinc-950 dark:bg-zinc-50 text-white dark:text-zinc-950 text-[9px] font-bold px-3 py-1.5 uppercase tracking-widest">
+                                ${product.discount_pct}% OFF
+                            </div>
+                        `;
+                    }
+
+                    let priceHtml = '';
+                    if (product.has_discount) {
+                        priceHtml = `
+                            <span class="text-xs sm:text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                                from ${product.promotion_old_price_text} to ${product.promotion_price_text}
+                            </span>
+                        `;
+                    } else {
+                        priceHtml = `
+                            <span class="text-xs sm:text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                                ${product.price_text}
+                            </span>
+                        `;
+                    }
+
+                    return `
+                        <div class="animate-fade-in h-full">
+                            <a href="${detailUrl}" class="group flex flex-col h-full overflow-hidden bg-transparent transition-all duration-300 hover:scale-[1.01]">
+                                <div class="relative w-full aspect-square bg-white dark:bg-zinc-900/40 overflow-hidden rounded-none border border-zinc-200/50 dark:border-zinc-800/50">
+                                    ${bestSellerBadge}
+                                    <img src="${imageUrl}" alt="${product.name}" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 cubic-bezier(0.16, 1, 0.3, 1) group-hover:scale-105">
+                                    ${discountBadge}
+                                </div>
+                                <div class="pt-4 pb-2 px-1 flex flex-col flex-1 bg-transparent text-left futuristic-card-info">
+                                    <h3 class="text-sm md:text-base font-semibold text-zinc-900 dark:text-zinc-100 leading-tight mb-1 group-hover:text-zinc-950 dark:group-hover:text-white transition-colors line-clamp-1">
+                                        ${product.name}
+                                    </h3>
+                                    <div class="flex items-center gap-2 mt-1">
+                                        ${priceHtml}
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    `;
+                };
 
                 // ======================================
                 // Render Products
@@ -568,21 +628,28 @@
                     if (productCount > 0) {
                         const grid = productSections.querySelector("#flatProductsGrid");
                         if (grid) {
-                            const parser = new DOMParser();
-                            const doc = parser.parseFromString(html, "text/html");
-                            const newGrid = doc.getElementById("flatProductsGrid");
-                            if (newGrid) {
-                                grid.insertAdjacentHTML("beforeend", newGrid.innerHTML);
-                                observeImages(grid);
-                            }
+                            const cardsHtml = products.map(renderProductCard).join('');
+                            grid.insertAdjacentHTML("beforeend", cardsHtml);
+                            observeImages(grid);
                         }
                         loadedProductCount += productCount;
                     }
                 } else {
-                    productSections.innerHTML = html;
+                    if (productCount > 0) {
+                        productSections.innerHTML = `
+                            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6" id="flatProductsGrid">
+                                ${products.map(renderProductCard).join('')}
+                            </div>
+                        `;
+                    } else {
+                        const noProductsText = `{{ _('no_products') }}`;
+                        productSections.innerHTML = `
+                            <div class="text-center py-20 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 mt-8 rounded-none animate-fade-in" id="emptyProductsGrid">
+                                <p class="text-zinc-550 text-sm font-bold uppercase tracking-widest">${noProductsText}</p>
+                            </div>
+                        `;
+                    }
                     loadedProductCount = productCount;
-
-                    // Observe images in the freshly replaced content
                     observeImages(productSections);
                 }
 
