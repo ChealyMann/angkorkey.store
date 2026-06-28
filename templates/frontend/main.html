@@ -545,6 +545,35 @@
             }
         };
 
+        const SKELETON_TEMPLATE = `
+<div class="animate-pulse px-4 py-6 md:py-10 max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+        <!-- Left: Image Gallery Skeleton -->
+        <div class="space-y-4">
+            <div class="w-full aspect-square bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+            <div class="flex gap-2">
+                <div class="w-20 h-20 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+                <div class="w-20 h-20 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+                <div class="w-20 h-20 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+            </div>
+        </div>
+        <!-- Right: Detail Info Skeleton -->
+        <div class="space-y-6">
+            <div class="h-8 bg-zinc-200 dark:bg-zinc-800 rounded-none w-3/4"></div>
+            <div class="h-6 bg-zinc-200 dark:bg-zinc-800 rounded-none w-1/4"></div>
+            <div class="space-y-2 pt-4">
+                <div class="h-4 bg-zinc-200 dark:bg-zinc-800 rounded-none w-1/3"></div>
+                <div class="flex gap-2">
+                    <div class="w-16 h-8 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+                    <div class="w-16 h-8 bg-zinc-200 dark:bg-zinc-800 rounded-none"></div>
+                </div>
+            </div>
+            <div class="h-12 bg-zinc-200 dark:bg-zinc-800 rounded-none w-full mt-8"></div>
+        </div>
+    </div>
+</div>
+`;
+
         // SPA-like tab switcher for mobile bottom navigation bar with cache
         const contentMain = document.getElementById('content-main');
         const pageCache = {};
@@ -560,6 +589,10 @@
             if (pageCache[cacheKey]) {
                 htmlText = pageCache[cacheKey];
             } else {
+                if (url.includes('/product_detail/') && contentMain) {
+                    contentMain.innerHTML = SKELETON_TEMPLATE;
+                    contentMain.style.opacity = '1';
+                }
                 try {
                     const res = await fetch(url);
                     htmlText = await res.text();
