@@ -1,0 +1,2032 @@
+ID: 1 | Name: Qkz x HBB | Desc: <p>• QKZ x HBB is a fun basshead IEM with strong, deep bass.</p><p>• Warm and smooth sound, great for long listening.</p><p>• Feels like mini subwoofers in your ears.</p><p>• Best for EDM, phonk, hip-hop, DJ music, and bass-heavy songs.</p><p>• Good for gaming if you like powerful explosions and immersive sound.</p><p>• Great budget choice for people who want fun and energetic sound.</p>
+ID: 2 | Name: Qkz Ak3 | Desc: <p data-start="42" data-end="60">The QKZ AK3 specs:</p><ul data-start="62" data-end="390">
+<li data-section-id="ik269y" data-start="62" data-end="97">
+<strong data-start="64" data-end="75">Driver:</strong> 10mm dynamic driver
+</li>
+<li data-section-id="nvdf0t" data-start="98" data-end="138">
+<strong data-start="100" data-end="123">Frequency Response:</strong> 20Hz – 20kHz
+</li>
+<li data-section-id="10p03eo" data-start="139" data-end="161">
+<strong data-start="141" data-end="155">Impedance:</strong> 16Ω
+</li>
+<li data-section-id="5c1yar" data-start="162" data-end="195">
+<strong data-start="164" data-end="180">Sensitivity:</strong> Around 108dB
+</li>
+<li data-section-id="1dsyvnw" data-start="196" data-end="231">
+<strong data-start="198" data-end="212">Connector:</strong> 3.5mm audio jack
+</li>
+<li data-section-id="168zr0k" data-start="232" data-end="258">
+<strong data-start="234" data-end="244">Cable:</strong> Fixed cable
+</li>
+<li data-section-id="1aadqr5" data-start="259" data-end="305">
+<strong data-start="261" data-end="276">Microphone:</strong> Available on some versions
+</li>
+<li data-section-id="okx4im" data-start="306" data-end="342">
+<strong data-start="308" data-end="319">Design:</strong> In-ear ergonomic fit
+</li>
+<li data-section-id="bt0k33" data-start="343" data-end="390">
+<strong data-start="345" data-end="358">Use Case:</strong> Gaming, music, casual listening
+</li>
+</ul><p data-start="392" data-end="406">Sound profile:</p><p>
+
+
+</p><ul data-start="407" data-end="504">
+<li data-section-id="1u8u93s" data-start="407" data-end="420">
+Strong bass
+</li>
+<li data-section-id="172mzlh" data-start="421" data-end="435">
+Clear vocals
+</li>
+<li data-section-id="7fd4yi" data-start="436" data-end="460">
+Slight V-shaped tuning
+</li>
+<li data-section-id="1bc20z9" data-start="461" data-end="504">
+Good for gaming footsteps at budget price</li></ul>
+ID: 3 | Name: Tanchjim Bunny | Desc: <p data-start="42" data-end="90">The <span class="hover:entity-accent entity-underline inline cursor-pointer align-baseline">Tanchjim Bunny</span> specs:</p><ul data-start="92" data-end="602">
+<li data-section-id="1fxrtvg" data-start="92" data-end="134">
+<strong data-start="94" data-end="105">Driver:</strong> 10mm single dynamic driver
+</li>
+<li data-section-id="148x71l" data-start="135" data-end="189">
+<strong data-start="137" data-end="157">Driver Material:</strong> PET titanium-coated diaphragm
+</li>
+<li data-section-id="109gjmk" data-start="190" data-end="259">
+<strong data-start="192" data-end="207">Technology:</strong> Acoustic Maze rear cavity + DMT4 Ultra technology
+</li>
+<li data-section-id="samjx5" data-start="260" data-end="299">
+<strong data-start="262" data-end="285">Frequency Response:</strong> 8Hz – 48kHz
+</li>
+<li data-section-id="11spa4x" data-start="300" data-end="327">
+<strong data-start="302" data-end="316">Impedance:</strong> 30Ω ±10%
+</li>
+<li data-section-id="16wqqe4" data-start="328" data-end="359">
+<strong data-start="330" data-end="346">Sensitivity:</strong> 123dB/Vrms
+</li>
+<li data-section-id="5bio2o" data-start="360" data-end="385">
+<strong data-start="362" data-end="370">THD:</strong> &lt;0.05% @1kHz
+</li>
+<li data-section-id="1edn4k" data-start="386" data-end="434">
+<strong data-start="388" data-end="402">Connector:</strong> 0.78mm 2-pin detachable cable
+</li>
+<li data-section-id="1pt294k" data-start="435" data-end="475">
+<strong data-start="437" data-end="454">Plug Options:</strong> 3.5mm or USB-C DSP
+</li>
+<li data-section-id="1vi43ey" data-start="476" data-end="514">
+<strong data-start="478" data-end="488">Cable:</strong> Silver-plated OFC cable
+</li>
+<li data-section-id="1fq338i" data-start="515" data-end="573">
+<strong data-start="517" data-end="536">Shell Material:</strong> Transparent medical-grade PC resin
+</li>
+<li data-section-id="1tzf860" data-start="574" data-end="602">
+<strong data-start="576" data-end="587">Weight:</strong> ~3.2g per side
+</li>
+</ul><p data-start="604" data-end="616">Sound recap:</p><p>
+
+
+</p><ul data-start="617" data-end="827">
+<li data-section-id="1boph1i" data-start="617" data-end="654">
+Balanced tuning with clean vocals
+</li>
+<li data-section-id="1f6yy97" data-start="655" data-end="690">
+Punchy mid-bass, not bass-heavy
+</li>
+<li data-section-id="xf4cv9" data-start="691" data-end="726">
+Smooth treble without harshness
+</li>
+<li data-section-id="18fji6s" data-start="727" data-end="771">
+Spacious soundstage for gaming and music
+</li>
+<li data-section-id="1syq0o" data-start="772" data-end="827">
+DSP version supports EQ customization in Tanchjim app</li></ul>
+ID: 4 | Name: Moondrop Chu 2 | Desc: <li data-section-id="jgqw06" data-start="145" data-end="180"><strong data-start="147" data-end="158">Driver:</strong> 10mm Dynamic Driver
+</li><li data-section-id="fom7mg" data-start="181" data-end="234">
+<strong data-start="183" data-end="197">Diaphragm:</strong> Aluminum-Magnesium Alloy Composite
+</li><li data-section-id="1v8vu0u" data-start="235" data-end="262">
+<strong data-start="237" data-end="251">Impedance:</strong> 18Ω ±15%
+</li><li data-section-id="64jdxx" data-start="263" data-end="294">
+<strong data-start="265" data-end="281">Sensitivity:</strong> 119dB/Vrms
+</li><li data-section-id="1osti1u" data-start="295" data-end="335">
+<strong data-start="297" data-end="320">Frequency Response:</strong> 15Hz – 38kHz
+</li><li data-section-id="1ad0xdf" data-start="336" data-end="370">
+<strong data-start="338" data-end="355">Effective FR:</strong> 20Hz – 20kHz
+</li><li data-section-id="11g4ky0" data-start="371" data-end="395">
+<strong data-start="373" data-end="381">THD:</strong> ≤0.5% @1kHz
+</li><li data-section-id="19vbi7o" data-start="396" data-end="444">
+<strong data-start="398" data-end="412">Connector:</strong> 0.78mm 2-Pin detachable cable
+</li><li data-section-id="e8eist" data-start="445" data-end="477">
+<strong data-start="447" data-end="456">Plug:</strong> 3.5mm single-ended
+</li><li data-section-id="rrxsi6" data-start="478" data-end="512">
+<strong data-start="480" data-end="499">Shell Material:</strong> Zinc Alloy
+</li><li data-section-id="jz0hbo" data-start="513" data-end="545">
+<strong data-start="515" data-end="525">Cable:</strong> Replaceable cable
+</li><p>
+
+
+
+
+
+
+
+
+
+
+</p><li data-section-id="yercnl" data-start="546" data-end="605">
+<strong data-start="548" data-end="561">Features:</strong> Replaceable acoustic filters, VDSF tuning</li>
+ID: 5 | Name: Qkz Ak6 Pro | Desc: <p data-start="42" data-end="90">The <span class="hover:entity-accent entity-underline inline cursor-pointer align-baseline">QKZ AK6 Pro</span> specs:</p><ul data-start="92" data-end="483">
+<li data-section-id="sgvzqf" data-start="92" data-end="127">
+<strong data-start="94" data-end="105">Driver:</strong> 11mm dynamic driver
+</li>
+<li data-section-id="la66rt" data-start="128" data-end="168">
+<strong data-start="130" data-end="153">Frequency Response:</strong> 20Hz – 24kHz
+</li>
+<li data-section-id="10p03eo" data-start="169" data-end="191">
+<strong data-start="171" data-end="185">Impedance:</strong> 16Ω
+</li>
+<li data-section-id="sbxggs" data-start="192" data-end="222">
+<strong data-start="194" data-end="210">Sensitivity:</strong> 98dB ±3dB
+</li>
+<li data-section-id="ync6u7" data-start="223" data-end="264">
+<strong data-start="225" data-end="239">Connector:</strong> 3.5mm gold-plated jack
+</li>
+<li data-section-id="1b1r9he" data-start="265" data-end="309">
+<strong data-start="267" data-end="277">Cable:</strong> Detachable 0.75mm C-pin cable
+</li>
+<li data-section-id="1netiiv" data-start="310" data-end="336">
+<strong data-start="312" data-end="329">Cable Length:</strong> 1.2m
+</li>
+<li data-section-id="ek5phb" data-start="337" data-end="383">
+<strong data-start="339" data-end="354">Microphone:</strong> Yes (depending on version)
+</li>
+<li data-section-id="1nhatv6" data-start="384" data-end="430">
+<strong data-start="386" data-end="397">Design:</strong> Ergonomic in-ear with ear hook
+</li>
+<li data-section-id="1wbzyzw" data-start="431" data-end="483">
+<strong data-start="433" data-end="446">Use Case:</strong> Gaming, bass music, casual listening
+</li>
+</ul><p data-start="485" data-end="497">Sound recap:</p><p>
+
+
+</p><ul data-start="498" data-end="619">
+<li data-section-id="1tm817l" data-start="498" data-end="520">
+Strong punchy bass
+</li>
+<li data-section-id="1jude9r" data-start="521" data-end="549">
+V-shaped sound signature
+</li>
+<li data-section-id="c16uin" data-start="550" data-end="588">
+Clear vocals with energetic treble
+</li>
+<li data-section-id="nfrik" data-start="589" data-end="619">
+Fun for gaming and EDM/music</li></ul>
+ID: 6 | Name: Moondrop Space Travel 2 | Desc: <p data-start="42" data-end="90">The <span class="hover:entity-accent entity-underline inline cursor-pointer align-baseline">Moondrop Space Travel 2</span> specs:</p><p>
+</p><ul data-start="92" data-end="757">
+<li data-section-id="1auqyjm" data-start="92" data-end="159">
+<strong data-start="94" data-end="105">Driver:</strong> 13mm dynamic driver with beryllium-coated diaphragm
+</li>
+<li data-section-id="1b994ly" data-start="160" data-end="190">
+<strong data-start="162" data-end="184">Bluetooth Version:</strong> 6.0
+</li>
+<li data-section-id="4v219t" data-start="191" data-end="216">
+<strong data-start="193" data-end="204">Codecs:</strong> SBC / AAC
+</li>
+<li data-section-id="ofeoc9" data-start="217" data-end="277">
+<strong data-start="219" data-end="227">ANC:</strong> Feedforward wide-band Active Noise Cancellation
+</li>
+<li data-section-id="vuxa23" data-start="278" data-end="321">
+<strong data-start="280" data-end="296">Gaming Mode:</strong> 55ms ultra-low latency
+</li>
+<li data-section-id="uwnivq" data-start="322" data-end="413">
+<strong data-start="324" data-end="341">Battery Life:</strong>
+<ul data-start="346" data-end="413">
+<li data-section-id="1gcbx9h" data-start="346" data-end="373">
+Up to 7 hours (earbuds)
+</li>
+<li data-section-id="wnxhze" data-start="376" data-end="413">
+Up to 24 hours with charging case
+</li>
+</ul>
+</li>
+<li data-section-id="1nfpu7o" data-start="414" data-end="479">
+<strong data-start="416" data-end="437">Battery Capacity:</strong>
+<ul data-start="442" data-end="479">
+<li data-section-id="1xzvq4m" data-start="442" data-end="460">
+Earbuds: 35mAh
+</li>
+<li data-section-id="v334mx" data-start="463" data-end="479">
+Case: 380mAh
+</li>
+</ul>
+</li>
+<li data-section-id="1h5qq4c" data-start="480" data-end="540">
+<strong data-start="482" data-end="498">App Support:</strong> MOONDROP Link app with EQ customization
+</li>
+<li data-section-id="1mp3w3e" data-start="541" data-end="688">
+<strong data-start="543" data-end="556">Features:</strong>
+<ul data-start="561" data-end="688">
+<li data-section-id="16iig0d" data-start="561" data-end="592">
+AI ENC call noise reduction
+</li>
+<li data-section-id="1anrgpj" data-start="595" data-end="621">
+Dual-device connection
+</li>
+<li data-section-id="h72cx6" data-start="624" data-end="649">
+Custom touch controls
+</li>
+<li data-section-id="1aufm5b" data-start="652" data-end="688">
+Mono / stereo seamless switching
+</li>
+</ul>
+</li>
+<li data-section-id="exkx3" data-start="689" data-end="712">
+<strong data-start="691" data-end="704">Charging:</strong> USB-C
+</li>
+<li data-section-id="1wq2riz" data-start="713" data-end="757">
+<strong data-start="715" data-end="723">Fit:</strong> Lightweight shallow in-ear design</li></ul>
+ID: 7 | Name: Moondrop Space Travel 2 ULTRA | Desc: <p data-start="42" data-end="90">The <span class="hover:entity-accent entity-underline inline cursor-pointer align-baseline">Moondrop Space Travel 2 Ultra</span> specs:</p><p>
+</p><ul data-start="92" data-end="696">
+<li data-section-id="1rh2qbp" data-start="92" data-end="143">
+<strong data-start="94" data-end="105">Driver:</strong> 13mm annular planar magnetic driver
+</li>
+<li data-section-id="prokv4" data-start="144" data-end="177">
+<strong data-start="146" data-end="158">Magnets:</strong> Dual N55 magnets
+</li>
+<li data-section-id="14oxito" data-start="178" data-end="200">
+<strong data-start="180" data-end="194">Bluetooth:</strong> 6.0
+</li>
+<li data-section-id="188egxg" data-start="201" data-end="233">
+<strong data-start="203" data-end="214">Codecs:</strong> SBC / AAC / LDAC
+</li>
+<li data-section-id="1tye3f1" data-start="234" data-end="281">
+<strong data-start="236" data-end="244">ANC:</strong> Wideband Active Noise Cancellation
+</li>
+<li data-section-id="14k3dlk" data-start="282" data-end="319">
+<strong data-start="284" data-end="300">Low Latency:</strong> 55ms gaming mode
+</li>
+<li data-section-id="1fpyl6w" data-start="320" data-end="390">
+<strong data-start="322" data-end="339">Battery Life:</strong>
+<ul data-start="344" data-end="390">
+<li data-section-id="8gvyuc" data-start="344" data-end="364">
+~7 hours earbuds
+</li>
+<li data-section-id="fm02qd" data-start="367" data-end="390">
+~24 hours with case
+</li>
+</ul>
+</li>
+<li data-section-id="1nfpu7o" data-start="391" data-end="456">
+<strong data-start="393" data-end="414">Battery Capacity:</strong>
+<ul data-start="419" data-end="456">
+<li data-section-id="1xzvq4m" data-start="419" data-end="437">
+Earbuds: 35mAh
+</li>
+<li data-section-id="v334mx" data-start="440" data-end="456">
+Case: 380mAh
+</li>
+</ul>
+</li>
+<li data-section-id="exkx3" data-start="457" data-end="480">
+<strong data-start="459" data-end="472">Charging:</strong> USB-C
+</li>
+<li data-section-id="1ac7u00" data-start="481" data-end="644">
+<strong data-start="483" data-end="496">Features:</strong>
+<ul data-start="501" data-end="644">
+<li data-section-id="1anrgpj" data-start="501" data-end="527">
+Dual-device connection
+</li>
+<li data-section-id="16iig0d" data-start="530" data-end="561">
+AI ENC call noise reduction
+</li>
+<li data-section-id="t2y1b7" data-start="564" data-end="585">
+Transparency mode
+</li>
+<li data-section-id="106zam2" data-start="588" data-end="623">
+Custom EQ via MOONDROP Link app
+</li>
+<li data-section-id="18f32e1" data-start="626" data-end="644">
+Touch controls
+</li>
+</ul>
+</li>
+<li data-section-id="ib0tag" data-start="645" data-end="664">
+<strong data-start="647" data-end="655">THD:</strong> &lt;0.05%
+</li>
+<li data-section-id="jc9aek" data-start="665" data-end="696">
+<strong data-start="667" data-end="686">Wireless Range:</strong> About 10m</li></ul>
+ID: 8 | Name: Moondrop Lan | Desc: <p data-start="42" data-end="90">The <span class="hover:entity-accent entity-underline inline cursor-pointer align-baseline">Moondrop LAN</span> specs:</p><p>
+</p><ul data-start="92" data-end="622">
+<li data-section-id="3udd2f" data-start="92" data-end="139">
+<strong data-start="94" data-end="105">Driver:</strong> 10mm dual-cavity dynamic driver
+</li>
+<li data-section-id="ipnqws" data-start="140" data-end="200">
+<strong data-start="142" data-end="156">Diaphragm:</strong> Beryllium-plated dome composite diaphragm
+</li>
+<li data-section-id="nwop1" data-start="201" data-end="246">
+<strong data-start="203" data-end="214">Magnet:</strong> N52 internal magnetic circuit
+</li>
+<li data-section-id="1i7tkvs" data-start="247" data-end="287">
+<strong data-start="249" data-end="259">Shell:</strong> MIM stainless steel shell
+</li>
+<li data-section-id="1odp98t" data-start="288" data-end="328">
+<strong data-start="290" data-end="313">Frequency Response:</strong> 15Hz – 37kHz
+</li>
+<li data-section-id="1mqps84" data-start="329" data-end="369">
+<strong data-start="331" data-end="354">Effective Response:</strong> 20Hz – 20kHz
+</li>
+<li data-section-id="1j1ai5y" data-start="370" data-end="397">
+<strong data-start="372" data-end="386">Impedance:</strong> 32Ω ±15%
+</li>
+<li data-section-id="186v9kv" data-start="398" data-end="429">
+<strong data-start="400" data-end="416">Sensitivity:</strong> 120dB/Vrms
+</li>
+<li data-section-id="11g4ky0" data-start="430" data-end="454">
+<strong data-start="432" data-end="440">THD:</strong> ≤0.5% @1kHz
+</li>
+<li data-section-id="1edn4k" data-start="455" data-end="503">
+<strong data-start="457" data-end="471">Connector:</strong> 0.78mm 2-pin detachable cable
+</li>
+<li data-section-id="e8eist" data-start="504" data-end="536">
+<strong data-start="506" data-end="515">Plug:</strong> 3.5mm single-ended
+</li>
+<li data-section-id="jz0hbo" data-start="537" data-end="569">
+<strong data-start="539" data-end="549">Cable:</strong> Replaceable cable
+</li>
+<li data-section-id="o4ohre" data-start="570" data-end="622">
+<strong data-start="572" data-end="592">Acoustic Filter:</strong> Patented anti-blocking filter</li><li data-section-id="o4ohre" data-start="570" data-end="622"><p data-start="666" data-end="678">Sound recap:</p>
+<ul data-start="679" data-end="905">
+<li data-section-id="ogbr7h" data-start="679" data-end="706">
+Neutral-balanced tuning
+</li>
+<li data-section-id="dny8k3" data-start="707" data-end="735">
+Clean and natural vocals
+</li>
+<li data-section-id="c4e2e" data-start="736" data-end="769">
+Tight bass but not bass-heavy
+</li>
+<li data-section-id="1yyy9lr" data-start="770" data-end="806">
+Smooth treble with low harshness
+</li>
+<li data-section-id="1dam4a2" data-start="807" data-end="846">
+Good imaging and clarity for gaming
+</li>
+<li data-section-id="drj4x2" data-start="847" data-end="905">
+Better for vocal, jazz, acoustic, and balanced listening</li></ul></li></ul>
+ID: 9 | Name: Moondrop Lan II | Desc: <h3 data-section-id="b13pdn" data-start="126" data-end="140">Main Specs</h3><p>
+</p><ul data-start="141" data-end="743">
+<li data-section-id="bu2msn" data-start="141" data-end="184">
+Driver: 10mm dual-cavity dynamic driver
+</li>
+<li data-section-id="vnxm7p" data-start="185" data-end="237">
+Diaphragm: 0.05mm glass dome composite diaphragm
+</li>
+<li data-section-id="1dx62l2" data-start="238" data-end="305">
+Magnetic Circuit: Internal + external dual N52 magnetic circuit
+</li>
+<li data-section-id="1vsy9al" data-start="306" data-end="345">
+Shell Material: MIM stainless steel
+</li>
+<li data-section-id="13uizpw" data-start="346" data-end="390">
+Connector: 0.78mm 2-pin detachable cable
+</li>
+<li data-section-id="8mati4" data-start="391" data-end="440">
+Plug: 4.4mm balanced + 3.5mm adapter included
+</li>
+<li data-section-id="g0b8fo" data-start="441" data-end="464">
+Impedance: 30Ω ±15%
+</li>
+<li data-section-id="e08gdw" data-start="465" data-end="492">
+Sensitivity: 118dB/Vrms
+</li>
+<li data-section-id="17xcmeg" data-start="493" data-end="529">
+Frequency Response: 12Hz – 60kHz
+</li>
+<li data-section-id="1y84bc" data-start="530" data-end="563">
+Effective Range: 20Hz – 20kHz
+</li>
+<li data-section-id="qgaqt9" data-start="564" data-end="579">
+THD: ≤0.08%
+</li>
+<li data-section-id="uksrr" data-start="580" data-end="743">
+Versions:
+<ul data-start="594" data-end="743">
+<li data-section-id="1rvgdpm" data-start="594" data-end="645">
+<strong data-start="596" data-end="610">LAN II REF</strong> → brighter, cleaner, more detailed
+</li>
+<li data-section-id="1j1w03a" data-start="648" data-end="743">
+<strong data-start="650" data-end="664">LAN II POP</strong> → stronger bass and vocals for pop music&nbsp;</li></ul></li></ul>
+ID: 10 | Name: Moondrop  Aria 2 | Desc: <h3 data-section-id="b13pdn" data-start="45" data-end="59">Main Specs</h3><ul data-start="60" data-end="476">
+<li data-section-id="zkg05i" data-start="60" data-end="91">
+Driver: 10mm dynamic driver
+</li>
+<li data-section-id="14ih8ub" data-start="92" data-end="153">
+Diaphragm: TiN ceramic-coated dome + composite suspension
+</li>
+<li data-section-id="1wy4s62" data-start="154" data-end="186">
+Shell: CNC alloy metal shell
+</li>
+<li data-section-id="13uizpw" data-start="187" data-end="231">
+Connector: 0.78mm 2-pin detachable cable
+</li>
+<li data-section-id="136a08c" data-start="232" data-end="284">
+Plug System: Interchangeable 3.5mm &amp; 4.4mm plugs
+</li>
+<li data-section-id="b1cd2v" data-start="285" data-end="308">
+Impedance: 33Ω ±15%
+</li>
+<li data-section-id="1n8y8vx" data-start="309" data-end="336">
+Sensitivity: 122dB/Vrms
+</li>
+<li data-section-id="qg6pe8" data-start="337" data-end="352">
+THD: ≤0.05%
+</li>
+<li data-section-id="1bt7vsa" data-start="353" data-end="389">
+Frequency Response: 16Hz – 22kHz
+</li>
+<li data-section-id="121ww3r" data-start="390" data-end="412">
+Cable Length: 1.2m
+</li>
+<li data-section-id="sj1sjg" data-start="413" data-end="476">
+Weight: ~11.8g per side <span class="" data-state="closed"></span>
+</li>
+</ul><h3 data-section-id="kjt22o" data-start="478" data-end="493">Sound Recap</h3><ul data-start="494" data-end="739">
+<li data-section-id="1girbem" data-start="494" data-end="534">
+Warm-neutral tuning with smooth treble
+</li>
+<li data-section-id="1mq6q2f" data-start="535" data-end="573">
+Stronger sub-bass than original Aria
+</li>
+<li data-section-id="1v843zk" data-start="574" data-end="606">
+Natural vocals and good timbre
+</li>
+<li data-section-id="skcu9g" data-start="607" data-end="656">
+Non-fatiguing sound for long listening sessions
+</li>
+<li data-section-id="ayb1i3" data-start="657" data-end="739">
+Wide soundstage with balanced presentation <span class="" data-state="closed"></span>
+</li>
+</ul><p>
+
+
+
+</p><h3 data-section-id="yntdlk" data-start="741" data-end="749"><br></h3>
+ID: 11 | Name: Truthear Gate | Desc: <h2 data-section-id="24eb25" data-start="39" data-end="61">TRUTHEAR GATE Specs</h2><ul data-start="63" data-end="664">
+<li data-section-id="jgqw06" data-start="63" data-end="98">
+<strong data-start="65" data-end="76">Driver:</strong> 10mm Dynamic Driver
+</li>
+<li data-section-id="1dm3p4s" data-start="99" data-end="164">
+<strong data-start="101" data-end="117">Driver Type:</strong> N52 internal magnetic circuit dynamic driver
+</li>
+<li data-section-id="grh0gr" data-start="165" data-end="225">
+<strong data-start="167" data-end="181">Diaphragm:</strong> Carbon LCP Dome + Ultra-thin PU diaphragm
+</li>
+<li data-section-id="u0zmnp" data-start="226" data-end="259">
+<strong data-start="228" data-end="242">Impedance:</strong> 28Ω ±15% @1kHz
+</li>
+<li data-section-id="1q7e8lx" data-start="260" data-end="297">
+<strong data-start="262" data-end="278">Sensitivity:</strong> 122dB/Vrms @1kHz
+</li>
+<li data-section-id="1o89c3x" data-start="298" data-end="338">
+<strong data-start="300" data-end="323">Frequency Response:</strong> 10Hz – 45kHz
+</li>
+<li data-section-id="rx1wbk" data-start="339" data-end="389">
+<strong data-start="341" data-end="374">Effective Frequency Response:</strong> 20Hz – 20kHz
+</li>
+<li data-section-id="6yfkuw" data-start="390" data-end="419">
+<strong data-start="392" data-end="400">THD:</strong> ≤1% @1kHz (94dB)
+</li>
+<li data-section-id="1x9tns0" data-start="420" data-end="481">
+<strong data-start="422" data-end="436">Connector:</strong> 0.78mm 2-pin (recessed/sunken female type)
+</li>
+<li data-section-id="e8eist" data-start="482" data-end="514">
+<strong data-start="484" data-end="493">Plug:</strong> 3.5mm single-ended
+</li>
+<li data-section-id="1eqay3r" data-start="515" data-end="565">
+<strong data-start="517" data-end="527">Cable:</strong> Oxygen-free copper detachable cable
+</li>
+<li data-section-id="1o8u7k1" data-start="566" data-end="612">
+<strong data-start="568" data-end="587">Shell Material:</strong> PC + ABS plastic shell
+</li>
+<li data-section-id="1saa5yr" data-start="613" data-end="664">
+<strong data-start="615" data-end="626">Weight:</strong> Very lightweight design for comfort
+</li>
+</ul><h2 data-section-id="18501b6" data-start="666" data-end="684">Sound Signature</h2><p>
+
+
+</p><ul data-start="685" data-end="850">
+<li data-section-id="1mtg9gx" data-start="685" data-end="719">
+Balanced / mild U-shape tuning
+</li>
+<li data-section-id="bpzx69" data-start="720" data-end="745">
+Clean vocals and mids
+</li>
+<li data-section-id="1oo68y2" data-start="746" data-end="771">
+Slight sub-bass boost
+</li>
+<li data-section-id="tqnhik" data-start="772" data-end="808">
+Smooth treble with decent detail
+</li>
+<li data-section-id="wpli4b" data-start="809" data-end="850">
+Easy to drive from phones and dongles</li></ul>
+ID: 12 | Name: Kz Edx pro X | Desc: <div class="" data-turn-id-container="72f32924-d6d5-49b3-9e55-0e0dc306bdad" data-is-intersecting="true"><div class="relative w-full overflow-visible"><section class="text-token-text-primary w-full focus:outline-none has-data-writing-block:pointer-events-none [&amp;:has([data-writing-block])&gt;*]:pointer-events-auto R6Vx5W_threadScrollVars scroll-mb-[calc(var(--scroll-root-safe-area-inset-bottom,0px)+var(--thread-response-height))] scroll-mt-(--header-height)" dir="auto" data-turn-id="72f32924-d6d5-49b3-9e55-0e0dc306bdad" data-turn-id-container="72f32924-d6d5-49b3-9e55-0e0dc306bdad" data-testid="conversation-turn-1" data-scroll-anchor="false" data-turn="user"></section><div class="contents"></div></div></div><div class="" data-turn-id-container="request-WEB:4a15a42f-a77e-438a-a404-3b37967f6a55-1" data-is-intersecting="true"><div class="relative w-full overflow-visible"><section class="text-token-text-primary w-full focus:outline-none has-data-writing-block:pointer-events-none [&amp;:has([data-writing-block])&gt;*]:pointer-events-auto R6Vx5W_threadScrollVars scroll-mb-[calc(var(--scroll-root-safe-area-inset-bottom,0px)+var(--thread-response-height))] scroll-mt-[calc(var(--header-height)+min(200px,max(70px,20svh)))]" dir="auto" data-turn-id="request-WEB:4a15a42f-a77e-438a-a404-3b37967f6a55-1" data-turn-id-container="request-WEB:4a15a42f-a77e-438a-a404-3b37967f6a55-1" data-testid="conversation-turn-2" data-scroll-anchor="false" data-turn="assistant"><div class="text-base my-auto mx-auto pb-10 [--thread-content-margin:var(--thread-content-margin-xs,calc(var(--spacing)*4))] @w-sm/main:[--thread-content-margin:var(--thread-content-margin-sm,calc(var(--spacing)*6))] @w-lg/main:[--thread-content-margin:var(--thread-content-margin-lg,calc(var(--spacing)*16))] px-(--thread-content-margin)"><div class="[--thread-content-max-width:40rem] @w-lg/main:[--thread-content-max-width:48rem] mx-auto max-w-(--thread-content-max-width) flex-1 group/turn-messages focus-visible:outline-hidden relative flex w-full min-w-0 flex-col agent-turn"><div class="flex max-w-full flex-col gap-4 grow"><div data-message-author-role="assistant" data-message-id="24ea2196-8bbf-44ce-9e89-2e97f213f15a" data-turn-start-message="true" dir="auto" tabindex="0" data-message-model-slug="gpt-5-5" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal outline-none keyboard-focused:focus-ring [.text-message+&amp;]:mt-1"><div class="flex w-full flex-col gap-1 empty:hidden"><div class="markdown prose dark:prose-invert wrap-break-word w-full dark markdown-new-styling"><p data-start="0" data-end="53"><span class="hover:entity-accent entity-underline inline cursor-pointer align-baseline">KZ EDX Pro X</span> specifications:</p>
+<ul data-start="55" data-end="498">
+<li data-section-id="1rtr9nw" data-start="55" data-end="106">
+Driver: Single Super-Linear Dynamic Driver (10mm)
+</li>
+<li data-section-id="zu0dvv" data-start="107" data-end="141">
+Frequency Response: 20Hz – 40kHz
+</li>
+<li data-section-id="1oq0og4" data-start="142" data-end="161">
+Impedance: 23 ±3Ω
+</li>
+<li data-section-id="yrufeq" data-start="162" data-end="185">
+Sensitivity: 108 ±3dB
+</li>
+<li data-section-id="z35ai7" data-start="186" data-end="209">
+Plug Type: 3.5mm jack
+</li>
+<li data-section-id="15sde51" data-start="210" data-end="251">
+Pin Type: 0.75mm 2-pin detachable cable
+</li>
+<li data-section-id="1gewnvx" data-start="252" data-end="290">
+Cable: Flat oxygen-free copper cable
+</li>
+<li data-section-id="1ckirha" data-start="291" data-end="315">
+Cable Length: 120 ±5cm
+</li>
+<li data-section-id="zirrj5" data-start="316" data-end="355">
+Wearing Style: In-ear / over-ear hook
+</li>
+<li data-section-id="1fumafn" data-start="356" data-end="395">
+Shell Material: Resin + metal accents
+</li>
+<li data-section-id="16tvhoe" data-start="396" data-end="440">
+Microphone: Optional mic version available
+</li>
+<li data-section-id="mx6j7" data-start="441" data-end="498">
+Weight: Around 8g <span class="" data-state="closed"></span>
+</li>
+</ul>
+<p data-start="500" data-end="516">Sound signature:</p>
+<ul data-start="517" data-end="667">
+<li data-section-id="nhktsn" data-start="517" data-end="534">
+V-shaped tuning
+</li>
+<li data-section-id="1u8u93s" data-start="535" data-end="548">
+Strong bass
+</li>
+<li data-section-id="172mzlh" data-start="549" data-end="563">
+Clear vocals
+</li>
+<li data-section-id="uk8ale" data-start="564" data-end="579">
+Bright treble
+</li>
+<li data-section-id="11741he" data-start="580" data-end="667">
+Good for pop, EDM, gaming, and casual listening&nbsp;</li></ul></div></div></div></div></div></div></section></div></div>
+ID: 13 | Name: Kz Castor Pro | Desc: <p data-start="66" data-end="115">Main model: <span class="hover:entity-accent entity-underline inline cursor-pointer align-baseline">KZ Castor Pro</span></p><ul data-start="117" data-end="631">
+<li data-section-id="1t3jur5" data-start="117" data-end="162">
+Drivers: Dual Dynamic Drivers (10mm + 10mm)
+</li>
+<li data-section-id="zu0dvv" data-start="163" data-end="197">
+Frequency Response: 20Hz – 40kHz
+</li>
+<li data-section-id="1hm31kn" data-start="198" data-end="262">
+Impedance:
+<ul data-start="213" data-end="262">
+<li data-section-id="1yi40xb" data-start="213" data-end="237">
+Harman Version: 22–40Ω
+</li>
+<li data-section-id="1pf4a3a" data-start="240" data-end="262">
+Bass Version: 16–22Ω
+</li>
+</ul>
+</li>
+<li data-section-id="j9cesj" data-start="263" data-end="335">
+Sensitivity:
+<ul data-start="280" data-end="335">
+<li data-section-id="1ix60sh" data-start="280" data-end="307">
+Harman Version: 101–104dB
+</li>
+<li data-section-id="mcutzx" data-start="310" data-end="335">
+Bass Version: 100–103dB
+</li>
+</ul>
+</li>
+<li data-section-id="1wceqih" data-start="336" data-end="378">
+Connector: 0.75mm 2-pin detachable cable
+</li>
+<li data-section-id="c2881g" data-start="379" data-end="392">
+Plug: 3.5mm
+</li>
+<li data-section-id="8cex0w" data-start="393" data-end="419">
+Cable Length: 120cm ±5cm
+</li>
+<li data-section-id="69jqgd" data-start="420" data-end="447">
+Shell: Zinc alloy + resin
+</li>
+<li data-section-id="qos5n2" data-start="448" data-end="492">
+Tuning Switches: 4-level adjustable tuning
+</li>
+<li data-section-id="1cakel" data-start="493" data-end="531">
+Cable: Oxygen-free copper flat cable
+</li>
+<li data-section-id="15aeyt7" data-start="532" data-end="631">
+Versions:
+<ul data-start="546" data-end="631">
+<li data-section-id="d8rw4g" data-start="546" data-end="561">
+Harman Target
+</li>
+<li data-section-id="1gzz8m8" data-start="564" data-end="631">
+Harman Target Improved Bass <span class="" data-state="closed"></span>
+</li>
+</ul>
+</li>
+</ul><h2 data-section-id="18501b6" data-start="633" data-end="651">Sound Signature</h2><ul data-start="652" data-end="813">
+<li data-section-id="1lzs2jo" data-start="652" data-end="676">
+Strong V-shaped tuning
+</li>
+<li data-section-id="s0xoxz" data-start="677" data-end="708">
+Deep sub-bass and punchy bass
+</li>
+<li data-section-id="blcgrx" data-start="709" data-end="750">
+Clear vocals but slightly recessed mids
+</li>
+<li data-section-id="1l1165l" data-start="751" data-end="780">
+Energetic and bright treble
+</li>
+<li data-section-id="1evlk0f" data-start="781" data-end="813">
+Wide soundstage for budget IEM
+</li>
+</ul><p data-start="815" data-end="824">Best for:</p><p>
+
+
+
+
+</p><ul data-start="825" data-end="874">
+<li data-section-id="1o4ihw" data-start="825" data-end="830">
+EDM
+</li>
+<li data-section-id="o8k5dv" data-start="831" data-end="840">
+Hip-hop
+</li>
+<li data-section-id="1o4npj" data-start="841" data-end="846">
+Pop
+</li>
+<li data-section-id="1xiwkar" data-start="847" data-end="855">
+Gaming
+</li>
+<li data-section-id="nkx9yc" data-start="856" data-end="874">
+Bass-heavy music</li></ul>
+ID: 14 | Name: CVJ Vivan | Desc: <ul data-start="119" data-end="565"><li data-section-id="1a5kfpl" data-start="119" data-end="162">Driver: 10mm Dual-Magnetic Dynamic Driver
+</li>
+<li data-section-id="i9doj7" data-start="163" data-end="183">
+Configuration: 1DD
+</li>
+<li data-section-id="zvfeml" data-start="184" data-end="218">
+Frequency Response: 20Hz – 20kHz
+</li>
+<li data-section-id="4yl7t3" data-start="219" data-end="235">
+Impedance: 22Ω
+</li>
+<li data-section-id="1yj4ph1" data-start="236" data-end="255">
+Sensitivity: 95dB
+</li>
+<li data-section-id="fxylmw" data-start="256" data-end="293">
+Connector: 0.78mm 2-pin (QDC style)
+</li>
+<li data-section-id="c2881g" data-start="294" data-end="307">
+Plug: 3.5mm
+</li>
+<li data-section-id="gh6rj6" data-start="308" data-end="370">
+Cable:
+<ul data-start="319" data-end="370">
+<li data-section-id="1qwezoh" data-start="319" data-end="341">
+Silver-plated copper
+</li>
+<li data-section-id="1oiegyg" data-start="344" data-end="370">
+Detachable modular cable
+</li>
+</ul>
+</li>
+<li data-section-id="1upidp5" data-start="371" data-end="392">
+Cable Length: ~1.2m
+</li>
+<li data-section-id="1eqbm9h" data-start="393" data-end="445">
+Shell:
+<ul data-start="404" data-end="445">
+<li data-section-id="jxvg1h" data-start="404" data-end="417">
+Resin shell
+</li>
+<li data-section-id="1bv3fyk" data-start="420" data-end="445">
+Alloy / metal faceplate
+</li>
+</ul>
+</li>
+<li data-section-id="1w9l366" data-start="446" data-end="468">
+Weight: ~9g per side
+</li>
+<li data-section-id="sifqa8" data-start="469" data-end="565">
+Versions:
+<ul data-start="483" data-end="565">
+<li data-section-id="1at4yhd" data-start="483" data-end="506">
+Anime / Waifu Edition
+</li>
+<li data-section-id="1nb5pyy" data-start="509" data-end="565">
+Standard Edition <span class="" data-state="closed"></span>
+</li>
+</ul>
+</li>
+</ul><h2 data-section-id="18501b6" data-start="567" data-end="585">Sound Signature</h2><ul data-start="586" data-end="730">
+<li data-section-id="tuk2f2" data-start="586" data-end="608">
+Warm V-shaped tuning
+</li>
+<li data-section-id="16xv0dc" data-start="609" data-end="642">
+Strong sub-bass and punchy bass
+</li>
+<li data-section-id="1790uoe" data-start="643" data-end="658">
+Smooth vocals
+</li>
+<li data-section-id="18dl4bk" data-start="659" data-end="677">
+Energetic treble
+</li>
+<li data-section-id="b1uwl7" data-start="678" data-end="730">
+Fun and immersive sound rather than neutral tuning
+</li>
+</ul><p data-start="732" data-end="741">Best for:</p><p>
+
+
+
+</p><ul data-start="742" data-end="800">
+<li data-section-id="1o4ihw" data-start="742" data-end="747">
+EDM
+</li>
+<li data-section-id="o8k5dv" data-start="748" data-end="757">
+Hip-hop
+</li>
+<li data-section-id="1xiwkar" data-start="758" data-end="766">
+Gaming
+</li>
+<li data-section-id="dhcyrh" data-start="767" data-end="791">
+Anime / Vocaloid music
+</li>
+<li data-section-id="1trwnk3" data-start="792" data-end="800">
+Movies</li></ul>
+ID: 15 | Name: Subnautica 2 | Desc: <p><br><b>Steam CDKey ដាក់ក្នុង Account steam ផ្ទាល់របស់បងប្អូនបាន​  </b><br><b>📌ទិញភ្លាមបានភ្លាម✔️<br>📌ទំហំហ្គេម 50GB ✔️</b></p>
+ID: 16 | Name:  forza horizon 6 | Desc: <p>➡️Steam CDKey ដាក់ក្នុង Account steam ផ្ទាល់របស់បងប្អូនបាន​&nbsp;&nbsp;<b><br>📌ទិញភ្លាមបានភ្លាម✔️<br>📌ទំហំហ្គេម 167GB ✔️</b></p>
+ID: 17 | Name: Ark survival Evolved | Desc: <p><b>➡️(ទិញ 3 Free 1 )🔥</b><br>🔥 free DLC :<br><br>🔡Fjordur - ARK Expansion Map<br>🔡Lost Island - ARK Expansion Map<br>🔡Valguero - ARK Expansion Map<br>🔡Ragnarok - ARK Expansion Card<br>🔡Primitive+ ARK Total conversion<br>🔡Center - ARK Expansion Map<br>🔡Crystal Isles - ARK Expansion Map<br><br>📌Steam online ✔️<br>📌អាច add friends លេងបាន 4 អ្នក✔️<br>📌change email-password ✔️<br>📌fast delivery ✔️</p>
+ID: 18 | Name: The forest | Desc: <p><br>📌Steam online ✔️<br>📌អាច add friends លេងបាន 4 អ្នក✔️<br>📌change email-password ✔️<br>📌fast delivery ✔️</p>
+ID: 19 | Name: Sons of the forest | Desc: <p>📌Steam online ✔️<br>📌អាច add friends លេងបាន 4 អ្នក✔️<br>📌change email-password ✔️<br>📌fast delivery ✔️</p>
+ID: 20 | Name: Black myth wukong | Desc: <p>📌Steam offline ✔️<br>📌fast delivery ✔️<br>📌ទំហំ <font face="Motiva Sans, sans-serif"><span style="font-size: 12px; background-color: rgb(255, 255, 255);">130</span></font>✔️</p>
+ID: 21 | Name: FC26 | Desc: <p>📌Steam online ✔️<br>📌អាច add friends លេងបាន 4 អ្នក✔️<br>📌change email-password ✔️<br>📌fast delivery ✔️<br></p>
+ID: 22 | Name:  Euro Truck 2 | Desc: <p>📌Steam online ✔️<br>📌អាច add friends លេងបាន 4 អ្នក✔️<br>📌change email-password ✔️<br>📌fast delivery ✔️</p>
+ID: 23 | Name: God of war Ragnarok | Desc: <p>➡️Steam CDKey 🔑 ដា<b>📌fast delivery ✔️</b></p><p>➡️Steam CDKey 🔑 ដាក់ក្នុង Account steam ផ្ទាល់របស់បងប្អូនបាន​&nbsp;&nbsp;<br><b>📌fast delivery ✔️<br>📌ទំហំហ្គេម 60GB ✔️</b></p>
+ID: 24 | Name: Spiderman 2 | Desc: <p><b>📌Steam CDKey ដាក់ក្នុង Account steam ផ្ទាល់ខ្លួនបាន​  ✔️</b><b><br>📌fast delivery ✔️<br>📌ទំហំហ្គេម 75GB ✔️</b></p>
+ID: 25 | Name: ATK X1 V2 | Desc: <h3 data-section-id="1jdds83" data-start="42" data-end="61">ATK X1 V2 Specs</h3><ul data-start="62" data-end="643">
+<li data-section-id="1hdeglq" data-start="62" data-end="114">
+<strong data-start="64" data-end="75">Sensor:</strong> PixArt PAW3395 Ultra / PAW3950 Ultra
+</li>
+<li data-section-id="1dcd9fd" data-start="115" data-end="148">
+<strong data-start="117" data-end="125">MCU:</strong> Nordic 54L15 / 54H20
+</li>
+<li data-section-id="15j8haa" data-start="149" data-end="193">
+<strong data-start="151" data-end="159">DPI:</strong> Up to 42,000 DPI (3950 version)
+</li>
+<li data-section-id="1ubudsy" data-start="194" data-end="230">
+<strong data-start="196" data-end="213">Polling Rate:</strong> 125Hz – 8000Hz
+</li>
+<li data-section-id="1ins3uo" data-start="231" data-end="254">
+<strong data-start="233" data-end="244">Weight:</strong> 54g–55g
+</li>
+<li data-section-id="fz0bgj" data-start="255" data-end="278">
+<strong data-start="257" data-end="269">Battery:</strong> 800mAh
+</li>
+<li data-section-id="1v76t1l" data-start="279" data-end="331">
+<strong data-start="281" data-end="298">Battery Life:</strong> Up to ~120 hours at 1K polling
+</li>
+<li data-section-id="jlnhh1" data-start="332" data-end="381">
+<strong data-start="334" data-end="349">Connection:</strong> Wireless 2.4GHz + USB-C wired
+</li>
+<li data-section-id="1alrigj" data-start="382" data-end="427">
+<strong data-start="384" data-end="397">Switches:</strong> ATK Custom Optical Switches
+</li>
+<li data-section-id="1amtnr2" data-start="428" data-end="475">
+<strong data-start="430" data-end="449">Click Lifespan:</strong> Up to 70 million clicks
+</li>
+<li data-section-id="nnr003" data-start="476" data-end="512">
+<strong data-start="478" data-end="493">Dimensions:</strong> 127 × 64 × 40 mm
+</li>
+<li data-section-id="c0iaa7" data-start="513" data-end="549">
+<strong data-start="515" data-end="527">Coating:</strong> Nano coating finish
+</li>
+<li data-section-id="5closm" data-start="550" data-end="600">
+<strong data-start="552" data-end="562">Shape:</strong> Similar to Razer Viper V3 Pro shape
+</li>
+<li data-section-id="hvwgxo" data-start="601" data-end="643">
+<strong data-start="603" data-end="616">Software:</strong> ATK HUB software support
+</li>
+</ul><h3 data-section-id="1idc9ty" data-start="645" data-end="660">Quick recap</h3><p>
+
+
+</p><ul data-start="661" data-end="852">
+<li data-section-id="tztmu3" data-start="661" data-end="696">
+Very lightweight for FPS gaming
+</li>
+<li data-section-id="16qu1qy" data-start="697" data-end="741">
+Excellent for claw and relaxed palm grip
+</li>
+<li data-section-id="ow4cmo" data-start="742" data-end="765">
+Strong battery life
+</li>
+<li data-section-id="qdlog5" data-start="766" data-end="804">
+8K polling gives ultra-low latency
+</li>
+<li data-section-id="13knpa5" data-start="805" data-end="852">
+Good value compared to premium esports mice</li></ul>
+ID: 26 | Name: ATK Horizon | Desc: <h3 data-section-id="39l2mh" data-start="36" data-end="57">ATK Horizon Specs</h3><ul data-start="58" data-end="398">
+<li data-section-id="1oi4aml" data-start="58" data-end="88">
+<strong data-start="60" data-end="69">Type:</strong> Wired gaming IEM
+</li>
+<li data-section-id="1c1rr5l" data-start="89" data-end="124">
+<strong data-start="91" data-end="102">Driver:</strong> Hybrid driver setup
+</li>
+<li data-section-id="v3dkci" data-start="125" data-end="158">
+<strong data-start="127" data-end="141">Connector:</strong> USB-C / Type-C
+</li>
+<li data-section-id="12rvzqa" data-start="159" data-end="198">
+<strong data-start="161" data-end="176">Microphone:</strong> Inline mic included
+</li>
+<li data-section-id="1amo9y1" data-start="199" data-end="226">
+<strong data-start="201" data-end="218">Cable Length:</strong> ~1.2m
+</li>
+<li data-section-id="1pnjxjq" data-start="227" data-end="283">
+<strong data-start="229" data-end="248">Shell Material:</strong> Resin shell + aluminum faceplate
+</li>
+<li data-section-id="1buj2te" data-start="284" data-end="348">
+<strong data-start="286" data-end="297">Tuning:</strong> FPS-focused with clear footsteps and positioning
+</li>
+<li data-section-id="4td5i4" data-start="349" data-end="398">
+<strong data-start="351" data-end="364">Features:</strong> Software EQ support and presets
+</li>
+</ul><h3 data-section-id="45yl7p" data-start="400" data-end="421">Quick sound recap</h3><p>
+
+
+</p><ul data-start="422" data-end="621">
+<li data-section-id="wh1jn8" data-start="422" data-end="477">
+Clear footsteps and directional audio for FPS games
+</li>
+<li data-section-id="109t2hy" data-start="478" data-end="519">
+Balanced sound, not overly bass-heavy
+</li>
+<li data-section-id="e6qlv9" data-start="520" data-end="564">
+Good vocal clarity and decent soundstage
+</li>
+<li data-section-id="3pu0qm" data-start="565" data-end="621">
+Comfortable lightweight fit for long gaming sessions</li></ul>
+ID: 27 | Name: ATK VXE R1 se+ | Desc: <h3 data-section-id="1e8o8jp" data-start="42" data-end="62">VXE R1 SE+ Specs</h3><ul data-start="63" data-end="590">
+<li data-section-id="uag44e" data-start="63" data-end="96">
+<strong data-start="65" data-end="76">Sensor:</strong> PixArt PAW3395 SE
+</li>
+<li data-section-id="q45eu1" data-start="97" data-end="126">
+<strong data-start="99" data-end="107">DPI:</strong> Up to 18,000 DPI
+</li>
+<li data-section-id="bjd9rc" data-start="127" data-end="163">
+<strong data-start="129" data-end="146">Polling Rate:</strong> 125Hz – 2000Hz
+</li>
+<li data-section-id="1wqi5d1" data-start="164" data-end="187">
+<strong data-start="166" data-end="177">Weight:</strong> 51g–55g
+</li>
+<li data-section-id="i4286m" data-start="188" data-end="211">
+<strong data-start="190" data-end="202">Battery:</strong> 500mAh
+</li>
+<li data-section-id="mmg1w3" data-start="212" data-end="272">
+<strong data-start="214" data-end="231">Battery Life:</strong> ~35–75 hours (depends on polling rate)
+</li>
+<li data-section-id="4yn7u0" data-start="273" data-end="325">
+<strong data-start="275" data-end="290">Connection:</strong> Wired USB-C + 2.4GHz + Bluetooth
+</li>
+<li data-section-id="11uzgkf" data-start="326" data-end="383">
+<strong data-start="328" data-end="341">Switches:</strong> Huano Blue Glow V2 / Ice Berry Pink Dot
+</li>
+<li data-section-id="k0x31l" data-start="384" data-end="431">
+<strong data-start="386" data-end="403">Scroll Wheel:</strong> Kailh GE upgraded encoder
+</li>
+<li data-section-id="gev7xo" data-start="432" data-end="466">
+<strong data-start="434" data-end="443">Size:</strong> 120.6 × 64 × 37.8 mm
+</li>
+<li data-section-id="12vs7do" data-start="467" data-end="492">
+<strong data-start="469" data-end="478">Feet:</strong> PTFE skates
+</li>
+<li data-section-id="q0limf" data-start="493" data-end="541">
+<strong data-start="495" data-end="505">Shape:</strong> Symmetrical lightweight FPS shape
+</li>
+<li data-section-id="sr5pzb" data-start="542" data-end="590">
+<strong data-start="544" data-end="557">Software:</strong> Web software + ATK HUB support
+</li>
+</ul><h3 data-section-id="1idc9ty" data-start="592" data-end="607">Quick recap</h3><p>
+
+
+</p><ul data-start="608" data-end="840">
+<li data-section-id="xrnt86" data-start="608" data-end="646">
+Excellent budget lightweight mouse
+</li>
+<li data-section-id="v2zdwa" data-start="647" data-end="695">
+Great for Valorant, CS2, Apex, and FPS games
+</li>
+<li data-section-id="26jtx1" data-start="696" data-end="739">
+Comfortable for claw and fingertip grip
+</li>
+<li data-section-id="12rn6pj" data-start="740" data-end="780">
+Very good battery life for the price
+</li>
+<li data-section-id="1ofr9gt" data-start="781" data-end="840">
+Strong value compared to Logitech and Razer budget mice</li></ul>
+ID: 28 | Name: ATK VXE R1 PRO | Desc: <table><thead><tr><th>Attribute</th><th align="right">VXE R1 Pro Wireless Gaming Mouse</th></tr></thead><tbody><tr><td>Sensor</td><td align="right">PAW3395</td></tr><tr><td>Weight</td><td align="right">48g</td></tr><tr><td>Polling Rate</td><td align="right">1K / 4K</td></tr><tr><td>Battery</td><td align="right">250mAh</td></tr><tr><td>Connectivity</td><td align="right">Wireless + Wired</td></tr><tr><td>Best Grip</td><td align="right">Claw / Fingertip</td></tr><tr><td>Battery Life</td><td align="right">~75 hrs</td></tr></tbody></table>
+ID: 29 | Name: ATK ZERO Extreme  | Desc: <table><thead><tr><th>Attribute</th><th align="right">ATK Blazing Sky ZERO Extreme Wireless Mouse</th></tr></thead><tbody><tr><td>Sensor</td><td align="right">PAW3950 Ultra</td></tr><tr><td>Weight</td><td align="right">44g</td></tr><tr><td>Polling Rate</td><td align="right">8K</td></tr><tr><td>DPI</td><td align="right">42,000</td></tr><tr><td>Battery</td><td align="right">300mAh</td></tr><tr><td>Battery Life</td><td align="right">~130 hrs</td></tr><tr><td>Shape</td><td align="right">Symmetrical</td></tr><tr><td>Best Grip</td><td align="right">Claw / Fingertip</td></tr></tbody></table>
+ID: 30 | Name: Attack Shack X11 | Desc: <h3 data-section-id="1m4ky9v" data-start="42" data-end="68">Attack Shark X11 Specs</h3><ul data-start="69" data-end="525">
+<li data-section-id="x9rhdw" data-start="69" data-end="99">
+<strong data-start="71" data-end="82">Sensor:</strong> PixArt PAW3311
+</li>
+<li data-section-id="h8goz4" data-start="100" data-end="129">
+<strong data-start="102" data-end="110">DPI:</strong> Up to 22,000 DPI
+</li>
+<li data-section-id="scpsfw" data-start="130" data-end="158">
+<strong data-start="132" data-end="149">Polling Rate:</strong> 1000Hz
+</li>
+<li data-section-id="1ptznzi" data-start="159" data-end="179">
+<strong data-start="161" data-end="172">Weight:</strong> ~63g
+</li>
+<li data-section-id="1ad8h4n" data-start="180" data-end="216">
+<strong data-start="182" data-end="199">Battery Life:</strong> Up to 65 hours
+</li>
+<li data-section-id="kf1pfs" data-start="217" data-end="278">
+<strong data-start="219" data-end="234">Connection:</strong> 2.4GHz wireless + Bluetooth + USB-C wired
+</li>
+<li data-section-id="brail" data-start="279" data-end="331">
+<strong data-start="281" data-end="294">Switches:</strong> HUANO switches (20 million clicks)
+</li>
+<li data-section-id="1co2fgx" data-start="332" data-end="360">
+<strong data-start="334" data-end="346">Encoder:</strong> TTC Encoder
+</li>
+<li data-section-id="rmf9ts" data-start="361" data-end="414">
+<strong data-start="363" data-end="376">Charging:</strong> Magnetic RGB charging dock included
+</li>
+<li data-section-id="uls2mv" data-start="415" data-end="439">
+<strong data-start="417" data-end="425">MCU:</strong> BK3633 chip
+</li>
+<li data-section-id="17xuj0k" data-start="440" data-end="483">
+<strong data-start="442" data-end="452">Shape:</strong> Ergonomic right-handed shape
+</li>
+<li data-section-id="17ff0j" data-start="484" data-end="525">
+<strong data-start="486" data-end="499">Software:</strong> Driver software support
+</li>
+</ul><h3 data-section-id="1idc9ty" data-start="527" data-end="542">Quick recap</h3><p>
+
+
+</p><ul data-start="543" data-end="759">
+<li data-section-id="54k2vw" data-start="543" data-end="585">
+Very good budget wireless gaming mouse
+</li>
+<li data-section-id="1jbzv2b" data-start="586" data-end="635">
+Charging dock is convenient and looks premium
+</li>
+<li data-section-id="1oa0i0m" data-start="636" data-end="680">
+Comfortable shape for claw and palm grip
+</li>
+<li data-section-id="kbzsx2" data-start="681" data-end="725">
+Good for casual FPS gaming and daily use
+</li>
+<li data-section-id="1fks66g" data-start="726" data-end="759">
+Excellent value for the price</li></ul>
+ID: 31 | Name: Moondrop NiceBuds | Desc: <h3 data-section-id="sa5ob" data-start="42" data-end="70">MOONDROP Nice Buds Specs</h3><ul data-start="71" data-end="504">
+<li data-section-id="1he9w7f" data-start="71" data-end="108">
+<strong data-start="73" data-end="82">Type:</strong> Flat-head wired earbuds
+</li>
+<li data-section-id="mhos55" data-start="109" data-end="146">
+<strong data-start="111" data-end="122">Driver:</strong> 15.4mm Dynamic Driver
+</li>
+<li data-section-id="1j1ai5y" data-start="147" data-end="174">
+<strong data-start="149" data-end="163">Impedance:</strong> 32Ω ±15%
+</li>
+<li data-section-id="szevi5" data-start="175" data-end="206">
+<strong data-start="177" data-end="193">Sensitivity:</strong> 122dB/Vrms
+</li>
+<li data-section-id="nvdf0t" data-start="207" data-end="247">
+<strong data-start="209" data-end="232">Frequency Response:</strong> 20Hz – 20kHz
+</li>
+<li data-section-id="u6jug4" data-start="248" data-end="266">
+<strong data-start="250" data-end="258">THD:</strong> ≤0.1%
+</li>
+<li data-section-id="x3cht9" data-start="267" data-end="303">
+<strong data-start="269" data-end="283">Connector:</strong> 3.5mm stereo plug
+</li>
+<li data-section-id="1gyrfob" data-start="304" data-end="352">
+<strong data-start="306" data-end="323">Shell Design:</strong> Ergonomic asymmetric shell
+</li>
+<li data-section-id="8klz5w" data-start="353" data-end="504">
+<strong data-start="355" data-end="368">Features:</strong>
+<ul data-start="373" data-end="504">
+<li data-section-id="1na6xww" data-start="373" data-end="408">
+Dual rear-cavity damping system
+</li>
+<li data-section-id="1o0om91" data-start="411" data-end="432">
+Bass airflow tube
+</li>
+<li data-section-id="1whmbul" data-start="435" data-end="470">
+Multi-pore acoustic front cover
+</li>
+<li data-section-id="6gwspl" data-start="473" data-end="504">
+Sponge foam tip lock design
+</li>
+</ul>
+</li>
+</ul><h3 data-section-id="45yl7p" data-start="506" data-end="527">Quick sound recap</h3><p>
+
+
+</p><ul data-start="528" data-end="681">
+<li data-section-id="1vqci2l" data-start="528" data-end="553">
+Neutral-bright tuning
+</li>
+<li data-section-id="1s2xnw3" data-start="554" data-end="582">
+Open and airy soundstage
+</li>
+<li data-section-id="1ckvi1i" data-start="583" data-end="614">
+Clear vocals and separation
+</li>
+<li data-section-id="al71r3" data-start="615" data-end="646">
+Light bass compared to IEMs
+</li>
+<li data-section-id="4bdbw4" data-start="647" data-end="681">
+Comfortable for long listening</li></ul>
+ID: 32 | Name: Attack shark X3 | Desc: <h3 data-section-id="mfp5f4" data-start="42" data-end="67">Attack Shark X3 Specs</h3><ul data-start="68" data-end="654">
+<li data-section-id="x9xjuw" data-start="68" data-end="98">
+<strong data-start="70" data-end="81">Sensor:</strong> PixArt PAW3395
+</li>
+<li data-section-id="edf2b8" data-start="99" data-end="128">
+<strong data-start="101" data-end="109">DPI:</strong> Up to 26,000 DPI
+</li>
+<li data-section-id="zmp00b" data-start="129" data-end="165">
+<strong data-start="131" data-end="148">Polling Rate:</strong> 125Hz – 1000Hz
+</li>
+<li data-section-id="qjmbjx" data-start="166" data-end="189">
+<strong data-start="168" data-end="179">Weight:</strong> 49g ±3g
+</li>
+<li data-section-id="1hzud4x" data-start="190" data-end="255">
+<strong data-start="192" data-end="207">Connection:</strong> 2.4GHz wireless + Bluetooth 5.2 + USB-C wired
+</li>
+<li data-section-id="9iamqw" data-start="256" data-end="279">
+<strong data-start="258" data-end="270">Battery:</strong> 300mAh
+</li>
+<li data-section-id="177mv6u" data-start="280" data-end="317">
+<strong data-start="282" data-end="299">Battery Life:</strong> Up to 200 hours
+</li>
+<li data-section-id="yr101x" data-start="318" data-end="368">
+<strong data-start="320" data-end="333">Switches:</strong> Kailh GM 8.0 (80 million clicks)
+</li>
+<li data-section-id="1co2fgx" data-start="369" data-end="397">
+<strong data-start="371" data-end="383">Encoder:</strong> TTC Encoder
+</li>
+<li data-section-id="1hbk8ir" data-start="398" data-end="429">
+<strong data-start="400" data-end="419">Tracking Speed:</strong> 650 IPS
+</li>
+<li data-section-id="t9dnoy" data-start="430" data-end="455">
+<strong data-start="432" data-end="449">Acceleration:</strong> 50G
+</li>
+<li data-section-id="17v2xb" data-start="456" data-end="492">
+<strong data-start="458" data-end="473">Mouse Feet:</strong> Pure PTFE skates
+</li>
+<li data-section-id="1eyv7hc" data-start="493" data-end="527">
+<strong data-start="495" data-end="504">Size:</strong> 118.5 × 61 × 39.7 mm
+</li>
+<li data-section-id="16bmh1r" data-start="528" data-end="582">
+<strong data-start="530" data-end="545">Grip Style:</strong> Claw / Fingertip / Small palm grip
+</li>
+<li data-section-id="3gn0q9" data-start="583" data-end="654">
+<strong data-start="585" data-end="598">Software:</strong> Driver software with DPI, macros, polling adjustments
+</li>
+</ul><h3 data-section-id="1idc9ty" data-start="656" data-end="671">Quick recap</h3><p>
+
+
+</p><ul data-start="672" data-end="879">
+<li data-section-id="qkkznq" data-start="672" data-end="715">
+Very lightweight and fast for FPS games
+</li>
+<li data-section-id="hesnuw" data-start="716" data-end="752">
+Great value budget PAW3395 mouse
+</li>
+<li data-section-id="kh77al" data-start="753" data-end="786">
+Comfortable symmetrical shape
+</li>
+<li data-section-id="ow4cmo" data-start="787" data-end="810">
+Strong battery life
+</li>
+<li data-section-id="vk4jgm" data-start="811" data-end="879">
+Excellent for Valorant, CS2, Apex, and casual competitive gaming</li></ul>
+ID: 33 | Name: IPI float 88 | Desc: <h2 data-section-id="1o203rn" data-start="42" data-end="63">IPI Float 88 Specs</h2><ul data-start="65" data-end="576">
+<li data-section-id="yeba2a" data-start="65" data-end="106">
+Sensor: PixArt PAW3395 optical sensor
+</li>
+<li data-section-id="9p5jhw" data-start="107" data-end="132">
+DPI: Up to 26,000 DPI
+</li>
+<li data-section-id="135s22h" data-start="133" data-end="168">
+Polling Rate: Up to 8000Hz (8K)
+</li>
+<li data-section-id="1ogy9vi" data-start="169" data-end="190">
+Weight: About 42g
+</li>
+<li data-section-id="4skgrg" data-start="191" data-end="231">
+Switches: Kailh White Blade switches
+</li>
+<li data-section-id="1m13sqj" data-start="232" data-end="275">
+Connection: 2.4GHz wireless + wired USB
+</li>
+<li data-section-id="1pwjo1w" data-start="276" data-end="292">
+MCU: PAR2862
+</li>
+<li data-section-id="1cbq323" data-start="293" data-end="335">
+Material: Carbon fiber composite shell
+</li>
+<li data-section-id="m14zv1" data-start="336" data-end="383">
+Battery: 230mAh–500mAh depending on version
+</li>
+<li data-section-id="7a1xsw" data-start="384" data-end="414">
+Size: 119.5 × 60.9 × 37 mm
+</li>
+<li data-section-id="hcfixj" data-start="415" data-end="446">
+Encoder: TTC Gold Dustproof
+</li>
+<li data-section-id="ecg5a2" data-start="447" data-end="467">
+RGB: No lighting
+</li>
+<li data-section-id="1bn7lnz" data-start="468" data-end="507">
+Software: Web-based driver/software
+</li>
+<li data-section-id="4b6r1" data-start="508" data-end="576">
+Color Options: Black / White <span class="" data-state="closed"></span>
+</li>
+</ul><h3 data-section-id="1idc9ty" data-start="578" data-end="593">Quick recap</h3><p>
+
+
+</p><ul data-start="594" data-end="771">
+<li data-section-id="tztmu3" data-start="594" data-end="629">
+Very lightweight for FPS gaming
+</li>
+<li data-section-id="19f83wb" data-start="630" data-end="668">
+Strong flagship sensor performance
+</li>
+<li data-section-id="t3ins3" data-start="669" data-end="704">
+Fast 8K polling for low latency
+</li>
+<li data-section-id="zmu0ck" data-start="705" data-end="728">
+Clean no-RGB design
+</li>
+<li data-section-id="f38omo" data-start="729" data-end="771">
+Good for claw and fingertip grip users</li></ul>
+ID: 34 | Name: Aula F75 | Desc: <h2 data-section-id="1iyrf9q" data-start="42" data-end="59">AULA F75 Specs</h2><ul data-start="61" data-end="659">
+<li data-section-id="awftt1" data-start="61" data-end="104">
+Layout: 75% compact layout (80–81 keys)
+</li>
+<li data-section-id="1sk5ih6" data-start="105" data-end="134">
+Mount Style: Gasket mount
+</li>
+<li data-section-id="wry440" data-start="135" data-end="198">
+Connectivity: Bluetooth 5.0 + 2.4GHz wireless + USB-C wired
+</li>
+<li data-section-id="9j1pen" data-start="199" data-end="248">
+Switch Support: Hot-swappable (3-pin &amp; 5-pin)
+</li>
+<li data-section-id="xe4gt0" data-start="249" data-end="308">
+Switches: Pre-lubed LEOBOG switches (varies by version)
+</li>
+<li data-section-id="hyo9sc" data-start="309" data-end="345">
+Keycaps: Double-shot PBT keycaps
+</li>
+<li data-section-id="7vlwr4" data-start="346" data-end="380">
+RGB: South-facing RGB lighting
+</li>
+<li data-section-id="1pd3lh1" data-start="381" data-end="422">
+Battery: 4000mAh rechargeable battery
+</li>
+<li data-section-id="1swf1oj" data-start="423" data-end="462">
+Polling Rate: 1000Hz wired / 2.4GHz
+</li>
+<li data-section-id="ow69t3" data-start="463" data-end="512">
+Knob: Multifunction volume &amp; RGB control knob
+</li>
+<li data-section-id="9m4mo1" data-start="513" data-end="541">
+Anti-Ghosting: Full NKRO
+</li>
+<li data-section-id="10gpfki" data-start="542" data-end="589">
+Compatibility: Windows, macOS, Android, iOS
+</li>
+<li data-section-id="l7c195" data-start="590" data-end="619">
+Weight: Around 975g–1023g
+</li>
+<li data-section-id="lxqwzm" data-start="620" data-end="659">
+Size: About 322.7 × 143.2 × 43.1 mm
+</li>
+</ul><h3 data-section-id="19zqy0x" data-start="661" data-end="673">Features</h3><p>
+
+
+</p><ul data-start="674" data-end="875">
+<li data-section-id="11agpct" data-start="674" data-end="726">
+5-layer foam dampening for deeper “thocky” sound
+</li>
+<li data-section-id="1ygrpzz" data-start="727" data-end="763">
+Smooth factory-lubed stabilizers
+</li>
+<li data-section-id="vd5eni" data-start="764" data-end="796">
+Compact desk-friendly design
+</li>
+<li data-section-id="723dyz" data-start="797" data-end="834">
+Good value budget custom keyboard
+</li>
+<li data-section-id="xa0efz" data-start="835" data-end="875">
+Popular for gaming and typing setups</li></ul>
+ID: 35 | Name: Jade Skate | Desc: 
+ID: 36 | Name: Obsidian Air | Desc: 
+ID: 37 | Name: Coiled Cable | Desc: 
+ID: 38 | Name: 3.5mm to USB-C adapter | Desc: 
+ID: 39 | Name: 3.5mm to lightning adapter | Desc: 
+ID: 40 | Name: Tangzu Waner SG 2 | Desc: <h2 data-section-id="11poij4" data-start="42" data-end="68">Tangzu Wan’er SG2 Specs</h2><ul data-start="70" data-end="365">
+<li data-section-id="1i6csvb" data-start="70" data-end="105">
+Driver: 10mm PET Dynamic Driver
+</li>
+<li data-section-id="1xq7bv1" data-start="106" data-end="142">
+Frequency Response: 20Hz – 20kHz
+</li>
+<li data-section-id="ve7quv" data-start="143" data-end="165">
+Impedance: 19Ω–20Ω
+</li>
+<li data-section-id="1efdad0" data-start="166" data-end="194">
+Sensitivity: 107–113.5dB
+</li>
+<li data-section-id="s95dbc" data-start="195" data-end="222">
+Connector: 0.78mm 2-Pin
+</li>
+<li data-section-id="1cay0tl" data-start="223" data-end="266">
+Cable: Silver-plated oxygen-free copper
+</li>
+<li data-section-id="121ww3r" data-start="267" data-end="289">
+Cable Length: 1.2m
+</li>
+<li data-section-id="c9fu54" data-start="290" data-end="339">
+Plug Options: 3.5mm / 4.4mm / Type-C variants
+</li>
+<li data-section-id="bvxhyy" data-start="340" data-end="365">
+Colors: Black &amp; White
+</li>
+</ul><h2 data-section-id="i06bb7" data-start="367" data-end="381">Sound Recap</h2><p>
+
+
+</p><ul data-start="382" data-end="548">
+<li data-section-id="1ahskgx" data-start="382" data-end="406">
+Warm-balanced tuning
+</li>
+<li data-section-id="1tbndhr" data-start="407" data-end="439">
+Clear vocals and smooth mids
+</li>
+<li data-section-id="1ltpx7e" data-start="440" data-end="469">
+Relaxed treble, not harsh
+</li>
+<li data-section-id="1bjpjkq" data-start="470" data-end="504">
+Moderate bass with good detail
+</li>
+<li data-section-id="1urqnnd" data-start="505" data-end="548">
+Comfortable for long listening session</li></ul>
+ID: 41 | Name: Mercury K1 Lite | Desc: <h2 data-section-id="zig3vx" data-start="42" data-end="76">GravaStar Mercury K1 Lite Specs</h2><ul data-start="78" data-end="471">
+<li data-section-id="5o722q" data-start="78" data-end="103">
+Layout: 75% (80 keys)
+</li>
+<li data-section-id="lq7xam" data-start="104" data-end="141">
+Switches: GravaStar x BSUN Linear
+</li>
+<li data-section-id="81euy5" data-start="142" data-end="180">
+Hot-swappable: Yes (3-pin &amp; 5-pin)
+</li>
+<li data-section-id="1sk5ih6" data-start="181" data-end="210">
+Mount Style: Gasket mount
+</li>
+<li data-section-id="wxj4d2" data-start="211" data-end="264">
+Keycaps: Double-shot PBT / transparent PC keycaps
+</li>
+<li data-section-id="194tu7v" data-start="265" data-end="322">
+Connectivity: Bluetooth, 2.4GHz wireless, USB-C wired
+</li>
+<li data-section-id="1rjk40v" data-start="323" data-end="343">
+Battery: 4000mAh
+</li>
+<li data-section-id="rhp301" data-start="344" data-end="373">
+RGB: Per-key RGB lighting
+</li>
+<li data-section-id="dsp28u" data-start="374" data-end="405">
+Compatible: Windows &amp; macOS
+</li>
+<li data-section-id="lkgesa" data-start="406" data-end="434">
+Weight: ~1.87 lbs (850g)
+</li>
+<li data-section-id="11fudw6" data-start="435" data-end="471">
+Colors: Transparent Black, White
+</li>
+</ul><h2 data-section-id="1d7mrtu" data-start="473" data-end="484">Features</h2><p>
+
+
+</p><ul data-start="485" data-end="708">
+<li data-section-id="n3c7w2" data-start="485" data-end="536">
+Smooth linear switches with light 40g actuation
+</li>
+<li data-section-id="10arvye" data-start="537" data-end="573">
+Deep clacky/thocky sound profile
+</li>
+<li data-section-id="1v9uqby" data-start="574" data-end="599">
+Lightweight PVC frame
+</li>
+<li data-section-id="1nmo12" data-start="600" data-end="626">
+Triple-mode connection
+</li>
+<li data-section-id="ft7oaf" data-start="627" data-end="677">
+Strong RGB brightness with transparent keycaps
+</li>
+<li data-section-id="lsgjn1" data-start="678" data-end="708">
+Good for gaming and typing</li></ul>
+ID: 42 | Name: Mercury K1 Stealth Black | Desc: <h2 data-section-id="pttyfh" data-start="42" data-end="85">GravaStar Mercury K1 Stealth Black Specs</h2><ul data-start="87" data-end="571">
+<li data-section-id="1ek7oqs" data-start="87" data-end="126">
+Layout: 75% (79 keys + rotary knob)
+</li>
+<li data-section-id="jsz68h" data-start="127" data-end="179">
+Switches: GravaStar x Kailh Stellar Bloom Linear
+</li>
+<li data-section-id="1sk5ih6" data-start="180" data-end="209">
+Mount Style: Gasket mount
+</li>
+<li data-section-id="81euy5" data-start="210" data-end="248">
+Hot-swappable: Yes (3-pin &amp; 5-pin)
+</li>
+<li data-section-id="5jkgcy" data-start="249" data-end="303">
+Keycaps: Double-shot PBT + PC side-printed keycaps
+</li>
+<li data-section-id="1pxlvte" data-start="304" data-end="329">
+Frame: Aluminum alloy
+</li>
+<li data-section-id="qlzdyo" data-start="330" data-end="384">
+Connectivity: Bluetooth 5.0 / 2.4GHz / USB-C wired
+</li>
+<li data-section-id="5g4cib" data-start="385" data-end="405">
+Battery: 8000mAh
+</li>
+<li data-section-id="itexk3" data-start="406" data-end="437">
+RGB: Dual-zone RGB lighting
+</li>
+<li data-section-id="z84tao" data-start="438" data-end="477">
+Sound Dampening: 5-layer PORON foam
+</li>
+<li data-section-id="10gpfki" data-start="478" data-end="525">
+Compatibility: Windows, macOS, Android, iOS
+</li>
+<li data-section-id="1pej4mx" data-start="526" data-end="545">
+Weight: ~1.06kg
+</li>
+<li data-section-id="m2mi4o" data-start="546" data-end="571">
+Colors: Stealth Black
+</li>
+</ul><h2 data-section-id="1d7mrtu" data-start="573" data-end="584">Features</h2><p>
+
+
+</p><ul data-start="585" data-end="782">
+<li data-section-id="1mj6n7o" data-start="585" data-end="614">
+Deep creamy “thock” sound
+</li>
+<li data-section-id="9he633" data-start="615" data-end="641">
+Premium aluminum build
+</li>
+<li data-section-id="1egljlr" data-start="642" data-end="677">
+Compact design with volume knob
+</li>
+<li data-section-id="ow4cmo" data-start="678" data-end="701">
+Strong battery life
+</li>
+<li data-section-id="1ka6ydb" data-start="702" data-end="734">
+Tri-mode wireless connection
+</li>
+<li data-section-id="twdii9" data-start="735" data-end="782">
+Smooth linear switches with light actuation</li></ul>
+ID: 43 | Name: Mercury M1 Pro | Desc: <h2 data-section-id="14refg2" data-start="42" data-end="75">GravaStar Mercury M1 Pro Specs</h2><p>
+</p><ul data-start="77" data-end="797">
+<li data-section-id="x9xjuw" data-start="77" data-end="107">
+<strong data-start="79" data-end="90">Sensor:</strong> PixArt PAW3395
+</li>
+<li data-section-id="uuwndq" data-start="108" data-end="135">
+<strong data-start="110" data-end="122">Max DPI:</strong> 26,000 DPI
+</li>
+<li data-section-id="1mbmzxg" data-start="136" data-end="207">
+<strong data-start="138" data-end="155">Polling Rate:</strong> 1,000Hz standard / up to 4,000Hz with 4K receiver
+</li>
+<li data-section-id="15jn6dt" data-start="208" data-end="273">
+<strong data-start="210" data-end="227">Connectivity:</strong> Wired USB-C, 2.4GHz wireless, Bluetooth 5.1
+</li>
+<li data-section-id="km274j" data-start="274" data-end="315">
+<strong data-start="276" data-end="288">Buttons:</strong> 6–7 programmable buttons
+</li>
+<li data-section-id="dmaqkx" data-start="316" data-end="359">
+<strong data-start="318" data-end="331">Switches:</strong> Omron Blue Point switches
+</li>
+<li data-section-id="mjx4vn" data-start="360" data-end="404">
+<strong data-start="362" data-end="373">Weight:</strong> ~79–88g depending on version
+</li>
+<li data-section-id="195y9u9" data-start="405" data-end="444">
+<strong data-start="407" data-end="420">Material:</strong> Magnesium alloy frame
+</li>
+<li data-section-id="1c8w5rn" data-start="445" data-end="531">
+<strong data-start="447" data-end="464">Battery Life:</strong>
+<ul data-start="469" data-end="531">
+<li data-section-id="1mlp42o" data-start="469" data-end="500">
+Up to 200 hours (Bluetooth)
+</li>
+<li data-section-id="14mr11m" data-start="503" data-end="531">
+Up to 146 hours (2.4GHz)
+</li>
+</ul>
+</li>
+<li data-section-id="pfdle" data-start="532" data-end="579">
+<strong data-start="534" data-end="542">RGB:</strong> GLOWSYNC customizable RGB lighting
+</li>
+<li data-section-id="1hbk8ir" data-start="580" data-end="611">
+<strong data-start="582" data-end="601">Tracking Speed:</strong> 650 IPS
+</li>
+<li data-section-id="t9dnoy" data-start="612" data-end="637">
+<strong data-start="614" data-end="631">Acceleration:</strong> 50G
+</li>
+<li data-section-id="1alageo" data-start="638" data-end="688">
+<strong data-start="640" data-end="650">Shape:</strong> Ambidextrous / right-hand optimized
+</li>
+<li data-section-id="1qp5fa0" data-start="689" data-end="730">
+<strong data-start="691" data-end="712">Software Support:</strong> Windows &amp; macOS
+</li>
+<li data-section-id="1qrk6oo" data-start="731" data-end="797">
+<strong data-start="733" data-end="744">Colors:</strong> Black, Silver, Yellow, Ice Blue, Gradient editions</li></ul>
+ID: 44 | Name: Scyrox V8 | Desc: <h2 data-section-id="px0mj5" data-start="42" data-end="60">Scyrox V8 Specs</h2><p>
+</p><ul data-start="62" data-end="644">
+<li data-section-id="xgqkaz" data-start="62" data-end="92">
+<strong data-start="64" data-end="75">Sensor:</strong> PixArt PAW3950
+</li>
+<li data-section-id="14ixtdl" data-start="93" data-end="120">
+<strong data-start="95" data-end="107">Max DPI:</strong> 30,000 DPI
+</li>
+<li data-section-id="fk6b6v" data-start="121" data-end="165">
+<strong data-start="123" data-end="140">Polling Rate:</strong> Up to 8,000Hz wireless
+</li>
+<li data-section-id="aq2alr" data-start="166" data-end="206">
+<strong data-start="168" data-end="179">Weight:</strong> ~36g (ultra lightweight)
+</li>
+<li data-section-id="1fwbjln" data-start="207" data-end="270">
+<strong data-start="209" data-end="226">Connectivity:</strong> Wired USB-C + 2.4GHz wireless + Bluetooth
+</li>
+<li data-section-id="1uf6dnr" data-start="271" data-end="319">
+<strong data-start="273" data-end="286">Switches:</strong> Omron / Kailh Optical switches
+</li>
+<li data-section-id="kcoryn" data-start="320" data-end="345">
+<strong data-start="322" data-end="330">MCU:</strong> Nordic 52840
+</li>
+<li data-section-id="17712u1" data-start="346" data-end="372">
+<strong data-start="348" data-end="362">Max Speed:</strong> 750 IPS
+</li>
+<li data-section-id="t9dnoy" data-start="373" data-end="398">
+<strong data-start="375" data-end="392">Acceleration:</strong> 50G
+</li>
+<li data-section-id="1q6vcr0" data-start="399" data-end="422">
+<strong data-start="401" data-end="413">Battery:</strong> 250mAh
+</li>
+<li data-section-id="yrs0br" data-start="423" data-end="459">
+<strong data-start="425" data-end="440">Dimensions:</strong> 118 × 63 × 38 mm
+</li>
+<li data-section-id="oqmsrh" data-start="460" data-end="510">
+<strong data-start="462" data-end="477">Grip Style:</strong> Best for claw &amp; fingertip grip
+</li>
+<li data-section-id="1yb4ezc" data-start="511" data-end="554">
+<strong data-start="513" data-end="523">Shape:</strong> Symmetrical ergonomic design
+</li>
+<li data-section-id="1kenom2" data-start="555" data-end="607">
+<strong data-start="557" data-end="570">Software:</strong> Web-based S-Center driver/software
+</li>
+<li data-section-id="12b1zh4" data-start="608" data-end="644">
+<strong data-start="610" data-end="621">Colors:</strong> Black, White, Yellow</li></ul>
+ID: 45 | Name: Dongle 4K VGN | Desc: 
+ID: 46 | Name: ATK E-sports Hand Sweat Bag | Desc: 
+ID: 47 | Name: Simgot Ew300 | Desc: <ul data-start="221" data-end="637"><li data-section-id="10rj4mz" data-start="221" data-end="300"><strong data-start="223" data-end="240">Driver setup:</strong> 1 Dynamic Driver + 1 Planar Driver + 1 Piezoelectric Driver
+</li>
+<li data-section-id="19nyfw2" data-start="301" data-end="355">
+<strong data-start="303" data-end="322">Dynamic driver:</strong> 10mm ceramic composite diaphragm
+</li>
+<li data-section-id="k4jl0k" data-start="356" data-end="396">
+<strong data-start="358" data-end="376">Planar driver:</strong> 6mm planar magnetic
+</li>
+<li data-section-id="1fk8fwt" data-start="397" data-end="417">
+<strong data-start="399" data-end="413">Impedance:</strong> 28Ω
+</li>
+<li data-section-id="mcb7bl" data-start="418" data-end="453">
+<strong data-start="420" data-end="443">Frequency response:</strong> 8Hz–40kHz
+</li>
+<li data-section-id="6j9byg" data-start="454" data-end="483">
+<strong data-start="456" data-end="470">Connector:</strong> 0.78mm 2-pin
+</li>
+<li data-section-id="19um956" data-start="484" data-end="520">
+<strong data-start="486" data-end="496">Cable:</strong> Silver-plated OFC cable
+</li>
+<li data-section-id="1tgjm40" data-start="521" data-end="637">
+<strong data-start="523" data-end="542">Tuning nozzles:</strong> 2 interchangeable nozzles for different sound signatures <span class="" data-state="closed"></span>
+</li>
+</ul><h3 data-section-id="kjt22o" data-start="639" data-end="654">Sound Recap</h3><p>
+
+</p><ul data-start="655" data-end="947">
+<li data-section-id="ljpi82" data-start="655" data-end="699">
+<strong data-start="657" data-end="666">Bass:</strong> Punchy with good sub-bass rumble
+</li>
+<li data-section-id="1s99y47" data-start="700" data-end="751">
+<strong data-start="702" data-end="718">Mids/Vocals:</strong> Slightly warm, smooth, and clean
+</li>
+<li data-section-id="13zgzdi" data-start="752" data-end="835">
+<strong data-start="754" data-end="765">Treble:</strong> Detailed and energetic but can feel bright for treble-sensitive users
+</li>
+<li data-section-id="o1qbtu" data-start="836" data-end="947">
+<strong data-start="838" data-end="863">Soundstage &amp; Imaging:</strong> Above average for gaming and music separation&nbsp;</li></ul>
+ID: 48 | Name: FPS Mousepad | Desc: <p>FPS Mousepad ជាប្រភេទ Cloth Mousepad ទន់ , Smooth ងាយស្រួលប្រើប្រាស់</p>
+ID: 49 | Name: Jcally Jm Pro 2 | Desc: 
+ID: 50 | Name: ATK Dragonfly A9 Air | Desc: <li data-section-id="15d4p44" data-start="73" data-end="121">Product: <span class="hover:entity-accent entity-underline inline cursor-pointer align-baseline">ATK Dragonfly A9 Air</span>
+</li><li data-section-id="hz9h8g" data-start="122" data-end="162">
+Type: Ultralight wireless gaming mouse
+</li><li data-section-id="1x2mjvt" data-start="163" data-end="199">
+Shape: GPX-style symmetrical shape
+</li><li data-section-id="dz8el0" data-start="200" data-end="221">
+Weight: <strong data-start="210" data-end="221">47 ± 3g</strong>
+</li><li data-section-id="1vo8gyl" data-start="222" data-end="258">
+Dimensions: <strong data-start="236" data-end="258">125 × 63.5 × 40 mm</strong>
+</li><li data-section-id="1vvfm9h" data-start="259" data-end="293">
+Sensor: <strong data-start="269" data-end="293">PixArt PAW3950 Ultra</strong>
+</li><li data-section-id="8cl842" data-start="294" data-end="355">
+DPI: <strong data-start="301" data-end="320">10 – 30,000 DPI</strong> (up to 42,000 OC on some firmware)
+</li><li data-section-id="fgxgd5" data-start="356" data-end="380">
+Max Speed: <strong data-start="369" data-end="380">750 IPS</strong>
+</li><li data-section-id="57hew6" data-start="381" data-end="408">
+Max Acceleration: <strong data-start="401" data-end="408">50G</strong>
+</li><li data-section-id="7mqkil" data-start="409" data-end="432">
+MCU: <strong data-start="416" data-end="432">Nordic 54L15</strong>
+</li><li data-section-id="1jhurtu" data-start="433" data-end="467">
+Polling Rate: <strong data-start="449" data-end="467">125Hz – 8000Hz</strong>
+</li><li data-section-id="1sba2v2" data-start="468" data-end="503">
+Click Latency: around <strong data-start="492" data-end="503">0.18 ms</strong>
+</li><li data-section-id="aekdk5" data-start="504" data-end="542">
+Switches: <strong data-start="516" data-end="542">ATK SwiftLight Optical</strong>
+</li><li data-section-id="hy3jek" data-start="543" data-end="577">
+Scroll Wheel: <strong data-start="559" data-end="577">TTC Gold Wheel</strong>
+</li><li data-section-id="pywwx4" data-start="578" data-end="663">
+Connectivity:
+<ul data-start="596" data-end="663">
+<li data-section-id="1ueqevp" data-start="596" data-end="613">
+2.4GHz Wireless
+</li>
+<li data-section-id="1n7nhr" data-start="616" data-end="629">
+USB-C Wired
+</li>
+<li data-section-id="1ozck2y" data-start="632" data-end="663">
+Bluetooth 5.3 (some versions)
+</li>
+</ul>
+</li><li data-section-id="1t16uvn" data-start="664" data-end="749">
+Battery:
+<ul data-start="677" data-end="749">
+<li data-section-id="mxderp" data-start="677" data-end="702">
+Air version: <strong data-start="692" data-end="702">300mAh</strong>
+</li>
+<li data-section-id="1hn330p" data-start="705" data-end="749">
+Battery life: around <strong data-start="728" data-end="749">300 hours @1000Hz</strong>
+</li>
+</ul>
+</li><li data-section-id="176zijo" data-start="750" data-end="778">
+Feet: PTFE skates included
+</li><li data-section-id="1au1who" data-start="779" data-end="804">
+Receiver: GEM 8K dongle
+</li><p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</p><li data-section-id="yuez8b" data-start="805" data-end="879">
+Coating: Nano coating matte finish</li>
+ID: 51 | Name: Jcally JA31 | Desc: <p>- DAC Chip: Conexant CX31993<br>- Output Power: 28.2mW @ 32Ω<br>- Max Sample Rate: 32-bit / 384kHz (Hi-Res)<br></p>
+ID: 52 | Name: Brateck E350 Monitor Arm | Desc: <h3 data-section-id="b13pdn" data-start="168" data-end="182">Main Specs</h3><p>
+</p><ul data-start="183" data-end="619">
+<li data-section-id="17iw4g5" data-start="183" data-end="215">
+Supports: <strong data-start="195" data-end="215">17″–32″ monitors</strong>
+</li>
+<li data-section-id="1rdnc41" data-start="216" data-end="244">
+Weight Capacity: <strong data-start="235" data-end="244">1–9kg</strong>
+</li>
+<li data-section-id="1m9rsrg" data-start="245" data-end="286">
+VESA Support:
+<ul data-start="263" data-end="286">
+<li data-section-id="5p257j" data-start="263" data-end="272">
+75×75mm
+</li>
+<li data-section-id="1dcfn7j" data-start="275" data-end="286">
+100×100mm
+</li>
+</ul>
+</li>
+<li data-section-id="1a3zdvm" data-start="287" data-end="335">
+Installation:
+<ul data-start="305" data-end="335">
+<li data-section-id="ausgma" data-start="305" data-end="317">
+Desk Clamp
+</li>
+<li data-section-id="1xs39ta" data-start="320" data-end="335">
+Grommet Mount
+</li>
+</ul>
+</li>
+<li data-section-id="xiq83z" data-start="336" data-end="378">
+Material:
+<ul data-start="350" data-end="378">
+<li data-section-id="16540hl" data-start="350" data-end="378">
+Aluminum + steel + plastic
+</li>
+</ul>
+</li>
+<li data-section-id="9mwkm6" data-start="379" data-end="420">
+Arm Type:
+<ul data-start="393" data-end="420">
+<li data-section-id="1v479yd" data-start="393" data-end="420">
+Gas spring adjustable arm
+</li>
+</ul>
+</li>
+<li data-section-id="1olukaw" data-start="421" data-end="445">
+Rotation:
+<ul data-start="435" data-end="445">
+<li data-section-id="10qo1a9" data-start="435" data-end="445">
+<strong data-start="437" data-end="445">180°</strong>
+</li>
+</ul>
+</li>
+<li data-section-id="zfs11h" data-start="446" data-end="474">
+Tilt:
+<ul data-start="456" data-end="474">
+<li data-section-id="5v28l9" data-start="456" data-end="474">
+<strong data-start="458" data-end="474">+90° to -45°</strong>
+</li>
+</ul>
+</li>
+<li data-section-id="1f63l22" data-start="475" data-end="505">
+Swivel:
+<ul data-start="487" data-end="505">
+<li data-section-id="5rfb11" data-start="487" data-end="505">
+<strong data-start="489" data-end="505">+90° to -90°</strong>
+</li>
+</ul>
+</li>
+<li data-section-id="n2qdwa" data-start="506" data-end="551">
+Height Adjustment:
+<ul data-start="529" data-end="551">
+<li data-section-id="xica3b" data-start="529" data-end="551">
+Around <strong data-start="538" data-end="551">133–428mm</strong>
+</li>
+</ul>
+</li>
+<li data-section-id="1chhw8x" data-start="552" data-end="619">
+Colors:
+<ul data-start="564" data-end="619">
+<li data-section-id="16y13v3" data-start="564" data-end="571">
+Black
+</li>
+<li data-section-id="oy980i" data-start="574" data-end="619">
+Whit</li></ul></li></ul>
+ID: 53 | Name: Monitor Arm  | Desc: <p>Load capacity 1kg - 10kg , compatible size : 17'' - 32"</p>
+ID: 54 | Name: Cm619 | Desc: <h3 data-section-id="b13pdn" data-start="78" data-end="92">Main Specs</h3><p>
+</p><ul data-start="93" data-end="614">
+<li data-section-id="oh3ml9" data-start="93" data-end="127">
+Type: Wireless gaming controller
+</li>
+<li data-section-id="651go3" data-start="128" data-end="175">
+Connectivity:
+<ul data-start="146" data-end="175">
+<li data-section-id="1oxncol" data-start="146" data-end="161">
+Bluetooth 5.0
+</li>
+<li data-section-id="903ke9" data-start="164" data-end="175">
+USB wired
+</li>
+</ul>
+</li>
+<li data-section-id="6wt5yl" data-start="176" data-end="260">
+Compatible With:
+<ul data-start="197" data-end="260">
+<li data-section-id="yhmu2j" data-start="197" data-end="201">
+PC
+</li>
+<li data-section-id="1bkusrr" data-start="204" data-end="221">
+Nintendo Switch
+</li>
+<li data-section-id="1bxj043" data-start="224" data-end="233">
+Android
+</li>
+<li data-section-id="muaaj8" data-start="236" data-end="245">
+iOS 13+
+</li>
+<li data-section-id="1tbrze7" data-start="248" data-end="260">
+Steam Deck
+</li>
+</ul>
+</li>
+<li data-section-id="1chwngt" data-start="261" data-end="282">
+Battery: <strong data-start="272" data-end="282">600mAh</strong>
+</li>
+<li data-section-id="17euxzi" data-start="283" data-end="320">
+Battery Life: around <strong data-start="306" data-end="320">5–10 hours</strong>
+</li>
+<li data-section-id="1fsefc7" data-start="321" data-end="338">
+Charging: USB-C
+</li>
+<li data-section-id="clbknd" data-start="339" data-end="370">
+Wireless Range: under <strong data-start="363" data-end="370">10m</strong>
+</li>
+<li data-section-id="nni6t2" data-start="371" data-end="550">
+Features:
+<ul data-start="385" data-end="550">
+<li data-section-id="1z0pein" data-start="385" data-end="408">
+Hall Effect joysticks
+</li>
+<li data-section-id="w74le2" data-start="411" data-end="426">
+Hall triggers
+</li>
+<li data-section-id="17kjhlt" data-start="429" data-end="443">
+RGB lighting
+</li>
+<li data-section-id="1go01n9" data-start="446" data-end="458">
+Turbo mode
+</li>
+<li data-section-id="14mf0rn" data-start="461" data-end="480">
+Macro programming
+</li>
+<li data-section-id="1xfwb3y" data-start="483" data-end="506">
+Dual vibration motors
+</li>
+<li data-section-id="bdee1" data-start="509" data-end="527">
+6-axis gyroscope
+</li>
+<li data-section-id="2yxog6" data-start="530" data-end="550">
+Mechanical buttons
+</li>
+</ul>
+</li>
+<li data-section-id="1g2rgfw" data-start="551" data-end="614">
+Weight: around <strong data-start="568" data-end="576">250</strong></li></ul>
+ID: 55 | Name: MAONO PM461 | Desc: <div class="note-editable" contenteditable="true" role="textbox" aria-multiline="true" spellcheck="true" autocorrect="true" style="box-sizing: border-box; outline: none; margin: 0px; padding: 10px; overflow: auto; overflow-wrap: break-word; color: rgb(0, 0, 0); font-family: sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; height: 250px;"><table><thead><tr><th>Specification</th><th>Details</th></tr></thead><tbody><tr><td>Microphone Type</td><td>Condenser</td></tr><tr><td>Capsule Size</td><td>14mm</td></tr><tr><td>Polar Pattern</td><td>Cardioid</td></tr><tr><td>Frequency Response</td><td>20Hz – 20kHz</td></tr><tr><td>Sample Rate</td><td>Up to 192kHz / 24-bit</td></tr><tr><td>Sensitivity</td><td>-13.5dBFS ±3dB</td></tr><tr><td>Signal-to-Noise Ratio</td><td>60dB</td></tr><tr><td>Max SPL</td><td>93.5dB</td></tr><tr><td>Connection</td><td>USB A to B</td></tr><tr><td>Cable Length</td><td>1.5m</td></tr><tr><td>Compatibility</td><td>Windows, Mac, Laptop, PC</td></tr><tr><td>Features</td><td>Gain knob, plug &amp; play, tripod included</td></tr></tbody></table></div><p><br class="Apple-interchange-newline"><br></p>
+ID: 56 | Name: Laptop Stand 360 Degree | Desc: <p>Laptop Stand 360 Degree</p><p>Load capacity 1kg - 8kg</p>
+ID: 57 | Name: Win 60 He | Desc: <table><thead><tr><th>Specification</th><th>Details</th></tr></thead><tbody><tr><td>Layout</td><td>60%</td></tr><tr><td>Keys</td><td>61 Keys</td></tr><tr><td>Switch Type</td><td>Hall Effect Magnetic Switch</td></tr><tr><td>Polling Rate</td><td>8000Hz</td></tr><tr><td>Scan Rate</td><td>32K per-key</td></tr><tr><td>Rapid Trigger Precision</td><td>0.02mm</td></tr><tr><td>Actuation Range</td><td>0.08mm – 3.4mm</td></tr><tr><td>Connection</td><td>Wired USB</td></tr><tr><td>RGB</td><td>Full RGB Backlight</td></tr><tr><td>Keycaps</td><td>OEM PBT / Double-shot</td></tr><tr><td>Mount Style</td><td>Tray Mount</td></tr><tr><td>Plate</td><td>Metal Positioning Plate</td></tr><tr><td>Sound Dampening</td><td>PO Sandwich Foam + Bottom Cotton</td></tr><tr><td>Dimensions</td><td>302 × 109 × 37 mm</td></tr><tr><td>Weight</td><td>Around 627g</td></tr><tr><td>Compatibility</td><td>Windows / Web Driver</td></tr></tbody></table>
+ID: 58 | Name: Valkyie | Desc: <p>-Weight: 49±3g<br>-Sensor: PixArt PAW3311<br>-DPI: 50–24000 DPI<br>-Polling Rate: 1000Hz</p>
+ID: 59 | Name: Xing Meng Zero 1 SE | Desc: <li data-section-id="1t1b9ek" data-start="251" data-end="268">49g lightweight
+</li><li data-section-id="9yjcc8" data-start="269" data-end="285">
+PAW3311 sensor
+</li><li data-section-id="nk6ehp" data-start="286" data-end="295">
+12K DPI</li><li data-section-id="nk6ehp" data-start="286" data-end="295">1000Hz polling</li>
+ID: 60 | Name: Monitor Light Bar | Desc: 54 cm&nbsp;
+ID: 61 | Name: MAD 60 HE | Desc: <h3 data-section-id="b13pdn" data-start="200" data-end="214">Main Specs</h3><p>
+</p><ul data-start="215" data-end="749">
+<li data-section-id="1ihxt7v" data-start="215" data-end="232">
+<strong data-start="217" data-end="228">Layout:</strong> 60%
+</li>
+<li data-section-id="1fxv9yr" data-start="233" data-end="283">
+<strong data-start="235" data-end="251">Switch Type:</strong> Magnetic / Hall Effect switches
+</li>
+<li data-section-id="1jueej" data-start="284" data-end="308">
+<strong data-start="286" data-end="304">Rapid Trigger:</strong> Yes
+</li>
+<li data-section-id="l4d8lo" data-start="309" data-end="355">
+<strong data-start="311" data-end="336">Adjustable Actuation:</strong> Around 0.1mm–3.5mm
+</li>
+<li data-section-id="3606rw" data-start="356" data-end="416">
+<strong data-start="358" data-end="386">Rapid Trigger Precision:</strong> up to 0.02mm on some versions
+</li>
+<li data-section-id="b14lxp" data-start="417" data-end="472">
+<strong data-start="419" data-end="436">Polling Rate:</strong> 1000Hz to 8000Hz depending on model
+</li>
+<li data-section-id="1sv7zkb" data-start="473" data-end="513">
+<strong data-start="475" data-end="493">Key Scan Rate:</strong> 16K single-key scan
+</li>
+<li data-section-id="a8sbyl" data-start="514" data-end="551">
+<strong data-start="516" data-end="524">RGB:</strong> Yes (some variants no RGB)
+</li>
+<li data-section-id="1uddyg3" data-start="552" data-end="581">
+<strong data-start="554" data-end="569">Connection:</strong> Wired USB-C
+</li>
+<li data-section-id="16se8lf" data-start="582" data-end="628">
+<strong data-start="584" data-end="596">Keycaps:</strong> PBT / custom variants available
+</li>
+<li data-section-id="1x7fu7j" data-start="629" data-end="661">
+<strong data-start="631" data-end="644">Software:</strong> Web-based driver
+</li>
+<li data-section-id="j3as9o" data-start="662" data-end="681">
+<strong data-start="664" data-end="675">Weight:</strong> ~520g
+</li>
+<li data-section-id="mfqtpl" data-start="682" data-end="749">
+<strong data-start="684" data-end="693">Size:</strong> 302 × 116 × 37 mm</li></ul>
+ID: 62 | Name: fantech NC21 | Desc: <h3 data-section-id="u9pdcd" data-start="42" data-end="64">Fantech NC21 Specs</h3><p>
+</p><ul data-start="65" data-end="611">
+<li data-section-id="bwri20" data-start="65" data-end="115">
+<strong data-start="67" data-end="76">Type:</strong> Laptop Cooling Pad / Notebook Cooler
+</li>
+<li data-section-id="1nv2mtp" data-start="116" data-end="162">
+<strong data-start="118" data-end="138">Compatible Size:</strong> Up to 17-inch laptops
+</li>
+<li data-section-id="btt9xc" data-start="163" data-end="183">
+<strong data-start="165" data-end="174">Fans:</strong> 2 fans
+</li>
+<li data-section-id="t5gant" data-start="184" data-end="219">
+<strong data-start="186" data-end="199">Fan Size:</strong> 140 × 140 × 25 mm
+</li>
+<li data-section-id="1vxlnf3" data-start="220" data-end="256">
+<strong data-start="222" data-end="236">Fan Speed:</strong> 900–1200 RPM ±10%
+</li>
+<li data-section-id="vgmipk" data-start="257" data-end="293">
+<strong data-start="259" data-end="275">Fan Bearing:</strong> Oilless Bearing
+</li>
+<li data-section-id="gzada5" data-start="294" data-end="328">
+<strong data-start="296" data-end="313">RGB Lighting:</strong> 10 RGB modes
+</li>
+<li data-section-id="148u8z7" data-start="329" data-end="379">
+<strong data-start="331" data-end="353">Adjustable Height:</strong> 8-step angle adjustment
+</li>
+<li data-section-id="m6tlt9" data-start="380" data-end="403">
+<strong data-start="382" data-end="395">Max Load:</strong> 10 kg
+</li>
+<li data-section-id="248clc" data-start="404" data-end="440">
+<strong data-start="406" data-end="419">Material:</strong> PC Plastic + Metal
+</li>
+<li data-section-id="11cjdbs" data-start="441" data-end="478">
+<strong data-start="443" data-end="458">Dimensions:</strong> 382 × 262 × 42 mm
+</li>
+<li data-section-id="1ambato" data-start="479" data-end="503">
+<strong data-start="481" data-end="492">Weight:</strong> 930g ±5g
+</li>
+<li data-section-id="khoea1" data-start="504" data-end="535">
+<strong data-start="506" data-end="522">Power Input:</strong> 5V / 750mA
+</li>
+<li data-section-id="1vjhnxn" data-start="536" data-end="611">
+<strong data-start="538" data-end="557">Extra Features:</strong> Phone holder, USB port extension, RGB on/off switch</li></ul>
+ID: 63 | Name: Simgot EG-280 | Desc: <li data-section-id="d71v51" data-start="166" data-end="216"><strong data-start="168" data-end="177">Type:</strong> Hybrid IEM (1 BA + 1 Dynamic driver)
+</li><li data-section-id="t5kt7k" data-start="217" data-end="330">
+<strong data-start="219" data-end="244">Driver Configuration:</strong>
+<ul data-start="249" data-end="330">
+<li data-section-id="puoy7m" data-start="249" data-end="298">
+1 Balanced Armature driver for mids and highs
+</li>
+<li data-section-id="thonzi" data-start="301" data-end="330">
+1 Dynamic driver for lows
+</li>
+</ul>
+</li><li data-section-id="3467sj" data-start="331" data-end="374">
+<strong data-start="333" data-end="356">Frequency Response:</strong> ~20 Hz – 20 kHz
+</li><li data-section-id="1jvitts" data-start="375" data-end="406">
+<strong data-start="377" data-end="391">Impedance:</strong> ~32 Ω (Ohms)
+</li><li data-section-id="18gojwr" data-start="407" data-end="438">
+<strong data-start="409" data-end="425">Sensitivity:</strong> ~108 dB/mW
+</li><li data-section-id="1h3us34" data-start="439" data-end="487">
+<strong data-start="441" data-end="451">Cable:</strong> Detachable, usually 2-pin 0.78 mm
+</li><li data-section-id="huyxj9" data-start="488" data-end="528">
+<strong data-start="490" data-end="511">Housing Material:</strong> Aluminum alloy
+</li><li data-section-id="fzfblz" data-start="529" data-end="610">
+<strong data-start="531" data-end="545">Connector:</strong> 3.5 mm or sometimes 2.5 mm balanced option (depends on bundle)
+</li><p>
+
+
+
+
+
+
+
+</p><li data-section-id="1yx2w8n" data-start="611" data-end="668">
+<strong data-start="613" data-end="626">Ear Tips:</strong> Multiple sizes included (silicone/foa</li>
+ID: 64 | Name: Aula S75 Pro | Desc: <li data-section-id="w334at" data-start="59" data-end="96"><strong data-start="61" data-end="72">Layout:</strong> 75% compact (80 keys)
+</li><li data-section-id="1848vhy" data-start="97" data-end="173">
+<strong data-start="99" data-end="114">Connection:</strong> Tri-mode — Bluetooth 5.0 / 2.4GHz wireless / USB-C wired
+</li><li data-section-id="1a9h74s" data-start="174" data-end="248">
+<strong data-start="176" data-end="189">Switches:</strong> Seiya / Caramel Latte (pre-lubed, hot-swappable 3/5-pin)
+</li><li data-section-id="m8kpmw" data-start="249" data-end="286">
+<strong data-start="251" data-end="261">Mount:</strong> Gasket mount structure
+</li><li data-section-id="1wssh27" data-start="287" data-end="311">
+<strong data-start="289" data-end="301">Battery:</strong> 4000mAh
+</li><li data-section-id="1g0qnpv" data-start="312" data-end="417">
+<strong data-start="314" data-end="331">Polling Rate:</strong> Up to 1000Hz (some listings mention higher, but 1000Hz is the common official spec)
+</li><li data-section-id="16hk9cq" data-start="418" data-end="450">
+<strong data-start="420" data-end="432">Keycaps:</strong> Double-shot PBT
+</li><li data-section-id="6bqzik" data-start="451" data-end="496">
+<strong data-start="453" data-end="461">RGB:</strong> Full RGB lighting (16.8M colors)
+</li><li data-section-id="1ymbmvr" data-start="497" data-end="555">
+<strong data-start="499" data-end="510">Screen:</strong> LCD/TFT smart display + multifunction knob
+</li><li data-section-id="1ocrdec" data-start="556" data-end="600">
+<strong data-start="558" data-end="576">Anti-Ghosting:</strong> NKRO (N-Key Rollover)
+</li><li data-section-id="mluqel" data-start="601" data-end="653">
+<strong data-start="603" data-end="621">Compatibility:</strong> Windows / Mac / iOS / Android
+</li><li data-section-id="ytjjzs" data-start="654" data-end="694">
+<strong data-start="656" data-end="665">Size:</strong> 333.29 × 147.39 × 43.17 mm
+</li><p>
+
+
+
+
+
+
+
+
+
+
+
+</p><li data-section-id="1y52drr" data-start="695" data-end="753">
+<strong data-start="697" data-end="708">Weight:</strong> ~1000g</li>
+ID: 65 | Name: 8 in 1 USB C Adapter | Desc: <h1 id="title" class="a-size-large a-spacing-none" style="padding-block-end: 0px; text-rendering: optimizelegibility; color: rgb(15, 17, 17); font-family: &quot;Amazon Ember&quot;, Arial, sans-serif; margin-bottom: 0px !important; font-size: 24px !important; line-height: 32px !important;"><span id="productTitle" class="a-size-large product-title-word-break" style="text-rendering: optimizelegibility; word-break: break-word; line-height: 32px !important;">USB C HUB, 8 in 1 USB C Adapter with 4K HDMI, 100W PD, USB C Port, USB 3.0, RJ45 Ethernet, SD/TF Card Reader, Docking Station Compatible with MacBook Pro/Air USB C Laptops and Other Type C Devices</span></h1>
+ID: 66 | Name: Memory Foam Eartips | Desc: <div class="rte" style="margin-block-start: 24px; color: rgb(23, 23, 23); font-family: Inter, sans-serif;"><span class="defshotcont" style="margin-block: 0px;">Memory Foam Eartips | Noise Isolating | Small 11mm Medium 12mm Large 13mm Eartips | Heat Sensitive | Breathable | Ergonomic Shape | Long Term &amp; Comfortable to Wear</span></div><div class="product__inventory no-js-hidden" id="Inventory-template--17845588623434__main-product-4838238355530" role="status" style="margin-block-start: 24px; color: rgb(23, 23, 23); font-family: Inter, sans-serif;"><div class="alert alert--error inline-flex items-center gap-3" style="display: inline-flex; align-items: center; gap: 12px; padding: 20px; color: rgb(190, 18, 60); background-color: rgb(255, 241, 242); border-radius: 9999px; padding-block: 14px; padding-inline: 18px 20px;"><svg class="icon icon-ellipse icon-xs shrink-0" viewBox="0 0 16 16" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg"><circle fill="currentColor" cx="8" cy="8" r="5"></circle><circle cx="8" cy="8" r="6.5" stroke-opacity="0.3" stroke-width="3"></circle></svg></div></div>
+ID: 67 | Name: Silicone EAR tips | Desc: 
+ID: 68 | Name: Monitor Arm NB D5 | Desc: <p>Load capacity 1-10kg&nbsp;</p><p>screen size 17- 32 inces</p>
+ID: 69 | Name: Keyz Glasspad | Desc: <p>Glasspad smooth , fast</p><p>size : 45 x 40 cm</p>
+ID: 70 | Name: Keyz Monitor Stand | Desc: USB Monitor stand
+ID: 71 | Name: YUNJI CX31993 | Desc: 
+ID: 72 | Name: Simgot LC 1 ii 0.78 | Desc: <p>0.78 wiht mic</p>
+ID: 73 | Name: Qkz-T7 | Desc: <ul style="list-style: disc; margin: 0px; margin-block: 24px; padding-inline-start: 32px; padding: 0px; color: rgb(23, 23, 23); font-family: Inter, sans-serif;"><li style="margin-block-start: 12px; padding-inline-start: 8px; position: relative; padding-left: 20px; margin-bottom: 6px; font-size: 14px;">4-core cable with 336 silver-plated oxygen-free copper strands</li><li style="margin-block-start: 12px; padding-inline-start: 8px; position: relative; padding-left: 20px; margin-bottom: 6px; font-size: 14px;">Compatible with KZ, TRN, and CCA In-Ear Monitors</li><li style="margin-block-start: 12px; padding-inline-start: 8px; position: relative; padding-left: 20px; margin-bottom: 6px; font-size: 14px;">Built-in microphone for clear hands-free calls</li><li style="margin-block-start: 12px; padding-inline-start: 8px; position: relative; padding-left: 20px; margin-bottom: 6px; font-size: 14px;">Over-ear design for secure and comfortable fit</li><li style="margin-block-start: 12px; padding-inline-start: 8px; position: relative; padding-left: 20px; margin-bottom: 6px; font-size: 14px;">High conductivity for superior audio quality</li><li style="margin-block-start: 12px; padding-inline-start: 8px; position: relative; padding-left: 20px; margin-bottom: 6px; font-size: 14px;">Durable and flexible 1.2-meter cable length</li></ul>
+ID: 74 | Name: JCALLY JM7L | Desc: <li class="Z1qcYe" data-sfc-cp="" jsaction="" jscontroller="oSLmPe" data-sfc-root="c" jsuid="xhNVve_10" data-sfc-cb="" data-hveid="CAIIAAgACA0QAQ" data-complete="true" data-copy-service-computed-style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; font-size: 16px; font-weight: 400; margin: 0px 0px 12px; text-decoration: none; border-bottom: 0px rgb(10, 10, 10);" style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; margin: 0px 0px 12px; border-bottom: 0px rgb(10, 10, 10);"><span class="T286Pc" data-sfc-cp="" jsaction="" jscontroller="fly6D" data-sfc-root="c" jsuid="xhNVve_11" data-sfc-cb="" data-complete="true" data-copy-service-computed-style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; font-size: 16px; font-weight: 400; margin: 0px; text-decoration: none; border-bottom: 0px rgb(10, 10, 10);" style="border-bottom: 0px rgb(10, 10, 10);"><span class="Yjhzub" jsaction="" jscontroller="zYmgkd" data-sfc-root="c" jsuid="xhNVve_12" data-sfc-cb="" data-complete="true" data-copy-service-computed-style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; font-size: 16px; font-weight: 600; margin: 0px; text-decoration: none; border-bottom: 0px rgb(10, 10, 10);" style="font-weight: 600; border-bottom: 0px rgb(10, 10, 10);">DAC Chip:<!--TgQPHd|[]--></span> CONEXANT CX31993 (Standard JM7) / Dual DAC architecture (JM7 MAX)<!--TgQPHd|[]--></span><!--TgQPHd|[]--></li><li class="Z1qcYe" data-sfc-cp="" jsaction="" jscontroller="oSLmPe" data-sfc-root="c" jsuid="xhNVve_13" data-sfc-cb="" data-hveid="CAIIAAgACA0QAg" data-complete="true" data-copy-service-computed-style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; font-size: 16px; font-weight: 400; margin: 0px 0px 12px; text-decoration: none; border-bottom: 0px rgb(10, 10, 10);" style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; margin: 0px 0px 12px; border-bottom: 0px rgb(10, 10, 10);"><span class="T286Pc" data-sfc-cp="" jsaction="" jscontroller="fly6D" data-sfc-root="c" jsuid="xhNVve_14" data-sfc-cb="" data-complete="true" data-copy-service-computed-style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; font-size: 16px; font-weight: 400; margin: 0px; text-decoration: none; border-bottom: 0px rgb(10, 10, 10);" style="border-bottom: 0px rgb(10, 10, 10);"><span class="Yjhzub" jsaction="" jscontroller="zYmgkd" data-sfc-root="c" jsuid="xhNVve_15" data-sfc-cb="" data-complete="true" data-copy-service-computed-style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; font-size: 16px; font-weight: 600; margin: 0px; text-decoration: none; border-bottom: 0px rgb(10, 10, 10);" style="font-weight: 600; border-bottom: 0px rgb(10, 10, 10);">Resolution Support:<!--TgQPHd|[]--></span> Up to 32-bit / 384 kHz PCM decoding<!--TgQPHd|[]--></span><!--TgQPHd|[]--></li><li class="Z1qcYe" data-sfc-cp="" jsaction="" jscontroller="oSLmPe" data-sfc-root="c" jsuid="xhNVve_16" data-sfc-cb="" data-hveid="CAIIAAgACA0QAw" data-complete="true" data-copy-service-computed-style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; font-size: 16px; font-weight: 400; margin: 0px 0px 12px; text-decoration: none; border-bottom: 0px rgb(10, 10, 10);" style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; margin: 0px 0px 12px; border-bottom: 0px rgb(10, 10, 10);"><span class="T286Pc" data-sfc-cp="" jsaction="" jscontroller="fly6D" data-sfc-root="c" jsuid="xhNVve_17" data-sfc-cb="" data-complete="true" data-copy-service-computed-style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; font-size: 16px; font-weight: 400; margin: 0px; text-decoration: none; border-bottom: 0px rgb(10, 10, 10);" style="border-bottom: 0px rgb(10, 10, 10);"><span class="Yjhzub" jsaction="" jscontroller="zYmgkd" data-sfc-root="c" jsuid="xhNVve_18" data-sfc-cb="" data-complete="true" data-copy-service-computed-style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; font-size: 16px; font-weight: 600; margin: 0px; text-decoration: none; border-bottom: 0px rgb(10, 10, 10);" style="font-weight: 600; border-bottom: 0px rgb(10, 10, 10);">Signal to Noise Ratio (SNR):<!--TgQPHd|[]--></span> ~117dB<!--TgQPHd|[]--></span><!--TgQPHd|[]--></li><li class="Z1qcYe" data-sfc-cp="" jsaction="" jscontroller="oSLmPe" data-sfc-root="c" jsuid="xhNVve_19" data-sfc-cb="" data-hveid="CAIIAAgACA0QBA" data-complete="true" data-copy-service-computed-style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; font-size: 16px; font-weight: 400; margin: 0px 0px 12px; text-decoration: none; border-bottom: 0px rgb(10, 10, 10);" style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; margin: 0px 0px 12px; border-bottom: 0px rgb(10, 10, 10);"><span class="T286Pc" data-sfc-cp="" jsaction="" jscontroller="fly6D" data-sfc-root="c" jsuid="xhNVve_1a" data-sfc-cb="" data-complete="true" data-copy-service-computed-style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; font-size: 16px; font-weight: 400; margin: 0px; text-decoration: none; border-bottom: 0px rgb(10, 10, 10);" style="border-bottom: 0px rgb(10, 10, 10);"><span class="Yjhzub" jsaction="" jscontroller="zYmgkd" data-sfc-root="c" jsuid="xhNVve_1b" data-sfc-cb="" data-complete="true" data-copy-service-computed-style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; font-size: 16px; font-weight: 600; margin: 0px; text-decoration: none; border-bottom: 0px rgb(10, 10, 10);" style="font-weight: 600; border-bottom: 0px rgb(10, 10, 10);">Total Harmonic Distortion (THD+N):<!--TgQPHd|[]--></span> -95dB<!--TgQPHd|[]--></span><!--TgQPHd|[]--></li><li class="Z1qcYe" data-sfc-cp="" jsaction="" jscontroller="oSLmPe" data-sfc-root="c" jsuid="xhNVve_1c" data-sfc-cb="" data-hveid="CAIIAAgACA0QBQ" data-complete="true" data-copy-service-computed-style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; font-size: 16px; font-weight: 400; margin: 0px 0px 12px; text-decoration: none; border-bottom: 0px rgb(10, 10, 10);" style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; margin: 0px 0px 12px; border-bottom: 0px rgb(10, 10, 10);"><span class="T286Pc" data-sfc-cp="" jsaction="" jscontroller="fly6D" data-sfc-root="c" jsuid="xhNVve_1d" data-sfc-cb="" data-complete="true" data-copy-service-computed-style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; font-size: 16px; font-weight: 400; margin: 0px; text-decoration: none; border-bottom: 0px rgb(10, 10, 10);" style="border-bottom: 0px rgb(10, 10, 10);"><span class="Yjhzub" jsaction="" jscontroller="zYmgkd" data-sfc-root="c" jsuid="xhNVve_1e" data-sfc-cb="" data-complete="true" data-copy-service-computed-style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; font-size: 16px; font-weight: 600; margin: 0px; text-decoration: none; border-bottom: 0px rgb(10, 10, 10);" style="font-weight: 600; border-bottom: 0px rgb(10, 10, 10);">Cable Material:<!--TgQPHd|[]--></span> 8-core 5N OFC Silver-Plated Cable (Standard JM7)<!--TgQPHd|[]--></span><!--TgQPHd|[]--></li><li class="Z1qcYe" data-sfc-cp="" jsaction="" jscontroller="oSLmPe" data-sfc-root="c" jsuid="xhNVve_1f" data-sfc-cb="" data-hveid="CAIIAAgACA0QBg" data-complete="true" data-copy-service-computed-style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; font-size: 16px; font-weight: 400; margin: 0px 0px 12px; text-decoration: none; border-bottom: 0px rgb(10, 10, 10);" style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; margin: 0px 0px 12px; border-bottom: 0px rgb(10, 10, 10);"><span class="T286Pc" data-sfc-cp="" jsaction="" jscontroller="fly6D" data-sfc-root="c" jsuid="xhNVve_1g" data-sfc-cb="" data-complete="true" data-copy-service-computed-style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; font-size: 16px; font-weight: 400; margin: 0px; text-decoration: none; border-bottom: 0px rgb(10, 10, 10);" style="border-bottom: 0px rgb(10, 10, 10);"><span class="Yjhzub" jsaction="" jscontroller="zYmgkd" data-sfc-root="c" jsuid="xhNVve_1h" data-sfc-cb="" data-complete="true" data-copy-service-computed-style="font-family: &quot;Google Sans&quot;, Arial, sans-serif; font-size: 16px; font-weight: 600; margin: 0px; text-decoration: none; border-bottom: 0px rgb(10, 10, 10);" style="font-weight: 600; border-bottom: 0px rgb(10, 10, 10);">Weight:<!--TgQPHd|[]--></span> Ultra-lightweight at approximately 6.5 grams</span></li>
+ID: 75 | Name: Moondrop Drawn Pro | Desc: <p style="margin-bottom: 10px; color: rgb(51, 51, 51); font-family: moondrop, sans-serif; font-size: 14px;">Product Name: DAWN PRO2 High-performance Portable DAC/AMP</p><p style="margin-bottom: 10px; color: rgb(51, 51, 51); font-family: moondrop, sans-serif; font-size: 14px;">Earphone Jack: 3.5mm Single-ended / 4.4mm Balanced Jack</p><p style="margin-bottom: 10px; color: rgb(51, 51, 51); font-family: moondrop, sans-serif; font-size: 14px;">Dynamic Range (A-wt): 132dB@1kHz</p><p style="margin-bottom: 10px; color: rgb(51, 51, 51); font-family: moondrop, sans-serif; font-size: 14px;">THD+N: 0.00014%@1kHz</p><p style="margin-bottom: 10px; color: rgb(51, 51, 51); font-family: moondrop, sans-serif; font-size: 14px;">Output Magnitude: 4.1Vrms@0dBFS</p><p style="margin-bottom: 10px; color: rgb(51, 51, 51); font-family: moondrop, sans-serif; font-size: 14px;">Output Power: 124+124mW@16Ω THD+N&lt; 1%</p>
+ID: 76 | Name: Leobog GRAYWOOD V4 | Desc: <h1 class="font-heading-extra-bold margin0" style="box-sizing: inherit; font-family: Inter, sans-serif; font-weight: 700; color: rgb(18, 18, 18); word-break: break-word; font-size: 3.6rem; margin: 0px; background-color: rgb(248, 250, 252);"><span style="color: rgb(18, 18, 18); font-size: 16px; font-weight: 400; background-color: rgb(255, 255, 255);">Bigger LED cutout, more light going through.</span><br style="box-sizing: inherit; color: rgb(18, 18, 18); font-size: 16px; font-weight: 400; background-color: rgb(255, 255, 255);"><span style="color: rgb(18, 18, 18); font-size: 16px; font-weight: 400; background-color: rgb(255, 255, 255);">The switches are 5-pin Compatible with mechanical keyboards.</span><br style="box-sizing: inherit; color: rgb(18, 18, 18); font-size: 16px; font-weight: 400; background-color: rgb(255, 255, 255);"><span style="color: rgb(18, 18, 18); font-size: 16px; font-weight: 400; background-color: rgb(255, 255, 255);">Redefine the bottom area for the stem, making the sound deeper and cleaner.</span><br style="box-sizing: inherit; color: rgb(18, 18, 18); font-size: 16px; font-weight: 400; background-color: rgb(255, 255, 255);"><span style="color: rgb(18, 18, 18); font-size: 16px; font-weight: 400; background-color: rgb(255, 255, 255);">This Graywood v4 switch is pre-lubed from the factory whose tactile feeling is much more smooth.</span></h1>
+ID: 77 | Name: Coconut latte | Desc: <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1" style="box-shadow: none !important;"><section id="shopify-section-template--26496341672214__main" class="shopify-section section"><product-info id="MainProduct-template--26496341672214__main" class="section-template--26496341672214__main-padding gradient color-background-1" data-section="template--26496341672214__main" data-product-id="10313892004118" data-update-url="true" data-url="/products/ktt-coconut-latte-45g-linear-switch-pcb-mount" style="display: block; --color-background: 255,255,255; --gradient-background: #ffffff; --color-foreground: 18,18,18; --color-background-contrast: 191,191,191; --color-shadow: 18,18,18; --color-button: 18,18,18; --color-button-text: 255,255,255; --color-secondary-button: 255,255,255; --color-secondary-button-text: 18,18,18; --color-link: 18,18,18; --color-badge-foreground: 18,18,18; --color-badge-background: 255,255,255; --color-badge-border: 18,18,18; --payment-terms-background-color: rgb(255 255 255); color: rgba(18, 18, 18, 0.75); background-image: none; background-position: 0% 0%; background-size: auto; background-repeat: repeat; background-attachment: fixed; background-origin: padding-box; background-clip: border-box; padding-top: 36px; padding-bottom: 12px;"><div class="page-width" style="max-width: 1400px; margin: 0px auto; padding: 0px 5rem;"><div class="product product--medium product--left product--thumbnail product--mobile-show grid grid--1-col grid--2-col-tablet" style="display: flex; flex-wrap: wrap; list-style: none; gap: 0px;"><div class="product__info-wrapper grid__item" style="width: calc(45% - 4px); max-width: 45%; flex-grow: 1; flex-shrink: 0; padding: 0px 0px 0px 5rem;"><section id="ProductInfo-template--26496341672214__main" class="product__info-container product__column-sticky" style="position: sticky; top: 3rem; z-index: 2; max-width: 60rem;"><div class="product__description rte quick-add-hidden" style="margin: 2.5rem 0px;"><p style="margin-bottom: 0px;"><span class="css-11oczh8 eytdjj00">Lube: Factory Hand Lubed<br>Brand: KTT / Content<br>Tipe Mount: PCB Mount (5-pin)<br>Karakter: Linear<br>Actuation Force: 37g<br>Bottom Out Force: 45g<br>Pre-travel: 2mm<br>Total Travel 3.5mm<br>Material Housing: PC top, Nylon bottom<br>Material Stem: POM, long pole<br>Spring: 13mm progressive</span></p></div><div class="product__accordion accordion quick-add-hidden" style="margin: 2.5rem 0px 0px; border-top: 1px solid rgba(18, 18, 18, 0.08); border-bottom: 1px solid rgba(18, 18, 18, 0.08);"><details id="Details-collapsible_tab_QeYdUM-template--26496341672214__main"><summary role="button" aria-expanded="false" aria-controls="ProductAccordion-collapsible_tab_QeYdUM-template--26496341672214__main" style="list-style: none; position: relative; display: flex; line-height: 1; padding: 1.5rem 0px;"><div class="summary__title" style="display: flex; flex: 1 1 0%;"><h2 class="h4 accordion__title inline-richtext" style="font-family: &quot;Instrument Sans&quot;, sans-serif; font-weight: 700; letter-spacing: 0.66px; color: rgb(18, 18, 18); line-height: 1.27273; word-break: break-word; font-size: 16.5px; display: inline-block; max-width: calc(100% - 6rem); min-height: 1.6rem; margin: 0px;">Jadwal Pengiriman</h2></div><svg class="icon icon-caret" viewBox="0 0 10 6"><path fill="currentColor" fill-rule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clip-rule="evenodd"></path></svg></summary><div class="accordion__content rte" id="ProductAccordion-collapsible_tab_QeYdUM-template--26496341672214__main" style="margin-bottom: 1.5rem; word-break: break-word; overflow-x: auto; padding: 0px 1rem;"><ul style="padding-left: 2rem; margin-bottom: 0px;"><li style="list-style: inherit;"><strong></strong></li><li style="list-style: inherit;"><strong></strong><br></li></ul></div></details></div><share-button id="Share-template--26496341672214__main" class="share-button quick-add-hidden" style="display: block; position: relative; margin: 1.5rem 0px;"><button class="share-button__button" style="font-size: 1.4rem; display: flex; align-items: center; color: rgb(18, 18, 18); min-height: 4.4rem; border-width: medium; border-style: none; border-color: currentcolor;"><span class="svg-wrapper" style="display: inline-flex; justify-content: center; align-items: center; width: 20px; height: 20px;"><svg xmlns="http://www.w3.org/2000/svg" fill="none" class="icon icon-share" viewBox="0 0 13 12"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M1.625 8.125v2.167a1.083 1.083 0 0 0 1.083 1.083h7.584a1.083 1.083 0 0 0 1.083-1.083V8.125"></path><path fill="currentColor" fill-rule="evenodd" d="M6.148 1.271a.5.5 0 0 1 .707 0L9.563 3.98a.5.5 0 0 1-.707.707L6.501 2.332 4.147 4.687a.5.5 0 1 1-.708-.707z" clip-rule="evenodd"></path><path fill="currentColor" fill-rule="evenodd" d="M6.5 1.125a.5.5 0 0 1 .5.5v6.5a.5.5 0 0 1-1 0v-6.5a.5.5 0 0 1 .5-.5" clip-rule="evenodd"></path></svg></span>Share</button></share-button></section></div></div></div></product-info></section><section id="shopify-section-template--26496341672214__custom_liquid_cjRQpQ" class="shopify-section section"><div class="color-background-1 gradient" style="--color-background: 255,255,255; --gradient-background: #ffffff; --color-foreground: 18,18,18; --color-background-contrast: 191,191,191; --color-shadow: 18,18,18; --color-button: 18,18,18; --color-button-text: 255,255,255; --color-secondary-button: 255,255,255; --color-secondary-button-text: 18,18,18; --color-link: 18,18,18; --color-badge-foreground: 18,18,18; --color-badge-background: 255,255,255; --color-badge-border: 18,18,18; --payment-terms-background-color: rgb(255 255 255); color: rgba(18, 18, 18, 0.75); background-image: none; background-position: 0% 0%; background-size: auto; background-repeat: repeat; background-attachment: fixed; background-origin: padding-box; background-clip: border-box;"><div class="section-template--26496341672214__custom_liquid_cjRQpQ-padding" style="padding-top: 40px; padding-bottom: 52px;"></div></div></section><section id="shopify-section-template--26496341672214__custom_liquid_g3DUFq" class="shopify-section section"><div class="color-background-1 gradient" style="--color-background: 255,255,255; --gradient-background: #ffffff; --color-foreground: 18,18,18; --color-background-contrast: 191,191,191; --color-shadow: 18,18,18; --color-button: 18,18,18; --color-button-text: 255,255,255; --color-secondary-button: 255,255,255; --color-secondary-button-text: 18,18,18; --color-link: 18,18,18; --color-badge-foreground: 18,18,18; --color-badge-background: 255,255,255; --color-badge-border: 18,18,18; --payment-terms-background-color: rgb(255 255 255); color: rgba(18, 18, 18, 0.75); background-image: none; background-position: 0% 0%; background-size: auto; background-repeat: repeat; background-attachment: fixed; background-origin: padding-box; background-clip: border-box;"><div class="section-template--26496341672214__custom_liquid_g3DUFq-padding"></div></div></section><section id="shopify-section-template--26496341672214__custom_liquid_PKNLGb" class="shopify-section section"><div class="color-background-1 gradient" style="--color-background: 255,255,255; --gradient-background: #ffffff; --color-foreground: 18,18,18; --color-background-contrast: 191,191,191; --color-shadow: 18,18,18; --color-button: 18,18,18; --color-button-text: 255,255,255; --color-secondary-button: 255,255,255; --color-secondary-button-text: 18,18,18; --color-link: 18,18,18; --color-badge-foreground: 18,18,18; --color-badge-background: 255,255,255; --color-badge-border: 18,18,18; --payment-terms-background-color: rgb(255 255 255); color: rgba(18, 18, 18, 0.75); background-image: none; background-position: 0% 0%; background-size: auto; background-repeat: repeat; background-attachment: fixed; background-origin: padding-box; background-clip: border-box;"><div class="section-template--26496341672214__custom_liquid_PKNLGb-padding" style="padding-top: 40px; padding-bottom: 52px;"></div></div></section><section id="shopify-section-template--26496341672214__custom_liquid_RGpkXP" class="shopify-section section"><div class="color-background-1 gradient" style="--color-background: 255,255,255; --gradient-background: #ffffff; --color-foreground: 18,18,18; --color-background-contrast: 191,191,191; --color-shadow: 18,18,18; --color-button: 18,18,18; --color-button-text: 255,255,255; --color-secondary-button: 255,255,255; --color-secondary-button-text: 18,18,18; --color-link: 18,18,18; --color-badge-foreground: 18,18,18; --color-badge-background: 255,255,255; --color-badge-border: 18,18,18; --payment-terms-background-color: rgb(255 255 255); color: rgba(18, 18, 18, 0.75); background-image: none; background-position: 0% 0%; background-size: auto; background-repeat: repeat; background-attachment: fixed; background-origin: padding-box; background-clip: border-box;"><div class="section-template--26496341672214__custom_liquid_RGpkXP-padding" style="padding-top: 40px; padding-bottom: 52px;"></div></div></section><section id="shopify-section-template--26496341672214__1758533083aa5e308a" class="shopify-section section"></section><section id="shopify-section-template--26496341672214__17746701846b89f472" class="shopify-section section"><div class="page-width" style="max-width: 1400px; margin: 0px auto; padding: 0px 5rem;"><div id="shopify-block-ATlVoSTV2K2h6Wm9ZO__fbp_fast_bundle_product_bundles_Mg9TXC" class="shopify-block shopify-app-block"><div class="rbrProductBundlePosition"></div></div></div></section></main><div id="shopify-section-sections--26496341967126__footer" class="shopify-section shopify-section-group-footer-group"><footer class="footer color-background-2 gradient section-sections--26496341967126__footer-padding" style="--color-background: 243,243,243; --gradient-background: #f3f3f3; --color-foreground: 18,18,18; --color-background-contrast: 179,179,179; --color-shadow: 255,255,255; --color-button: 18,18,18; --color-button-text: 243,243,243; --color-secondary-button: 243,243,243; --color-secondary-button-text: 18,18,18; --color-link: 18,18,18; --color-badge-foreground: 18,18,18; --color-badge-background: 243,243,243; --color-badge-border: 18,18,18; --payment-terms-background-color: rgb(243 243 243); color: rgba(18, 18, 18, 0.75); background: none 0% 0% / auto repeat fixed padding-box border-box rgb(243, 243, 243); border-top-width: medium; border-top-style: none; border-top-color: currentcolor; padding-top: 56px; padding-bottom: 48px;"><div class="footer__content-top page-width" style="max-width: 1400px; margin: 0px auto; padding: 0px 5rem 5rem;"><div class="footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet " style="display: flex; flex-wrap: wrap; list-style: none; gap: 6rem 8px;"><div class="footer-block grid__item footer-block--menu" style="width: calc(25% - 6px); max-width: 100%; flex-grow: 1; flex-shrink: 0;"><h2 class="footer-block__heading inline-richtext" style="font-family: &quot;Instrument Sans&quot;, sans-serif; font-weight: 700; letter-spacing: 0.66px; color: rgb(18, 18, 18); line-height: 1.27273; word-break: break-word; font-size: 19.8px; margin-bottom: 2rem;">Quick links</h2><ul class="footer-block__details-content list-unstyled" style="margin: 0px; padding: 0px; list-style: none;"><li style="margin-right: 1.5rem;"><a href="https://pressplayid.com/search" class="link link--text list-menu__item list-menu__item--link" style="cursor: pointer; display: inline-block; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; box-shadow: none; text-decoration: none; text-underline-offset: 0.3rem; color: rgba(18, 18, 18, 0.75); font-size: 1.4rem; align-items: center; line-height: 1.8; padding-bottom: 0.5rem;">Search</a></li><li style="margin-right: 1.5rem;"><a href="https://wa.me/6281380802324?text=Halo+Press+Play%2C+saya+mau+konsultasi+dong" class="link link--text list-menu__item list-menu__item--link" style="cursor: pointer; display: inline-block; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; box-shadow: none; text-decoration: none; text-underline-offset: 0.3rem; color: rgba(18, 18, 18, 0.75); font-size: 1.4rem; align-items: center; line-height: 1.8; padding-bottom: 0.5rem; padding-top: 0.5rem;">Contact Us</a></li><li style="margin-right: 1.5rem;"><a href="http://bit.ly/pressplaywarranty" class="link link--text list-menu__item list-menu__item--link" style="cursor: pointer; display: inline-block; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; box-shadow: none; text-decoration: none; text-underline-offset: 0.3rem; color: rgba(18, 18, 18, 0.75); font-size: 1.4rem; align-items: center; line-height: 1.8; padding-bottom: 0.5rem; padding-top: 0.5rem;">Register Your Product</a></li><li><a href="https://discord.gg/U9qujCxUH9" class="link link--text list-menu__item list-menu__item--link" style="cursor: pointer; display: inline-block; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; box-shadow: none; text-decoration: none; text-underline-offset: 0.3rem; color: rgba(18, 18, 18, 0.75); font-size: 1.4rem; align-items: center; line-height: 1.8; padding-bottom: 0.5rem; padding-top: 0.5rem;">Join our Discord!</a></li></ul></div><div class="footer-block grid__item" style="width: calc(25% - 6px); max-width: 100%; flex-grow: 1; flex-shrink: 0;"><h2 class="footer-block__heading inline-richtext" style="font-family: &quot;Instrument Sans&quot;, sans-serif; font-weight: 700; letter-spacing: 0.66px; color: rgb(18, 18, 18); line-height: 1.27273; word-break: break-word; font-size: 19.8px; margin-bottom: 2rem;">Schedule</h2><div class="footer-block__details-content rte"><p style="margin-bottom: 0px;"><strong>Shipping:</strong><br>Mon - Sat: Orders made before 12 noon (WIB) will be shipped at that day<br>Sun - Holidays: Closed (no shipping)<br><br><strong>Customer Services:<br></strong>Mon - Fri: 9AM - 4PM WIB<br>Sat:9AM - 1PM WIB<br>Slow response on holidays and&nbsp; non-working hours.</p></div></div></div><div class="footer-block--newsletter" style="display: flex; align-items: flex-end; margin-top: 3rem; gap: 1rem; flex-wrap: nowrap; justify-content: center;"><div class="footer-block__newsletter" style="flex-grow: 1; margin-right: auto;"><h2 class="footer-block__heading inline-richtext" style="font-family: &quot;Instrument Sans&quot;, sans-serif; font-weight: 700; letter-spacing: 0.66px; color: rgb(18, 18, 18); line-height: 1.27273; word-break: break-word; font-size: 19.8px; margin-bottom: 2rem;">Subscribe to our emails</h2><form method="post" action="https://pressplayid.com/contact#ContactFooter" id="ContactFooter" accept-charset="UTF-8" class="footer__newsletter newsletter-form" style="display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; width: 360px; position: relative; max-width: 36rem;"><div class="newsletter-form__field-wrapper" style="max-width: 36rem; width: 360px;"><div class="field" style="position: relative; width: 360px; display: flex; transition: box-shadow 0.1s; z-index: 0;"><input id="NewsletterForm--sections--26496341967126__footer" type="email" name="contact[email]" class="field__input" value="" aria-required="true" autocorrect="off" autocapitalize="off" autocomplete="email" placeholder="Email" required="" style="font-size: 1.6rem; line-height: 1.5; letter-spacing: 0.04rem; appearance: none; background-color: rgb(243, 243, 243); color: rgb(18, 18, 18); font-family: &quot;Instrument Sans&quot;, sans-serif; font-style: normal; font-weight: 400; width: 358px; transition: box-shadow 0.1s; border-radius: 0px; height: 4.5rem; min-height: 2px; min-width: 72px; position: relative; border-width: 0px; border-style: none; border-color: currentcolor; flex-grow: 1; padding: 1.5rem 5rem 1.5rem 1.5rem; margin: 1px;"><label class="field__label" for="NewsletterForm--sections--26496341967126__footer" style="font-size: 1.6rem; left: 21px; top: 11px; pointer-events: none; position: absolute; transition: top 0.1s, font-size 0.1s; letter-spacing: 0.1rem; line-height: 1.5;">Email</label><button type="submit" class="newsletter-form__button field__button" name="commit" id="Subscribe" aria-label="Subscribe" style="align-items: center; border-width: 0px; border-style: none; border-color: currentcolor; display: flex; height: 47px; justify-content: center; overflow: hidden; position: absolute; right: 1px; top: 0px; width: 4.4rem; z-index: 2; box-shadow: inherit;"><span class="svg-wrapper" style="display: inline-flex; justify-content: center; align-items: center; width: 2.5rem; height: 2.5rem;"><svg xmlns="http://www.w3.org/2000/svg" fill="none" class="icon icon-arrow" viewBox="0 0 14 10"><path fill="currentColor" fill-rule="evenodd" d="M8.537.808a.5.5 0 0 1 .817-.162l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 1 1-.708-.708L11.793 5.5H1a.5.5 0 0 1 0-1h10.793L8.646 1.354a.5.5 0 0 1-.109-.546" clip-rule="evenodd"></path></svg></span></button></div></div></form></div><ul class="list-unstyled list-social footer__list-social" role="list" style="margin: 0px; padding: 0px; list-style: none; display: flex; flex-wrap: wrap; justify-content: flex-end;"><li class="list-social__item"><a href="https://www.instagram.com/pressplayid/" class="link list-social__link" style="cursor: pointer; display: flex; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; box-shadow: none; text-decoration: underline; text-underline-offset: 0.3rem; color: rgb(18, 18, 18); font-size: 1.4rem; align-items: center; padding: 1.1rem;"><span class="svg-wrapper" style="display: inline-flex; justify-content: center; align-items: center; width: 20px; height: 20px;"><svg class="icon icon-instagram" viewBox="0 0 20 20"><path fill="currentColor" fill-rule="evenodd" d="M13.23 3.492c-.84-.037-1.096-.046-3.23-.046-2.144 0-2.39.01-3.238.055-.776.027-1.195.164-1.487.273a2.4 2.4 0 0 0-.912.593 2.5 2.5 0 0 0-.602.922c-.11.282-.238.702-.274 1.486-.046.84-.046 1.095-.046 3.23s.01 2.39.046 3.229c.004.51.097 1.016.274 1.495.145.365.319.639.602.913.282.282.538.456.92.602.474.176.974.268 1.479.273.848.046 1.103.046 3.238.046s2.39-.01 3.23-.046c.784-.036 1.203-.164 1.486-.273.374-.146.648-.329.921-.602.283-.283.447-.548.602-.922.177-.476.27-.979.274-1.486.037-.84.046-1.095.046-3.23s-.01-2.39-.055-3.229c-.027-.784-.164-1.204-.274-1.495a2.4 2.4 0 0 0-.593-.913 2.6 2.6 0 0 0-.92-.602c-.284-.11-.703-.237-1.488-.273ZM6.697 2.05c.857-.036 1.131-.045 3.302-.045a63 63 0 0 1 3.302.045c.664.014 1.321.14 1.943.374a4 4 0 0 1 1.414.922c.41.397.728.88.93 1.414.23.622.354 1.279.365 1.942C18 7.56 18 7.824 18 10.005c0 2.17-.01 2.444-.046 3.292-.036.858-.173 1.442-.374 1.943-.2.53-.474.976-.92 1.423a3.9 3.9 0 0 1-1.415.922c-.51.191-1.095.337-1.943.374-.857.036-1.122.045-3.302.045-2.171 0-2.445-.009-3.302-.055-.849-.027-1.432-.164-1.943-.364a4.15 4.15 0 0 1-1.414-.922 4.1 4.1 0 0 1-.93-1.423c-.183-.51-.329-1.085-.365-1.943C2.009 12.45 2 12.167 2 10.004c0-2.161 0-2.435.055-3.302.027-.848.164-1.432.365-1.942a4.4 4.4 0 0 1 .92-1.414 4.2 4.2 0 0 1 1.415-.93c.51-.183 1.094-.33 1.943-.366Zm.427 4.806a4.105 4.105 0 1 1 5.805 5.805 4.105 4.105 0 0 1-5.805-5.805m1.882 5.371a2.668 2.668 0 1 0 2.042-4.93 2.668 2.668 0 0 0-2.042 4.93m5.922-5.942a.958.958 0 1 1-1.355-1.355.958.958 0 0 1 1.355 1.355" clip-rule="evenodd"></path></svg></span><span class="visually-hidden" style="overflow-wrap: normal !important;">Instagram</span></a></li><li class="list-social__item"><a href="https://www.youtube.com/@PressPlayid" class="link list-social__link" style="cursor: pointer; display: flex; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; box-shadow: none; text-decoration: underline; text-underline-offset: 0.3rem; color: rgb(18, 18, 18); font-size: 1.4rem; align-items: center; padding: 1.1rem;"><span class="svg-wrapper" style="display: inline-flex; justify-content: center; align-items: center; width: 20px; height: 20px;"><svg class="icon icon-youtube" viewBox="0 0 20 20"><path fill="currentColor" d="M18.16 5.87c.34 1.309.34 4.08.34 4.08s0 2.771-.34 4.08a2.13 2.13 0 0 1-1.53 1.53c-1.309.34-6.63.34-6.63.34s-5.321 0-6.63-.34a2.13 2.13 0 0 1-1.53-1.53c-.34-1.309-.34-4.08-.34-4.08s0-2.771.34-4.08a2.17 2.17 0 0 1 1.53-1.53C4.679 4 10 4 10 4s5.321 0 6.63.34a2.17 2.17 0 0 1 1.53 1.53M8.3 12.5l4.42-2.55L8.3 7.4z"></path></svg></span><span class="visually-hidden" style="overflow-wrap: normal !important;">YouTube</span></a></li><li class="list-social__item"><a href="https://www.tiktok.com/@pressplayid" class="link list-social__link" style="cursor: pointer; display: flex; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; box-shadow: none; text-decoration: underline; text-underline-offset: 0.3rem; color: rgb(18, 18, 18); font-size: 1.4rem; align-items: center; padding: 1.1rem;"><span class="svg-wrapper" style="display: inline-flex; justify-content: center; align-items: center; width: 20px; height: 20px;"><svg class="icon icon-tiktok" viewBox="0 0 20 20"><path fill="currentColor" d="M10.511 1.705h2.74s-.157 3.51 3.795 3.768v2.711s-2.114.129-3.796-1.158l.028 5.606A5.073 5.073 0 1 1 8.213 7.56h.708v2.785a2.298 2.298 0 1 0 1.618 2.205z"></path></svg></span><span class="visually-hidden" style="overflow-wrap: normal !important;">TikTok</span></a></li></ul></div></div><div class="footer__content-bottom" style="border-top: 1px solid rgba(18, 18, 18, 0.08); padding-top: 3rem;"><div class="footer__content-bottom-wrapper page-width" style="max-width: 1400px; margin: 0px auto; padding: 0px 5rem; display: flex; width: 1400px;"></div><div class="footer__content-bottom-wrapper page-width footer__content-bottom-wrapper--center" style="max-width: 1400px; margin: 0px auto; padding: 0px 5rem; display: flex; width: 1400px; justify-content: center;"><div class="footer__copyright caption" style="font-size: 1.2rem; letter-spacing: 0.07rem; line-height: 1.7; text-align: center; margin-top: 1.5rem;"><small class="copyright__content" style="font-size: 1.1rem;">© 2026, <a href="https://pressplayid.com/" title="" style="color: currentcolor; text-decoration: none;">pressplayid</a></small> <small class="copyright__content" style="font-size: 1.1rem;"><a target="_blank" rel="nofollow" href="https://www.shopify.com/?utm_campaign=poweredby&amp;utm_medium=shopify&amp;utm_source=onlinestore" style="color: currentcolor; text-decoration: none;">Powered by Shopify</a></small></div></div></div></footer></div><div id="shopify-block-AK0dLVWhIdk5hVnkyc__7194384644902525832" class="shopify-block shopify-app-block"></div><div id="shopify-block-AVEg1ZzNYWEZ2ZXBEN__7584948915495707528" class="shopify-block shopify-app-block"></div><div id="shopify-block-AUStKZXNOSkRYTGQ5T__1700746595972018580" class="shopify-block shopify-app-block"></div><div id="shopify-block-ATjUrbVNsbzNjMnNRR__13615385223509461694" class="shopify-block shopify-app-block"></div><div tabindex="-1" aria-hidden="true" id="web-pixels-manager-sandbox-container" data-shopify-privacy="exclude" style="height: 0px !important; width: 0px !important; position: fixed !important; visibility: hidden !important; overflow: hidden !important; z-index: -100 !important; border: 0px !important;"><iframe tabindex="-1" aria-hidden="true" name="web-pixel-sandbox-CUSTOM-172097814-LAX-6aad4977wba422492pcfc93db9m5341e0bd" src="https://pressplayid.com/web-pixels@6aad4977wba422492pcfc93db9m5341e0bd/custom/web-pixel-172097814@2/sandbox/modern/products/ktt-coconut-latte-45g-linear-switch-pcb-mount?srsltid=AfmBOopYBEt5lxf10Zu6ByFHp7xcBm8TYqQ2xkFfTB397a1BefrtbHJn" id="web-pixel-sandbox-CUSTOM-172097814-LAX-6aad4977wba422492pcfc93db9m5341e0bd" sandbox="allow-scripts allow-forms" style="height: 0px !important; width: 0px !important; visibility: hidden !important;"></iframe><iframe tabindex="-1" aria-hidden="true" name="web-pixel-sandbox-CUSTOM-shopify-custom-pixel-LAX-6aad4977wba422492pcfc93db9m5341e0bd" src="https://pressplayid.com/web-pixels@6aad4977wba422492pcfc93db9m5341e0bd/custom/web-pixel-shopify-custom-pixel@0460/sandbox/modern/products/ktt-coconut-latte-45g-linear-switch-pcb-mount?srsltid=AfmBOopYBEt5lxf10Zu6ByFHp7xcBm8TYqQ2xkFfTB397a1BefrtbHJn" id="web-pixel-sandbox-CUSTOM-shopify-custom-pixel-LAX-6aad4977wba422492pcfc93db9m5341e0bd" sandbox="allow-scripts allow-forms" style="height: 0px !important; width: 0px !important; visibility: hidden !important;"></iframe></div><div class="smv-arrow-control" style="pointer-events: none; position: absolute; top: -10000px; left: -10000px; width: 10px; height: 10px; opacity: 0; display: inline-block !important; z-index: 42 !important;"><div class="smv-arrow" style="height: 10px; overflow: hidden; pointer-events: auto; width: 10px; align-items: center !important; background-color: initial !important; border: 0px !important; inset: 0px !important; cursor: pointer !important; display: flex !important; justify-content: center !important; margin: auto !important; position: absolute !important;"><div class="smv-icon" style="background-image: none; background-position: 50% center; background-repeat: no-repeat; background-size: cover; opacity: 1e-06; height: 10px; width: 10px; background-color: rgb(153, 153, 153); mask-image: url(&quot;data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNDggNDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE4Ljc2IDkuMzVhMSAxIDAgMCAwLTEuNTIgMS4zbDEuNTItMS4zWk0zMCAyNGwuNzYuNjVhMSAxIDAgMCAwIDAtMS4zTDMwIDI0Wk0xNy4yNCAzNy4zNWExIDEgMCAwIDAgMS41MiAxLjNsLTEuNTItMS4zWm0wLTI2LjcgMTIgMTQgMS41Mi0xLjMtMTItMTQtMS41MiAxLjNabTEyIDEyLjctMTIgMTQgMS41MiAxLjMgMTItMTQtMS41Mi0xLjNaIiBmaWxsPSIjOTk5Ii8+PC9zdmc+&quot;); mask-position: center center; mask-repeat: no-repeat; mask-size: cover; display: inline-block !important; left: 0px !important; position: relative !important; top: 0px !important; transition: opacity 0.2s linear !important;"></div></div></div><div class="smv-button-fullscreen-open" style="top: -10000px; left: -10000px; width: 10px; height: 10px; position: absolute; opacity: 0;"></div><div class="smv-button-fullscreen-close" style="top: -10000px; left: -10000px; width: 10px; height: 10px; position: absolute; opacity: 0;"></div><div class="smv-thumbnails" style="top: -10000px; left: -10000px; width: 10px; height: 10px; position: absolute; opacity: 0;"></div><div id="shopify-block-AMlR3V2dTYlYvaEdRM__6048552914641687618" class="shopify-block shopify-app-block"></div><div class="product-media-modal__dialog color-background-1 gradient" role="dialog" aria-label="Media gallery" aria-modal="true" tabindex="-1" style="--color-background: 255,255,255; --gradient-background: #ffffff; --color-foreground: 18,18,18; --color-background-contrast: 191,191,191; --color-shadow: 18,18,18; --color-button: 18,18,18; --color-button-text: 255,255,255; --color-secondary-button: 255,255,255; --color-secondary-button-text: 18,18,18; --color-link: 18,18,18; --color-badge-foreground: 18,18,18; --color-badge-background: 255,255,255; --color-badge-border: 18,18,18; --payment-terms-background-color: rgb(255 255 255); color: rgba(18, 18, 18, 0.75); background-image: none; background-position: 0% 0%; background-size: auto; background-repeat: repeat; background-attachment: fixed; background-origin: padding-box; background-clip: border-box; display: flex; align-items: center; height: 100vh;"><button id="ModalClose-template--26496341672214__main" type="button" class="product-media-modal__toggle" aria-label="Close" style="background-color: rgb(255, 255, 255); border-color: rgba(18, 18, 18, 0.1); border-style: solid; border-width: 1px; border-image: none 100% / 1 / 0 stretch; border-radius: 50%; color: rgba(18, 18, 18, 0.55); display: flex; align-items: center; justify-content: center; right: 5rem; padding: 1.2rem; position: fixed; z-index: 2; top: 2.2rem; width: 4rem;"><svg xmlns="http://www.w3.org/2000/svg" fill="none" class="icon icon-close" viewBox="0 0 18 17"><path fill="currentColor" d="M.865 15.978a.5.5 0 0 0 .707.707l7.433-7.431 7.579 7.282a.501.501 0 0 0 .846-.37.5.5 0 0 0-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 1 0-.707-.708L8.991 7.853 1.413.573a.5.5 0 1 0-.693.72l7.563 7.268z"></path></svg></button><div class="product-media-modal__content color-background-1 gradient" role="document" aria-label="Media gallery" tabindex="0" style="--color-background: 255,255,255; --gradient-background: #ffffff; --color-foreground: 18,18,18; --color-background-contrast: 191,191,191; --color-shadow: 18,18,18; --color-button: 18,18,18; --color-button-text: 255,255,255; --color-secondary-button: 255,255,255; --color-secondary-button-text: 18,18,18; --color-link: 18,18,18; --color-badge-foreground: 18,18,18; --color-badge-background: 255,255,255; --color-badge-border: 18,18,18; --payment-terms-background-color: rgb(255 255 255); background-image: none; background-position: 0% 0%; background-size: auto; background-repeat: repeat; background-attachment: fixed; background-origin: padding-box; background-clip: border-box; max-height: 100vh; width: 1905px; overflow: auto; padding: 2rem 11rem 1.5rem;"><img class="global-media-settings global-media-settings--no-shadow" srcset="//pressplayid.com/cdn/shop/files/1_e79c68f2-1d14-4f8c-b0e2-b387d48d9e33.jpg?v=1764495006&amp;width=550 550w,//pressplayid.com/cdn/shop/files/1_e79c68f2-1d14-4f8c-b0e2-b387d48d9e33.jpg?v=1764495006 1080w
+    " sizes="(min-width: 750px) calc(100vw - 22rem), 1100px" src="https://pressplayid.com/cdn/shop/files/1_e79c68f2-1d14-4f8c-b0e2-b387d48d9e33.jpg?v=1764495006&amp;width=1445" alt="KTT Coconut Latte 45g Linear Switch PCB Mount" loading="lazy" width="1100" height="1100" data-media-id="43199692636438" style="--border-radius: 0px; --border-width: 1px; --border-opacity: 0.05; --shadow-horizontal-offset: 0px; --shadow-vertical-offset: 4px; --shadow-blur-radius: 5px; --shadow-opacity: 0.0; --shadow-visible: 0; position: relative; border-color: rgba(18, 18, 18, 0.05); border-style: solid; border-width: 1px; border-image: none 100% / 1 / 0 stretch; border-radius: 0px; display: block; height: auto; margin: auto; width: 1670px; overflow: visible !important;"><img class="global-media-settings global-media-settings--no-shadow" srcset="//pressplayid.com/cdn/shop/files/2_c8f56a41-bc88-43a0-ad5a-366a5e9be551.jpg?v=1764495006&amp;width=550 550w,//pressplayid.com/cdn/shop/files/2_c8f56a41-bc88-43a0-ad5a-366a5e9be551.jpg?v=1764495006 1080w
+    " sizes="(min-width: 750px) calc(100vw - 22rem), 1100px" src="https://pressplayid.com/cdn/shop/files/2_c8f56a41-bc88-43a0-ad5a-366a5e9be551.jpg?v=1764495006&amp;width=1445" alt="KTT Coconut Latte 45g Linear Switch PCB Mount" loading="lazy" width="1100" height="1100" data-media-id="43199692669206" style="--border-radius: 0px; --border-width: 1px; --border-opacity: 0.05; --shadow-horizontal-offset: 0px; --shadow-vertical-offset: 4px; --shadow-blur-radius: 5px; --shadow-opacity: 0.0; --shadow-visible: 0; position: relative; border-color: rgba(18, 18, 18, 0.05); border-style: solid; border-width: 1px; border-image: none 100% / 1 / 0 stretch; border-radius: 0px; display: block; height: auto; margin: 1.5rem auto auto; width: 1670px; overflow: visible !important;"><img class="global-media-settings global-media-settings--no-shadow" srcset="//pressplayid.com/cdn/shop/files/DSC07759.jpg?v=1764495021&amp;width=550 550w,//pressplayid.com/cdn/shop/files/DSC07759.jpg?v=1764495021&amp;width=1100 1100w,//pressplayid.com/cdn/shop/files/DSC07759.jpg?v=1764495021&amp;width=1445 1445w,//pressplayid.com/cdn/shop/files/DSC07759.jpg?v=1764495021&amp;width=1680 1680w,//pressplayid.com/cdn/shop/files/DSC07759.jpg?v=1764495021 1955w
+    " sizes="(min-width: 750px) calc(100vw - 22rem), 1100px" src="https://pressplayid.com/cdn/shop/files/DSC07759.jpg?v=1764495021&amp;width=1445" alt="KTT Coconut Latte 45g Linear Switch PCB Mount" loading="lazy" width="1100" height="1100" data-media-id="43199695946006" style="--border-radius: 0px; --border-width: 1px; --border-opacity: 0.05; --shadow-horizontal-offset: 0px; --shadow-vertical-offset: 4px; --shadow-blur-radius: 5px; --shadow-opacity: 0.0; --shadow-visible: 0; position: relative; border-color: rgba(18, 18, 18, 0.05); border-style: solid; border-width: 1px; border-image: none 100% / 1 / 0 stretch; border-radius: 0px; display: block; height: auto; margin: 1.5rem auto auto; width: 1670px; overflow: visible !important;"><img class="global-media-settings global-media-settings--no-shadow" srcset="//pressplayid.com/cdn/shop/files/DSC07760.jpg?v=1764495021&amp;width=550 550w,//pressplayid.com/cdn/shop/files/DSC07760.jpg?v=1764495021&amp;width=1100 1100w,//pressplayid.com/cdn/shop/files/DSC07760.jpg?v=1764495021&amp;width=1445 1445w,//pressplayid.com/cdn/shop/files/DSC07760.jpg?v=1764495021&amp;width=1680 1680w,//pressplayid.com/cdn/shop/files/DSC07760.jpg?v=1764495021 1738w
+    " sizes="(min-width: 750px) calc(100vw - 22rem), 1100px" src="https://pressplayid.com/cdn/shop/files/DSC07760.jpg?v=1764495021&amp;width=1445" alt="KTT Coconut Latte 45g Linear Switch PCB Mount" loading="lazy" width="1100" height="1100" data-media-id="43199695978774" style="--border-radius: 0px; --border-width: 1px; --border-opacity: 0.05; --shadow-horizontal-offset: 0px; --shadow-vertical-offset: 4px; --shadow-blur-radius: 5px; --shadow-opacity: 0.0; --shadow-visible: 0; position: relative; border-color: rgba(18, 18, 18, 0.05); border-style: solid; border-width: 1px; border-image: none 100% / 1 / 0 stretch; border-radius: 0px; display: block; height: auto; margin: 1.5rem auto auto; width: 1670px; overflow: visible !important;"><img class="global-media-settings global-media-settings--no-shadow" srcset="//pressplayid.com/cdn/shop/files/DSC07761.jpg?v=1764495022&amp;width=550 550w,//pressplayid.com/cdn/shop/files/DSC07761.jpg?v=1764495022&amp;width=1100 1100w,//pressplayid.com/cdn/shop/files/DSC07761.jpg?v=1764495022&amp;width=1445 1445w,//pressplayid.com/cdn/shop/files/DSC07761.jpg?v=1764495022&amp;width=1680 1680w,//pressplayid.com/cdn/shop/files/DSC07761.jpg?v=1764495022&amp;width=2048 2048w,//pressplayid.com/cdn/shop/files/DSC07761.jpg?v=1764495022 2153w
+    " sizes="(min-width: 750px) calc(100vw - 22rem), 1100px" src="https://pressplayid.com/cdn/shop/files/DSC07761.jpg?v=1764495022&amp;width=1445" alt="KTT Coconut Latte 45g Linear Switch PCB Mount" loading="lazy" width="1100" height="1100" data-media-id="43199696142614" style="--border-radius: 0px; --border-width: 1px; --border-opacity: 0.05; --shadow-horizontal-offset: 0px; --shadow-vertical-offset: 4px; --shadow-blur-radius: 5px; --shadow-opacity: 0.0; --shadow-visible: 0; position: relative; border-color: rgba(18, 18, 18, 0.05); border-style: solid; border-width: 1px; border-image: none 100% / 1 / 0 stretch; border-radius: 0px; display: block; height: auto; margin: 1.5rem auto auto; width: 1670px; overflow: visible !important;"><img class="global-media-settings global-media-settings--no-shadow" srcset="//pressplayid.com/cdn/shop/files/DSC07762.jpg?v=1764495022&amp;width=550 550w,//pressplayid.com/cdn/shop/files/DSC07762.jpg?v=1764495022&amp;width=1100 1100w,//pressplayid.com/cdn/shop/files/DSC07762.jpg?v=1764495022&amp;width=1445 1445w,//pressplayid.com/cdn/shop/files/DSC07762.jpg?v=1764495022&amp;width=1680 1680w,//pressplayid.com/cdn/shop/files/DSC07762.jpg?v=1764495022&amp;width=2048 2048w,//pressplayid.com/cdn/shop/files/DSC07762.jpg?v=1764495022&amp;width=2200 2200w,//pressplayid.com/cdn/shop/files/DSC07762.jpg?v=1764495022 2210w
+    " sizes="(min-width: 750px) calc(100vw - 22rem), 1100px" src="https://pressplayid.com/cdn/shop/files/DSC07762.jpg?v=1764495022&amp;width=1445" alt="KTT Coconut Latte 45g Linear Switch PCB Mount" loading="lazy" width="1100" height="1100" data-media-id="43199696175382" style="--border-radius: 0px; --border-width: 1px; --border-opacity: 0.05; --shadow-horizontal-offset: 0px; --shadow-vertical-offset: 4px; --shadow-blur-radius: 5px; --shadow-opacity: 0.0; --shadow-visible: 0; position: relative; border-color: rgba(18, 18, 18, 0.05); border-style: solid; border-width: 1px; border-image: none 100% / 1 / 0 stretch; border-radius: 0px; display: block; height: auto; margin: 1.5rem auto auto; width: 1670px; overflow: visible !important;"></div></div><p><product-modal id="ProductModal-template--26496341672214__main" class="product-media-modal media-modal" data-section="template--26496341672214__main" style="cursor: zoom-out; height: 945px; position: fixed; top: 0px; left: 0px; width: 1905px; visibility: hidden; opacity: 0; z-index: -1;"></product-modal></p><div class="magic-hidden-wrapper" style="min-height: 0px !important; min-width: 0px !important; max-height: none !important; max-width: none !important; width: 10px !important; height: 10px !important; position: absolute !important; top: -10000px !important; left: 0px !important; overflow: hidden !important; transform: none !important; transition: none !important;"><div class="mz-zoom-window white-bg" style="z-index: 2000000000; transform: translate3d(0px, 0px, 0px); background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 3px; top: -100000px; position: absolute !important; overflow: hidden !important; pointer-events: none !important;"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" style="position: absolute; width: 0px; height: 0px; inset: 0px; transform: translate3d(0px, 0px, 0px) scale(1); backface-visibility: hidden; max-width: none !important; max-height: none !important; margin: auto !important; transition: none !important; transform-origin: 50% 50% !important;"></div></div><div class="msc-tmp-hdn-holder"></div><div id="Avada-Joy_FloatingButton" style="font-size: 14px; font-family: Inter; letter-spacing: 0px; -webkit-font-smoothing: antialiased;"><div style="box-sizing: inherit;"><div class="MuiBox-root jss198 Avada-Preview_Popup NewVersion home left bottom fullHeight ninety-percent" style="box-sizing: inherit; text-align: unset; position: fixed; bottom: 6em; width: 380px; max-height: 47em; height: calc(-7em + 100dvh); flex-direction: column; border-radius: 8px; box-shadow: rgba(0, 0, 0, 0.13) 1px 0px 0px 0px inset, rgba(0, 0, 0, 0.17) -1px 0px 0px 0px inset, rgba(0, 0, 0, 0.17) 0px -1px 0px 0px inset, rgba(204, 204, 204, 0.5) 0px 1px 0px 0px inset, rgba(26, 26, 26, 0.28) 0px 20px 20px -8px; left: 24px; opacity: 0; transform: scale(0.75, 0.5625); visibility: hidden; transform-origin: left bottom; background-color: rgb(246, 246, 246) !important;"></div><div class="Avada-Joy_ButtonWidget left bottom ninety-percent closed" style="box-sizing: inherit; position: fixed; bottom: 24px; z-index: 9999999; left: 24px;"><button id="Avada-Joy_FloatingButtonTrigger" color="secondary" aria-label="avada-joy-button-widget" style="box-sizing: inherit; position: relative; border-width: medium; border-style: none; border-color: currentcolor; height: inherit;"></button></div></div></div><p><shop-cart-sync experiments="{}" data-instance-id="d381f262-c645-4445-b6b6-e1fe533e6f2d" style="text-size-adjust: 100%; font-feature-settings: normal; -webkit-tap-highlight-color: transparent; font-family: GTStandard-M, sans-serif; font-variation-settings: normal; line-height: 1.5; tab-size: 4;"></shop-cart-sync></p><div class="wsscc-main topRight" id="wsscc-main" style="position: fixed; z-index: 9999; top: 20px; right: 20px; left: initial; bottom: initial;"><div class="wsscc-dropdownTop dropDown" id="wsscc-dropdownTop" style="box-shadow: rgba(60, 60, 60, 0.09) 0px 0px 10px 4px; color: rgb(33, 33, 33); font-size: 18px; border-radius: 10px;"><div class="wsscc-dropdown country has-search topRight" id="wsscc-dropdown"><div class="wsscc-drop-items" style="height: auto; transition: 0.5s; background: transparent; overflow: hidden; position: absolute; top: calc(100% + 5px); white-space: nowrap; opacity: 0; max-height: 0px; box-shadow: rgba(60, 60, 60, 0.09) 0px 0px 10px 4px; right: 0px; left: initial; transform: translateY(0px); border-radius: 10px; min-width: 160px;"><div class="wsscc-search-box" style="padding: 8px 12px; border-bottom: 1px solid rgb(230, 230, 230); display: flex; justify-content: flex-end; align-items: center; max-width: 200px; position: sticky; top: -1px; z-index: 1; gap: 5px;"><div class="wsscc-search-icon" style="display: flex;"><svg width="12" height="12" viewBox="0 0 24 24" fill="#212121" xmlns="http://www.w3.org/2000/svg" class="sel-magnifier--svg"><path d="M2.4 9.6C2.4 5.6292 5.6292 2.4 9.6 2.4C13.5708 2.4 16.8 5.6292 16.8 9.6C16.8 13.5708 13.5708 16.8 9.6 16.8C5.6292 16.8 2.4 13.5708 2.4 9.6ZM23.6484 21.9516L17.1744 15.4764C18.487 13.7988 19.2001 11.7301 19.2 9.6C19.2 4.3068 14.8932 0 9.6 0C4.3068 0 0 4.3068 0 9.6C0 14.8932 4.3068 19.2 9.6 19.2C11.7299 19.1994 13.7985 18.4864 15.4764 17.1744L21.9516 23.6484C22.0628 23.7602 22.195 23.849 22.3406 23.9095C22.4862 23.9701 22.6423 24.0012 22.8 24.0012C22.9577 24.0012 23.1138 23.9701 23.2594 23.9095C23.405 23.849 23.5372 23.7602 23.6484 23.6484C23.7599 23.5371 23.8484 23.4048 23.9088 23.2592C23.9692 23.1137 24.0002 22.9576 24.0002 22.8C24.0002 22.6424 23.9692 22.4863 23.9088 22.3408C23.8484 22.1952 23.7599 22.0629 23.6484 21.9516Z" fill-opacity="1"></path></svg></div><input id="wsscc-drop-items-search-input" autocomplete="off" style="border-width: medium; border-style: none; border-color: currentcolor; outline: none; box-shadow: none; margin: inherit; background-color: rgb(255, 255, 255); width: 159px; text-transform: uppercase;"></div><div class="wsscc-drop-item" data-code="ID" style="padding: 8px 15px 10px; cursor: pointer; display: flex; flex-direction: row-reverse; justify-content: flex-end; align-items: center; max-width: 200px;"><span class="ws-curreny-text" style="display: block; width: 135px; overflow: hidden; text-overflow: ellipsis; line-height: initial;"></span><span class="currency-flag active" style="display: inline-block; margin-right: 8px;"><span class="fflag fflag-ID ff-App ff-md" style="box-sizing: content-box; background-repeat: no-repeat; background-size: 100% 49494%; display: block; overflow: hidden; position: relative; vertical-align: middle; background-image: url(&quot;https://cdn.shopify.com/extensions/019d85a1-c3fb-7622-8b52-74193b79cece/currency-converter-42-179/assets/flags.png&quot;) !important; background-position: center 27.7195%; height: 17px; width: 27px;"></span></span></div><div class="wsscc-drop-item" data-code="MY" style="padding: 10px 15px; cursor: pointer; display: flex; flex-direction: row-reverse; justify-content: flex-end; align-items: center; max-width: 200px;"><span class="ws-curreny-text" style="display: block; width: 135px; overflow: hidden; text-overflow: ellipsis; line-height: initial;"></span><span class="currency-flag active" style="display: inline-block; margin-right: 8px;"><span class="fflag fflag-MY ff-App ff-md" style="box-sizing: content-box; background-repeat: no-repeat; background-size: 100% 49494%; display: block; overflow: hidden; position: relative; vertical-align: middle; background-image: url(&quot;https://cdn.shopify.com/extensions/019d85a1-c3fb-7622-8b52-74193b79cece/currency-converter-42-179/assets/flags.png&quot;) !important; background-position: center 28.829%; height: 17px; width: 27px;"></span></span></div><div class="wsscc-drop-item" data-code="SG" style="padding: 10px 15px; cursor: pointer; display: flex; flex-direction: row-reverse; justify-content: flex-end; align-items: center; max-width: 200px;"><span class="ws-curreny-text" style="display: block; width: 135px; overflow: hidden; text-overflow: ellipsis; line-height: initial;"></span><span class="currency-flag active" style="display: inline-block; margin-right: 8px;"><span class="fflag fflag-SG ff-App ff-md" style="box-sizing: content-box; background-repeat: no-repeat; background-size: 100% 49494%; display: block; overflow: hidden; position: relative; vertical-align: middle; background-image: url(&quot;https://cdn.shopify.com/extensions/019d85a1-c3fb-7622-8b52-74193b79cece/currency-converter-42-179/assets/flags.png&quot;) !important; background-position: left 31.045%; height: 17px; width: 27px;"></span></span></div><div class="wsscc-drop-item" data-code="US" style="padding: 10px 15px 8px; cursor: pointer; display: flex; flex-direction: row-reverse; justify-content: flex-end; align-items: center; max-width: 200px; border-bottom-width: medium; border-bottom-style: none; border-bottom-color: currentcolor;"><span class="ws-curreny-text" style="display: block; width: 135px; overflow: hidden; text-overflow: ellipsis; line-height: initial;"></span><span class="currency-flag active" style="display: inline-block; margin-right: 8px;"><span class="fflag fflag-US ff-App ff-md" style="box-sizing: content-box; background-repeat: no-repeat; background-size: 100% 49494%; display: block; overflow: hidden; position: relative; vertical-align: middle; background-image: url(&quot;https://cdn.shopify.com/extensions/019d85a1-c3fb-7622-8b52-74193b79cece/currency-converter-42-179/assets/flags.png&quot;) !important; background-position: center 24.394%; height: 17px; width: 27px;"></span></span></div></div><div class="wssccSelectedDropdownItem has-Flag" id="wssccSelected" style="display: flex; align-items: center; justify-content: center; position: relative; padding: 7px 3px 7px 7px; border-width: medium !important; border-style: none !important; border-color: currentcolor !important; border-image: initial !important;"><span id="flag" class="currency-flag active" style="display: inline-block; margin-right: 8px;"><span class="fflag fflag-KH ff-App ff-md" style="box-sizing: content-box; background-repeat: no-repeat; background-size: 100% 49494%; display: block; overflow: hidden; position: relative; vertical-align: middle; background-image: url(&quot;https://cdn.shopify.com/extensions/019d85a1-c3fb-7622-8b52-74193b79cece/currency-converter-42-179/assets/flags.png&quot;) !important; background-position: center 26.611%; height: 17px; width: 27px;"></span></span><span class="wsscc-text" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; line-height: initial;">KH (KHR)</span><div class="arrow-icon" style="height: 20px; width: 20px; margin-left: 10px; display: flex; align-items: center; justify-content: center;"><svg version="1.1" id="Capa_1" x="0px" y="0px" width="451.847px" height="451.847px" viewBox="0 0 451.847 451.847" style="enable-background:new 0 0 451.847 451.847; fill:#212121;" xml:space="preserve"><g><path d="M225.923,354.706c-8.098,0-16.195-3.092-22.369-9.263L9.27,151.157c-12.359-12.359-12.359-32.397,0-44.751   c12.354-12.354,32.388-12.354,44.748,0l171.905,171.915l171.906-171.909c12.359-12.354,32.391-12.354,44.744,0   c12.365,12.354,12.365,32.392,0,44.751L248.292,345.449C242.115,351.621,234.018,354.706,225.923,354.706z"></path></g></svg></div></div></div></div></div>
+ID: 78 | Name: Attack Shark L80 Pro | Desc: <ul style="padding-left: 2rem; color: rgb(119, 119, 119); font-family: Poppins, sans-serif; font-size: 14px; list-style: inherit !important;"><li style="line-height: 24px;">Impedance 30 Ohm</li><li class="a-spacing-mini" style="line-height: 24px;">3.5mm AUX cable as a backup option</li><li style="line-height: 24px;">2.4GHz wireless connectivity, and 3.5mm wired connectivity.</li><li style="line-height: 24px;">3-hour charging time for a full charge</li></ul>
+ID: 79 | Name: R85 HE | Desc: <h1 class="product-info__title h3" style="border-style: solid; border-width: 0px; border-color: rgba(26, 26, 26, 0.12); font-size: 36px; font-weight: inherit; margin: 0px; --product-info-block-spacing: 1rem; font-family: Attackshark, sans-serif; overflow-wrap: anywhere; color: rgb(26, 26, 26); background-color: rgb(240, 240, 240);"><div class="qMYqUG_convSearchResultHighlightRoot"><div class="" data-turn-id-container="request-WEB:5711b886-b5ff-4bd1-aa15-f2986b03e501-1" data-is-intersecting="true"><section class="text-token-text-primary w-full focus:outline-none has-data-writing-block:pointer-events-none [&amp;:has([data-writing-block])&gt;*]:pointer-events-auto R6Vx5W_threadScrollVars scroll-mb-[calc(var(--scroll-root-safe-area-inset-bottom,0px)+var(--thread-response-height))] scroll-mt-[calc(var(--header-height)+min(200px,max(70px,20svh)))]" dir="auto" data-turn-id="request-WEB:5711b886-b5ff-4bd1-aa15-f2986b03e501-1" data-turn-id-container="request-WEB:5711b886-b5ff-4bd1-aa15-f2986b03e501-1" data-testid="conversation-turn-4" data-scroll-anchor="false" data-turn="assistant"><div class="text-base my-auto mx-auto pb-10 [--thread-content-margin:var(--thread-content-margin-xs,calc(var(--spacing)*4))] @w-sm/main:[--thread-content-margin:var(--thread-content-margin-sm,calc(var(--spacing)*6))] @w-lg/main:[--thread-content-margin:var(--thread-content-margin-lg,calc(var(--spacing)*16))] px-(--thread-content-margin)"><div class="[--thread-content-max-width:40rem] @w-lg/main:[--thread-content-max-width:48rem] mx-auto max-w-(--thread-content-max-width) flex-1 group/turn-messages focus-visible:outline-hidden relative flex w-full min-w-0 flex-col agent-turn"><div class="flex max-w-full flex-col gap-4 grow"><div data-message-author-role="assistant" data-message-id="e961fba6-d8b0-4b90-828b-065e57610e93" dir="auto" data-message-model-slug="gpt-5-5" class="min-h-8 text-message relative flex w-full flex-col items-end gap-2 text-start break-words whitespace-normal outline-none keyboard-focused:focus-ring [.text-message+&amp;]:mt-1" data-turn-start-message="true" tabindex="0"><div class="flex w-full flex-col gap-1 empty:hidden"><div class="markdown prose dark:prose-invert wrap-break-word w-full light markdown-new-styling"><ul data-start="38" data-end="1253"><li data-section-id="g3xn1j" data-start="38" data-end="140"><strong data-start="40" data-end="51">Layout:</strong> 75% compact keyboard (function row + arrow keys) <span class="" data-state="closed"></span>
+</li>
+<li data-section-id="ozdd0c" data-start="141" data-end="249">
+<strong data-start="143" data-end="154">Switch:</strong> Magnetic / Hall Effect linear switches (Rapid Trigger) <span class="" data-state="closed"></span>
+</li>
+<li data-section-id="1skqoga" data-start="250" data-end="324">
+<strong data-start="252" data-end="267">Connection:</strong> Wired USB-C only <span class="" data-state="closed"></span>
+</li>
+<li data-section-id="hrndyy" data-start="325" data-end="396">
+<strong data-start="327" data-end="344">Polling Rate:</strong> 8000Hz (8K) <span class="" data-state="closed"></span>
+</li>
+<li data-section-id="j8rqey" data-start="397" data-end="460">
+<strong data-start="399" data-end="413">Scan Rate:</strong> 256KHz <span class="" data-state="closed"></span>
+</li>
+<li data-section-id="12lwahb" data-start="461" data-end="522">
+<strong data-start="463" data-end="475">Latency:</strong> 0.08ms <span class="" data-state="closed"></span>
+</li>
+<li data-section-id="1gztfo7" data-start="523" data-end="628">
+<strong data-start="525" data-end="545">Actuation Range:</strong> Adjustable 0.1mm–3.3mm (0.005mm precision) <span class="" data-state="closed"></span>
+</li>
+<li data-section-id="1q2y0iu" data-start="629" data-end="729">
+<strong data-start="631" data-end="651">Gaming Features:</strong> Rapid Trigger, Snap Tap, DKS, MT, TGL <span class="" data-state="closed"></span>
+</li>
+<li data-section-id="1ym3fnr" data-start="730" data-end="800">
+<strong data-start="732" data-end="744">Keycaps:</strong> Double-shot PBT <span class="" data-state="closed"></span>
+</li>
+<li data-section-id="ide2bu" data-start="801" data-end="886">
+<strong data-start="803" data-end="811">RGB:</strong> Per-key RGB + rear/custom lightbox <span class="" data-state="closed"></span>
+</li>
+<li data-section-id="1sltdk5" data-start="887" data-end="965">
+<strong data-start="889" data-end="898">Knob:</strong> Multimedia / volume knob <span class="" data-state="closed"></span>
+</li>
+<li data-section-id="1gt2d7p" data-start="966" data-end="1075">
+<strong data-start="968" data-end="981">Software:</strong> Web driver + downloadable software + onboard memory <span class="" data-state="closed"></span>
+</li>
+<li data-section-id="54ut8l" data-start="1076" data-end="1178">
+<strong data-start="1078" data-end="1088">Build:</strong> ABS plastic shell, 5-layer sound dampening foam <span class="" data-state="closed"></span>
+</li>
+<li data-section-id="10oadku" data-start="1179" data-end="1253">
+<strong data-start="1181" data-end="1199">Compatibility:</strong> Windows / Mac <span class="" data-state="closed"></span>
+</li>
+</ul>
+</div></div></div></div><div class="z-0 flex min-h-[46px] justify-start"></div><div class="mt-3 w-full empty:hidden"><div class="text-center"></div></div></div></div></section></div></div><div aria-hidden="true" class="pointer-events-none -mt-px h-px translate-y-[calc(var(--scroll-root-safe-area-inset-bottom)-14*var(--spacing))]"></div></h1><p style="border-style: solid; border-width: 0px; border-color: rgba(26, 26, 26, 0.12); font-size: 36px; font-weight: inherit; margin: 0px; --product-info-block-spacing: 1rem; font-family: Attackshark, sans-serif; overflow-wrap: anywhere; color: rgb(26, 26, 26); background-color: rgb(240, 240, 240);"><span style="border-style: solid; border-width: 0px; border-color: rgba(26, 26, 26, 0.12); display: block; opacity: 0; transform: translateY(24px); will-change: transform, opacity; animation: 0.6s ease-out 0.3s 1 normal forwards running fadeUpIn; font-family: Attackshark4, sans-serif; font-size: 14.4px; margin-block-start: 0px !important;"><span class="metafield-multi_line_text_field" style="border-style: solid; border-width: 0px; border-color: rgba(26, 26, 26, 0.12); display: block; opacity: 0; transform: translateY(24px); will-change: transform, opacity; animation: 0.6s ease-out 0s 1 normal forwards running fadeUpIn; margin-block: 0px !important;">• Custom RGB Lightbox</span></span><span style="border-style: solid; border-width: 0px; border-color: rgba(26, 26, 26, 0.12); display: inline-block; opacity: 0; transform: translateY(24px); will-change: transform, opacity; animation: 0.6s ease-out 0.3s 1 normal forwards running fadeUpIn; font-family: Attackshark4, sans-serif; font-size: 14.4px;">• Multimedia Knob</span><span style="border-style: solid; border-width: 0px; border-color: rgba(26, 26, 26, 0.12); display: inline-block; opacity: 0; transform: translateY(24px); will-change: transform, opacity; animation: 0.6s ease-out 0.3s 1 normal forwards running fadeUpIn; font-family: Attackshark4, sans-serif; font-size: 14.4px;">• 0.005mm Rapid Trigger Accuracy, Zero Dead Zone</span><span style="border-style: solid; border-width: 0px; border-color: rgba(26, 26, 26, 0.12); display: inline-block; opacity: 0; transform: translateY(24px); will-change: transform, opacity; animation: 0.6s ease-out 0.3s 1 normal forwards running fadeUpIn; font-family: Attackshark4, sans-serif; font-size: 14.4px;">• 8000Hz Polling Rate, 0.08ms Latency</span><span style="border-style: solid; border-width: 0px; border-color: rgba(26, 26, 26, 0.12); display: inline-block; opacity: 0; transform: translateY(24px); will-change: transform, opacity; animation: 0.6s ease-out 0.3s 1 normal forwards running fadeUpIn; font-family: Attackshark4, sans-serif; font-size: 14.4px;">• Adjustable Actuation Points (0.1-3.3mm)</span><span style="border-style: solid; border-width: 0px; border-color: rgba(26, 26, 26, 0.12); display: inline-block; opacity: 0; transform: translateY(24px); will-change: transform, opacity; animation: 0.6s ease-out 0.3s 1 normal forwards running fadeUpIn; font-family: Attackshark4, sans-serif; font-size: 14.4px;">• Snap tap and Last Keystroke Prioritization</span><span style="border-style: solid; border-width: 0px; border-color: rgba(26, 26, 26, 0.12); display: inline-block; opacity: 0; transform: translateY(24px); will-change: transform, opacity; animation: 0.6s ease-out 0.3s 1 normal forwards running fadeUpIn; font-family: Attackshark4, sans-serif; font-size: 14.4px;">• One Key. Multiple Actions (DKS)</span><span style="border-style: solid; border-width: 0px; border-color: rgba(26, 26, 26, 0.12); display: inline-block; opacity: 0; transform: translateY(24px); will-change: transform, opacity; animation: 0.6s ease-out 0.3s 1 normal forwards running fadeUpIn; font-family: Attackshark4, sans-serif; font-size: 14.4px;">• 5‑Layer Sound‑Optimizing</span><span style="border-style: solid; border-width: 0px; border-color: rgba(26, 26, 26, 0.12); display: inline-block; opacity: 0; transform: translateY(24px); will-change: transform, opacity; animation: 0.6s ease-out 0.3s 1 normal forwards running fadeUpIn; font-family: Attackshark4, sans-serif; font-size: 14.4px;">• Web Driver &amp; On-board Memory</span></p>
+ID: 80 | Name: Moondrop MC1 | Desc: <div style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12); color: rgb(68, 68, 68); font-family: Roboto, sans-serif; text-align: center; background-color: rgb(249, 249, 249);"><h3 class="product-page-header" style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12); font-size: 36px; font-weight: 700; margin: 0px; text-align: left; font-family: sora, sans-serif; letter-spacing: -0.24px; overflow-wrap: anywhere;">MOONDROP PRESENTS ITS ALL-NEW 2-PIN UPGRADE CABLE WITH A 3.5MM TERMINATION</h3></div><div style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12); margin-block-start: 0px; color: rgb(68, 68, 68); font-family: Roboto, sans-serif; text-align: center; background-color: rgb(249, 249, 249);"><p class="product-page-body" style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12); margin: 0px; text-align: left;">Elevate your audio experience with the premium Moondrop MC1, featuring an oxygen-free copper cable equipped with a 0.78 2-pin universal connection and a 3.5mm termination. The MC1 boasts 4N oxygen-free internal wires, ensuring dependable signal transmission. Its 0.78 2-pin socket offers compatibility with a wide range of interchangeable IEMs. Additionally, the Moondrop MC1 provides user-friendly in-line controls and a high-quality pickup microphone, facilitating clear communication and effortless music playback management. This versatile cable is compatible with various devices, including smartphones, computers, and both iOS and Android platforms, ensuring widespread adaptability.</p></div>
+ID: 81 | Name: Keycap K001 | Desc: 
+ID: 82 | Name: Keycap K002 | Desc: 
+ID: 83 | Name: Keycap K003 | Desc: 
+ID: 84 | Name: Keycap K004 | Desc: 
+ID: 85 | Name: Keycap K005 | Desc: 
+ID: 86 | Name: Keycap K006 | Desc: 
+ID: 87 | Name: Keycap K007 | Desc: 
+ID: 88 | Name: Keycap K008 | Desc: 
+ID: 89 | Name: Keycap K009 | Desc: 
+ID: 90 | Name: ATK Anime Mouse Pad – Reverie | Desc: <ul style="-webkit-font-smoothing: antialiased; margin-block: 0px; margin-inline: 1.25em 0px; padding: 0px; list-style-type: square; color: rgb(40, 40, 40); font-family: Rubik, sans-serif; font-size: 15px;"><li style="-webkit-font-smoothing: antialiased; padding-block: 4px; padding-inline: 0px 5px;"><span style="-webkit-font-smoothing: antialiased;"><strong style="-webkit-font-smoothing: antialiased;">Firmness</strong>: SOFT (Custom-Tuned)</span><br style="-webkit-font-smoothing: antialiased;"><span style="-webkit-font-smoothing: antialiased;"><strong style="-webkit-font-smoothing: antialiased;"></strong></span></li><li style="-webkit-font-smoothing: antialiased; padding-block: 4px; padding-inline: 0px 5px;"><span style="-webkit-font-smoothing: antialiased;"><strong style="-webkit-font-smoothing: antialiased;">Edge Design</strong>: Recessed Edge</span></li><li style="-webkit-font-smoothing: antialiased; padding-block: 4px; padding-inline: 0px 5px;"><span style="-webkit-font-smoothing: antialiased;"><strong style="-webkit-font-smoothing: antialiased;">Dimensions</strong>: 490 x 420 x 4mm</span><span style="-webkit-font-smoothing: antialiased;"></span></li><li style="-webkit-font-smoothing: antialiased; padding-block: 4px; padding-inline: 0px 5px;"><span style="-webkit-font-smoothing: antialiased;"><strong style="-webkit-font-smoothing: antialiased;">Surface Material</strong>: Proprietary Textured Fabric</span></li><li style="-webkit-font-smoothing: antialiased; padding-block: 4px; padding-inline: 0px 5px;"><span style="-webkit-font-smoothing: antialiased;"><strong style="-webkit-font-smoothing: antialiased;">Base Material</strong>: Poron Polyurethane</span></li></ul>
+ID: 91 | Name: Tangzu Wan'er SG 2 Red Lion | Desc: <table><thead><tr><th>Specification</th><th>Details</th></tr></thead><tbody><tr><td>Driver</td><td>10mm PET Dynamic Driver</td></tr><tr><td>Type</td><td>In-Ear Monitor (IEM)</td></tr><tr><td>Connector</td><td>0.78mm 2-pin detachable cable</td></tr><tr><td>Plug Options</td><td>3.5mm, 3.5mm with mic, USB-C with mic</td></tr><tr><td>Shell Material</td><td>Lightweight resin/plastic shell</td></tr><tr><td>Tuning</td><td>Warm V-shape, bass-enhanced</td></tr><tr><td>Color</td><td>Red Lion Edition (Red translucent shell)</td></tr><tr><td><br></td><td><br></td></tr></tbody></table>
+ID: 92 | Name: ooopusX - Op.22 | Desc: <div class="feature-chart__table-row" style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12); --feature-chart-heading-width: 180px; grid-template-columns: 180px repeat(1, minmax(140px, 1fr)); gap: 4px 20px; min-width: min-content; padding-block: 20px; display: grid; color: rgb(68, 68, 68); font-family: Roboto, sans-serif; background-color: rgb(240, 240, 240);"><div class="feature-chart__heading bold" style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12); font-weight: bold;">Driver</div><div class="feature-chart__value text-subdued" style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12); color: rgba(68, 68, 68, 0.7); font-size: 14px;">Hybrid Driver</div></div><div class="feature-chart__table-row" style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12); --feature-chart-heading-width: 180px; grid-template-columns: 180px repeat(1, minmax(140px, 1fr)); gap: 4px 20px; min-width: min-content; padding-block: 20px; display: grid; border-block-start-width: 1px; color: rgb(68, 68, 68); font-family: Roboto, sans-serif; background-color: rgb(240, 240, 240);"><div class="feature-chart__heading bold" style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12); font-weight: bold;">Driver Configuration</div><div class="feature-chart__value text-subdued" style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12); color: rgba(68, 68, 68, 0.7); font-size: 14px;">2 Dynamic Drivers + 2 Balanced Armatures Drivers</div></div><div class="feature-chart__table-row" style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12); --feature-chart-heading-width: 180px; grid-template-columns: 180px repeat(1, minmax(140px, 1fr)); gap: 4px 20px; min-width: min-content; padding-block: 20px; display: grid; border-block-start-width: 1px; color: rgb(68, 68, 68); font-family: Roboto, sans-serif; background-color: rgb(240, 240, 240);"><div class="feature-chart__heading bold" style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12); font-weight: bold;">Impedance</div><div class="feature-chart__value text-subdued" style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12); color: rgba(68, 68, 68, 0.7); font-size: 14px;">Bass Off Mode : 22 Ohms<br style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12);">Bass On Mode : 22 Ohms</div></div><div class="feature-chart__table-row" style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12); --feature-chart-heading-width: 180px; grid-template-columns: 180px repeat(1, minmax(140px, 1fr)); gap: 4px 20px; min-width: min-content; padding-block: 20px; display: grid; border-block-start-width: 1px; color: rgb(68, 68, 68); font-family: Roboto, sans-serif; background-color: rgb(240, 240, 240);"><div class="feature-chart__heading bold" style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12); font-weight: bold;">Plug</div><div class="feature-chart__value text-subdued" style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12); color: rgba(68, 68, 68, 0.7); font-size: 14px;">3.5mm (Single-Ended)</div></div><div class="feature-chart__table-row" style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12); --feature-chart-heading-width: 180px; grid-template-columns: 180px repeat(1, minmax(140px, 1fr)); gap: 4px 20px; min-width: min-content; padding-block: 20px; display: grid; border-block-start-width: 1px; color: rgb(68, 68, 68); font-family: Roboto, sans-serif; background-color: rgb(240, 240, 240);"><div class="feature-chart__heading bold" style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12); font-weight: bold;">Connector</div><div class="feature-chart__value text-subdued" style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12); color: rgba(68, 68, 68, 0.7); font-size: 14px;">2-Pin QDC</div></div><div class="feature-chart__table-row" style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12); --feature-chart-heading-width: 180px; grid-template-columns: 180px repeat(1, minmax(140px, 1fr)); gap: 4px 20px; min-width: min-content; padding-block: 20px; display: grid; border-block-start-width: 1px; color: rgb(68, 68, 68); font-family: Roboto, sans-serif; background-color: rgb(240, 240, 240);"><div class="feature-chart__heading bold" style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12); font-weight: bold;">Microphone</div><div class="feature-chart__value text-subdued" style="border-style: solid; border-width: 0px; border-color: rgba(68, 68, 68, 0.12); color: rgba(68, 68, 68, 0.7); font-size: 14px;">Without Mic</div></div>
+ID: 93 | Name: JCally Jm6 pro | Desc: 
+ID: 94 | Name: Jade Air Skate | Desc: <p style="box-sizing: inherit; margin: 0px 0px 1em; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-variant-alternates: inherit; font-variant-position: inherit; font-stretch: inherit; font-size: 18px; line-height: inherit; font-family: Verdana, sans-serif; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; vertical-align: baseline; color: rgb(102, 102, 102);"><span style="box-sizing: inherit; font-weight: 600; border: 0px; font-style: inherit; font-variant: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; vertical-align: baseline;"><span style="box-sizing: inherit; color: rgb(97, 189, 109);">Jade Air</span> DIY Mouse Skates</span> – <span style="box-sizing: inherit; font-weight: 600; border: 0px; font-style: inherit; font-variant: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; vertical-align: baseline;">Less Noise, Smooth Control, Stable Braking</span></p><p style="box-sizing: inherit; margin: 0px 0px 1em; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-variant-alternates: inherit; font-variant-position: inherit; font-stretch: inherit; font-size: 18px; line-height: inherit; font-family: Verdana, sans-serif; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; vertical-align: baseline; color: rgb(102, 102, 102);">Universal Dots with diameter 6.5mm, offer smooth gliding. which is made of pure PTFE with One-piece molding processing, smooth and flat surface, precise fit, allowing the mouse to move more smoothly. Now New upgrade the Noise and Vibration Reduction Tech!</p><p style="box-sizing: inherit; margin: 0px 0px 1em; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-variant-alternates: inherit; font-variant-position: inherit; font-stretch: inherit; font-size: 18px; line-height: inherit; font-family: Verdana, sans-serif; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; vertical-align: baseline; color: rgb(102, 102, 102);">Which is suitable for cloth mouse pads &amp; plastic mouse pads.</p>

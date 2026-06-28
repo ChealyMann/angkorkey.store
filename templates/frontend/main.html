@@ -53,10 +53,6 @@
 
     <!-- ========== CUSTOM STYLES ========== -->
     <style>
-        /* Hide redundant inline back button when product details are in the drawer */
-        #detail-drawer button[onclick="history.back()"] {
-            display: none !important;
-        }
 
         {#/product category partial#}
         .category-title {
@@ -248,7 +244,6 @@
     </script>
 </head>
 <body class="bg-gray-50 text-gray-900 dark:bg-zinc-950 dark:text-zinc-50 antialiased selection:bg-red-500 selection:text-white min-h-screen transition-colors duration-300">
-<div id="page-wrapper" class="transition-all duration-300 ease-out origin-center">
 {% include("frontend/layouts/header.html") %}
 
 <!-- ==================== MAIN CONTENT CONTAINER ==================== -->
@@ -258,31 +253,10 @@
 
 <!-- ==================== FOOTER ==================== -->
 {% include("frontend/layouts/footer.html") %}
-</div>
 
 <!-- ==================== MOBILE MENU (Off-Canvas) ==================== -->
 {% include("frontend/layouts/mobile_menu.html") %}
 {% include("frontend/layouts/mobile_categories.html") %}
-
-<!-- ==================== PRODUCT DETAIL SLIDE-OVER DRAWER ==================== -->
-<!-- Backdrop Blur Overlay -->
-<div id="drawer-backdrop" class="fixed inset-0 bg-black/40 backdrop-blur-xs z-[55] opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out"></div>
-
-<!-- Slide-Over Drawer Container -->
-<div id="detail-drawer" class="fixed inset-y-0 right-0 z-[60] w-full bg-white dark:bg-zinc-950 shadow-2xl transform translate-x-full transition-transform duration-300 ease-out flex flex-col">
-    <!-- Close / Back Header -->
-    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200/60 dark:border-zinc-800/60 flex-shrink-0">
-        <button id="close-drawer-btn" class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors cursor-pointer select-none">
-            <i data-lucide="arrow-left" class="w-4 h-4"></i>
-            Back
-        </button>
-    </div>
-    
-    <!-- Dynamic Content Area -->
-    <div id="drawer-content" class="flex-1 overflow-y-auto">
-        <!-- Dynamic content will load here -->
-    </div>
-</div>
 
 <!-- ==================== JAVASCRIPT ==================== -->
 <script>
@@ -748,117 +722,25 @@
             link.addEventListener('click', handleBottomNavClick);
         });
 
-        // Slide-Over Drawer Elements & Controller
-        const drawerBackdrop = document.getElementById('drawer-backdrop');
-        const detailDrawer = document.getElementById('detail-drawer');
-        const drawerContent = document.getElementById('drawer-content');
-        const closeDrawerBtn = document.getElementById('close-drawer-btn');
-        let drawerOpen = false;
-
-        async function openProductDrawer(url, isBack = false) {
-            if (drawerOpen) return;
-            drawerOpen = true;
-
-            // Slide in drawer and fade in backdrop overlay
-            drawerBackdrop.classList.remove('opacity-0', 'pointer-events-none');
-            drawerBackdrop.classList.add('opacity-100', 'pointer-events-auto');
-            detailDrawer.classList.remove('translate-x-full');
-            detailDrawer.classList.add('translate-x-0');
-
-            // Apply body scroll freeze and page wrapper cinematic shift
-            document.body.classList.add('overflow-hidden');
-            const pageWrapper = document.getElementById('page-wrapper');
-            if (pageWrapper) {
-                pageWrapper.classList.add('scale-[0.98]', 'opacity-50', 'blur-[1px]', '-translate-x-12');
-            }
-
-            // Render skeleton immediately inside drawer
-            drawerContent.innerHTML = SKELETON_TEMPLATE;
-            drawerContent.scrollTop = 0;
-
-            // Sync URL state if not triggered by browser back/forward buttons
-            if (!isBack) {
-                history.pushState({ isDrawer: true, url: url }, '', url);
-            }
-
-            try {
-                const res = await fetch(url);
-                const htmlText = await res.text();
-
-                // Extract only content-main block (skips outer header/footer)
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(htmlText, 'text/html');
-                const innerContent = doc.getElementById('content-main');
-
-                if (innerContent) {
-                    drawerContent.innerHTML = innerContent.innerHTML;
-                    
-                    // Re-execute scripts within content block to bind gallery/cart handlers
-                    const scripts = drawerContent.querySelectorAll('script');
-                    scripts.forEach(script => {
-                        const newScript = document.createElement('script');
-                        Array.from(script.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
-                        newScript.appendChild(document.createTextNode(script.innerHTML));
-                        script.parentNode.replaceChild(newScript, script);
-                    });
-
-                    // Translate content
-                    window.translatePage(currentLang);
-
-                    // Render icons
-                    if (typeof lucide !== 'undefined') {
-                        lucide.createIcons();
-                    }
-                } else {
-                    drawerContent.innerHTML = `<div class="text-center py-20 text-red-500 font-medium">Failed to load content.</div>`;
-                }
-            } catch (err) {
-                console.error('Failed to load drawer product detail:', err);
-                drawerContent.innerHTML = `<div class="text-center py-20 text-red-500 font-medium">Failed to load content.</div>`;
-            }
-        }
-
-        function closeProductDrawer(isBack = false) {
-            if (!drawerOpen) return;
-            drawerOpen = false;
-
-            // Slide out drawer and fade out backdrop overlay
-            drawerBackdrop.classList.remove('opacity-100', 'pointer-events-auto');
-            drawerBackdrop.classList.add('opacity-0', 'pointer-events-none');
-            detailDrawer.classList.remove('translate-x-0');
-            detailDrawer.classList.add('translate-x-full');
-
-            // Restore body scroll and page wrapper visual state
-            document.body.classList.remove('overflow-hidden');
-            const pageWrapper = document.getElementById('page-wrapper');
-            if (pageWrapper) {
-                pageWrapper.classList.remove('scale-[0.98]', 'opacity-50', 'blur-[1px]', '-translate-x-12');
-            }
-
-            // Trigger history pop if closed manually (restores parent catalog URL)
-            if (!isBack) {
-                history.back();
-            }
-
-            // Empty drawer content once animation completes
-            setTimeout(() => {
-                if (!drawerOpen) {
-                    drawerContent.innerHTML = '';
-                }
-            }, 300);
-        }
-
-        // Event Listeners for closing the drawer
-        drawerBackdrop.addEventListener('click', () => closeProductDrawer(false));
-        closeDrawerBtn.addEventListener('click', () => closeProductDrawer(false));
-
-        // Intercept clicks on product detail links to open drawer
+        // Intercept clicks on product detail links for instant AJAX load
         document.body.addEventListener('click', async (e) => {
             const productLink = e.target.closest('a[href^="/product_detail/"]');
             if (productLink) {
                 e.preventDefault();
                 const href = productLink.getAttribute('href');
-                await openProductDrawer(href, false);
+                
+                if (contentMain) {
+                    contentMain.style.opacity = '0.5';
+                    contentMain.style.transition = 'opacity 0.15s ease-in-out';
+                }
+                
+                await navigateTo(href);
+                
+                history.pushState(null, '', href);
+                
+                if (contentMain) {
+                    contentMain.style.opacity = '1';
+                }
             }
         });
 
@@ -913,28 +795,19 @@
         }
 
         // Intercept popstate (browser back/forward button clicks) to navigate dynamically
-        window.addEventListener('popstate', async (e) => {
-            const state = e.state;
+        window.addEventListener('popstate', async () => {
             const path = window.location.pathname;
-
-            if (state && state.isDrawer) {
-                if (!drawerOpen) {
-                    await openProductDrawer(state.url, true);
-                }
-            } else {
-                if (drawerOpen) {
-                    closeProductDrawer(true);
-                } else {
-                    if (contentMain) {
-                        contentMain.style.opacity = '0.5';
-                        contentMain.style.transition = 'opacity 0.15s ease-in-out';
-                    }
-                    await navigateTo(path, true);
-                    updateActiveNavbarTab(path);
-                    if (contentMain) {
-                        contentMain.style.opacity = '1';
-                    }
-                }
+            
+            if (contentMain) {
+                contentMain.style.opacity = '0.5';
+                contentMain.style.transition = 'opacity 0.15s ease-in-out';
+            }
+            
+            await navigateTo(path, true);
+            updateActiveNavbarTab(path);
+            
+            if (contentMain) {
+                contentMain.style.opacity = '1';
             }
         });
 
