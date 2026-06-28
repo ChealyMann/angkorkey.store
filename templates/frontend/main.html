@@ -613,6 +613,9 @@
                 oldMenu.outerHTML = newMenu.outerHTML;
             }
             
+            // Scroll to the top of the page instantly so they see the product gallery/details
+            window.scrollTo({ top: 0, behavior: 'instant' });
+            
             // Re-run script tags inside content-main
             const scripts = document.getElementById('content-main').querySelectorAll('script');
             scripts.forEach(script => {
