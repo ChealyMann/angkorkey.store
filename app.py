@@ -25,6 +25,24 @@ from translations import TRANSLATIONS
 app = Flask(__name__)
 
 # ------------------------------------------------------------
+# Proxy and HTTPS Configuration
+# ------------------------------------------------------------
+# Trust headers sent by reverse proxy (like Cloudflare/cPanel Apache)
+from werkzeug.middleware.proxy_fix import ProxyFix
+app.wsgi_app = ProxyFix(
+    app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1, x_prefix=1
+)
+
+# Ensure generated external URLs (like redirects) use https
+app.config["PREFERRED_URL_SCHEME"] = "https"
+
+# Secure cookie configuration (conditional in debug mode to avoid breaking local dev)
+if not app.debug:
+    app.config["SESSION_COOKIE_SECURE"] = True
+app.config["SESSION_COOKIE_HTTPONLY"] = True
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+
+# ------------------------------------------------------------
 # Base folders
 # ------------------------------------------------------------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
