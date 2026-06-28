@@ -4,7 +4,7 @@ const ASSETS_TO_CACHE = [
   '/home',
   '/products',
   '/promotions',
-  '/all_categories',
+  '/categories',
   '/cart',
   'https://cdn.tailwindcss.com',
   'https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js',
@@ -15,7 +15,17 @@ const ASSETS_TO_CACHE = [
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
+      const localAssets = ASSETS_TO_CACHE.filter(url => !url.startsWith('http') || url.includes(self.location.hostname));
+      const crossOriginAssets = ASSETS_TO_CACHE.filter(url => url.startsWith('http') && !url.includes(self.location.hostname));
+
+      return cache.addAll(localAssets).then(() => {
+        const promises = crossOriginAssets.map(url => {
+          return fetch(new Request(url, { mode: 'no-cors' }))
+            .then(response => cache.put(url, response))
+            .catch(err => console.warn('Failed to pre-cache cross-origin asset:', url, err));
+        });
+        return Promise.all(promises);
+      });
     }).then(() => self.skipWaiting())
   );
 });
@@ -38,6 +48,7 @@ self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
   const url = new URL(event.request.url);
+  if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
 
   // Cache-first for static assets
   const isStaticAsset = 
@@ -55,7 +66,7 @@ self.addEventListener('fetch', (event) => {
           return cachedResponse;
         }
         return fetch(event.request).then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200) {
+          if (networkResponse && (networkResponse.status === 200 || networkResponse.status === 0)) {
             const responseToCache = networkResponse.clone();
             caches.open(CACHE_NAME).then((cache) => {
               cache.put(event.request, responseToCache);

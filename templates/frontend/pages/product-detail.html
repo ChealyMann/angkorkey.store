@@ -358,7 +358,7 @@
 
 /* Description prose */
 .prose-dark { color: #374151; line-height: 1.75; font-size: 14px; }
-.prose-dark h1, .prose-dark h2, .prose-dark h3 { color: #111827; margin-top: 1.5rem; margin-bottom: 0.6rem; font-size: 1.15rem; font-weight: 800; tracking-tight; }
+.prose-dark h1, .prose-dark h2, .prose-dark h3 { color: #111827; margin-top: 1.5rem; margin-bottom: 0.6rem; font-size: 1.15rem; font-weight: 800; letter-spacing: -0.025em; }
 .prose-dark ul { list-style: disc; padding-left: 1.25rem; margin-bottom: 1rem; }
 .prose-dark ul li { margin-bottom: .4rem; }
 .prose-dark p { margin-bottom: 1.25rem; }
@@ -477,7 +477,7 @@
     <div class="flex items-center justify-between mb-10 anim-1">
         <div class="flex items-center gap-4">
             <button onclick="history.back()"
-                class="flex items-center justify-center gap-1.5 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-gray-200/80 dark:border-zinc-800/80 text-[10px] font-bold px-4 py-2 rounded-full uppercase tracking-widest text-zinc-900 dark:text-white shadow-xs cursor-pointer hover:bg-zinc-955 dark:hover:bg-zinc-50 hover:text-white dark:hover:text-zinc-950 hover:border-zinc-955 dark:hover:border-zinc-50 transition-all duration-300 hover:scale-105 active:scale-95 group"
+                class="flex items-center justify-center gap-1.5 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-gray-200/80 dark:border-zinc-800/80 text-[10px] font-bold px-4 py-2 rounded-full uppercase tracking-widest text-zinc-900 dark:text-white shadow-xs cursor-pointer hover:bg-zinc-905 dark:hover:bg-zinc-50 hover:text-white dark:hover:text-zinc-950 hover:border-zinc-905 dark:hover:border-zinc-50 transition-all duration-300 hover:scale-105 active:scale-95 group"
                 title="Back"
             >
                 <i data-lucide="arrow-left" class="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5"></i>
@@ -498,7 +498,7 @@
 
         <div class="lg:col-span-7 anim-2">
 
-            <div class="relative rounded-none overflow-hidden bg-gray-100 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 aspect-square cursor-zoom-in shadow-xs" id="gallery-wrap">
+            <div class="relative rounded-none overflow-hidden bg-gray-100 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 aspect-square cursor-zoom-in shadow-xs group" id="gallery-wrap">
                 <img id="main-image"
                     src="{{ first_image }}"
                     alt="{{ product.name }}"
@@ -684,7 +684,7 @@
 
             <!-- Desktop Add to Cart Button (PC only) -->
             <div class="hidden lg:block mt-6">
-                <button id="add-to-cart-btn" class="buy-btn w-full h-13 py-3.5 flex items-center justify-center gap-2 text-sm cursor-pointer border-0 shadow-sm">
+                <button id="add-to-cart-btn" class="buy-btn w-full h-12 py-3 flex items-center justify-center gap-2 text-sm cursor-pointer border-0 shadow-sm">
                     <i class="w-5 h-5" data-lucide="shopping-cart"></i>
                     <span id="atc-button-text">{{ _('add_to_cart') }}</span>
                 </button>
@@ -723,7 +723,7 @@
 
 </main>
 
-<div id="mobile-bar" class="fixed bottom-0 left-0 right-0 z-40 p-4 lg:hidden pb-[calc(1rem+env(safe-area-inset-bottom))] bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl border-t border-gray-200 dark:border-zinc-800 shadow-[0_-8px_32px_rgba(0,0,0,0.06)]">
+<div id="mobile-bar" class="lg:hidden p-4 pb-[calc(1rem+env(safe-area-inset-bottom))] bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl border-t border-gray-200 dark:border-zinc-800 shadow-[0_-8px_32px_rgba(0,0,0,0.06)]" style="position: fixed !important; bottom: 0 !important; left: 0 !important; right: 0 !important; z-index: 40 !important;">
     <div class="flex items-center justify-between gap-6">
         <div class="flex flex-col flex-shrink-0">
             <span class="text-[10px] text-gray-400 font-medium uppercase tracking-wider">{{ _('total') }}</span>
@@ -740,7 +740,7 @@
     </div>
 </div>
 
-</div>
+
 <script id="variants-json" type="application/json">{{ variants_data | tojson }}</script>
 <script id="base-product-json" type="application/json">{{
     {"name": product.name, "price": product.price, "old_price": product.old_price, "image": first_image} | tojson
@@ -749,55 +749,71 @@
 <script>
 function initProductDetailPage() {
     const getLang = () => document.documentElement.getAttribute('lang') || 'en';
+    
+    // Find the container for this specific page instance to support dynamic slide-in drawers and SPA navigation
+    let container = document;
+    if (document.currentScript) {
+        container = document.currentScript.closest('.pd-page') || document;
+    } else {
+        const drawerPage = document.querySelector('#drawer-content .pd-page');
+        if (drawerPage) {
+            container = drawerPage;
+        } else {
+            const pages = document.querySelectorAll('.pd-page');
+            if (pages.length > 0) {
+                container = pages[pages.length - 1];
+            }
+        }
+    }
     const translations = {
         get add_to_cart() { return getLang() === 'km' ? 'បន្ថែមទៅកន្ត្រក' : 'Add to Cart'; },
         get out_of_stock() { return getLang() === 'km' ? 'អស់ពីស្តុក' : 'Out of Stock'; },
         get in_stock() { return getLang() === 'km' ? 'មានក្នុងស្តុក' : 'In Stock'; }
     };
     // ── Data ──────────────────────────────────────────────────────────────
-    const variants     = JSON.parse(document.getElementById('variants-json').textContent || '[]');
-    const baseProduct  = JSON.parse(document.getElementById('base-product-json').textContent || '{}');
+    const variants     = JSON.parse((container.querySelector('#variants-json')?.textContent) || '[]');
+    const baseProduct  = JSON.parse((container.querySelector('#base-product-json')?.textContent) || '{}');
 
     // ── Elements ──────────────────────────────────────────────────────────
-    const mainImage        = document.getElementById('main-image');
-    const thumbContainer   = document.getElementById('thumbnail-container');
-    const dotContainer     = document.getElementById('dot-container');
-    const prevBtn          = document.getElementById('prev-btn');
-    const nextBtn          = document.getElementById('next-btn');
-    const galleryWrap      = document.getElementById('gallery-wrap');
+    const mainImage        = container.querySelector('#main-image');
+    const thumbContainer   = container.querySelector('#thumbnail-container');
+    const dotContainer     = container.querySelector('#dot-container');
+    const prevBtn          = container.querySelector('#prev-btn');
+    const nextBtn          = container.querySelector('#next-btn');
+    const galleryWrap      = container.querySelector('#gallery-wrap');
 
-    const priceEl          = document.getElementById('variant-price');
-    const mobilePriceEl    = document.getElementById('mobile-variant-price');
-    const oldPriceEl       = document.getElementById('variant-old-price');
-    const dynDiscount      = document.getElementById('dynamic-discount-badge');
-    const topDiscount      = document.getElementById('discount-badge');
+    const priceEl          = container.querySelector('#variant-price');
+    const mobilePriceEl    = container.querySelector('#mobile-variant-price');
+    const oldPriceEl       = container.querySelector('#variant-old-price');
+    const dynDiscount      = container.querySelector('#dynamic-discount-badge');
+    const topDiscount      = container.querySelector('#discount-badge');
 
-    const stockEl          = document.getElementById('variant-stock');
-    const skuEl            = document.getElementById('variant-sku');
-    const selectedTextEl   = document.getElementById('selected-variant-text');
-    const stockDot         = document.getElementById('stock-badge-dot');
-    const stockText        = document.getElementById('stock-badge-text');
+    const stockEl          = container.querySelector('#variant-stock');
+    const skuEl            = container.querySelector('#variant-sku');
+    const selectedTextEl   = container.querySelector('#selected-variant-text');
+    const stockDot         = container.querySelector('#stock-badge-dot');
+    const stockText        = container.querySelector('#stock-badge-text');
 
-    const atcBtn           = document.getElementById('add-to-cart-btn');
-    const atcBtnMob        = document.getElementById('add-to-cart-btn-mobile');
-    const atcBtnText       = document.getElementById('atc-button-text');
-    const copyLinkBtn      = document.getElementById('copy-link-btn');
+    const atcBtn           = container.querySelector('#add-to-cart-btn');
+    const atcBtnMob        = container.querySelector('#add-to-cart-btn-mobile');
+    const atcBtnText       = container.querySelector('#atc-button-text');
+    const copyLinkBtn      = container.querySelector('#copy-link-btn');
 
     // Qty
-    const qtyDisplay    = document.getElementById('qty-display');
-    const qtyMinus      = document.getElementById('qty-minus');
-    const qtyPlus       = document.getElementById('qty-plus');
+    const qtyDisplay    = container.querySelector('#qty-display');
+    const qtyMinus      = container.querySelector('#qty-minus');
+    const qtyPlus       = container.querySelector('#qty-plus');
 
     // Lightbox
-    const lightbox = document.getElementById('lightbox');
-    const lbImg    = document.getElementById('lb-img');
-    const lbClose  = document.getElementById('lb-close');
-    const lbPrev   = document.getElementById('lb-prev');
-    const lbNext   = document.getElementById('lb-next');
-    const lbCounter= document.getElementById('lb-counter');
+    const lightbox = container.querySelector('#lightbox');
+    const lbImg    = container.querySelector('#lb-img');
+    const lbClose  = container.querySelector('#lb-close');
+    const lbPrev   = container.querySelector('#lb-prev');
+    const lbNext   = container.querySelector('#lb-next');
+    const lbCounter= container.querySelector('#lb-counter');
 
     // Buttons
-    const optionButtons = document.querySelectorAll('.variant-option-btn');
+    const optionButtons = container.querySelectorAll('.variant-option-btn');
 
     // ── State ─────────────────────────────────────────────────────────────
     let currentIndex    = 0;
@@ -805,19 +821,30 @@ function initProductDetailPage() {
     let selectedOptions = {};
     let quantity        = 1;
     let lbIndex         = 0;
+    let currentPrice    = 0;
+    let currentOldPrice = 0;
 
     // ── Helpers ───────────────────────────────────────────────────────────
     const money = val => '$' + Number(val || 0).toFixed(2);
     const esc   = v => String(v || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
     function syncGalleryFromDOM() {
-        galleryImages = [...document.querySelectorAll('.thumb-btn')].map(b => b.dataset.src);
+        galleryImages = [...container.querySelectorAll('.thumb-btn')].map(b => b.dataset.src);
     }
 
     // ── Quantity ──────────────────────────────────────────────────────────
+    function updatePriceDisplay() {
+        if (priceEl) priceEl.textContent = money(currentPrice * quantity);
+        if (mobilePriceEl) mobilePriceEl.textContent = money(currentPrice * quantity);
+        if (oldPriceEl) {
+            oldPriceEl.textContent = currentOldPrice > 0 ? money(currentOldPrice * quantity) : '';
+        }
+    }
+
     function setQty(n) {
         quantity = Math.max(1, Math.min(99, n));
         if (qtyDisplay) qtyDisplay.textContent = quantity;
+        updatePriceDisplay();
     }
 
     if (qtyMinus) qtyMinus.addEventListener('click', () => setQty(quantity - 1));
@@ -831,8 +858,8 @@ function initProductDetailPage() {
         idx = ((idx % galleryImages.length) + galleryImages.length) % galleryImages.length;
         currentIndex = idx;
 
-        const thumbs  = [...document.querySelectorAll('.thumb-btn')];
-        const dots    = [...document.querySelectorAll('.dot')];
+        const thumbs  = [...container.querySelectorAll('.thumb-btn')];
+        const dots    = [...container.querySelectorAll('.dot')];
         const target  = thumbs[idx];
         if (!target) return;
 
@@ -860,10 +887,10 @@ function initProductDetailPage() {
     }
 
     function bindThumbs() {
-        document.querySelectorAll('.thumb-btn').forEach((t, i) => {
+        container.querySelectorAll('.thumb-btn').forEach((t, i) => {
             t.addEventListener('click', () => updateGallery(i));
         });
-        document.querySelectorAll('.dot').forEach((d, i) => {
+        container.querySelectorAll('.dot').forEach((d, i) => {
             d.addEventListener('click', () => updateGallery(i));
         });
     }
@@ -910,12 +937,22 @@ function initProductDetailPage() {
         lbImg.src = galleryImages[lbIndex];
         lbCounter.textContent = (lbIndex + 1) + ' / ' + galleryImages.length;
     });
-    document.addEventListener('keydown', e => {
-        if (!lightbox.classList.contains('open')) return;
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowLeft')  lbPrev.click();
-        if (e.key === 'ArrowRight') lbNext.click();
-    });
+    // Bind document keydown only once globally to prevent listener leakage on page/drawer dynamic loads
+    if (!window.lightboxKeydownBound) {
+        window.lightboxKeydownBound = true;
+        document.addEventListener('keydown', e => {
+            const activeLightbox = document.querySelector('#lightbox.open');
+            if (!activeLightbox) return;
+            if (e.key === 'Escape') {
+                activeLightbox.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+            const activeLbPrev = activeLightbox.querySelector('#lb-prev');
+            const activeLbNext = activeLightbox.querySelector('#lb-next');
+            if (e.key === 'ArrowLeft' && activeLbPrev) activeLbPrev.click();
+            if (e.key === 'ArrowRight' && activeLbNext) activeLbNext.click();
+        });
+    }
 
     // ── Rebuild gallery after variant switch ───────────────────────────────
     function rebuildGallery(images) {
@@ -925,7 +962,7 @@ function initProductDetailPage() {
 
         thumbContainer.innerHTML = images.map((src, i) => `
             <button data-src="${esc(src)}" data-index="${i}"
-                class="thumb-btn ${i === 0 ? 'active' : 'opacity-40'} relative flex-shrink-0 w-[76px] h-[76px] rounded-xl overflow-hidden bg-zinc-900">
+                class="thumb-btn ${i === 0 ? 'active' : 'opacity-40'} relative flex-shrink-0 w-[76px] h-[76px] rounded-none overflow-hidden bg-gray-100 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 shadow-xs">
                 <img src="${esc(src)}" class="w-full h-full object-cover" alt="Product Image" loading="lazy">
             </button>`).join('');
 
@@ -959,13 +996,13 @@ function initProductDetailPage() {
     }
 
     function activateBtn(type, value) {
-        document.querySelectorAll(`.variant-option-btn[data-type="${type}"]`).forEach(b => {
+        container.querySelectorAll(`.variant-option-btn[data-type="${type}"]`).forEach(b => {
             b.classList.remove('var-active');
         });
-        const active = document.querySelector(`.variant-option-btn[data-type="${type}"][data-value="${CSS.escape(value)}"]`);
+        const active = container.querySelector(`.variant-option-btn[data-type="${type}"][data-value="${CSS.escape(value)}"]`);
         if (active) active.classList.add('var-active');
 
-        const label = document.getElementById('selected-' + type);
+        const label = container.querySelector('#selected-' + type);
         if (label) label.textContent = value;
     }
 
@@ -998,22 +1035,31 @@ function initProductDetailPage() {
     }
 
     function updateVariantUI(variant) {
+        const mobDesc = container.querySelector('#mobile-variant-desc');
         if (!variant) {
-            if (selectedTextEl) selectedTextEl.textContent = 'Combination unavailable';
-            if (stockEl) { stockEl.textContent = '—'; stockEl.className = 'text-sm font-bold text-red-400'; }
+            const unavailableLabel = getLang() === 'km' ? 'ជម្រើសនេះមិនទាន់មានទេ' : 'Combination unavailable';
+            if (selectedTextEl) selectedTextEl.textContent = unavailableLabel;
+            if (mobDesc) mobDesc.textContent = unavailableLabel;
+            if (stockEl) { stockEl.textContent = '—'; stockEl.className = 'text-sm font-bold text-red-600'; }
             if (skuEl) skuEl.textContent = '—';
+            if (priceEl) priceEl.textContent = '—';
+            if (mobilePriceEl) mobilePriceEl.textContent = '—';
+            if (oldPriceEl) oldPriceEl.classList.add('hidden');
+            if (dynDiscount) dynDiscount.classList.add('hidden');
+            if (topDiscount) topDiscount.classList.add('hidden');
             setButtons(false);
             setStockBadge(false);
+            currentPrice = 0;
+            currentOldPrice = 0;
             return;
         }
 
-        const price = money(variant.price);
-        if (priceEl)       priceEl.textContent       = price;
-        if (mobilePriceEl) mobilePriceEl.textContent = price;
+        currentPrice = Number(variant.price);
+        currentOldPrice = variant.old_price ? Number(variant.old_price) : 0;
+        updatePriceDisplay();
 
         const hasDiscount = variant.old_price && Number(variant.old_price) > Number(variant.price);
         if (oldPriceEl) {
-            oldPriceEl.textContent = hasDiscount ? money(variant.old_price) : '';
             oldPriceEl.classList.toggle('hidden', !hasDiscount);
         }
         if (priceEl) {
@@ -1039,7 +1085,6 @@ function initProductDetailPage() {
         }
         if (skuEl) skuEl.textContent = variant.sku || '—';
         if (selectedTextEl) selectedTextEl.textContent = Object.values(variant.options).join(' / ');
-        const mobDesc = document.getElementById('mobile-variant-desc');
         if (mobDesc) mobDesc.textContent = Object.values(variant.options).join(' / ');
 
         setStockBadge(inStock);
@@ -1201,10 +1246,10 @@ function initProductDetailPage() {
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
             </div>
             <div class="ct-content">
-                ${imgSrc ? `<img class="ct-img" src="${imgSrc}" alt="">` : ''}
+                ${imgSrc ? `<img class="ct-img" src="${esc(imgSrc)}" alt="">` : ''}
                 <div class="ct-text">
                     <p class="ct-label">Added to cart</p>
-                    <p class="ct-name">${item.name}${item.optionsText !== 'Standard' ? ` — ${item.optionsText}` : ''}</p>
+                    <p class="ct-name">${esc(item.name)}${item.optionsText !== 'Standard' ? ` — ${esc(item.optionsText)}` : ''}</p>
                 </div>
             </div>
             <a href="/cart" class="ct-btn">View Cart</a>
@@ -1308,6 +1353,9 @@ function initProductDetailPage() {
         // Base Product Initialization (No Variants)
         setStockBadge(true);
         setButtons(true);
+        currentPrice = Number(baseProduct.price || 0);
+        currentOldPrice = baseProduct.old_price ? Number(baseProduct.old_price) : 0;
+        updatePriceDisplay();
 
         // Initialize price display for base product
         const hasDiscount = baseProduct.old_price && Number(baseProduct.old_price) > Number(baseProduct.price);
@@ -1323,4 +1371,5 @@ if (document.readyState === 'loading') {
     initProductDetailPage();
 }
 </script>
+</div>
 {% endblock %}

@@ -155,7 +155,7 @@
             letter-spacing: 0.18em;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 1024px) {
             body {
                 padding-bottom: 0;
             }
@@ -700,10 +700,16 @@
                 bottomNav.classList.add('hidden');
             }
 
+            // Hide main page's mobile bar to avoid overlays/collisions
+            const mainMobileBar = document.querySelector('#content-main #mobile-bar');
+            if (mainMobileBar) {
+                mainMobileBar.classList.add('hidden');
+            }
+
             drawer.classList.remove('hidden');
             drawer.offsetHeight;
-            drawer.classList.remove('translate-x-full');
-            drawer.classList.add('translate-x-0');
+            drawer.classList.remove('left-full');
+            drawer.classList.add('left-0');
             drawer.scrollTo({ top: 0, behavior: 'instant' });
             drawerOpen = true;
             document.body.style.overflow = 'hidden';
@@ -718,8 +724,14 @@
                 bottomNav.classList.remove('hidden');
             }
 
-            drawer.classList.remove('translate-x-0');
-            drawer.classList.add('translate-x-full');
+            // Restore main page's mobile bar visibility
+            const mainMobileBar = document.querySelector('#content-main #mobile-bar');
+            if (mainMobileBar) {
+                mainMobileBar.classList.remove('hidden');
+            }
+
+            drawer.classList.remove('left-0');
+            drawer.classList.add('left-full');
             setTimeout(() => {
                 drawer.classList.add('hidden');
                 if (drawerContent) drawerContent.innerHTML = '';
@@ -939,13 +951,14 @@
                 
                 window.startLoadingBar();
 
+                const wasDrawerOpen = drawerOpen;
                 // Open drawer with skeleton loading state immediately
                 if (drawer && drawerContent) {
                     drawerContent.innerHTML = SKELETON_TEMPLATE;
                     drawer.classList.remove('hidden');
                     drawer.offsetHeight;
-                    drawer.classList.remove('translate-x-full');
-                    drawer.classList.add('translate-x-0');
+                    drawer.classList.remove('left-full');
+                    drawer.classList.add('left-0');
                     drawer.scrollTo({ top: 0, behavior: 'instant' });
                     drawerOpen = true;
                     document.body.style.overflow = 'hidden';
@@ -970,7 +983,11 @@
                 }
                 
                 openDrawer(htmlText);
-                history.pushState({ isDrawer: true }, '', href);
+                if (wasDrawerOpen) {
+                    history.replaceState({ isDrawer: true }, '', href);
+                } else {
+                    history.pushState({ isDrawer: true }, '', href);
+                }
                 window.finishLoadingBar();
             }
         });
@@ -1088,7 +1105,7 @@
     });
 </script>
     <!-- Slide-in Product Detail Drawer Overlay -->
-    <div id="product-detail-drawer" class="fixed inset-x-0 bottom-0 top-16 md:top-20 z-30 overflow-y-auto bg-gray-50 dark:bg-zinc-955 translate-x-full transition-transform duration-300 ease-out hidden">
+    <div id="product-detail-drawer" class="fixed left-full w-full bottom-0 top-16 md:top-20 z-30 overflow-y-auto bg-gray-50 dark:bg-zinc-950 transition-[left] duration-300 ease-out hidden">
         <div id="drawer-content" class="min-h-screen"></div>
     </div>
 

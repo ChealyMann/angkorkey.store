@@ -95,8 +95,7 @@
     }
 </style>
 
-<div id="bottom-nav-container">
-{% if request.endpoint != 'home.product_detail' %}
+<div id="bottom-nav-container" class="{% if request.endpoint == 'home.product_detail' %}hidden{% endif %}">
 <div
     class="fixed bottom-4 left-4 right-4 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl border border-gray-200/50 dark:border-zinc-800/50 md:hidden z-50 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] transition-all duration-300 py-1">
     <div class="grid grid-cols-4 h-15 items-center px-1">
@@ -150,6 +149,5 @@
         </a>
     </div>
 </div>
-{% endif %}
 </div>
 
