@@ -674,67 +674,77 @@
 
         function openDrawer(htmlText) {
             if (!drawer || !drawerContent) return;
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(htmlText, 'text/html');
-            const newContent = doc.getElementById('content-main');
-            if (newContent) {
-                drawerContent.innerHTML = newContent.innerHTML;
-            } else {
-                drawerContent.innerHTML = htmlText;
-            }
-            const scripts = drawerContent.querySelectorAll('script');
-            scripts.forEach(script => {
-                const newScript = document.createElement('script');
-                Array.from(script.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
-                newScript.appendChild(document.createTextNode(script.innerHTML));
-                script.parentNode.replaceChild(newScript, script);
-            });
-            window.translatePage(currentLang);
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            }
             
-            // Hide bottom navigation bar to avoid overlays/collisions
-            const bottomNav = document.getElementById('bottom-nav-container');
-            if (bottomNav) {
-                bottomNav.classList.add('hidden');
-            }
+            drawerContent.style.opacity = '0';
+            drawerContent.style.transition = 'opacity 0.15s ease-in-out';
+            
+            setTimeout(() => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlText, 'text/html');
+                const newContent = doc.getElementById('content-main');
+                if (newContent) {
+                    drawerContent.innerHTML = newContent.innerHTML;
+                } else {
+                    drawerContent.innerHTML = htmlText;
+                }
+                const scripts = drawerContent.querySelectorAll('script');
+                scripts.forEach(script => {
+                    const newScript = document.createElement('script');
+                    Array.from(script.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                    newScript.appendChild(document.createTextNode(script.innerHTML));
+                    script.parentNode.replaceChild(newScript, script);
+                });
+                window.translatePage(currentLang);
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
 
-            // Hide main page's mobile bar to avoid overlays/collisions
-            const mainMobileBar = document.querySelector('#content-main #mobile-bar');
-            if (mainMobileBar) {
-                mainMobileBar.classList.add('hidden');
-            }
+                // Hide bottom navigation bar to avoid overlays/collisions
+                const bottomNav = document.getElementById('bottom-nav-container');
+                if (bottomNav) {
+                    bottomNav.classList.add('hidden');
+                }
 
-            drawer.classList.remove('hidden');
-            drawer.offsetHeight;
-            drawer.classList.remove('left-full');
-            drawer.classList.add('left-0');
-            drawer.scrollTo({ top: 0, behavior: 'instant' });
-            drawerOpen = true;
-            document.body.style.overflow = 'hidden';
+                // Hide main page's mobile bar to avoid overlays/collisions
+                const mainMobileBar = document.querySelector('#content-main #mobile-bar');
+                if (mainMobileBar) {
+                    mainMobileBar.classList.add('hidden');
+                }
+
+                drawer.classList.remove('hidden');
+                drawer.offsetHeight;
+                drawer.classList.remove('left-full');
+                drawer.classList.add('left-0');
+                drawer.scrollTo({ top: 0, behavior: 'instant' });
+                drawerOpen = true;
+                document.body.style.overflow = 'hidden';
+                
+                requestAnimationFrame(() => {
+                    drawerContent.style.opacity = '1';
+                });
+            }, 50);
         }
 
         function closeDrawer() {
             if (!drawer) return;
             
-            // Restore bottom navigation bar visibility
-            const bottomNav = document.getElementById('bottom-nav-container');
-            if (bottomNav) {
-                bottomNav.classList.remove('hidden');
-            }
-
-            // Restore main page's mobile bar visibility
-            const mainMobileBar = document.querySelector('#content-main #mobile-bar');
-            if (mainMobileBar) {
-                mainMobileBar.classList.remove('hidden');
-            }
-
             drawer.classList.remove('left-0');
             drawer.classList.add('left-full');
             setTimeout(() => {
                 drawer.classList.add('hidden');
                 if (drawerContent) drawerContent.innerHTML = '';
+                
+                // Restore bottom navigation bar visibility only after drawer is fully closed
+                const bottomNav = document.getElementById('bottom-nav-container');
+                if (bottomNav) {
+                    bottomNav.classList.remove('hidden');
+                }
+
+                // Restore main page's mobile bar visibility only after drawer is fully closed
+                const mainMobileBar = document.querySelector('#content-main #mobile-bar');
+                if (mainMobileBar) {
+                    mainMobileBar.classList.remove('hidden');
+                }
             }, 300);
             drawerOpen = false;
             document.body.style.overflow = '';
@@ -1070,8 +1080,11 @@
             
             // If we are going forward/back to a product detail page and the drawer is not open
             if (path.includes('/product_detail/')) {
-                // Immediately show skeleton and hide bottom navigation bar during popstate history navigation
-                if (drawer && drawerContent && !drawerOpen) {
+                const cacheKey = `${path}::${currentLang}`;
+                const isCached = !!pageCache[cacheKey];
+
+                // Immediately show skeleton and hide bottom navigation bar during popstate history navigation if not cached
+                if (!isCached && drawer && drawerContent) {
                     drawerContent.innerHTML = SKELETON_TEMPLATE;
                     drawer.classList.remove('hidden');
                     drawer.offsetHeight;
@@ -1085,7 +1098,6 @@
                     }
                 }
 
-                const cacheKey = `${path}::${currentLang}`;
                 let htmlText = pageCache[cacheKey];
                 if (!htmlText) {
                     try {
