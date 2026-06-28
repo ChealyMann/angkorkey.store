@@ -138,11 +138,11 @@
                 <!-- Mobile Single Flag Toggle -->
                 <div class="md:hidden flex items-center">
                     {% if session.get('lang', 'en') == 'km' %}
-                    <a href="/set_lang/en" class="p-2 flex items-center justify-center rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" title="Switch to English">
+                    <a href="/set_lang/en" class="mobile-lang-toggle p-2 flex items-center justify-center rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" title="Switch to English">
                         <img src="https://flagcdn.com/24x18/gb.png" alt="English" class="w-5 h-3.5 object-cover rounded-xs border border-gray-200/50 dark:border-zinc-700/50">
                     </a>
                     {% else %}
-                    <a href="/set_lang/km" class="p-2 flex items-center justify-center rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" title="ប្តូរទៅភាសាខ្មែរ">
+                    <a href="/set_lang/km" class="mobile-lang-toggle p-2 flex items-center justify-center rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" title="ប្តូរទៅភាសាខ្មែរ">
                         <img src="https://flagcdn.com/24x18/kh.png" alt="Khmer" class="w-5 h-3.5 object-cover rounded-xs border border-gray-200/50 dark:border-zinc-700/50">
                     </a>
                     {% endif %}

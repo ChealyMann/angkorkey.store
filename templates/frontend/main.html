@@ -35,7 +35,7 @@
 
     <!-- External Scripts & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
     <script>
         tailwind.config = {
             darkMode: 'class'
@@ -381,6 +381,7 @@
 
             if (categoryOverlay) {
                 categoryOverlay.addEventListener("click", () => toggleCategoryMenu(false));
+            }
         }
 
         const TRANSLATIONS = JSON.parse(document.getElementById('translations-json').textContent || '{}');
@@ -504,7 +505,7 @@
             }
             
             // Update mobile single flag toggle button
-            const mobToggleLink = document.querySelector('.md\:hidden.flex.items-center a[href^="/set_lang/"]');
+            const mobToggleLink = document.querySelector('.mobile-lang-toggle');
             if (mobToggleLink) {
                 if (lang === 'km') {
                     mobToggleLink.setAttribute('href', '/set_lang/en');
