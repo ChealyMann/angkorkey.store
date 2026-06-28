@@ -741,29 +741,7 @@
             }
         });
 
-        // Background prefetch on hover or touchstart
-        const prefetchLink = (href) => {
-            const cacheKey = `${href}::${currentLang}`;
-            if (!pageCache[cacheKey]) {
-                fetch(href).then(res => res.text()).then(html => {
-                    pageCache[cacheKey] = html;
-                }).catch(() => {});
-            }
-        };
 
-        document.body.addEventListener('mouseover', (e) => {
-            const link = e.target.closest('a[href^="/product_detail/"]');
-            if (link) {
-                prefetchLink(link.getAttribute('href'));
-            }
-        });
-
-        document.body.addEventListener('touchstart', (e) => {
-            const link = e.target.closest('a[href^="/product_detail/"]');
-            if (link) {
-                prefetchLink(link.getAttribute('href'));
-            }
-        }, { passive: true });
 
         // AJAX Language Switcher (No full page reload, uses caching)
         document.body.addEventListener('click', async (e) => {
