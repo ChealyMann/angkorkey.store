@@ -51,11 +51,11 @@
                         <div class="w-full flex items-center justify-between py-2 text-sm font-bold uppercase tracking-widest text-zinc-400">
                             <span>{{ _('language') }}</span>
                             <div class="flex items-center gap-2">
-                                <a href="/set_lang/en" class="text-xs font-bold px-3 py-1.5 rounded-lg transition-colors {{ 'bg-zinc-950 text-white dark:bg-white dark:text-black' if session.get('lang', 'en') == 'en' else 'text-zinc-500 hover:text-zinc-950 dark:hover:text-white' }}">
-                                    EN
+                                <a href="/set_lang/en" class="p-2 rounded-lg transition-colors flex items-center justify-center {{ 'bg-zinc-100 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700' if session.get('lang', 'en') == 'en' else 'opacity-60 hover:opacity-100' }}" title="English">
+                                    <img src="https://flagcdn.com/24x18/gb.png" alt="English" class="w-6 h-4 object-cover rounded-xs border border-gray-200/50 dark:border-zinc-700/50">
                                 </a>
-                                <a href="/set_lang/km" class="text-xs font-bold px-3 py-1.5 rounded-lg transition-colors {{ 'bg-zinc-950 text-white dark:bg-white dark:text-black' if session.get('lang', 'en') == 'km' else 'text-zinc-500 hover:text-zinc-950 dark:hover:text-white' }}">
-                                    KM
+                                <a href="/set_lang/km" class="p-2 rounded-lg transition-colors flex items-center justify-center {{ 'bg-zinc-100 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700' if session.get('lang', 'en') == 'km' else 'opacity-60 hover:opacity-100' }}" title="ភាសាខ្មែរ">
+                                    <img src="https://flagcdn.com/24x18/kh.png" alt="Khmer" class="w-6 h-4 object-cover rounded-xs border border-gray-200/50 dark:border-zinc-700/50">
                                 </a>
                             </div>
                         </div>
@@ -80,11 +80,11 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    window.initMobileMenuLogic = function() {
         const mobThemeToggle = document.getElementById('mobile-theme-toggle');
         
         if (mobThemeToggle) {
-            mobThemeToggle.addEventListener('click', () => {
+            mobThemeToggle.onclick = () => {
                 if (document.documentElement.classList.contains('dark')) {
                     document.documentElement.classList.remove('dark');
                     localStorage.setItem('theme', 'light');
@@ -95,12 +95,15 @@
                 if (typeof window.applyTheme === 'function') {
                     window.applyTheme();
                 }
-            });
+            };
         }
         
-        // Initial load
         if (typeof window.applyTheme === 'function') {
             window.applyTheme();
         }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+        window.initMobileMenuLogic();
     });
 </script>

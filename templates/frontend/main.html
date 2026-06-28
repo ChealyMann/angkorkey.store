@@ -440,6 +440,86 @@
             });
         });
 
+        // AJAX Language Switcher (No full page reload)
+        document.body.addEventListener('click', async (e) => {
+            const langLink = e.target.closest('a[href^="/set_lang/"]');
+            if (langLink) {
+                e.preventDefault();
+                const href = langLink.getAttribute('href');
+                
+                try {
+                    // Set language session on server
+                    await fetch(href);
+                    
+                    // Fetch the current page content in the new language
+                    const currentUrl = window.location.href;
+                    const res = await fetch(currentUrl);
+                    const htmlText = await res.text();
+                    
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(htmlText, 'text/html');
+                    
+                    // Update HTML lang attribute (switches font-family instantly via CSS selector!)
+                    const newLang = doc.documentElement.getAttribute('lang') || 'en';
+                    document.documentElement.setAttribute('lang', newLang);
+                    
+                    // Replace Header
+                    const oldHeader = document.querySelector('header');
+                    const newHeader = doc.querySelector('header');
+                    if (oldHeader && newHeader) {
+                        oldHeader.outerHTML = newHeader.outerHTML;
+                    }
+                    
+                    // Replace Main Content
+                    const oldContent = document.getElementById('content-main');
+                    const newContent = doc.getElementById('content-main');
+                    if (oldContent && newContent) {
+                        oldContent.innerHTML = newContent.innerHTML;
+                    }
+                    
+                    // Replace Footer
+                    const oldFooter = document.querySelector('footer');
+                    const newFooter = doc.querySelector('footer');
+                    if (oldFooter && newFooter) {
+                        oldFooter.outerHTML = newFooter.outerHTML;
+                    }
+                    
+                    // Replace Mobile Menu
+                    const oldMenu = document.getElementById('mobile-menu');
+                    const newMenu = doc.getElementById('mobile-menu');
+                    if (oldMenu && newMenu) {
+                        oldMenu.outerHTML = newMenu.outerHTML;
+                    }
+
+                    // Re-run script tags inside content-main
+                    const scripts = document.getElementById('content-main').querySelectorAll('script');
+                    scripts.forEach(script => {
+                        const newScript = document.createElement('script');
+                        Array.from(script.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                        newScript.appendChild(document.createTextNode(script.innerHTML));
+                        script.parentNode.replaceChild(newScript, script);
+                    });
+                    
+                    // Re-initialize Lucide Icons
+                    if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                    }
+                    
+                    // Re-bind theme toggles and mobile menu events
+                    if (typeof window.initHeaderLogic === 'function') {
+                        window.initHeaderLogic();
+                    }
+                    if (typeof window.initMobileMenuLogic === 'function') {
+                        window.initMobileMenuLogic();
+                    }
+                    
+                } catch (err) {
+                    console.error('Failed to swap language dynamically:', err);
+                    window.location.reload();
+                }
+            }
+        });
+
         function updateActiveNavbarTab(currentPath) {
             mobileLinks.forEach(link => {
                 const href = link.getAttribute('href');

@@ -124,24 +124,28 @@
                     <i id="theme-toggle-moon" class="h-6 w-6" data-lucide="moon"></i>
                 </button>
 
-                <!-- Language Selector -->
-                <div class="relative dropdown group py-4 hidden md:block">
-                    <button class="p-2 text-xs font-bold uppercase tracking-widest text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white transition-colors focus:outline-none flex items-center gap-1 cursor-pointer">
-                        {{ 'KM' if session.get('lang', 'en') == 'km' else 'EN' }}
-                        <i class="h-3 w-3 bg-transparent group-hover:rotate-180 transition-transform duration-300" data-lucide="chevron-down"></i>
-                    </button>
-                    <ul class="dropdown-menu absolute hidden group-hover:block bg-white dark:bg-zinc-900 shadow-xl rounded-xl w-32 p-2 z-50 origin-top-right right-0 top-full mt-0 border border-gray-100 dark:border-zinc-800">
-                        <li>
-                            <a href="/set_lang/en" class="block px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-zinc-650 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:text-zinc-950 dark:hover:text-white rounded-lg transition-colors {{ 'bg-zinc-100 dark:bg-zinc-800 text-zinc-950 dark:text-white' if session.get('lang', 'en') == 'en' }}">
-                                English
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/set_lang/km" class="block px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-zinc-650 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:text-zinc-950 dark:hover:text-white rounded-lg transition-colors {{ 'bg-zinc-100 dark:bg-zinc-800 text-zinc-950 dark:text-white' if session.get('lang', 'en') == 'km' }}">
-                                ភាសាខ្មែរ
-                            </a>
-                        </li>
-                    </ul>
+                <!-- Language Selector (Animated Sliding Switch for Desktop, Simple Flag Toggle for Mobile) -->
+                <div class="relative hidden md:flex items-center bg-zinc-100 dark:bg-zinc-800 p-1 rounded-full w-24 h-9 shadow-xs border border-gray-200/40 dark:border-zinc-700/40">
+                    <div class="absolute top-1 bottom-1 left-1 w-[42px] bg-white dark:bg-zinc-955 rounded-full shadow-sm transition-transform duration-300 ease-in-out {% if session.get('lang', 'en') == 'km' %}translate-x-[42px]{% else %}translate-x-0{% endif %}"></div>
+                    <a href="/set_lang/en" class="relative z-10 flex-1 flex items-center justify-center h-full cursor-pointer" title="English">
+                        <img src="https://flagcdn.com/24x18/gb.png" alt="English" class="w-5 h-3.5 object-cover rounded-xs {% if session.get('lang', 'en') != 'en' %}opacity-50 hover:opacity-80{% endif %} transition-opacity duration-300">
+                    </a>
+                    <a href="/set_lang/km" class="relative z-10 flex-1 flex items-center justify-center h-full cursor-pointer" title="ភាសាខ្មែរ">
+                        <img src="https://flagcdn.com/24x18/kh.png" alt="Khmer" class="w-5 h-3.5 object-cover rounded-xs {% if session.get('lang', 'en') != 'km' %}opacity-50 hover:opacity-80{% endif %} transition-opacity duration-300">
+                    </a>
+                </div>
+
+                <!-- Mobile Single Flag Toggle -->
+                <div class="md:hidden flex items-center">
+                    {% if session.get('lang', 'en') == 'km' %}
+                    <a href="/set_lang/en" class="p-2 flex items-center justify-center rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" title="Switch to English">
+                        <img src="https://flagcdn.com/24x18/gb.png" alt="English" class="w-5 h-3.5 object-cover rounded-xs border border-gray-200/50 dark:border-zinc-700/50">
+                    </a>
+                    {% else %}
+                    <a href="/set_lang/km" class="p-2 flex items-center justify-center rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" title="ប្តូរទៅភាសាខ្មែរ">
+                        <img src="https://flagcdn.com/24x18/kh.png" alt="Khmer" class="w-5 h-3.5 object-cover rounded-xs border border-gray-200/50 dark:border-zinc-700/50">
+                    </a>
+                    {% endif %}
                 </div>
 
                 <a href="{{ url_for('home.cart') }}" class="relative p-2 text-zinc-500 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors group">
@@ -201,34 +205,6 @@
 </header>
 
 <script>
-    const mobileMenuButton = document.getElementById("mobile-menu-button");
-    const mobileMenu = document.getElementById("mobile-menu");
-
-    if (mobileMenuButton && mobileMenu) {
-        mobileMenuButton.addEventListener("click", function () {
-            mobileMenuButton.classList.toggle("active");
-            mobileMenu.classList.toggle("active-menu");
-        });
-    }
-
-    // Theme toggle button logic
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', () => {
-            const isDarkNow = !document.documentElement.classList.contains('dark');
-            if (isDarkNow) {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            }
-            if (typeof window.applyTheme === 'function') {
-                window.applyTheme();
-            }
-        });
-    }
-
     // Function to update the cart badge across all pages
     window.updateGlobalCartBadge = function() {
         let cart = JSON.parse(localStorage.getItem('angkorkey_cart')) || [];
@@ -245,11 +221,43 @@
         }
     };
 
-    // Run on page load
-    document.addEventListener('DOMContentLoaded', () => {
+    window.initHeaderLogic = function() {
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.onclick = function () {
+                mobileMenuButton.classList.toggle("active");
+                mobileMenu.classList.toggle("active-menu");
+            };
+        }
+
+        // Theme toggle button logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        if (themeToggleBtn) {
+            themeToggleBtn.onclick = () => {
+                const isDarkNow = !document.documentElement.classList.contains('dark');
+                if (isDarkNow) {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                }
+                if (typeof window.applyTheme === 'function') {
+                    window.applyTheme();
+                }
+            };
+        }
+        
         window.updateGlobalCartBadge();
         if (typeof window.applyTheme === 'function') {
             window.applyTheme();
         }
+    };
+
+    // Run on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        window.initHeaderLogic();
     });
 </script>
