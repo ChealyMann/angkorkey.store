@@ -91,6 +91,11 @@ TRANSLATIONS = {
         'voucher': 'Voucher',
         'err_voucher_already_used': 'This voucher has already been used on this device.',
         'err_voucher_phone_already_used': 'This phone number has already used this voucher code.',
+        'clear_cart': 'Clear Cart',
+        'clear_cart_confirm': 'Are you sure you want to clear your cart?',
+        'clear_cart_desc': 'This will remove all items from your shopping cart. This action cannot be undone.',
+        'cancel': 'Cancel',
+        'clear': 'Clear',
     },
     'km': {
         'products': 'ផលិតផល',
@@ -184,5 +189,10 @@ TRANSLATIONS = {
         'voucher': 'ប័ណ្ណបញ្ចុះតម្លៃ',
         'err_voucher_already_used': 'ប័ណ្ណបញ្ចុះតម្លៃនេះត្រូវបានប្រើប្រាស់រួចហើយនៅលើឧបករណ៍នេះ។',
         'err_voucher_phone_already_used': 'លេខទូរស័ព្ទនេះត្រូវបានប្រើប្រាស់កូដប័ណ្ណនេះរួចហើយ។',
+        'clear_cart': 'សម្អាតកន្ត្រក',
+        'clear_cart_confirm': 'តើអ្នកពិតជាចង់សម្អាតកន្ត្រកទំនិញមែនទេ?',
+        'clear_cart_desc': 'វានឹងលុបទំនិញទាំងអស់ចេញពីកន្ត្រកទំនិញរបស់អ្នក។ សកម្មភាពនេះមិនអាចត្រឡប់វិញបានទេ។',
+        'cancel': 'បោះបង់',
+        'clear': 'លុបសម្អាត',
     }
 }

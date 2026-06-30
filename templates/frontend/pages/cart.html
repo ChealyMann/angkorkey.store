@@ -4,10 +4,16 @@
 <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-24 font-sans text-zinc-900 dark:text-zinc-100">
 
     <!-- Header -->
-    <div class="flex items-center gap-3 mb-10 border-b border-zinc-100 dark:border-zinc-900 pb-5">
-        <h1 class="serif text-4xl font-bold tracking-tight">{{ _('your_cart') }}</h1>
-        <span id="cart-item-count" class="bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 text-xs font-bold px-3 py-1 rounded-none border border-zinc-200 dark:border-zinc-700 hidden">
-        </span>
+    <div class="flex items-center justify-between mb-10 border-b border-zinc-100 dark:border-zinc-900 pb-5">
+        <div class="flex items-center gap-3">
+            <h1 class="serif text-4xl font-bold tracking-tight">{{ _('your_cart') }}</h1>
+            <span id="cart-item-count" class="bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 text-xs font-bold px-3 py-1 rounded-none border border-zinc-200 dark:border-zinc-700 hidden">
+            </span>
+        </div>
+        <button id="open-clear-cart-btn" class="hidden text-zinc-400 hover:text-red-650 dark:hover:text-red-400 transition-colors duration-200 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider p-2 cursor-pointer bg-transparent border-0">
+            <i class="w-4 h-4" data-lucide="trash-2"></i>
+            <span>{{ _('clear_cart') }}</span>
+        </button>
     </div>
 
     <!-- Main List Panel -->
@@ -30,6 +36,43 @@
         </button>
     </div>
 
+</div>
+
+<!-- Clear Cart Confirmation Modal -->
+<div id="clear-cart-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4" role="dialog" aria-modal="true">
+    <!-- Modal Overlay -->
+    <div id="clear-cart-modal-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity duration-300 opacity-0"></div>
+
+    <!-- Modal Content Box -->
+    <div id="clear-cart-modal-box" class="relative bg-white dark:bg-zinc-955 w-full max-w-sm shadow-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden p-6 sm:p-8 flex flex-col scale-95 opacity-0 transition-all duration-300">
+        <!-- Close Button -->
+        <button id="cancel-clear-cart-btn-close" class="absolute top-4 right-4 text-zinc-400 hover:text-zinc-955 dark:hover:text-white transition-colors p-1.5 cursor-pointer bg-transparent border-0">
+            <i class="w-4 h-4" data-lucide="x"></i>
+        </button>
+
+        <div class="flex items-center gap-3.5 mb-5">
+            <div class="w-10 h-10 bg-red-50 dark:bg-red-950/30 rounded-full flex items-center justify-center text-red-600 dark:text-red-400 border border-red-100 dark:border-red-950/50 flex-shrink-0">
+                <i class="w-5 h-5" data-lucide="alert-triangle"></i>
+            </div>
+            <h3 class="text-zinc-900 dark:text-zinc-100 text-sm font-bold uppercase tracking-wider">
+                {{ _('clear_cart') }}
+            </h3>
+        </div>
+
+        <p class="text-zinc-550 dark:text-zinc-400 text-xs sm:text-sm leading-relaxed mb-6">
+            {{ _('clear_cart_confirm') }} <br class="hidden sm:inline"> {{ _('clear_cart_desc') }}
+        </p>
+
+        <div class="flex gap-3">
+            <button id="cancel-clear-cart-btn" class="w-full py-3 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer rounded-none border-0 active:scale-[0.99]">
+                {{ _('cancel') }}
+            </button>
+            <button id="confirm-clear-cart-btn" class="w-full py-3 bg-red-650 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider transition-all cursor-pointer rounded-none border-0 active:scale-[0.99] flex items-center justify-center gap-2">
+                <i class="w-3.5 h-3.5" data-lucide="trash-2"></i>
+                {{ _('clear') }}
+            </button>
+        </div>
+    </div>
 </div>
 
 <!-- Checkout Modal (Order Summary) -->
@@ -216,6 +259,23 @@
     .scroll-hide::-webkit-scrollbar {
         display: none;
     }
+
+    /* Premium Modal Transition & Keyboard Resize Fix */
+    #checkout-modal-box, #clear-cart-modal-box {
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #checkout-modal-box.no-transition, #clear-cart-modal-box.no-transition {
+        transition: none !important;
+    }
+    #checkout-modal-overlay, #clear-cart-modal-overlay {
+        transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), backdrop-filter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #checkout-modal-overlay.opacity-0, #clear-cart-modal-overlay.opacity-0 {
+        backdrop-filter: blur(0px);
+    }
+    #checkout-modal-overlay:not(.opacity-0), #clear-cart-modal-overlay:not(.opacity-0) {
+        backdrop-filter: blur(4px);
+    }
 </style>
 
 <script>
@@ -389,16 +449,19 @@
             const currentLang = getLang();
             container.innerHTML = '';
 
+            const openClearCartBtn = document.getElementById('open-clear-cart-btn');
             if (cart.length === 0) {
                 emptyMsg.classList.remove('hidden');
                 actionsBox.classList.add('hidden');
                 countBadge.classList.add('hidden');
+                if (openClearCartBtn) openClearCartBtn.classList.add('hidden');
                 hideCheckoutModal();
                 return;
             }
 
             emptyMsg.classList.add('hidden');
             actionsBox.classList.remove('hidden');
+            if (openClearCartBtn) openClearCartBtn.classList.remove('hidden');
 
             let totalItems = 0;
 
@@ -640,6 +703,15 @@
             checkoutModalOverlay.addEventListener('click', hideCheckoutModal);
         }
 
+        const openClearCartBtn = document.getElementById('open-clear-cart-btn');
+        if (openClearCartBtn) {
+            openClearCartBtn.addEventListener('click', showClearCartModal);
+        }
+        const closeClearCartBtn = document.getElementById('cancel-clear-cart-btn-close');
+        if (closeClearCartBtn) {
+            closeClearCartBtn.addEventListener('click', hideClearCartModal);
+        }
+
         if (confirmClearCartBtn) {
             confirmClearCartBtn.addEventListener('click', () => {
                 cart = [];
@@ -653,6 +725,31 @@
         if (clearCartModalOverlay) {
             clearCartModalOverlay.addEventListener('click', hideClearCartModal);
         }
+
+        // Keyboard resizing flicker fix: temporarily disable transform transitions during active input focus
+        const inputs = [
+            document.getElementById('checkout-phone'),
+            document.getElementById('checkout-address'),
+            document.getElementById('checkout-maps'),
+            document.getElementById('checkout-voucher')
+        ];
+        const checkoutModalBox = document.getElementById('checkout-modal-box');
+
+        inputs.forEach(input => {
+            if (input && checkoutModalBox) {
+                input.addEventListener('focus', () => {
+                    checkoutModalBox.classList.add('no-transition');
+                });
+                input.addEventListener('blur', () => {
+                    setTimeout(() => {
+                        const activeEl = document.activeElement;
+                        if (!inputs.includes(activeEl)) {
+                            checkoutModalBox.classList.remove('no-transition');
+                        }
+                    }, 50);
+                });
+            }
+        });
 
         deliveryRadios.forEach(radio => {
             radio.addEventListener('change', () => {
