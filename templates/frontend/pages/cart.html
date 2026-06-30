@@ -33,13 +33,16 @@
 </div>
 
 <!-- Checkout Modal (Order Summary) -->
-<div id="checkout-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4" role="dialog" aria-modal="true">
+<div id="checkout-modal" class="fixed inset-0 z-[100] hidden flex items-end sm:items-center justify-center p-0 sm:p-4" role="dialog" aria-modal="true">
     <!-- Modal Overlay -->
     <div id="checkout-modal-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity duration-300 opacity-0"></div>
 
     <!-- Modal Content Box -->
-    <div id="checkout-modal-box" class="relative bg-white dark:bg-zinc-950 w-full max-w-md rounded-none shadow-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden p-6 md:p-8 flex flex-col max-h-[90vh] scale-95 opacity-0 transition-all duration-300">
+    <div id="checkout-modal-box" class="relative bg-white dark:bg-zinc-950 w-full sm:max-w-md rounded-t-2xl sm:rounded-none shadow-2xl border-t sm:border border-zinc-250 dark:border-zinc-850 overflow-hidden p-6 md:p-8 flex flex-col max-h-[92vh] sm:max-h-[90vh] translate-y-full sm:translate-y-0 sm:scale-95 opacity-0 transition-all duration-300">
         
+        <!-- Pull indicator for mobile bottom sheet -->
+        <div class="w-12 h-1 bg-zinc-200 dark:bg-zinc-800 rounded-full mx-auto mb-4 sm:hidden flex-shrink-0"></div>
+
         <!-- Close Button -->
         <button id="close-checkout-modal" class="absolute top-4 right-4 text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors p-1.5 cursor-pointer">
             <i class="w-5 h-5" data-lucide="x"></i>
@@ -571,14 +574,18 @@
             checkoutModal.classList.remove('hidden');
             checkoutModal.offsetHeight; // force reflow
             checkoutModalOverlay.classList.remove('opacity-0');
-            document.getElementById('checkout-modal-box').classList.remove('scale-95', 'opacity-0');
+            const box = document.getElementById('checkout-modal-box');
+            box.classList.remove('translate-y-full', 'sm:scale-95', 'opacity-0');
+            box.classList.add('translate-y-0', 'sm:scale-100', 'opacity-100');
             document.body.style.overflow = 'hidden';
             updateSummary();
         }
 
         function hideCheckoutModal() {
             checkoutModalOverlay.classList.add('opacity-0');
-            document.getElementById('checkout-modal-box').classList.add('scale-95', 'opacity-0');
+            const box = document.getElementById('checkout-modal-box');
+            box.classList.remove('translate-y-0', 'sm:scale-100', 'opacity-100');
+            box.classList.add('translate-y-full', 'sm:scale-95', 'opacity-0');
             setTimeout(() => {
                 checkoutModal.classList.add('hidden');
                 document.body.style.overflow = '';
