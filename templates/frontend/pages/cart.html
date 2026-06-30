@@ -101,8 +101,10 @@
                         {{ _('phone_number') }} <span class="text-red-600 dark:text-red-400">*</span>
                     </label>
                     <input 
-                        type="text" 
+                        type="tel" 
                         id="checkout-phone" 
+                        inputmode="numeric"
+                        pattern="[0-9]*"
                         placeholder="{{ _('phone_placeholder') }}" 
                         class="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-none py-3 px-4 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-zinc-950 dark:focus:border-zinc-50 transition-all"
                     >
