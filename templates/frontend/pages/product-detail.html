@@ -72,6 +72,12 @@
 .dark .text-gray-750 {
     color: #e4e4e7;
 }
+.dark .text-gray-950 {
+    color: #ffffff;
+}
+.dark .text-gray-955 {
+    color: #f4f4f5;
+}
 .dark .text-gray-700 {
     color: #e4e4e7;
 }
@@ -119,6 +125,12 @@
 }
 .dark .ct-img {
     border-color: rgba(255, 255, 255, 0.08) !important;
+}
+.dark .ct-close {
+    color: #71717a !important;
+}
+.dark .ct-close:hover {
+    color: #ffffff !important;
 }
 .dark .prose-dark {
     color: #d4d4d8;
@@ -459,6 +471,9 @@
     pointer-events: none;
     transition: opacity 0.3s;
 }
+.dark .desc-fade-mask::after {
+    background: linear-gradient(to bottom, rgba(24,24,27,0), #18181b) !important;
+}
 .desc-fade-mask.expanded::after { opacity: 0; }
 </style>
 
@@ -477,7 +492,7 @@
     <div class="flex items-center justify-between mb-10 anim-1">
         <div class="flex items-center gap-4">
             <button onclick="history.back()"
-                class="flex items-center justify-center gap-1.5 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-gray-200/80 dark:border-zinc-800/80 text-[10px] font-bold px-4 py-2 rounded-full uppercase tracking-widest text-zinc-900 dark:text-white shadow-xs cursor-pointer hover:bg-zinc-905 dark:hover:bg-zinc-50 hover:text-white dark:hover:text-zinc-950 hover:border-zinc-905 dark:hover:border-zinc-50 transition-all duration-300 hover:scale-105 active:scale-95 group"
+                class="flex items-center justify-center gap-1.5 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-gray-200/80 dark:border-zinc-800/80 text-[10px] font-bold px-4 py-2 rounded-full uppercase tracking-widest text-zinc-900 dark:text-white shadow-xs cursor-pointer hover:bg-zinc-950 dark:hover:bg-zinc-50 hover:text-white dark:hover:text-zinc-950 hover:border-zinc-950 dark:hover:border-zinc-50 transition-all duration-300 hover:scale-105 active:scale-95 group"
                 title="Back"
             >
                 <i data-lucide="arrow-left" class="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5"></i>

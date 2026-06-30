@@ -71,6 +71,16 @@
                 </a>
             </li>
 
+            <!-- VOUCHERS -->
+            <li class="sidebar-item {% if request.endpoint and request.endpoint.startswith('voucher.') %}selected{% endif %}">
+                <a class="sidebar-link {% if request.endpoint and request.endpoint.startswith('voucher.') %}active{% endif %}"
+                   href="{{ url_for('voucher.admin_voucher') }}"
+                   aria-expanded="false">
+                    <i data-feather="gift" class="feather-icon" style="width: 18px; stroke-width: 2px;"></i>
+                    <span class="hide-menu ms-2" style="font-weight: 500;">Vouchers</span>
+                </a>
+            </li>
+
             <!-- SETTINGS -->
             <li class="sidebar-item {% if request.endpoint == 'admin.settings' %}selected{% endif %}">
                 <a class="sidebar-link {% if request.endpoint == 'admin.settings' %}active{% endif %}"

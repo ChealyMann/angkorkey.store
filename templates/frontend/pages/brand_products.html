@@ -38,12 +38,30 @@
         background: linear-gradient(to right, #dc2626, rgba(220, 38, 38, 0.12));
     }
 
+    .dark .brand-banner {
+        background: #18181b !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2) !important;
+    }
+
     .brand-image-wrap::after {
         content: "";
         position: absolute;
         inset: 0;
         background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.05));
         pointer-events: none;
+    }
+
+    .dark .brand-image-wrap::after {
+        background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.03)) !important;
+    }
+
+    .dark .brand-image-wrap {
+        background-color: #18181b !important;
+    }
+
+    .dark .brand-image-wrap .text-gray-300 {
+        color: #52525b !important;
     }
 
     @media (max-width: 640px) {

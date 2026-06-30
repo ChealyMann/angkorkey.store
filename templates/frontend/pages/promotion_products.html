@@ -31,7 +31,7 @@
                 id="searchInput"
                 placeholder="Search promotions..."
                 autocomplete="off"
-                class="w-full bg-white border border-gray-200 rounded-full py-3 pl-12 pr-12 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 shadow-xs transition-all"
+                class="w-full bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-full py-3 pl-12 pr-12 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-red-600 dark:focus:border-red-400 focus:ring-1 focus:ring-red-600 shadow-xs transition-all"
             >
 
             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -63,13 +63,13 @@
             {% include 'frontend/layouts/product_grid.html' %}
         {% else %}
             <div class="text-center py-8">
-                <p class="text-gray-400 text-xs md:text-sm font-medium mb-5">
+                <p class="text-gray-400 dark:text-zinc-500 text-xs md:text-sm font-medium mb-5">
                     No active promotions.
                 </p>
 
                 <a
                     href="{{ url_for('home.products') }}"
-                    class="inline-block border border-gray-300 text-gray-600 px-5 py-2 rounded-full text-[11px] font-semibold uppercase tracking-widest hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors shadow-xs"
+                    class="inline-block border border-gray-300 dark:border-zinc-700 text-gray-600 dark:text-zinc-400 px-5 py-2 rounded-full text-[11px] font-semibold uppercase tracking-widest hover:bg-red-600 dark:hover:bg-red-600 hover:text-white hover:border-red-600 dark:hover:border-red-400 transition-colors shadow-xs"
                 >
                     Browse Products
                 </a>
@@ -113,13 +113,13 @@
                 } else {
                     promotionSections.innerHTML = `
                         <div class="text-center py-8">
-                            <p class="text-gray-400 text-xs md:text-sm font-medium mb-5">
+                            <p class="text-gray-400 dark:text-zinc-500 text-xs md:text-sm font-medium mb-5">
                                 No promotions found.
                             </p>
 
                             <a
                                 href="{{ url_for('home.products') }}"
-                                class="inline-block border border-gray-300 text-gray-600 px-5 py-2 rounded-full text-[11px] font-semibold uppercase tracking-widest hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors shadow-xs"
+                                class="inline-block border border-gray-300 dark:border-zinc-700 text-gray-600 dark:text-zinc-400 px-5 py-2 rounded-full text-[11px] font-semibold uppercase tracking-widest hover:bg-red-600 dark:hover:bg-red-600 hover:text-white hover:border-red-600 dark:hover:border-red-400 transition-colors shadow-xs"
                             >
                                 Browse Products
                             </a>

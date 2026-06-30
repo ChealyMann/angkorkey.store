@@ -90,6 +90,75 @@
                 </div>
             </div>
 
+            <!-- Contact Details Form -->
+            <div class="mb-6 space-y-4 border-t border-b border-zinc-100 dark:border-zinc-900 py-6">
+                <!-- Phone Number Field -->
+                <div>
+                    <label for="checkout-phone" class="block text-zinc-550 dark:text-zinc-400 text-xs font-semibold uppercase tracking-wider mb-2">
+                        {{ _('phone_number') }} <span class="text-red-600 dark:text-red-400">*</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="checkout-phone" 
+                        placeholder="{{ _('phone_placeholder') }}" 
+                        class="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-none py-3 px-4 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-zinc-950 dark:focus:border-zinc-50 transition-all"
+                    >
+                    <p id="error-phone" class="text-red-600 dark:text-red-400 text-xs mt-1.5 hidden"></p>
+                </div>
+
+                <!-- Delivery Address Field -->
+                <div>
+                    <label for="checkout-address" class="block text-zinc-550 dark:text-zinc-400 text-xs font-semibold uppercase tracking-wider mb-2">
+                        {{ _('delivery_address') }} <span class="text-red-600 dark:text-red-400">*</span>
+                    </label>
+                    <textarea 
+                        id="checkout-address" 
+                        rows="2" 
+                        placeholder="{{ _('address_placeholder') }}" 
+                        class="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-none py-3 px-4 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-zinc-950 dark:focus:border-zinc-50 transition-all resize-none"
+                    ></textarea>
+                    <p id="error-address" class="text-red-600 dark:text-red-400 text-xs mt-1.5 hidden"></p>
+                </div>
+
+                <!-- Google Maps Link Field -->
+                <div>
+                    <label for="checkout-maps" class="block text-zinc-550 dark:text-zinc-400 text-xs font-semibold uppercase tracking-wider mb-2">
+                        {{ _('google_maps_link') }}
+                    </label>
+                    <input 
+                        type="text" 
+                        id="checkout-maps" 
+                        placeholder="{{ _('maps_placeholder') }}" 
+                        class="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-none py-3 px-4 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-zinc-950 dark:focus:border-zinc-50 transition-all"
+                    >
+                    <p id="error-maps" class="text-red-600 dark:text-red-400 text-xs mt-1.5 hidden"></p>
+                </div>
+
+                <!-- Voucher Code Field -->
+                <div>
+                    <label for="checkout-voucher" class="block text-zinc-550 dark:text-zinc-400 text-xs font-semibold uppercase tracking-wider mb-2">
+                        {{ _('promo_code') }}
+                    </label>
+                    <div class="flex gap-2">
+                        <input 
+                            type="text" 
+                            id="checkout-voucher" 
+                            placeholder="{{ _('promo_placeholder') }}" 
+                            class="flex-1 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-none py-3 px-4 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-zinc-950 dark:focus:border-zinc-50 transition-all uppercase"
+                        >
+                        <button 
+                            type="button" 
+                            id="apply-voucher-btn" 
+                            class="px-5 bg-zinc-950 text-white dark:bg-zinc-50 dark:text-zinc-950 font-bold text-xs uppercase tracking-wider hover:opacity-90 active:scale-98 transition-all cursor-pointer rounded-none border border-transparent"
+                        >
+                            {{ _('apply') }}
+                        </button>
+                    </div>
+                    <p id="voucher-success" class="text-emerald-600 dark:text-emerald-400 text-xs mt-1.5 hidden"></p>
+                    <p id="error-voucher" class="text-red-600 dark:text-red-400 text-xs mt-1.5 hidden"></p>
+                </div>
+            </div>
+
             <div class="flex justify-between items-center mb-4 text-sm">
                 <span class="text-zinc-550 dark:text-zinc-400">{{ _('delivery_fee') }}</span>
                 <span id="delivery-fee" class="text-zinc-955 dark:text-zinc-100 font-bold">$2.00</span>
@@ -154,6 +223,25 @@
         const checkoutModalOverlay = document.getElementById('checkout-modal-overlay');
         const openCheckoutBtn = document.getElementById('open-checkout-btn');
         const closeCheckoutModal = document.getElementById('close-checkout-modal');
+
+        // Contact Details fields
+        const phoneInput = document.getElementById('checkout-phone');
+        const addressInput = document.getElementById('checkout-address');
+        const mapsInput = document.getElementById('checkout-maps');
+
+        // Voucher fields
+        const voucherInput = document.getElementById('checkout-voucher');
+        const applyVoucherBtn = document.getElementById('apply-voucher-btn');
+        const voucherSuccess = document.getElementById('voucher-success');
+        const errorVoucher = document.getElementById('error-voucher');
+
+        let appliedVoucherCode = null;
+        let appliedVoucherMinSpend = 0.0;
+
+        // Load contact details from localStorage
+        if (phoneInput) phoneInput.value = localStorage.getItem('checkout_phone') || '';
+        if (addressInput) addressInput.value = localStorage.getItem('checkout_address') || '';
+        if (mapsInput) mapsInput.value = localStorage.getItem('checkout_maps') || '';
 
         let cart = JSON.parse(localStorage.getItem('angkorkey_cart')) || [];
 
@@ -231,12 +319,30 @@
 
         function updateSummary() {
             const subtotal = getCartSubtotal();
+
+            // Check minimum spend if a voucher is applied
+            if (appliedVoucherCode && subtotal < appliedVoucherMinSpend) {
+                appliedVoucherCode = null;
+                appliedVoucherMinSpend = 0.0;
+                if (voucherInput) voucherInput.value = '';
+                if (voucherSuccess) {
+                    voucherSuccess.classList.add('hidden');
+                }
+                if (errorVoucher) {
+                    const currentLang = getLang();
+                    const translations = JSON.parse(document.getElementById('translations-json').textContent || '{}');
+                    errorVoucher.textContent = translations[currentLang] && translations[currentLang]['err_voucher_min_spend'] ? translations[currentLang]['err_voucher_min_spend'].replace('${min_spend}', appliedVoucherMinSpend.toFixed(2)) : 'Minimum spend not met.';
+                    errorVoucher.classList.remove('hidden');
+                }
+            }
+
             const delivery = getSelectedDelivery();
             let finalTotal = subtotal;
 
             if (delivery.type === 'standard') {
-                finalTotal += delivery.fee;
-                deliveryFeeEl.textContent = money(delivery.fee);
+                const fee = appliedVoucherCode ? 0 : delivery.fee;
+                finalTotal += fee;
+                deliveryFeeEl.textContent = money(fee);
                 totalEl.textContent = money(finalTotal);
             } else if (delivery.type === 'grab') {
                 deliveryFeeEl.textContent = delivery.feeText;
@@ -379,7 +485,7 @@
             }
         }
 
-        function buildTelegramMessage() {
+        function buildTelegramMessage(phoneVal, addressVal, mapsVal) {
             const currentLang = getLang();
             let subtotal = 0;
             const delivery = getSelectedDelivery();
@@ -425,13 +531,33 @@
             const deliveryName = currentLang === 'km' ? delivery.nameKh : delivery.nameEn;
 
             if (delivery.type === 'standard') {
-                const finalTotal = subtotal + delivery.fee;
+                const fee = appliedVoucherCode ? 0 : delivery.fee;
+                const finalTotal = subtotal + fee;
                 message += `${deliveryLabel}: ${deliveryName}\n`;
-                message += `${deliveryFeeLabel}: ${money(delivery.fee)}\n`;
+                message += `${deliveryFeeLabel}: ${money(fee)}\n`;
                 message += `${grandTotalLabel}: ${money(finalTotal)}\n`;
             } else if (delivery.type === 'grab') {
                 message += `${deliveryLabel}: ${deliveryName}\n`;
                 message += `${grandTotalLabel}: ${money(subtotal)} + Grab Fee\n`;
+            }
+
+            // Append contact details
+            const translations = JSON.parse(document.getElementById('translations-json').textContent || '{}');
+            const contactLabel = translations[currentLang] && translations[currentLang]['contact_details'] ? translations[currentLang]['contact_details'] : 'Contact Details';
+            const phoneLabelText = translations[currentLang] && translations[currentLang]['phone'] ? translations[currentLang]['phone'] : 'Phone';
+            const addressLabelText = translations[currentLang] && translations[currentLang]['address'] ? translations[currentLang]['address'] : 'Address';
+            const mapLabelText = translations[currentLang] && translations[currentLang]['map'] ? translations[currentLang]['map'] : 'Map';
+            const voucherLabelText = translations[currentLang] && translations[currentLang]['voucher'] ? translations[currentLang]['voucher'] : 'Voucher';
+
+            message += `━━━━━━━━━━━━━━\n`;
+            message += `${contactLabel}:\n`;
+            message += `• ${phoneLabelText}: ${phoneVal}\n`;
+            message += `• ${addressLabelText}: ${addressVal}\n`;
+            if (mapsVal) {
+                message += `• ${mapLabelText}: ${mapsVal}\n`;
+            }
+            if (appliedVoucherCode) {
+                message += `• ${voucherLabelText}: ${appliedVoucherCode} (Free Delivery)\n`;
             }
 
             message += `━━━━━━━━━━━━━━\n`;
@@ -518,10 +644,257 @@
             });
         });
 
-        checkoutBtn.addEventListener('click', () => {
+        async function handleApplyVoucher() {
+            if (!voucherInput) return;
+            const code = voucherInput.value.trim().toUpperCase();
+            
+            if (errorVoucher) errorVoucher.classList.add('hidden');
+            if (voucherSuccess) voucherSuccess.classList.add('hidden');
+            
+            if (!code) return;
+            
+            const currentLang = getLang();
+            const translations = JSON.parse(document.getElementById('translations-json').textContent || '{}');
+
+            // Check if voucher was already used on this device
+            const usedVouchers = JSON.parse(localStorage.getItem('angkorkey_used_vouchers') || '[]');
+            if (usedVouchers.includes(code)) {
+                if (errorVoucher) {
+                    errorVoucher.textContent = translations[currentLang] && translations[currentLang]['err_voucher_already_used'] 
+                        ? translations[currentLang]['err_voucher_already_used'] 
+                        : 'This voucher has already been used on this device.';
+                    errorVoucher.classList.remove('hidden');
+                }
+                return;
+            }
+            
+            const subtotal = getCartSubtotal();
+            const phoneVal = phoneInput ? phoneInput.value.trim() : '';
+            
+            try {
+                const response = await fetch(`/api/validate_voucher?code=${encodeURIComponent(code)}&subtotal=${subtotal}&phone=${encodeURIComponent(phoneVal)}`);
+                const data = await response.json();
+                
+                if (data.valid) {
+                    appliedVoucherCode = data.code;
+                    appliedVoucherMinSpend = data.min_spend;
+                    
+                    if (voucherSuccess) {
+                        const msg = translations[currentLang] && translations[currentLang]['voucher_applied_msg'] ? translations[currentLang]['voucher_applied_msg'] : 'Voucher applied successfully!';
+                        voucherSuccess.textContent = msg;
+                        voucherSuccess.classList.remove('hidden');
+                    }
+                    updateSummary();
+                } else {
+                    appliedVoucherCode = null;
+                    appliedVoucherMinSpend = 0.0;
+                    if (errorVoucher) {
+                        let msg = data.message;
+                        if (msg.includes("Invalid")) {
+                            msg = (translations[currentLang] && translations[currentLang]['err_voucher_invalid']) || msg;
+                        } else if (msg.includes("inactive")) {
+                            msg = (translations[currentLang] && translations[currentLang]['err_voucher_inactive']) || msg;
+                        } else if (msg.includes("limit reached")) {
+                            msg = (translations[currentLang] && translations[currentLang]['err_voucher_limit']) || msg;
+                        } else if (msg.includes("Minimum spend")) {
+                            msg = (translations[currentLang] && translations[currentLang]['err_voucher_min_spend']) ? translations[currentLang]['err_voucher_min_spend'].replace('${min_spend}', data.min_spend.toFixed(2)) : msg;
+                        } else if (msg.includes("already used")) {
+                            msg = (translations[currentLang] && translations[currentLang]['err_voucher_phone_already_used']) || msg;
+                        }
+                        errorVoucher.textContent = msg;
+                        errorVoucher.classList.remove('hidden');
+                    }
+                    updateSummary();
+                }
+            } catch (err) {
+                console.error("Voucher validation error:", err);
+                if (errorVoucher) {
+                    errorVoucher.textContent = "Error validating voucher code.";
+                    errorVoucher.classList.remove('hidden');
+                }
+            }
+        }
+        
+        if (applyVoucherBtn) {
+            applyVoucherBtn.addEventListener('click', handleApplyVoucher);
+        }
+        
+        if (voucherInput) {
+            voucherInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleApplyVoucher();
+                }
+            });
+        }
+        
+        function validatePhoneLive() {
+            const phoneVal = phoneInput.value.trim();
+            const errorPhone = document.getElementById('error-phone');
+            const translations = JSON.parse(document.getElementById('translations-json').textContent || '{}');
+            const currentLang = getLang();
+
+            if (!phoneVal) {
+                // Empty state: default border, no error
+                phoneInput.classList.remove('border-red-600', 'dark:border-red-400', 'border-emerald-600', 'dark:border-emerald-400');
+                errorPhone.classList.add('hidden');
+                return false;
+            }
+
+            const cleanPhone = phoneVal.replace(/[\s-]/g, '');
+            const phoneRegex = /^(?:\+?855|0)?\d{8,9}$/;
+            const isValid = phoneRegex.test(cleanPhone);
+
+            if (isValid) {
+                // Valid state: green border, no error
+                phoneInput.classList.remove('border-red-600', 'dark:border-red-400');
+                phoneInput.classList.add('border-emerald-600', 'dark:border-emerald-400');
+                errorPhone.classList.add('hidden');
+                return true;
+            } else {
+                // If length is short, don't show red error while typing yet, unless they blur
+                // But if they have typed more than 12 chars, it is definitely invalid
+                if (cleanPhone.length > 12) {
+                    phoneInput.classList.remove('border-emerald-600', 'dark:border-emerald-400');
+                    phoneInput.classList.add('border-red-600', 'dark:border-red-400');
+                    errorPhone.textContent = translations[currentLang] && translations[currentLang]['err_phone_invalid'] ? translations[currentLang]['err_phone_invalid'] : 'Please enter a valid Cambodian phone number.';
+                    errorPhone.classList.remove('hidden');
+                } else {
+                    // Short/incomplete: clear green/red classes while typing
+                    phoneInput.classList.remove('border-red-600', 'dark:border-red-400', 'border-emerald-600', 'dark:border-emerald-400');
+                    errorPhone.classList.add('hidden');
+                }
+                return false;
+            }
+        }
+
+        if (phoneInput) {
+            phoneInput.addEventListener('input', () => {
+                validatePhoneLive();
+                if (appliedVoucherCode) {
+                    handleApplyVoucher();
+                }
+            });
+
+            phoneInput.addEventListener('blur', () => {
+                const phoneVal = phoneInput.value.trim();
+                const errorPhone = document.getElementById('error-phone');
+                const translations = JSON.parse(document.getElementById('translations-json').textContent || '{}');
+                const currentLang = getLang();
+
+                if (!phoneVal) {
+                    phoneInput.classList.remove('border-emerald-600', 'dark:border-emerald-400');
+                    phoneInput.classList.add('border-red-600', 'dark:border-red-400');
+                    errorPhone.textContent = translations[currentLang] && translations[currentLang]['err_phone_required'] ? translations[currentLang]['err_phone_required'] : 'Phone number is required.';
+                    errorPhone.classList.remove('hidden');
+                    return;
+                }
+
+                const cleanPhone = phoneVal.replace(/[\s-]/g, '');
+                const phoneRegex = /^(?:\+?855|0)?\d{8,9}$/;
+                const isValid = phoneRegex.test(cleanPhone);
+
+                if (!isValid) {
+                    phoneInput.classList.remove('border-emerald-600', 'dark:border-emerald-400');
+                    phoneInput.classList.add('border-red-600', 'dark:border-red-400');
+                    errorPhone.textContent = translations[currentLang] && translations[currentLang]['err_phone_invalid'] ? translations[currentLang]['err_phone_invalid'] : 'Please enter a valid Cambodian phone number.';
+                    errorPhone.classList.remove('hidden');
+                }
+            });
+        }
+
+        checkoutBtn.addEventListener('click', async () => {
             if (cart.length === 0) return;
 
-            const message = buildTelegramMessage();
+            // Clear previous errors
+            const errorPhone = document.getElementById('error-phone');
+            const errorAddress = document.getElementById('error-address');
+            const errorMaps = document.getElementById('error-maps');
+
+            errorPhone.classList.add('hidden');
+            errorAddress.classList.add('hidden');
+            errorMaps.classList.add('hidden');
+
+            phoneInput.classList.remove('border-red-600', 'dark:border-red-400');
+            addressInput.classList.remove('border-red-600', 'dark:border-red-400');
+            mapsInput.classList.remove('border-red-600', 'dark:border-red-400');
+
+            const phoneVal = phoneInput.value.trim();
+            const addressVal = addressInput.value.trim();
+            const mapsVal = mapsInput.value.trim();
+
+            let isValid = true;
+            const translations = JSON.parse(document.getElementById('translations-json').textContent || '{}');
+            const currentLang = getLang();
+
+            // 1. Phone number validation
+            if (!phoneVal) {
+                errorPhone.textContent = translations[currentLang] && translations[currentLang]['err_phone_required'] ? translations[currentLang]['err_phone_required'] : 'Phone number is required.';
+                errorPhone.classList.remove('hidden');
+                phoneInput.classList.add('border-red-600', 'dark:border-red-400');
+                isValid = false;
+            } else {
+                const cleanPhone = phoneVal.replace(/[\s-]/g, '');
+                const phoneRegex = /^(?:\+?855|0)?\d{8,9}$/;
+                if (!phoneRegex.test(cleanPhone)) {
+                    errorPhone.textContent = translations[currentLang] && translations[currentLang]['err_phone_invalid'] ? translations[currentLang]['err_phone_invalid'] : 'Please enter a valid Cambodian phone number.';
+                    errorPhone.classList.remove('hidden');
+                    phoneInput.classList.add('border-red-600', 'dark:border-red-400');
+                    isValid = false;
+                }
+            }
+
+            // 2. Address validation
+            if (!addressVal) {
+                errorAddress.textContent = translations[currentLang] && translations[currentLang]['err_address_required'] ? translations[currentLang]['err_address_required'] : 'Delivery address is required.';
+                errorAddress.classList.remove('hidden');
+                addressInput.classList.add('border-red-600', 'dark:border-red-400');
+                isValid = false;
+            }
+
+            // 3. Maps link validation (optional)
+            if (mapsVal) {
+                const mapsRegex = /^(https?:\/\/)?(www\.)?(google\.com\/maps|maps\.app\.goo\.gl|goo\.gl\/maps|maps\.google\.com|apple\.com\/maps)/i;
+                if (!mapsRegex.test(mapsVal)) {
+                    errorMaps.textContent = translations[currentLang] && translations[currentLang]['err_maps_invalid'] ? translations[currentLang]['err_maps_invalid'] : 'Please enter a valid Google Maps URL.';
+                    errorMaps.classList.remove('hidden');
+                    mapsInput.classList.add('border-red-600', 'dark:border-red-400');
+                    isValid = false;
+                }
+            }
+
+            if (!isValid) {
+                return;
+            }
+
+            // Save details to localStorage
+            localStorage.setItem('checkout_phone', phoneVal);
+            localStorage.setItem('checkout_address', addressVal);
+            localStorage.setItem('checkout_maps', mapsVal);
+
+            // Increment voucher usage
+            if (appliedVoucherCode) {
+                try {
+                    await fetch('/api/use_voucher', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ code: appliedVoucherCode, phone: phoneVal })
+                    });
+
+                    // Save to used list in localStorage
+                    const usedVouchers = JSON.parse(localStorage.getItem('angkorkey_used_vouchers') || '[]');
+                    if (!usedVouchers.includes(appliedVoucherCode)) {
+                        usedVouchers.push(appliedVoucherCode);
+                        localStorage.setItem('angkorkey_used_vouchers', JSON.stringify(usedVouchers));
+                    }
+                } catch (err) {
+                    console.error("Error recording voucher usage:", err);
+                }
+            }
+
+            const message = buildTelegramMessage(phoneVal, addressVal, mapsVal);
             const telegramUsername = '{{ telegram_username }}';
             const tgUrl = `https://t.me/${telegramUsername}?text=${encodeURIComponent(message)}`;
 

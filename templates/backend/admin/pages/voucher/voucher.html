@@ -1,0 +1,151 @@
+{% extends 'backend/admin/master.html' %}
+
+{% block main %}
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+    <style>
+        .font-khmer {
+            font-family: 'Kantumruy Pro', 'Inter', sans-serif;
+        }
+    </style>
+
+    <div class="font-khmer w-auto mx-4 mt-4 mb-4">
+
+        <div class="d-flex justify-content-between align-items-end mb-4">
+            <div>
+                <h3 class="text-main mb-1" style="font-weight: 500; letter-spacing: -0.02em;">ការគ្រប់គ្រងប័ណ្ណបញ្ចុះតម្លៃ</h3>
+                <span class="text-muted" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;">Voucher Management</span>
+            </div>
+            <a href="{{ url_for('voucher.admin_voucher_add') }}" class="text-decoration-none">
+                <button class="btn btn-dark shadow-sm px-4" style="border-radius: 8px; font-weight: 500;">
+                    <i class="fa-solid fa-plus me-2"></i> បង្កើតថ្មី (Add New)
+                </button>
+            </a>
+        </div>
+
+        <div class="card overflow-hidden">
+            <div class="card-body p-0">
+                <div class="table-scroll-area scrollbar-hidden">
+                    <table class="table table-hover mb-0 align-middle">
+                        <thead>
+                        <tr>
+                            <th class="text-center py-3 ps-4" style="width: 80px;">ID</th>
+                            <th class="py-3" style="width: 250px;">CODE</th>
+                            <th class="py-3" style="width: 200px;">MINIMUM SPEND</th>
+                            <th class="py-3">USAGE STATS</th>
+                            <th class="text-center py-3" style="width: 150px;">STATUS</th>
+                            <th class="text-end py-3 pe-4" style="width: 120px;">ACTION</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for voucher in vouchers %}
+                            <tr>
+                                <td class="text-center text-muted font-12 ps-4">
+                                    #{{ loop.index }}
+                                </td>
+                                <td class="text-main fw-bold">
+                                    <span class="badge bg-light text-dark border px-2.5 py-1.5 font-14">{{ voucher.code }}</span>
+                                </td>
+                                <td class="text-main font-14">
+                                    ${{ "%.2f"|format(voucher.min_spend) }}
+                                </td>
+                                <td class="text-main font-14">
+                                    {% if voucher.usage_limit %}
+                                        {% if voucher.usage_count >= voucher.usage_limit %}
+                                            <span class="text-danger fw-bold"><i class="fa-solid fa-circle-xmark me-1"></i>{{ voucher.usage_count }} / {{ voucher.usage_limit }} used (Limit Reached)</span>
+                                        {% else %}
+                                            <span class="text-success"><i class="fa-solid fa-circle-check me-1"></i>{{ voucher.usage_count }} / {{ voucher.usage_limit }} used</span>
+                                        {% endif %}
+                                    {% else %}
+                                        <span class="text-muted"><i class="fa-solid fa-infinity me-1"></i>{{ voucher.usage_count }} used (Unlimited)</span>
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">
+                                    {% if voucher.status == 'false' %}
+                                        <span class="badge bg-danger">Inactive</span>
+                                    {% elif voucher.usage_limit and voucher.usage_count >= voucher.usage_limit %}
+                                        <span class="badge bg-warning text-dark">Limit Reached</span>
+                                    {% else %}
+                                        <span class="badge bg-success">Active</span>
+                                    {% endif %}
+                                </td>
+                                <td class="text-end pe-4">
+                                    <div class="d-flex justify-content-end gap-2">
+                                        <a href="{{ url_for('voucher.admin_voucher_edit', voucher_id=voucher.id) }}" class="btn btn-light btn-sm border" style="border-radius: 6px; color: var(--text-main);" title="Edit Voucher">
+                                            <i class="fa-solid fa-pen-to-square" style="font-size: 0.8rem;"></i>
+                                        </a>
+                                        <form action="{{ url_for('voucher.admin_voucher_delete', voucher_id=voucher.id) }}" method="post" class="m-0">
+                                            <button type="button" class="btn btn-light btn-sm border btn-delete" style="border-radius: 6px; color: #ef4444;" title="Delete Voucher">
+                                                <i class="fa-solid fa-trash-can" style="font-size: 0.8rem;"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="6" class="text-center py-5 text-muted">
+                                    <i class="fa-solid fa-ticket mb-3" style="font-size: 2rem; color: var(--border-light);"></i>
+                                    <p class="mb-0">មិនមានទិន្នន័យ (No vouchers found)</p>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer bg-transparent border-top py-3 px-4">
+                <span class="text-muted" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;">
+                    Total Vouchers: <span class="text-main fw-bold">{{ vouchers|length }}</span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const deleteButtons = document.querySelectorAll('.btn-delete');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                const form = this.closest('form');
+
+                Swal.fire({
+                    title: "តើអ្នកប្រាកដទេ?",
+                    text: "ទិន្នន័យដែលលុបហើយមិនអាចយកមកវិញបានទេ!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#dc3545",
+                    cancelButtonColor: "#e5e7eb",
+                    cancelButtonText: "<span style='color: #000'>បោះបង់ (Cancel)</span>",
+                    confirmButtonText: "លុប (Delete)",
+                    background: "var(--bg-card)",
+                    color: "var(--text-main)"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <script>
+                {% for category, message in messages %}
+                    Swal.fire({
+                        title: '{{ "ជោគជ័យ" if category == "success" else "បរាជ័យ" }}',
+                        text: '{{ message }}',
+                        icon: '{{ category }}',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        timerProgressBar: true,
+                        background: "var(--bg-card)",
+                        color: "var(--text-main)"
+                    });
+                {% endfor %}
+            </script>
+        {% endif %}
+    {% endwith %}
+{% endblock %}

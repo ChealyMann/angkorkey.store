@@ -11,7 +11,7 @@
                 type="text"
                 id="categorySearchInput"
                 placeholder="{{ _('search_categories') }}"
-                class="w-full bg-white border border-gray-200 rounded-full py-2.5 pl-10 pr-4 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-200 focus:border-red-500 transition-all shadow-xs"
+                class="w-full bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-full py-2.5 pl-10 pr-4 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-200 dark:focus:ring-red-900 focus:border-red-500 dark:focus:border-red-400 transition-all shadow-xs"
             >
             <!-- Search icon -->
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -55,9 +55,9 @@
     </div>
 
     <!-- Empty State -->
-    <div id="no-categories-found" class="hidden text-center py-16 border border-gray-200 rounded-2xl bg-white shadow-xs mt-4">
-        <p class="text-gray-500 text-sm font-bold uppercase tracking-widest mb-6">{{ _('no_categories_match') }}</p>
-        <button id="clear-category-search" class="border border-gray-300 text-gray-700 bg-white px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors shadow-sm cursor-pointer">{{ _('clear_search') }}</button>
+    <div id="no-categories-found" class="hidden text-center py-16 border border-gray-200 dark:border-zinc-800 rounded-2xl bg-white dark:bg-zinc-900 shadow-xs mt-4">
+        <p class="text-gray-500 dark:text-zinc-400 text-sm font-bold uppercase tracking-widest mb-6">{{ _('no_categories_match') }}</p>
+        <button id="clear-category-search" class="border border-gray-300 dark:border-zinc-700 text-gray-700 dark:text-zinc-300 bg-white dark:bg-zinc-900 px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-red-600 dark:hover:bg-red-600 hover:text-white hover:border-red-600 dark:hover:border-red-400 transition-colors shadow-sm cursor-pointer">{{ _('clear_search') }}</button>
     </div>
 </div>
 
