@@ -917,13 +917,12 @@
 
             window.open(tgUrl, '_blank');
 
+            // Clear cart immediately
+            cart = [];
+            saveCart();
+
             // Close order summary modal
             hideCheckoutModal();
-
-            // Open custom clear-cart modal
-            setTimeout(() => {
-                showClearCartModal();
-            }, 400);
         });
 
         renderCart();
