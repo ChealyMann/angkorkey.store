@@ -44,9 +44,9 @@
     <div id="clear-cart-modal-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity duration-300 opacity-0"></div>
 
     <!-- Modal Content Box -->
-    <div id="clear-cart-modal-box" class="relative bg-white dark:bg-zinc-955 w-full max-w-sm shadow-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden p-6 sm:p-8 flex flex-col scale-95 opacity-0 transition-all duration-300">
+    <div id="clear-cart-modal-box" class="relative bg-white dark:bg-zinc-950 w-full max-w-sm shadow-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden p-6 sm:p-8 flex flex-col scale-95 opacity-0 transition-all duration-300">
         <!-- Close Button -->
-        <button id="cancel-clear-cart-btn-close" class="absolute top-4 right-4 text-zinc-400 hover:text-zinc-955 dark:hover:text-white transition-colors p-1.5 cursor-pointer bg-transparent border-0">
+        <button id="cancel-clear-cart-btn-close" class="absolute top-4 right-4 text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors p-1.5 cursor-pointer bg-transparent border-0">
             <i class="w-4 h-4" data-lucide="x"></i>
         </button>
 
@@ -91,95 +91,51 @@
             <i class="w-5 h-5" data-lucide="x"></i>
         </button>
 
-        <h3 class="text-zinc-900 dark:text-zinc-100 mb-6 uppercase tracking-widest text-xs font-bold border-b border-zinc-100 dark:border-zinc-900 pb-4">
-            {{ _('order_summary') }}
+        <h3 id="checkout-modal-title" class="text-zinc-900 dark:text-zinc-100 mb-6 uppercase tracking-widest text-xs font-bold border-b border-zinc-100 dark:border-zinc-900 pb-4">
+            {{ _('step_1') }}
         </h3>
 
         <!-- Modal Content (Scrollable if needed) -->
         <div class="overflow-y-auto pr-1 flex-1 scroll-hide mb-6">
-            <div class="flex justify-between items-center mb-4 text-sm">
-                <span class="text-zinc-550 dark:text-zinc-400">{{ _('subtotal') }}</span>
-                <span id="cart-subtotal" class="text-zinc-955 dark:text-zinc-100 font-bold">$0.00</span>
-            </div>
+            <!-- STEP 1 CONTAINER -->
+            <div id="checkout-step-1" class="space-y-5">
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-zinc-550 dark:text-zinc-400">{{ _('subtotal') }}</span>
+                    <span id="cart-subtotal" class="text-zinc-950 dark:text-zinc-100 font-bold">$0.00</span>
+                </div>
 
-            <!-- Delivery Options -->
-            <div class="mb-6">
-                <p class="text-zinc-500 dark:text-zinc-400 text-sm mb-3">{{ _('delivery_option') }}</p>
-                <div class="space-y-3">
-                    <!-- Standard Delivery -->
-                    <label class="delivery-option flex items-center justify-between gap-3 border border-zinc-200 dark:border-zinc-850 rounded-none p-3.5 cursor-pointer transition-all hover:bg-zinc-50 dark:hover:bg-zinc-900/60 select-none">
-                        <div class="flex items-center gap-3">
-                            <input type="radio" name="delivery_option" value="standard" checked class="delivery-radio accent-zinc-950 dark:accent-zinc-50">
-                            <div>
-                                <p class="text-zinc-900 dark:text-zinc-100 text-sm font-semibold flex items-center gap-1.5">
-                                    <i class="w-3.5 h-3.5 text-zinc-500" data-lucide="truck"></i> {{ _('standard_delivery') }}
-                                </p>
-                                <p class="text-zinc-400 dark:text-zinc-500 text-xs">{{ _('standard_delivery_sub') }}</p>
+                <!-- Delivery Options -->
+                <div>
+                    <p class="text-zinc-500 dark:text-zinc-400 text-sm mb-3">{{ _('delivery_option') }}</p>
+                    <div class="space-y-3">
+                        <!-- Standard Delivery -->
+                        <label class="delivery-option flex items-center justify-between gap-3 border border-zinc-200 dark:border-zinc-850 rounded-none p-3.5 cursor-pointer transition-all hover:bg-zinc-50 dark:hover:bg-zinc-900/60 select-none">
+                            <div class="flex items-center gap-3">
+                                <input type="radio" name="delivery_option" value="standard" checked class="delivery-radio accent-zinc-950 dark:accent-zinc-50">
+                                <div>
+                                    <p class="text-zinc-900 dark:text-zinc-100 text-sm font-semibold flex items-center gap-1.5">
+                                        <i class="w-3.5 h-3.5 text-zinc-500" data-lucide="truck"></i> {{ _('standard_delivery') }}
+                                    </p>
+                                    <p class="text-zinc-400 dark:text-zinc-500 text-xs">{{ _('standard_delivery_sub') }}</p>
+                                </div>
                             </div>
-                        </div>
-                        <span class="text-zinc-900 dark:text-zinc-100 text-sm font-bold">$2.00</span>
-                    </label>
+                            <span class="text-zinc-900 dark:text-zinc-100 text-sm font-bold">$2.00</span>
+                        </label>
 
-                    <!-- Grab Delivery -->
-                    <label class="delivery-option flex items-center justify-between gap-3 border border-zinc-200 dark:border-zinc-850 rounded-none p-3.5 cursor-pointer transition-all hover:bg-zinc-50 dark:hover:bg-zinc-900/60 select-none">
-                        <div class="flex items-center gap-3">
-                            <input type="radio" name="delivery_option" value="grab" class="delivery-radio accent-zinc-950 dark:accent-zinc-50">
-                            <div>
-                                <p class="text-zinc-900 dark:text-zinc-100 text-sm font-semibold flex items-center gap-1.5">
-                                    <i class="w-3.5 h-3.5 text-zinc-500" data-lucide="zap"></i> {{ _('grab_delivery') }}
-                                </p>
-                                <p class="text-zinc-400 dark:text-zinc-500 text-xs">{{ _('grab_delivery_sub') }}</p>
+                        <!-- Grab Delivery -->
+                        <label class="delivery-option flex items-center justify-between gap-3 border border-zinc-200 dark:border-zinc-850 rounded-none p-3.5 cursor-pointer transition-all hover:bg-zinc-50 dark:hover:bg-zinc-900/60 select-none">
+                            <div class="flex items-center gap-3">
+                                <input type="radio" name="delivery_option" value="grab" class="delivery-radio accent-zinc-950 dark:accent-zinc-50">
+                                <div>
+                                    <p class="text-zinc-900 dark:text-zinc-100 text-sm font-semibold flex items-center gap-1.5">
+                                        <i class="w-3.5 h-3.5 text-zinc-500" data-lucide="zap"></i> {{ _('grab_delivery') }}
+                                    </p>
+                                    <p class="text-zinc-400 dark:text-zinc-500 text-xs">{{ _('grab_delivery_sub') }}</p>
+                                </div>
                             </div>
-                        </div>
-                        <span class="text-emerald-600 dark:text-emerald-400 text-xs font-bold">{{ _('confirm_later') }}</span>
-                    </label>
-                </div>
-            </div>
-
-            <!-- Contact Details Form -->
-            <div class="mb-6 space-y-4 border-t border-b border-zinc-100 dark:border-zinc-900 py-6">
-                <!-- Phone Number Field -->
-                <div>
-                    <label for="checkout-phone" class="block text-zinc-550 dark:text-zinc-400 text-xs font-semibold uppercase tracking-wider mb-2">
-                        {{ _('phone_number') }} <span class="text-red-600 dark:text-red-400">*</span>
-                    </label>
-                    <input 
-                        type="tel" 
-                        id="checkout-phone" 
-                        inputmode="numeric"
-                        pattern="[0-9]*"
-                        placeholder="{{ _('phone_placeholder') }}" 
-                        class="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-none py-3 px-4 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-zinc-950 dark:focus:border-zinc-50 transition-all"
-                    >
-                    <p id="error-phone" class="text-red-600 dark:text-red-400 text-xs mt-1.5 hidden"></p>
-                </div>
-
-                <!-- Delivery Address Field -->
-                <div>
-                    <label for="checkout-address" class="block text-zinc-550 dark:text-zinc-400 text-xs font-semibold uppercase tracking-wider mb-2">
-                        {{ _('delivery_address') }} <span class="text-red-600 dark:text-red-400">*</span>
-                    </label>
-                    <textarea 
-                        id="checkout-address" 
-                        rows="2" 
-                        placeholder="{{ _('address_placeholder') }}" 
-                        class="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-none py-3 px-4 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-zinc-950 dark:focus:border-zinc-50 transition-all resize-none"
-                    ></textarea>
-                    <p id="error-address" class="text-red-600 dark:text-red-400 text-xs mt-1.5 hidden"></p>
-                </div>
-
-                <!-- Google Maps Link Field -->
-                <div>
-                    <label for="checkout-maps" class="block text-zinc-550 dark:text-zinc-400 text-xs font-semibold uppercase tracking-wider mb-2">
-                        {{ _('google_maps_link') }}
-                    </label>
-                    <input 
-                        type="text" 
-                        id="checkout-maps" 
-                        placeholder="{{ _('maps_placeholder') }}" 
-                        class="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-none py-3 px-4 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-zinc-950 dark:focus:border-zinc-50 transition-all"
-                    >
-                    <p id="error-maps" class="text-red-600 dark:text-red-400 text-xs mt-1.5 hidden"></p>
+                            <span class="text-emerald-600 dark:text-emerald-400 text-xs font-bold">{{ _('confirm_later') }}</span>
+                        </label>
+                    </div>
                 </div>
 
                 <!-- Voucher Code Field -->
@@ -205,23 +161,95 @@
                     <p id="voucher-success" class="text-emerald-600 dark:text-emerald-400 text-xs mt-1.5 hidden"></p>
                     <p id="error-voucher" class="text-red-600 dark:text-red-400 text-xs mt-1.5 hidden"></p>
                 </div>
+
+                <div class="border-t border-zinc-100 dark:border-zinc-900 pt-4 space-y-3">
+                    <div class="flex justify-between items-center text-sm">
+                        <span class="text-zinc-550 dark:text-zinc-400">{{ _('delivery_fee') }}</span>
+                        <span id="delivery-fee-step1" class="text-zinc-950 dark:text-zinc-100 font-bold">$2.00</span>
+                    </div>
+                    <div class="flex justify-between items-end">
+                        <span class="text-zinc-955 dark:text-zinc-100 font-bold">{{ _('total') }}</span>
+                        <span id="cart-total-step1" class="text-xl font-bold text-zinc-950 dark:text-white">$0.00</span>
+                    </div>
+                </div>
+
+                <button type="button" id="next-step-btn" class="w-full py-4 rounded-none bg-zinc-950 text-white dark:bg-zinc-50 dark:text-zinc-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:opacity-90 active:scale-98 transition-all cursor-pointer border-0">
+                    <span>{{ _('next') }}</span>
+                    <i class="w-4 h-4" data-lucide="arrow-right"></i>
+                </button>
             </div>
 
-            <div class="flex justify-between items-center mb-4 text-sm">
-                <span class="text-zinc-550 dark:text-zinc-400">{{ _('delivery_fee') }}</span>
-                <span id="delivery-fee" class="text-zinc-955 dark:text-zinc-100 font-bold">$2.00</span>
-            </div>
+            <!-- STEP 2 CONTAINER -->
+            <div id="checkout-step-2" class="space-y-5 hidden">
+                <div class="space-y-4">
+                    <!-- Phone Number Field -->
+                    <div>
+                        <label for="checkout-phone" class="block text-zinc-550 dark:text-zinc-400 text-xs font-semibold uppercase tracking-wider mb-2">
+                            {{ _('phone_number') }} <span class="text-red-600 dark:text-red-400">*</span>
+                        </label>
+                        <input 
+                            type="tel" 
+                            id="checkout-phone" 
+                            inputmode="numeric"
+                            pattern="[0-9]*"
+                            placeholder="{{ _('phone_placeholder') }}" 
+                            class="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-none py-3 px-4 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-zinc-900 dark:focus:border-zinc-50 transition-all"
+                        >
+                        <p id="error-phone" class="text-red-600 dark:text-red-400 text-xs mt-1.5 hidden"></p>
+                    </div>
 
-            <div class="border-t border-zinc-100 dark:border-zinc-900 pt-4 flex justify-between items-end">
-                <span class="text-zinc-955 dark:text-zinc-100 font-bold">{{ _('total') }}</span>
-                <span id="cart-total" class="text-xl font-bold text-zinc-955 dark:text-white">$0.00</span>
+                    <!-- Delivery Address Field -->
+                    <div>
+                        <label for="checkout-address" class="block text-zinc-550 dark:text-zinc-400 text-xs font-semibold uppercase tracking-wider mb-2">
+                            {{ _('delivery_address') }} <span class="text-red-600 dark:text-red-400">*</span>
+                        </label>
+                        <textarea 
+                            id="checkout-address" 
+                            rows="2" 
+                            placeholder="{{ _('address_placeholder') }}" 
+                            class="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-none py-3 px-4 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-zinc-900 dark:focus:border-zinc-50 transition-all resize-none"
+                        ></textarea>
+                        <p id="error-address" class="text-red-600 dark:text-red-400 text-xs mt-1.5 hidden"></p>
+                    </div>
+
+                    <!-- Google Maps Link Field -->
+                    <div>
+                        <label for="checkout-maps" class="block text-zinc-550 dark:text-zinc-400 text-xs font-semibold uppercase tracking-wider mb-2">
+                            {{ _('google_maps_link') }}
+                        </label>
+                        <input 
+                            type="text" 
+                            id="checkout-maps" 
+                            placeholder="{{ _('maps_placeholder') }}" 
+                            class="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-none py-3 px-4 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-zinc-900 dark:focus:border-zinc-50 transition-all"
+                        >
+                        <p id="error-maps" class="text-red-600 dark:text-red-400 text-xs mt-1.5 hidden"></p>
+                    </div>
+                </div>
+
+                <div class="border-t border-zinc-100 dark:border-zinc-900 pt-4 space-y-3">
+                    <div class="flex justify-between items-center text-sm">
+                        <span class="text-zinc-550 dark:text-zinc-400">{{ _('delivery_fee') }}</span>
+                        <span id="delivery-fee-step2" class="text-zinc-950 dark:text-zinc-100 font-bold">$2.00</span>
+                    </div>
+                    <div class="flex justify-between items-end">
+                        <span class="text-zinc-950 dark:text-zinc-100 font-bold">{{ _('total') }}</span>
+                        <span id="cart-total-step2" class="text-xl font-bold text-zinc-950 dark:text-white">$0.00</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-2.5">
+                    <button type="button" id="checkout-btn" class="w-full py-4 bg-zinc-950 text-white dark:bg-zinc-50 dark:text-zinc-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer border-0">
+                        <i class="w-4 h-4" data-lucide="send"></i>
+                        <span>{{ _('confirm_order_tg') }}</span>
+                    </button>
+                    <button type="button" id="prev-step-btn" class="w-full py-3 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer rounded-none border-0 active:scale-[0.99] flex items-center justify-center gap-1.5">
+                        <i class="w-3.5 h-3.5" data-lucide="arrow-left"></i>
+                        <span>{{ _('back') }}</span>
+                    </button>
+                </div>
             </div>
         </div>
-
-        <button id="checkout-btn" class="w-full py-4 rounded-none bg-zinc-950 text-white dark:bg-zinc-50 dark:text-zinc-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:opacity-90 active:scale-98 transition-all cursor-pointer">
-            <i class="w-4 h-4" data-lucide="send"></i>
-            {{ _('confirm_order_tg') }}
-        </button>
     </div>
 </div>
 
@@ -286,8 +314,10 @@
         const actionsBox = document.getElementById('cart-actions-box');
         const countBadge = document.getElementById('cart-item-count');
         const subtotalEl = document.getElementById('cart-subtotal');
-        const totalEl = document.getElementById('cart-total');
-        const deliveryFeeEl = document.getElementById('delivery-fee');
+        const totalStep1El = document.getElementById('cart-total-step1');
+        const totalStep2El = document.getElementById('cart-total-step2');
+        const deliveryFeeStep1El = document.getElementById('delivery-fee-step1');
+        const deliveryFeeStep2El = document.getElementById('delivery-fee-step2');
         const checkoutBtn = document.getElementById('checkout-btn');
         const deliveryRadios = document.querySelectorAll('.delivery-radio');
 
@@ -415,14 +445,20 @@
             if (delivery.type === 'standard') {
                 const fee = appliedVoucherCode ? 0 : delivery.fee;
                 finalTotal += fee;
-                deliveryFeeEl.textContent = money(fee);
-                totalEl.textContent = money(finalTotal);
+                if (deliveryFeeStep1El) deliveryFeeStep1El.textContent = money(fee);
+                if (deliveryFeeStep2El) deliveryFeeStep2El.textContent = money(fee);
+                if (totalStep1El) totalStep1El.textContent = money(finalTotal);
+                if (totalStep2El) totalStep2El.textContent = money(finalTotal);
             } else if (delivery.type === 'grab') {
-                deliveryFeeEl.textContent = delivery.feeText;
-                totalEl.textContent = `${money(subtotal)} + Grab`;
+                const text = getLang() === 'km' ? 'គិតតាម Grab' : 'Rate by Grab';
+                if (deliveryFeeStep1El) deliveryFeeStep1El.textContent = text;
+                if (deliveryFeeStep2El) deliveryFeeStep2El.textContent = text;
+                const totalText = `${money(subtotal)} + Grab`;
+                if (totalStep1El) totalStep1El.textContent = totalText;
+                if (totalStep2El) totalStep2El.textContent = totalText;
             }
 
-            subtotalEl.textContent = money(subtotal);
+            if (subtotalEl) subtotalEl.textContent = money(subtotal);
             updateDeliveryUI();
         }
 
@@ -500,18 +536,18 @@
 
                     <div class="flex items-center gap-6 w-full sm:w-auto justify-between sm:justify-end mt-2 sm:mt-0 pt-3 sm:pt-0 border-t border-zinc-100 dark:border-zinc-900 sm:border-0">
                         <div class="flex items-center gap-3">
-                            <button class="qty-btn dec-btn text-zinc-500 hover:text-zinc-955 dark:hover:text-white" data-index="${index}">
+                            <button class="qty-btn dec-btn text-zinc-500 hover:text-zinc-950 dark:hover:text-white" data-index="${index}">
                                 <i class="w-3.5 h-3.5" data-lucide="minus"></i>
                             </button>
                             <span class="text-zinc-900 dark:text-zinc-100 font-semibold text-sm w-6 text-center select-none">
                                 ${quantity}
                             </span>
-                            <button class="qty-btn inc-btn text-zinc-500 hover:text-zinc-955 dark:hover:text-white" data-index="${index}">
+                            <button class="qty-btn inc-btn text-zinc-500 hover:text-zinc-950 dark:hover:text-white" data-index="${index}">
                                 <i class="w-3.5 h-3.5" data-lucide="plus"></i>
                             </button>
                         </div>
 
-                        <button class="remove-btn text-zinc-400 hover:text-zinc-955 dark:text-zinc-600 dark:hover:text-white transition-colors p-2" data-index="${index}">
+                        <button class="remove-btn text-zinc-400 hover:text-zinc-950 dark:text-zinc-600 dark:hover:text-white transition-colors p-2" data-index="${index}">
                             <i class="w-4 h-4" data-lucide="trash-2"></i>
                         </button>
                     </div>
@@ -643,7 +679,35 @@
         }
 
         // Modal triggers
+        function goToStep(step) {
+            const step1 = document.getElementById('checkout-step-1');
+            const step2 = document.getElementById('checkout-step-2');
+            const modalTitle = document.getElementById('checkout-modal-title');
+            const translations = JSON.parse(document.getElementById('translations-json').textContent || '{}');
+            const currentLang = getLang();
+
+            if (step === 1) {
+                if (step2) step2.classList.add('hidden');
+                if (step1) step1.classList.remove('hidden');
+                if (modalTitle) {
+                    modalTitle.textContent = translations[currentLang] && translations[currentLang]['step_1'] ? translations[currentLang]['step_1'] : 'Step 1: Delivery & Promo';
+                }
+            } else if (step === 2) {
+                if (step1) step1.classList.add('hidden');
+                if (step2) step2.classList.remove('hidden');
+                if (modalTitle) {
+                    modalTitle.textContent = translations[currentLang] && translations[currentLang]['step_2'] ? translations[currentLang]['step_2'] : 'Step 2: Contact Info';
+                }
+                
+                const phoneInput = document.getElementById('checkout-phone');
+                if (phoneInput) {
+                    setTimeout(() => phoneInput.focus(), 150);
+                }
+            }
+        }
+
         function showCheckoutModal() {
+            goToStep(1);
             checkoutModal.classList.remove('hidden');
             checkoutModal.offsetHeight; // force reflow
             checkoutModalOverlay.classList.remove('opacity-0');
@@ -701,6 +765,16 @@
         }
         if (checkoutModalOverlay) {
             checkoutModalOverlay.addEventListener('click', hideCheckoutModal);
+        }
+
+        const nextStepBtn = document.getElementById('next-step-btn');
+        if (nextStepBtn) {
+            nextStepBtn.addEventListener('click', () => goToStep(2));
+        }
+
+        const prevStepBtn = document.getElementById('prev-step-btn');
+        if (prevStepBtn) {
+            prevStepBtn.addEventListener('click', () => goToStep(1));
         }
 
         const openClearCartBtn = document.getElementById('open-clear-cart-btn');
