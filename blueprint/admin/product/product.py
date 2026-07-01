@@ -319,6 +319,35 @@ def product_bulk_delete():
         return jsonify({"success": False, "message": "Error deleting products"}), 500
 
 
+@product_bp.route("/admin/product/bulk_status", methods=["POST"])
+def product_bulk_status():
+    from flask import jsonify
+    data = request.get_json() or {}
+    product_ids = data.get("ids", [])
+    status = data.get("status")
+
+    if not product_ids:
+        return jsonify({"success": False, "message": "No products selected"}), 400
+
+    if status not in ["true", "false"]:
+        return jsonify({"success": False, "message": "Invalid status value"}), 400
+
+    try:
+        products = Product.query.filter(Product.id.in_(product_ids)).all()
+        for _product in products:
+            _product.status = status
+
+        db.session.commit()
+        status_label = "Active" if status == "true" else "Inactive"
+        flash(f"Successfully updated {len(products)} products to {status_label}", "success")
+        return jsonify({"success": True, "message": f"Successfully updated {len(products)} products to {status_label}"})
+
+    except Exception as e:
+        db.session.rollback()
+        print("Bulk Status Update Error:", e)
+        return jsonify({"success": False, "message": "Error updating products status"}), 500
+
+
 # ============================================================
 # Product normal gallery images
 # ============================================================

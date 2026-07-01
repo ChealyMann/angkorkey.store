@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, request, jsonify, url_for
-from sqlalchemy.orm import subqueryload, joinedload
+from flask import Blueprint, render_template, request, jsonify, url_for, abort
+from sqlalchemy.orm import subqueryload, joinedload, contains_eager
 from sqlalchemy import func, or_, and_
 from extensions import db
 
@@ -25,7 +25,14 @@ def image_url(filename):
 @home_bp.route("/")
 @home_bp.route("/home")
 def home():
-    products = Product.query.filter_by(status="true").order_by(Product.id.desc()).limit(10).all()
+    products = (
+        Product.query
+        .join(Category, Product.category_id == Category.id)
+        .filter(Product.status == "true", Category.status == "true")
+        .order_by(Product.id.desc())
+        .limit(10)
+        .all()
+    )
     promotions = Promotion.query.filter_by(is_active=True).all()
 
     return render_template(
@@ -51,6 +58,9 @@ def product_detail(product_id):
         subqueryload(Product.option_types)
         .subqueryload(ProductOptionType.variant_type),
     ).get_or_404(product_id)
+
+    if product.status == "false" or (product.category_name and product.category_name.status == "false"):
+        abort(404)
 
     # -------------------------------
     # Default product gallery
@@ -193,18 +203,34 @@ def product_detail(product_id):
     # -------------------------------
     # Related products
     # -------------------------------
-    related_products = Product.query.filter(
-        Product.category_id == product.category_id,
-        Product.id != product.id
-    ).limit(4).all()
+    related_products = (
+        Product.query
+        .join(Category, Product.category_id == Category.id)
+        .filter(
+            Product.category_id == product.category_id,
+            Product.id != product.id,
+            Product.status == "true",
+            Category.status == "true"
+        )
+        .limit(4)
+        .all()
+    )
 
     if len(related_products) < 4:
         needed = 4 - len(related_products)
         excluded_ids = [p.id for p in related_products] + [product.id]
 
-        more_products = Product.query.filter(
-            Product.id.notin_(excluded_ids)
-        ).limit(needed).all()
+        more_products = (
+            Product.query
+            .join(Category, Product.category_id == Category.id)
+            .filter(
+                Product.id.notin_(excluded_ids),
+                Product.status == "true",
+                Category.status == "true"
+            )
+            .limit(needed)
+            .all()
+        )
 
         related_products.extend(more_products)
 
@@ -224,7 +250,7 @@ def cart():
 
 @home_bp.route("/categories")
 def all_categories():
-    categories = Category.query.all()
+    categories = Category.query.filter_by(status="true").all()
 
     return render_template(
         "frontend/pages/all_categories.html",
@@ -236,9 +262,11 @@ def all_categories():
 @home_bp.route("/category/<int:category_id>")
 def products(category_id=None):
     search_query = request.args.get("search", "").strip()
-
     if category_id is None:
         category_id = request.args.get("category_id", type=int)
+
+    if category_id:
+        Category.query.filter_by(id=category_id, status="true").first_or_404()
 
     is_ajax = request.args.get("ajax", type=int)
     page = request.args.get("page", 1, type=int)
@@ -265,10 +293,15 @@ def products(category_id=None):
     # 2. normal product price
     sort_price = func.coalesce(lowest_variant_price, Product.price)
 
-    query = Product.query.options(
-        joinedload(Product.brand),
-        joinedload(Product.category_name),
-        subqueryload(Product.variants)
+    query = (
+        Product.query
+        .join(Category, Product.category_id == Category.id)
+        .filter(Product.status == "true", Category.status == "true")
+        .options(
+            joinedload(Product.brand),
+            contains_eager(Product.category_name),
+            subqueryload(Product.variants)
+        )
     )
 
     if category_id:
@@ -360,7 +393,7 @@ def products(category_id=None):
         response.headers["Cache-Control"] = "public, max-age=3600"
         return response
 
-    categories = Category.query.all()
+    categories = Category.query.filter_by(status="true").all()
 
     return render_template(
         "frontend/pages/products.html",
@@ -426,17 +459,19 @@ def promotions():
         )
     )
 
-    # ------------------------------------------------------------
-    # Main query
-    # Load brand, category, and variants for product card.
-    # ------------------------------------------------------------
-    query = Product.query.options(
-        joinedload(Product.brand),
-        joinedload(Product.category_name),
-        subqueryload(Product.variants)
-    ).filter(
-        Product.status == "true",
-        promotion_condition
+    query = (
+        Product.query
+        .join(Category, Product.category_id == Category.id)
+        .filter(
+            Product.status == "true",
+            Category.status == "true",
+            promotion_condition
+        )
+        .options(
+            joinedload(Product.brand),
+            contains_eager(Product.category_name),
+            subqueryload(Product.variants)
+        )
     )
 
     # ------------------------------------------------------------
@@ -514,6 +549,8 @@ def all_brands():
 @home_bp.route("/brand/<int:brand_id>")
 def brand_products(brand_id):
     brand = Brand.query.get_or_404(brand_id)
+    if brand.status == "false":
+        abort(404)
 
     page = request.args.get("page", 1, type=int)
     per_page = 10
@@ -535,20 +572,28 @@ def brand_products(brand_id):
 
     sort_price = func.coalesce(lowest_variant_price, Product.price)
 
-    pagination = Product.query.options(
-        joinedload(Product.brand),
-        joinedload(Product.category_name),
-        subqueryload(Product.variants)
-    ).filter(
-        Product.brand_id == brand.id,
-        Product.status == "true"
-    ).order_by(
-        sort_price.asc(),
-        Product.id.desc()
-    ).paginate(
-        page=page,
-        per_page=per_page,
-        error_out=False
+    pagination = (
+        Product.query
+        .join(Category, Product.category_id == Category.id)
+        .filter(
+            Product.brand_id == brand.id,
+            Product.status == "true",
+            Category.status == "true"
+        )
+        .options(
+            joinedload(Product.brand),
+            contains_eager(Product.category_name),
+            subqueryload(Product.variants)
+        )
+        .order_by(
+            sort_price.asc(),
+            Product.id.desc()
+        )
+        .paginate(
+            page=page,
+            per_page=per_page,
+            error_out=False
+        )
     )
 
     products = pagination.items
