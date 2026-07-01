@@ -1184,6 +1184,45 @@
             }
         });
 
+        // Telegram WebApp Deep Link start_param Redirect to Product Detail Drawer
+        const urlParams = new URLSearchParams(window.location.search);
+        const startParam = urlParams.get('tgWebAppStartParam') || (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.start_param);
+        if (startParam) {
+            const match = startParam.match(/\d+/);
+            if (match) {
+                const productId = match[0];
+                const productUrl = `/product_detail/${productId}`;
+                
+                window.startLoadingBar();
+                if (drawer && drawerContent) {
+                    drawerContent.innerHTML = SKELETON_TEMPLATE;
+                    drawer.classList.remove('hidden');
+                    drawer.offsetHeight;
+                    drawer.classList.remove('left-full');
+                    drawer.classList.add('left-0');
+                    drawerContent.scrollTo({ top: 0, behavior: 'instant' });
+                    drawerOpen = true;
+                    document.body.style.overflow = 'hidden';
+                    const bottomNav = document.getElementById('bottom-nav-container');
+                    if (bottomNav) {
+                        bottomNav.classList.add('hidden');
+                    }
+                }
+                
+                fetch(productUrl)
+                    .then(res => res.text())
+                    .then(htmlText => {
+                        openDrawer(htmlText);
+                        history.pushState({ isDrawer: true }, '', productUrl);
+                        window.finishLoadingBar();
+                    })
+                    .catch(err => {
+                        console.error('Failed to load deep-linked product:', err);
+                        window.cancelLoadingBar();
+                    });
+            }
+        }
+
         // Register Service Worker for instant loading on slow connections
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

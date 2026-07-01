@@ -103,8 +103,40 @@ def product_list():
             "brand_name": _product.brand.name if _product.brand else "-",
             "image": _product.image or "none.jpg",
             "best_selling": bool(_product.best_selling),
+            "desc": _product.desc or "",
+            "images": list(set(
+                [pi.image for pi in _product.images if pi.image and pi.image != "none.jpg"] +
+                [vi.image for var in _product.variants for vi in var.images if vi.image and vi.image != "none.jpg"]
+            )),
         })
-    return render_template("backend/admin/mobile/product/product.html", output=output)
+    tg_user = Setting.get_val("telegram_username", "Angkorkey_Store")
+    tg_chat = Setting.get_val("telegram_chat_id", "")
+    
+    if tg_chat.startswith("@"):
+        tg_chat_link = f"https://t.me/{tg_chat[1:]}"
+    elif tg_chat.startswith("https://t.me/"):
+        tg_chat_link = tg_chat
+    else:
+        tg_chat_link = f"https://t.me/{tg_chat}" if tg_chat else "https://t.me/Angkorkeyy"
+
+    default_template = (
+        "<b>{name}</b>🔥\n\n"
+        "តម្លៃ {price}$\n\n"
+        "🔗 KEYZ STORE – CONTACT\n"
+        "━━━━━━━━━━━━━━\n"
+        "⚡️ Order: <a href=\"https://t.me/angkorkeywebsite_bot/angkorkey?startapp=product_{id}\">Website</a>\n"
+        "💬 Chat: <a href=\"http://t.me/{telegram_username}\">Admin</a>\n"
+        "👥 Channel: <a href=\"{telegram_chat_link}\">Group</a>"
+    )
+    tg_template = Setting.get_val("telegram_caption_template", default_template)
+
+    return render_template(
+        "backend/admin/mobile/product/product.html",
+        output=output,
+        telegram_username=tg_user,
+        telegram_chat_link=tg_chat_link,
+        telegram_caption_template=tg_template
+    )
 
 @mobile_bp.route("/product/add", methods=["GET", "POST"])
 def product_add():
@@ -218,6 +250,7 @@ def product_fast_image_upload(product_id):
 @mobile_bp.route("/product/telegram/<int:product_id>", methods=["POST"])
 def product_post_telegram(product_id):
     import os
+    import json
     import requests
     product = Product.query.get_or_404(product_id)
     
@@ -232,34 +265,83 @@ def product_post_telegram(product_id):
 
     data = request.get_json() or {}
     caption = data.get("caption", "").strip()
+    selected_images = data.get("selected_images", [])
+    
     if not caption:
         caption = f"<b>{product.name}</b>\n\nPrice: ${product.price:.2f}"
 
     image_dir = current_app.config.get("UPLOAD_FOLDER", "static/images")
-    image_path = os.path.join(image_dir, product.image) if product.image else ""
     
-    url = f"https://api.telegram.org/bot{bot_token}/sendPhoto"
-    payload = {
-        "chat_id": chat_id,
-        "caption": caption,
-        "parse_mode": "HTML"
-    }
-
     try:
-        if image_path and os.path.exists(image_path) and os.path.isfile(image_path) and product.image != "none.jpg":
-            with open(image_path, "rb") as f:
-                res = requests.post(url, data=payload, files={"photo": f}, timeout=15)
-        else:
+        # Check which of the selected images exist
+        valid_images = []
+        for img in selected_images:
+            if img and img != "none.jpg":
+                path = os.path.join(image_dir, img)
+                if os.path.exists(path) and os.path.isfile(path):
+                    valid_images.append(img)
+                    
+        # Send text only if no images selected/valid
+        if not valid_images:
             msg_url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
-            payload["text"] = caption
-            payload.pop("caption", None)
+            payload = {
+                "chat_id": chat_id,
+                "text": caption,
+                "parse_mode": "HTML"
+            }
             res = requests.post(msg_url, data=payload, timeout=15)
-
+        
+        # Send single image if only one valid
+        elif len(valid_images) == 1:
+            url = f"https://api.telegram.org/bot{bot_token}/sendPhoto"
+            payload = {
+                "chat_id": chat_id,
+                "caption": caption,
+                "parse_mode": "HTML"
+            }
+            img_path = os.path.join(image_dir, valid_images[0])
+            with open(img_path, "rb") as f:
+                res = requests.post(url, data=payload, files={"photo": f}, timeout=15)
+                
+        # Send media group (album) if multiple images
+        else:
+            url = f"https://api.telegram.org/bot{bot_token}/sendMediaGroup"
+            media_group = []
+            files_payload = {}
+            opened_files = []
+            
+            for idx, img_name in enumerate(valid_images):
+                attach_key = f"photo_{idx}"
+                media_item = {
+                    "type": "photo",
+                    "media": f"attach://{attach_key}"
+                }
+                # Put the caption on the first item in the group
+                if idx == 0:
+                    media_item["caption"] = caption
+                    media_item["parse_mode"] = "HTML"
+                    
+                media_group.append(media_item)
+                img_path = os.path.join(image_dir, img_name)
+                f = open(img_path, "rb")
+                opened_files.append(f)
+                files_payload[attach_key] = f
+                
+            payload = {
+                "chat_id": chat_id,
+                "media": json.dumps(media_group)
+            }
+            try:
+                res = requests.post(url, data=payload, files=files_payload, timeout=30)
+            finally:
+                for f in opened_files:
+                    f.close()
+                    
         tg_res = res.json()
         if not tg_res.get("ok"):
             error_desc = tg_res.get("description", "Unknown Telegram Error")
             return {"status": "error", "message": f"Telegram API: {error_desc}"}, 400
-        
+            
         return {"status": "success", "message": "Product posted to Telegram channel successfully!"}
     except Exception as e:
         return {"status": "error", "message": f"Connection Error: {str(e)}"}, 500
@@ -918,6 +1000,7 @@ def settings():
         phone2 = request.form.get("phone2", "").strip()
         telegram_bot_token = request.form.get("telegram_bot_token", "").strip()
         telegram_chat_id = request.form.get("telegram_chat_id", "").strip()
+        telegram_caption_template = request.form.get("telegram_caption_template", "").strip()
 
         if telegram_username.startswith("@"):
             telegram_username = telegram_username[1:]
@@ -929,9 +1012,20 @@ def settings():
         Setting.set_val("phone2", phone2)
         Setting.set_val("telegram_bot_token", telegram_bot_token)
         Setting.set_val("telegram_chat_id", telegram_chat_id)
+        Setting.set_val("telegram_caption_template", telegram_caption_template)
 
         flash("Settings updated successfully.", "success")
         return redirect(url_for("mobile.settings"))
+
+    default_template = (
+        "<b>{name}</b>🔥\n\n"
+        "តម្លៃ {price}$\n\n"
+        "🔗 KEYZ STORE – CONTACT\n"
+        "━━━━━━━━━━━━━━\n"
+        "⚡️ Order: <a href=\"https://t.me/angkorkeywebsite_bot/angkorkey?startapp=product_{id}\">Website</a>\n"
+        "💬 Chat: <a href=\"http://t.me/{telegram_username}\">Admin</a>\n"
+        "👥 Channel: <a href=\"{telegram_chat_link}\">Group</a>"
+    )
 
     return render_template(
         "backend/admin/mobile/settings.html",
@@ -942,4 +1036,5 @@ def settings():
         phone2=Setting.get_val("phone2", ""),
         telegram_bot_token=Setting.get_val("telegram_bot_token", ""),
         telegram_chat_id=Setting.get_val("telegram_chat_id", ""),
+        telegram_caption_template=Setting.get_val("telegram_caption_template", default_template),
     )

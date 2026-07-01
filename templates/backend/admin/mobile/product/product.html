@@ -240,6 +240,25 @@
                         </div>
                     </div>
 
+                    <!-- Multi-Image Selection Gallery -->
+                    <div v-if="tgAvailableImages.length > 0" class="mb-3">
+                        <label class="keyz-label mb-1.5" style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Select Images ({[ tgSelectedImages.length ]}/{[ tgAvailableImages.length ]})</label>
+                        <div class="d-flex gap-2 overflow-x-auto pb-2" style="scrollbar-width: thin; -webkit-overflow-scrolling: touch;">
+                            <div v-for="(img, idx) in tgAvailableImages" :key="idx" 
+                                 class="position-relative cursor-pointer rounded-3 border overflow-hidden" 
+                                 style="width: 60px; height: 60px; flex-shrink: 0; border-color: var(--border-light) !important;"
+                                 @click="toggleImageSelection(img)">
+                                <img :src="'/static/images/' + img" class="w-100 h-100" style="object-fit: cover;">
+                                
+                                <!-- Selection Overlay Indicator -->
+                                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" 
+                                     :style="tgSelectedImages.includes(img) ? 'background: rgba(36, 161, 222, 0.15);' : 'background: rgba(0,0,0,0.55);'">
+                                    <i v-if="tgSelectedImages.includes(img)" class="fa-solid fa-circle-check text-primary font-16 bg-white rounded-circle shadow-sm" style="color: #24A1DE !important;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Editable caption area -->
                     <div class="mb-2">
                         <label class="keyz-label mb-1">Message Caption (HTML Supported)</label>
@@ -265,6 +284,7 @@
     const productsData = {{ output|tojson }};
     const telegramUsername = {{ telegram_username|tojson }};
     const telegramChatLink = {{ telegram_chat_link|tojson }};
+    const telegramCaptionTemplate = {{ telegram_caption_template|tojson }};
     const { createApp, ref, computed } = Vue;
 
     createApp({
@@ -276,8 +296,9 @@
             const searchQuery = ref('');
             const tgSelectedProduct = ref(null);
             const tgCaption = ref('');
+            const tgAvailableImages = ref([]);
+            const tgSelectedImages = ref([]);
             const sendingTg = ref(false);
-            const tgModalInstance = ref(null);
             const showFilters = ref(false);
             const selectedIds = ref([]);
             
@@ -515,18 +536,47 @@
                 return Array.from(doc.body.childNodes).map(cleanNode).join('').trim();
             };
 
+            const toggleImageSelection = (img) => {
+                const idx = tgSelectedImages.value.indexOf(img);
+                if (idx > -1) {
+                    tgSelectedImages.value.splice(idx, 1);
+                } else {
+                    tgSelectedImages.value.push(img);
+                }
+            };
+
             const openTelegramModal = (product) => {
                 tgSelectedProduct.value = product;
+                
+                tgAvailableImages.value = [];
+                tgSelectedImages.value = [];
+                
+                if (product.image && product.image !== 'none.jpg') {
+                    tgAvailableImages.value.push(product.image);
+                    tgSelectedImages.value.push(product.image);
+                }
+                if (product.images && Array.isArray(product.images)) {
+                    product.images.forEach(img => {
+                        if (img && img !== 'none.jpg' && !tgAvailableImages.value.includes(img)) {
+                            tgAvailableImages.value.push(img);
+                            if (tgSelectedImages.value.length < 3) {
+                                tgSelectedImages.value.push(img);
+                            }
+                        }
+                    });
+                }
+                
                 const cleanDesc = cleanHtmlForTelegram(product.desc);
                 
-                tgCaption.value = `<b>${product.name}</b>🔥\n\n` +
-                                  (cleanDesc ? `including:\n\n${cleanDesc}\n\n` : '') +
-                                  `តម្លៃ ${Math.round(product.price)}$` + `\n\n` +
-                                  `🔗 KEYZ STORE – CONTACT\n` +
-                                  `━━━━━━━━━━━━━━\n` +
-                                  `⚡️ Order: <a href="https://t.me/angkorkeywebsite_bot/angkorkey">Website</a>\n` +
-                                  `💬 Chat: <a href="http://t.me/${telegramUsername}">Admin</a>\n` +
-                                  `👥 Channel: <a href="${telegramChatLink}">Group</a>`;
+                // Compile the template dynamically
+                let rendered = telegramCaptionTemplate
+                    .replaceAll('{name}', product.name)
+                    .replaceAll('{price}', Math.round(product.price))
+                    .replaceAll('{telegram_username}', telegramUsername)
+                    .replaceAll('{telegram_chat_link}', telegramChatLink)
+                    .replaceAll('{desc}', cleanDesc);
+                
+                tgCaption.value = rendered;
             };
 
             const sendToTelegram = () => {
@@ -536,7 +586,10 @@
                 fetch('/admin/mobile/product/telegram/' + tgSelectedProduct.value.id, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ caption: tgCaption.value })
+                    body: JSON.stringify({ 
+                        caption: tgCaption.value,
+                        selected_images: tgSelectedImages.value
+                    })
                 })
                 .then(r => r.json())
                 .then(data => {
@@ -601,6 +654,9 @@
                 uploadFastImage,
                 tgSelectedProduct,
                 tgCaption,
+                tgAvailableImages,
+                tgSelectedImages,
+                toggleImageSelection,
                 sendingTg,
                 openTelegramModal,
                 sendToTelegram

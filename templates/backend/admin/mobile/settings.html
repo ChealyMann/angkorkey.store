@@ -60,6 +60,12 @@
                 <input type="text" name="telegram_chat_id" class="form-control keyz-input" placeholder="e.g. @angkorkey_store or -100..." value="{{ telegram_chat_id }}">
                 <span class="text-muted font-10 mt-1 d-block">Make sure your bot is an Administrator in the channel.</span>
             </div>
+
+            <div class="mb-3">
+                <label class="keyz-label">Telegram Caption Template</label>
+                <textarea name="telegram_caption_template" class="form-control keyz-input font-12" rows="6" placeholder="Configure the default post formatting..." style="height: auto !important; line-height: 1.5;">{{ telegram_caption_template }}</textarea>
+                <span class="text-muted font-10 mt-1 d-block">Supported Placeholders: <code>{name}</code>, <code>{price}</code>, <code>{telegram_username}</code>, <code>{telegram_chat_link}</code>, <code>{desc}</code></span>
+            </div>
         </div>
 
         <!-- Sticky Footer -->
