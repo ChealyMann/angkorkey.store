@@ -118,7 +118,7 @@
                         <a :href="'/admin/mobile/product/variant/' + product.id" class="btn btn-outline-custom btn-sm font-12 py-2 flex-fill" style="border-radius: 8px; font-weight: 500;">
                             <i class="fa-solid fa-layer-group me-1"></i> Variant
                         </a>
-                        <button type="button" class="btn btn-outline-primary btn-sm font-12 py-2 flex-fill d-flex align-items-center justify-content-center" style="border-radius: 8px; font-weight: 500; color: #24A1DE; border-color: #24A1DE;" @click="openTelegramModal(product)">
+                        <button type="button" class="btn btn-outline-primary btn-sm font-12 py-2 flex-fill d-flex align-items-center justify-content-center" style="border-radius: 8px; font-weight: 500; color: #24A1DE; border-color: #24A1DE;" data-bs-toggle="modal" data-bs-target="#telegramPostModal" @click="openTelegramModal(product)">
                             <i class="fa-brands fa-telegram me-1"></i> Telegram
                         </button>
                         <button @click="deleteProduct(product.id)" class="btn btn-outline-danger btn-sm font-12 py-2" style="border-radius: 8px; width: 42px;">
@@ -215,7 +215,6 @@
                 <button type="button" class="btn btn-dark flex-fill py-2.5 font-14 fw-bold" style="border-radius: 8px;" data-bs-dismiss="offcanvas">
                     Apply Filters
                 </button>
-            </div>
         </div>
     </div>
 </div>
@@ -257,6 +256,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <!-- Import Vue.js CDN -->
@@ -464,12 +464,6 @@
                                   `Brand: ${product.brand_name}\n\n` +
                                   `💵 Price: <b>$${product.price.toFixed(2)}</b>\n\n` +
                                   `🛍️ Order yours today!`;
-                
-                const el = document.getElementById('telegramPostModal');
-                if (el) {
-                    tgModalInstance.value = new bootstrap.Modal(el);
-                    tgModalInstance.value.show();
-                }
             };
 
             const sendToTelegram = () => {
@@ -484,9 +478,11 @@
                 .then(r => r.json())
                 .then(data => {
                     sendingTg.value = false;
-                    if (tgModalInstance.value) {
-                        tgModalInstance.value.hide();
-                    }
+                    
+                    // Native modal dismiss trigger
+                    const closeBtn = document.querySelector('#telegramPostModal .btn-close');
+                    if (closeBtn) closeBtn.click();
+                    
                     if (data.status === 'success') {
                         Swal.fire({
                             title: 'ជោគជ័យ',
@@ -509,9 +505,9 @@
                 })
                 .catch(err => {
                     sendingTg.value = false;
-                    if (tgModalInstance.value) {
-                        tgModalInstance.value.hide();
-                    }
+                    const closeBtn = document.querySelector('#telegramPostModal .btn-close');
+                    if (closeBtn) closeBtn.click();
+                    
                     Swal.fire({
                         title: 'បរាជ័យ',
                         text: 'Network error occurred',
