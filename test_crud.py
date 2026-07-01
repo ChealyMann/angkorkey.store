@@ -164,6 +164,20 @@ def test_crud():
         assert prod.name == 'Test Product Mobile Edited', "Product edit not in database"
         print(" -> Product Update: PASS")
 
+        # Fast Image Upload
+        res = client.post(f'/admin/mobile/product/fast-image-upload/{prod.id}', data={
+            'image': (io.BytesIO(b"dummy image content"), 'fast_test.jpg')
+        }, follow_redirects=True)
+        assert res.status_code == 200, "Fast image upload failed"
+        import json
+        resp_data = json.loads(res.data)
+        assert resp_data['status'] == 'success', "Fast image upload response status not success"
+        assert resp_data['filename'] is not None, "Fast image upload did not return new filename"
+        
+        prod = Product.query.get(prod.id)
+        assert prod.image == resp_data['filename'], "Product image in database did not update"
+        print(" -> Product Fast Image Upload: PASS")
+
         # ------------------------------------------------------------
         # Test 4: User CRUD
         # ------------------------------------------------------------

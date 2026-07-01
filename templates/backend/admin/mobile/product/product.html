@@ -62,10 +62,25 @@
                             <input type="checkbox" :value="product.id" v-model="selectedIds" class="form-check-input border-secondary" style="width: 20px; height: 20px; border-radius: 4px;">
                         </div>
 
-                        <!-- Image -->
-                        <div class="position-relative">
+                        <!-- Image with fast upload helper -->
+                        <div class="position-relative" style="cursor: pointer;" @click="triggerFastUpload(product.id)">
                             <img :src="'/static/images/' + product.image" class="rounded-3 border" style="width: 72px; height: 72px; object-fit: cover; border-color: var(--border-light) !important;">
+                            
+                            <!-- Edit badge overlay -->
+                            <span class="badge bg-dark text-white position-absolute bottom-0 end-0 m-1 p-1 d-flex align-items-center justify-content-center" style="width: 18px; height: 18px; border-radius: 50%; opacity: 0.85; box-shadow: 0 1px 4px rgba(0,0,0,0.25); font-size: 8px;">
+                                <i class="fa-solid fa-camera"></i>
+                            </span>
+                            
+                            <!-- Best selling badge -->
                             <span v-if="product.best_selling" class="badge bg-warning text-dark position-absolute top-0 start-0 m-1 font-10 px-1.5 py-0.5" style="border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.1);"><i class="fa-solid fa-star"></i></span>
+                            
+                            <!-- Uploading spinner overlay -->
+                            <div v-if="product.uploading" class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-75 rounded-3 d-flex align-items-center justify-content-center">
+                                <span class="spinner-border spinner-border-sm text-white" role="status"></span>
+                            </div>
+
+                            <!-- Hidden file input -->
+                            <input type="file" :id="'fast-upload-input-' + product.id" style="display: none;" accept="image/*" @change="uploadFastImage($event, product)">
                         </div>
 
                         <!-- Info details -->
@@ -213,7 +228,7 @@
             delimiters: ['{[', ']}']
         },
         setup() {
-            const products = ref(productsData);
+            const products = ref(productsData.map(p => ({ ...p, uploading: false })));
             const searchQuery = ref('');
             const showFilters = ref(false);
             const selectedIds = ref([]);
@@ -343,6 +358,59 @@
                 });
             };
 
+            const triggerFastUpload = (productId) => {
+                const el = document.getElementById('fast-upload-input-' + productId);
+                if (el) el.click();
+            };
+
+            const uploadFastImage = (event, product) => {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                product.uploading = true;
+                const formData = new FormData();
+                formData.append('image', file);
+
+                fetch('/admin/mobile/product/fast-image-upload/' + product.id, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(r => r.json())
+                .then(data => {
+                    product.uploading = false;
+                    if (data.status === 'success') {
+                        product.image = data.filename;
+                        Swal.fire({
+                            title: 'ជោគជ័យ',
+                            text: 'រូបភាពត្រូវបានផ្លាស់ប្តូរដោយជោគជ័យ!',
+                            icon: 'success',
+                            background: "var(--bg-card)",
+                            color: "var(--text-main)",
+                            showConfirmButton: false,
+                            timer: 1200
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'បរាជ័យ',
+                            text: data.message || 'Error uploading image',
+                            icon: 'error',
+                            background: "var(--bg-card)",
+                            color: "var(--text-main)"
+                        });
+                    }
+                })
+                .catch(err => {
+                    product.uploading = false;
+                    Swal.fire({
+                        title: 'បរាជ័យ',
+                        text: 'Network error occurred',
+                        icon: 'error',
+                        background: "var(--bg-card)",
+                        color: "var(--text-main)"
+                    });
+                });
+            };
+
             return {
                 searchQuery,
                 showFilters,
@@ -358,7 +426,9 @@
                 clearAllFilters,
                 deleteProduct,
                 bulkStatus,
-                bulkDelete
+                bulkDelete,
+                triggerFastUpload,
+                uploadFastImage
             };
         }
     }).mount('#app');

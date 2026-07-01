@@ -186,6 +186,35 @@ def product_delete(product_id):
     flash("Product deleted successfully!", "success")
     return redirect(url_for("mobile.product_list"))
 
+@mobile_bp.route("/product/fast-image-upload/<int:product_id>", methods=["POST"])
+def product_fast_image_upload(product_id):
+    product = Product.query.get_or_404(product_id)
+    if "image" not in request.files:
+        return {"status": "error", "message": "No file uploaded"}, 400
+    
+    file = request.files["image"]
+    if not file or file.filename == "":
+        return {"status": "error", "message": "No selected file"}, 400
+
+    allowed_exts = current_app.config.get("ALLOWED_EXTENSIONS", {'png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp', 'avif'})
+    ext = file.filename.rsplit(".", 1)[-1].lower() if "." in file.filename else ""
+    if ext not in allowed_exts:
+        return {"status": "error", "message": f"Extension .{ext} not allowed"}, 400
+
+    # Save new image and delete old files
+    delete_image_files(product.image)
+    upload_dir = current_app.config.get("UPLOAD_FOLDER", "static/images")
+    unique_filename = save_image(file, upload_dir, allowed_exts)
+    
+    product.image = str(unique_filename)
+    db.session.commit()
+    
+    return {
+        "status": "success",
+        "message": "Image updated successfully!",
+        "filename": unique_filename
+    }
+
 @mobile_bp.route("/product/bulk_status", methods=["POST"])
 def bulk_status():
     data = request.get_json() or {}
