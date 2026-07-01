@@ -252,27 +252,27 @@ def product_post_telegram(product_id):
     import os
     import json
     import requests
-    product = Product.query.get_or_404(product_id)
-    
-    bot_token = Setting.get_val("telegram_bot_token", "").strip()
-    chat_id = Setting.get_val("telegram_chat_id", "").strip()
-    
-    if not bot_token or not chat_id:
-        return {
-            "status": "error",
-            "message": "Please configure Telegram Bot Token and Chat ID in Settings first."
-        }, 400
-
-    data = request.get_json() or {}
-    caption = data.get("caption", "").strip()
-    selected_images = data.get("selected_images", [])
-    
-    if not caption:
-        caption = f"<b>{product.name}</b>\n\nPrice: ${product.price:.2f}"
-
-    image_dir = current_app.config.get("UPLOAD_FOLDER", "static/images")
     
     try:
+        product = Product.query.get_or_404(product_id)
+        
+        bot_token = (Setting.get_val("telegram_bot_token") or "").strip()
+        chat_id = (Setting.get_val("telegram_chat_id") or "").strip()
+        
+        if not bot_token or not chat_id:
+            return {
+                "status": "error",
+                "message": "Please configure Telegram Bot Token and Chat ID in Settings first."
+            }, 400
+
+        data = request.get_json() or {}
+        caption = data.get("caption", "").strip()
+        selected_images = data.get("selected_images", [])
+        
+        if not caption:
+            caption = f"<b>{product.name}</b>\n\nPrice: ${product.price:.2f}"
+
+        image_dir = current_app.config.get("UPLOAD_FOLDER", "static/images")
         # Check which of the selected images exist
         valid_images = []
         for img in selected_images:
