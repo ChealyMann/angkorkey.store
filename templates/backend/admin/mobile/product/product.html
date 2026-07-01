@@ -263,6 +263,8 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
 <script>
     const productsData = {{ output|tojson }};
+    const telegramUsername = {{ telegram_username|tojson }};
+    const telegramChatLink = {{ telegram_chat_link|tojson }};
     const { createApp, ref, computed } = Vue;
 
     createApp({
@@ -457,13 +459,74 @@
                 });
             };
 
+            const cleanHtmlForTelegram = (html) => {
+                if (!html) return '';
+                let text = html
+                    .replace(/<div[^>]*>/gi, '')
+                    .replace(/<\/div>/gi, '\n')
+                    .replace(/<p[^>]*>/gi, '')
+                    .replace(/<\/p>/gi, '\n')
+                    .replace(/<br\s*\/?>/gi, '\n')
+                    .replace(/<li[^>]*>/gi, '- ')
+                    .replace(/<\/li>/gi, '\n')
+                    .replace(/<ul[^>]*>/gi, '')
+                    .replace(/<\/ul>/gi, '\n')
+                    .replace(/<ol[^>]*>/gi, '')
+                    .replace(/<\/ol>/gi, '\n');
+
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(text, 'text/html');
+                
+                const cleanNode = (node) => {
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        return node.nodeValue;
+                    }
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        const tagName = node.tagName.toLowerCase();
+                        const childrenContent = Array.from(node.childNodes).map(cleanNode).join('');
+                        
+                        if (['b', 'strong'].includes(tagName)) {
+                            return `<b>${childrenContent}</b>`;
+                        }
+                        if (['i', 'em'].includes(tagName)) {
+                            return `<i>${childrenContent}</i>`;
+                        }
+                        if (['u', 'ins'].includes(tagName)) {
+                            return `<u>${childrenContent}</u>`;
+                        }
+                        if (['s', 'strike', 'del'].includes(tagName)) {
+                            return `<s>${childrenContent}</s>`;
+                        }
+                        if (tagName === 'code') {
+                            return `<code>${childrenContent}</code>`;
+                        }
+                        if (tagName === 'pre') {
+                            return `<pre>${childrenContent}</pre>`;
+                        }
+                        if (tagName === 'a') {
+                            const href = node.getAttribute('href') || '';
+                            return `<a href="${href}">${childrenContent}</a>`;
+                        }
+                        return childrenContent;
+                    }
+                    return '';
+                };
+
+                return Array.from(doc.body.childNodes).map(cleanNode).join('').trim();
+            };
+
             const openTelegramModal = (product) => {
                 tgSelectedProduct.value = product;
-                tgCaption.value = `<b>${product.name}</b>\n\n` +
-                                  `Category: ${product.category_name}\n` +
-                                  `Brand: ${product.brand_name}\n\n` +
-                                  `💵 Price: <b>$${product.price.toFixed(2)}</b>\n\n` +
-                                  `🛍️ Order yours today!`;
+                const cleanDesc = cleanHtmlForTelegram(product.desc);
+                
+                tgCaption.value = `<b>${product.name}</b>🔥\n\n` +
+                                  (cleanDesc ? `including:\n\n${cleanDesc}\n\n` : '') +
+                                  `តម្លៃ ${Math.round(product.price)}$` + `\n\n` +
+                                  `🔗 KEYZ STORE – CONTACT\n` +
+                                  `━━━━━━━━━━━━━━\n` +
+                                  `⚡️ Order: <a href="https://t.me/angkorkeywebsite_bot/angkorkey">Website</a>\n` +
+                                  `💬 Chat: <a href="http://t.me/${telegramUsername}">Admin</a>\n` +
+                                  `👥 Channel: <a href="${telegramChatLink}">Group</a>`;
             };
 
             const sendToTelegram = () => {
