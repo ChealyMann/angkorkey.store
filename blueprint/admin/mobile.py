@@ -25,6 +25,14 @@ from Webp import save_picture
 
 mobile_bp = Blueprint("mobile", __name__, url_prefix="/admin/mobile")
 
+@mobile_bp.context_processor
+def inject_bottom_nav_visibility():
+    endpoint = request.endpoint or ""
+    hide = False
+    if endpoint.startswith("mobile.") and any(suffix in endpoint for suffix in ["_add", "_edit", "add_image", "variant_settings", "variant_add", "variant_edit", "bulk_best_seller"]):
+        hide = True
+    return dict(hide_bottom_nav=hide)
+
 # ============================================================
 # Helpers
 # ============================================================
