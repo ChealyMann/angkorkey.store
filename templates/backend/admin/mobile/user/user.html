@@ -1,0 +1,102 @@
+{% extends 'backend/admin/mobile/mobile_master.html' %}
+
+{% block main %}
+<div class="mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="fw-bold font-16 mb-1 text-main">Users</h3>
+            <span class="text-muted font-11">Manage admin and staff accounts</span>
+        </div>
+    </div>
+
+    <!-- User Cards List -->
+    <div class="row g-3">
+        {% for user in users %}
+        <div class="col-12">
+            <div class="card shadow-sm border mb-0" style="border-radius: 12px;">
+                <div class="card-body p-3">
+                    <div class="d-flex align-items-start gap-3">
+                        <img src="{{ url_for('static', filename='images/' + user.image) if user.image else url_for('static', filename='images/none.jpg') }}" alt="{{ user.username }}" class="rounded-3 border" style="width: 50px; height: 50px; object-fit: cover; border-color: var(--border-light) !important;">
+                        
+                        <div class="flex-grow-1 min-w-0">
+                            <h6 class="mb-1 fw-bold font-14 text-truncate text-main">{{ user.username }}</h6>
+                            <p class="text-muted font-11 mb-0"><i class="fa-solid fa-phone me-1"></i> {{ user.phone or '-' }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="d-flex justify-content-end gap-2 border-top mt-3 pt-3" style="border-color: var(--border-light) !important;">
+                        <a href="{{ url_for('mobile.user_edit', user_id=user.id) }}" class="btn btn-outline-dark btn-sm flex-fill py-2" style="border-radius: 8px; font-weight: 500;">
+                            <i class="fa-solid fa-pen-to-square me-1"></i> Edit
+                        </a>
+
+                        {% if user.username != 'chealy' %}
+                        <form action="{{ url_for('mobile.user_delete', user_id=user.id) }}" method="post" class="m-0 flex-fill">
+                            <button type="button" class="btn btn-outline-danger btn-sm w-100 py-2 btn-delete-user" style="border-radius: 8px; font-weight: 500;">
+                                <i class="fa-solid fa-trash-can me-1"></i> Delete
+                            </button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12 text-center py-5 text-muted border rounded-3 bg-white" style="border-style: dashed !important; border-color: var(--border-light) !important; background-color: var(--bg-card) !important;">
+            <i class="fa-solid fa-users mb-3" style="font-size: 2.2rem; color: var(--border-light);"></i>
+            <p class="mb-0 font-12">No user accounts created yet</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Floating Action Button (FAB) -->
+    <a href="{{ url_for('mobile.user_add') }}" class="btn-fab">
+        <i class="fa-solid fa-plus"></i>
+    </a>
+</div>
+
+<script>
+    document.querySelectorAll('.btn-delete-user').forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            const form = this.closest('form');
+            Swal.fire({
+                title: "តើអ្នកប្រាកដទេ?",
+                text: "គណនីអ្នកប្រើប្រាស់នេះនឹងត្រូវលុបជាអចិន្ត្រៃយ៍!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#000000",
+                cancelButtonColor: "#e2e8f0",
+                confirmButtonText: "លុប",
+                cancelButtonText: "<span style='color:#0f172a'>បោះបង់</span>",
+                background: "var(--bg-card)",
+                color: "var(--text-main)"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<script>
+    {% for category, message in messages %}
+        Swal.fire({
+            title: '{{ "ជោគជ័យ" if category == "success" else "បរាជ័យ" }}',
+            text: '{{ message }}',
+            icon: '{{ "error" if category == "error" else category }}',
+            showConfirmButton: false,
+            timer: 1800,
+            timerProgressBar: true,
+            background: "var(--bg-card)",
+            color: "var(--text-main)"
+        });
+    {% endfor %}
+</script>
+{% endif %}
+{% endwith %}
+
+{% endblock %}

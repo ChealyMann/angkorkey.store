@@ -1,0 +1,89 @@
+{% extends 'backend/admin/mobile/mobile_master.html' %}
+
+{% block main %}
+<div class="mb-4">
+    <div class="d-flex align-items-center gap-3 border rounded-3 p-3 shadow-sm mb-4" style="background-color: var(--bg-card) !important; border-color: var(--border-light) !important;">
+        <img src="{{ url_for('static', filename='logo/logo.jpg') }}" alt="Logo" class="rounded-circle" style="width: 48px; height: 48px; object-fit: cover;">
+        <div>
+            <h4 class="mb-0 fw-bold font-16 text-main">សួស្តី, Chealy!</h4>
+            <span class="text-muted font-12">Welcome to your store control center</span>
+        </div>
+    </div>
+
+    <!-- Quick Stats Grid -->
+    <h6 class="text-muted text-uppercase fw-bold font-12 mb-3" style="letter-spacing: 0.05em;">Store Overview</h6>
+    <div class="row g-3 mb-4">
+        <div class="col-6">
+            <div class="card h-100 p-3">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="text-muted font-11 fw-bold text-uppercase">Products</span>
+                    <span class="badge badge-custom-light p-2"><i class="fa-solid fa-box text-primary"></i></span>
+                </div>
+                <h3 class="mb-0 fw-bold font-16 text-main">{{ total_products }}</h3>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card h-100 p-3">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="text-muted font-11 fw-bold text-uppercase">Categories</span>
+                    <span class="badge badge-custom-light p-2"><i class="fa-solid fa-tags text-success"></i></span>
+                </div>
+                <h3 class="mb-0 fw-bold font-16 text-main">{{ total_categories }}</h3>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card h-100 p-3">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="text-muted font-11 fw-bold text-uppercase">Brands</span>
+                    <span class="badge badge-custom-light p-2"><i class="fa-solid fa-copyright text-warning"></i></span>
+                </div>
+                <h3 class="mb-0 fw-bold font-16 text-main">{{ total_brands }}</h3>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card h-100 p-3">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="text-muted font-11 fw-bold text-uppercase">Users</span>
+                    <span class="badge badge-custom-light p-2"><i class="fa-solid fa-users text-danger"></i></span>
+                </div>
+                <h3 class="mb-0 fw-bold font-16 text-main">{{ total_users }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions List -->
+    <h6 class="text-muted text-uppercase fw-bold font-12 mb-3" style="letter-spacing: 0.05em;">Quick Actions</h6>
+    <div class="list-group list-group-custom rounded-3 border shadow-sm">
+        <a href="{{ url_for('mobile.product_add') }}" class="list-group-item list-group-item-custom list-group-item-action d-flex align-items-center justify-content-between py-3 border-0 border-bottom">
+            <div class="d-flex align-items-center gap-3">
+                <span class="d-flex align-items-center justify-content-center badge-custom-light rounded-circle" style="width: 36px; height: 36px;"><i class="fa-solid fa-plus text-main"></i></span>
+                <div>
+                    <h6 class="mb-0 font-14 fw-bold text-main">Add New Product</h6>
+                    <span class="text-muted font-11">Create new inventory items</span>
+                </div>
+            </div>
+            <i class="fa-solid fa-chevron-right text-muted font-12"></i>
+        </a>
+        <a href="{{ url_for('mobile.bulk_best_seller') }}" class="list-group-item list-group-item-custom list-group-item-action d-flex align-items-center justify-content-between py-3 border-0 border-bottom">
+            <div class="d-flex align-items-center gap-3">
+                <span class="d-flex align-items-center justify-content-center badge-custom-light rounded-circle" style="width: 36px; height: 36px;"><i class="fa-solid fa-star text-warning"></i></span>
+                <div>
+                    <h6 class="mb-0 font-14 fw-bold text-main">Manage Best Sellers</h6>
+                    <span class="text-muted font-11">Feature your top items</span>
+                </div>
+            </div>
+            <i class="fa-solid fa-chevron-right text-muted font-12"></i>
+        </a>
+        <a href="{{ url_for('mobile.variant_settings') }}" class="list-group-item list-group-item-custom list-group-item-action d-flex align-items-center justify-content-between py-3 border-0">
+            <div class="d-flex align-items-center gap-3">
+                <span class="d-flex align-items-center justify-content-center badge-custom-light rounded-circle" style="width: 36px; height: 36px;"><i class="fa-solid fa-gear text-main"></i></span>
+                <div>
+                    <h6 class="mb-0 font-14 fw-bold text-main">Variant Settings</h6>
+                    <span class="text-muted font-11">Manage colors, sizes, and attributes</span>
+                </div>
+            </div>
+            <i class="fa-solid fa-chevron-right text-muted font-12"></i>
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'backend/admin/mobile/mobile_master.html' %}
+
+{% block main %}
+<div class="mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="fw-bold font-16 mb-1 text-main">Best Sellers</h3>
+            <span class="text-muted font-11">Bulk manage best selling items</span>
+        </div>
+        <a href="{{ url_for('mobile.product_list') }}" class="btn btn-link text-decoration-none text-muted font-12 p-0">
+            <i class="fa-solid fa-arrow-left me-1"></i> Back
+        </a>
+    </div>
+
+    <form action="{{ url_for('mobile.bulk_best_seller') }}" method="POST">
+        <div class="card p-3 mb-4">
+            <h6 class="text-muted text-uppercase fw-bold font-11 mb-2">Instructions</h6>
+            <p class="font-12 text-muted mb-0">Check the items you want to feature as best sellers on the storefront, and then click Save.</p>
+        </div>
+
+        <div class="row g-2 mb-5">
+            {% for product in products %}
+            <div class="col-12">
+                <label class="w-100 m-0 card p-3 shadow-sm border cursor-pointer" style="border-radius: 12px; background-color: var(--bg-card);">
+                    <div class="d-flex align-items-center gap-3">
+                        <input type="checkbox" name="selected_ids" value="{{ product.id }}" {% if product.best_selling %}checked{% endif %} class="form-check-input border-secondary" style="width: 20px; height: 20px; border-radius: 4px;">
+                        
+                        <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}" class="rounded-3 border" style="width: 48px; height: 48px; object-fit: cover; border-color: var(--border-light) !important;">
+                        
+                        <div class="flex-grow-1 min-w-0">
+                            <h6 class="mb-0 fw-bold font-14 text-truncate text-main">{{ product.name }}</h6>
+                            <div class="text-muted font-11">${{ "%.2f"|format(product.price) }}</div>
+                        </div>
+                    </div>
+                </label>
+            </div>
+            {% else %}
+            <div class="col-12 text-center py-5 text-muted border rounded-3 bg-white" style="border-style: dashed !important; border-color: var(--border-light) !important; background-color: var(--bg-card) !important;">
+                <i class="fa-solid fa-box-open mb-3" style="font-size: 2.2rem; color: var(--border-light);"></i>
+                <p class="mb-0 font-12">No products in inventory yet</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Sticky save button -->
+        <div class="form-sticky-footer d-flex gap-3">
+            <a href="{{ url_for('mobile.product_list') }}" class="btn btn-outline-dark flex-fill d-flex align-items-center justify-content-center" style="border-radius: 8px; height: 48px; font-weight: 500;">
+                Cancel
+            </a>
+            <button type="submit" class="btn btn-dark flex-fill" style="border-radius: 8px; height: 48px; font-weight: 600;">
+                Save Best Sellers
+            </button>
+        </div>
+    </form>
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<script>
+    {% for category, message in messages %}
+        Swal.fire({
+            title: '{{ "ជោគជ័យ" if category == "success" else "បរាជ័យ" }}',
+            text: '{{ message }}',
+            icon: '{{ "error" if category == "error" else category }}',
+            showConfirmButton: false,
+            timer: 1800,
+            timerProgressBar: true,
+            background: "var(--bg-card)",
+            color: "var(--text-main)"
+        });
+    {% endfor %}
+</script>
+{% endif %}
+{% endwith %}
+
+{% endblock %}

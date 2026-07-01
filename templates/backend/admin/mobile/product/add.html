@@ -1,0 +1,90 @@
+{% extends 'backend/admin/mobile/mobile_master.html' %}
+
+{% block main %}
+<div class="mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="fw-bold font-16 mb-1 text-main">Add Product</h3>
+            <span class="text-muted font-11">Create new inventory items</span>
+        </div>
+        <a href="{{ url_for('mobile.product_list') }}" class="btn btn-link text-decoration-none text-muted font-12 p-0">
+            <i class="fa-solid fa-arrow-left me-1"></i> Back
+        </a>
+    </div>
+
+    <form action="{{ url_for('mobile.product_add') }}" method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="card p-3 mb-4">
+            <h6 class="text-muted text-uppercase fw-bold font-11 mb-3">1. Product Information</h6>
+            
+            <div class="mb-3">
+                <label class="keyz-label">Product Name *</label>
+                {{ form.name(class="form-control keyz-input", placeholder="Enter name") }}
+            </div>
+
+            <div class="mb-3">
+                <label class="keyz-label">Description</label>
+                {{ form.desc(class="form-control keyz-input", style="height: 100px !important;", placeholder="Enter description") }}
+            </div>
+
+            <div class="row g-2">
+                <div class="col-6">
+                    <label class="keyz-label">Category</label>
+                    {{ form.category(class="form-select keyz-input") }}
+                </div>
+                <div class="col-6">
+                    <label class="keyz-label">Brand</label>
+                    {{ form.brand(class="form-select keyz-input") }}
+                </div>
+            </div>
+        </div>
+
+        <div class="card p-3 mb-4">
+            <h6 class="text-muted text-uppercase fw-bold font-11 mb-3">2. Pricing & Status</h6>
+
+            <div class="row g-2 mb-3">
+                <div class="col-6">
+                    <label class="keyz-label">Price *</label>
+                    {{ form.price(class="form-control keyz-input", type="number", step="0.01", placeholder="8.99") }}
+                </div>
+                <div class="col-6">
+                    <label class="keyz-label">Cost</label>
+                    {{ form.cost(class="form-control keyz-input", type="number", step="0.01", placeholder="5.00") }}
+                </div>
+                <div class="col-12">
+                    <label class="keyz-label">Old Price</label>
+                    {{ form.old_price(class="form-control keyz-input", type="number", step="0.01", placeholder="10.99") }}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="keyz-label">Status</label>
+                {{ form.status(class="form-select keyz-input") }}
+            </div>
+
+            <div class="form-check form-switch pt-2">
+                {{ form.best_selling(class="form-check-input", role="switch", id="bestSellingSwitch") }}
+                <label class="form-check-label font-14 text-main ms-2" for="bestSellingSwitch">Best Selling Product</label>
+            </div>
+        </div>
+
+        <div class="card p-3 mb-5">
+            <h6 class="text-muted text-uppercase fw-bold font-11 mb-3">3. Main Thumbnail Image</h6>
+            <div class="mb-3">
+                {{ form.image(class="form-control keyz-input", type="file", accept="image/*") }}
+            </div>
+        </div>
+
+        <!-- Mobile Sticky Action Footer -->
+        <div class="form-sticky-footer d-flex gap-3">
+            <a href="{{ url_for('mobile.product_list') }}" class="btn btn-outline-dark flex-fill d-flex align-items-center justify-content-center" style="border-radius: 8px; height: 48px; font-weight: 500;">
+                Cancel
+            </a>
+            <button type="submit" class="btn btn-dark flex-fill" style="border-radius: 8px; height: 48px; font-weight: 600;">
+                Save Product
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

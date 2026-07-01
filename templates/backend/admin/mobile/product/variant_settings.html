@@ -1,0 +1,168 @@
+{% extends 'backend/admin/mobile/mobile_master.html' %}
+
+{% block main %}
+<div class="mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="fw-bold font-16 mb-1 text-main">Option Types</h3>
+            <span class="text-muted font-11">Manage variant types and values</span>
+        </div>
+        <a href="{{ url_for('mobile.product_list') }}" class="btn btn-link text-decoration-none text-muted font-12 p-0">
+            <i class="fa-solid fa-arrow-left me-1"></i> Back
+        </a>
+    </div>
+
+    <!-- Tab options bar -->
+    <div class="d-flex gap-2 mb-4">
+        <button class="btn btn-outline-dark btn-sm flex-fill font-12 py-2" onclick="history.back()" style="border-radius: 8px;">
+            Back to Product Variants
+        </button>
+        <a href="{{ url_for('mobile.variant_settings') }}" class="btn btn-dark btn-sm flex-fill font-12 py-2" style="border-radius: 8px;">
+            Option Types Settings
+        </a>
+    </div>
+
+    <!-- Create Variant Type form -->
+    <div class="card p-3 mb-4">
+        <h6 class="text-muted text-uppercase fw-bold font-11 mb-3">Add Option Type</h6>
+        <form action="{{ url_for('mobile.variant_settings') }}" method="POST">
+            <input type="hidden" name="action" value="add_type">
+            <div class="input-group">
+                <input type="text" name="name" class="form-control keyz-input" placeholder="e.g. Storage, Material" required style="height: 44px !important;">
+                <button type="submit" class="btn btn-dark px-3" style="border-radius: 0 8px 8px 0; font-size: 0.9rem;">Add</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Option types list -->
+    <h6 class="text-muted text-uppercase fw-bold font-12 mb-3" style="letter-spacing: 0.05em;">Existing Types & Options</h6>
+    {% for vt in variant_types %}
+    <div class="card p-3 mb-3">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+                <h5 class="mb-0 fw-bold font-14 text-main">{{ vt.name }}</h5>
+                <span class="text-muted font-10">Slug: {{ vt.slug }}</span>
+            </div>
+            
+            <form action="{{ url_for('mobile.variant_settings') }}" method="POST" class="m-0">
+                <input type="hidden" name="action" value="delete_type">
+                <input type="hidden" name="type_id" value="{{ vt.id }}">
+                <button type="button" class="btn btn-outline-danger btn-sm btn-delete-type" style="border-radius: 6px; padding: 4px 10px; font-size: 0.75rem;">
+                    <i class="fa-solid fa-trash-can"></i> Delete Type
+                </button>
+            </form>
+        </div>
+
+        <!-- Add Option value to this type -->
+        <form action="{{ url_for('mobile.variant_settings') }}" method="POST" class="mb-3">
+            <input type="hidden" name="action" value="add_option">
+            <input type="hidden" name="type_id" value="{{ vt.id }}">
+            <div class="row g-2">
+                <div class="col-8">
+                    <input type="text" name="value" class="form-control keyz-input" placeholder="Value (e.g. 128GB, Silk)" required style="height: 40px !important; padding: 0.5rem 0.8rem !important; font-size: 0.85rem !important;">
+                </div>
+                <div class="col-4">
+                    <input type="text" name="meta" class="form-control keyz-input" placeholder="Meta (e.g. #ffffff)" style="height: 40px !important; padding: 0.5rem 0.8rem !important; font-size: 0.85rem !important;">
+                </div>
+                <div class="col-12 text-end">
+                    <button type="submit" class="btn btn-outline-dark btn-sm w-100" style="border-radius: 6px; height: 36px; font-weight: 500;">+ Add Value</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Display tag values -->
+        <div class="d-flex flex-wrap gap-2 pt-2 border-top" style="border-color: var(--border-light) !important;">
+            {% for opt in vt.options %}
+            <div class="badge bg-light text-dark border d-inline-flex align-items-center gap-2 p-2 font-12" style="border-radius: 6px; font-weight: 500;">
+                {% if vt.slug == 'color' and opt.meta %}
+                <span class="color-dot m-0" style="background-color: {{ opt.meta }};"></span>
+                {% endif %}
+                {{ opt.value }}
+                
+                <form action="{{ url_for('mobile.variant_settings') }}" method="POST" class="d-inline m-0">
+                    <input type="hidden" name="action" value="delete_option">
+                    <input type="hidden" name="option_id" value="{{ opt.id }}">
+                    <button type="button" class="btn btn-link p-0 text-danger border-0 font-12 btn-delete-option" style="text-decoration: none; vertical-align: middle;"><i class="fa-solid fa-xmark"></i></button>
+                </form>
+            </div>
+            {% else %}
+            <span class="text-muted font-11">No option values added yet</span>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <div class="text-center py-5 text-muted border rounded-3 bg-white" style="border-style: dashed !important; border-color: var(--border-light) !important; background-color: var(--bg-card) !important;">
+        <i class="fa-solid fa-gear mb-3" style="font-size: 2.2rem; color: var(--border-light);"></i>
+        <p class="mb-0 font-12">No option types created yet</p>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    document.querySelectorAll('.btn-delete-type').forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            const form = this.closest('form');
+            Swal.fire({
+                title: "តើអ្នកប្រាកដទេ?",
+                text: "Option type នេះ និងតម្លៃទាំងអស់របស់វានឹងត្រូវលុបចោល!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#dc3545",
+                cancelButtonColor: "#e2e8f0",
+                confirmButtonText: "លុប",
+                cancelButtonText: "<span style='color:#0f172a'>បោះបង់</span>",
+                background: "var(--bg-card)",
+                color: "var(--text-main)"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    });
+
+    document.querySelectorAll('.btn-delete-option').forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            const form = this.closest('form');
+            Swal.fire({
+                title: "តើអ្នកប្រាកដទេ?",
+                text: "តម្លៃ option នេះនឹងត្រូវលុបចោល!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#000000",
+                cancelButtonColor: "#e2e8f0",
+                confirmButtonText: "លុប",
+                cancelButtonText: "<span style='color:#0f172a'>បោះបង់</span>",
+                background: "var(--bg-card)",
+                color: "var(--text-main)"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<script>
+    {% for category, message in messages %}
+        Swal.fire({
+            title: '{{ "ជោគជ័យ" if category == "success" else "បរាជ័យ" }}',
+            text: '{{ message }}',
+            icon: '{{ "error" if category == "error" else category }}',
+            showConfirmButton: false,
+            timer: 1800,
+            timerProgressBar: true,
+            background: "var(--bg-card)",
+            color: "var(--text-main)"
+        });
+    {% endfor %}
+</script>
+{% endif %}
+{% endwith %}
+
+{% endblock %}

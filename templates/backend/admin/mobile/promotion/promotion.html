@@ -1,0 +1,106 @@
+{% extends 'backend/admin/mobile/mobile_master.html' %}
+
+{% block main %}
+<div class="mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="fw-bold font-16 mb-1 text-main">Banners</h3>
+            <span class="text-muted font-11">Manage storefront promotions & banners</span>
+        </div>
+    </div>
+
+    <!-- Banner Cards List -->
+    <div class="row g-3">
+        {% for promo in promotions %}
+        <div class="col-12">
+            <div class="card shadow-sm border mb-0" style="border-radius: 12px;">
+                <div class="card-body p-3">
+                    <div class="d-flex align-items-start gap-3">
+                        <img src="{{ url_for('static', filename='images/' + promo.image) }}" alt="{{ promo.title }}" class="rounded-3 border" style="width: 72px; height: 48px; object-fit: cover; border-color: var(--border-light) !important;">
+                        
+                        <div class="flex-grow-1 min-w-0">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <h6 class="mb-0 fw-bold font-14 text-truncate text-main">{{ promo.title }}</h6>
+                                <span class="badge font-10 {% if promo.is_active %}bg-success-subtle text-success border border-success{% else %}bg-danger-subtle text-danger border border-danger{% endif %}" style="border-radius: 6px; padding: 2px 6px;">
+                                    {{ 'Active' if promo.is_active else 'Inactive' }}
+                                </span>
+                            </div>
+                            <p class="text-muted font-11 text-truncate mb-1">{{ promo.subtitle or 'No subtitle' }}</p>
+                            <p class="text-muted font-10 mb-0"><i class="fa-solid fa-link me-1"></i> {{ promo.link or '-' }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="d-flex justify-content-end gap-2 border-top mt-3 pt-3" style="border-color: var(--border-light) !important;">
+                        <a href="{{ url_for('mobile.promotion_edit', promotion_id=promo.id) }}" class="btn btn-outline-dark btn-sm flex-fill py-2" style="border-radius: 8px; font-weight: 500;">
+                            <i class="fa-solid fa-pen-to-square me-1"></i> Edit
+                        </a>
+
+                        <form action="{{ url_for('mobile.promotion_delete', promotion_id=promo.id) }}" method="post" class="m-0 flex-fill">
+                            <button type="button" class="btn btn-outline-danger btn-sm w-100 py-2 btn-delete-banner" style="border-radius: 8px; font-weight: 500;">
+                                <i class="fa-solid fa-trash-can me-1"></i> Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12 text-center py-5 text-muted border rounded-3 bg-white" style="border-style: dashed !important; border-color: var(--border-light) !important; background-color: var(--bg-card) !important;">
+            <i class="fa-solid fa-images mb-3" style="font-size: 2.2rem; color: var(--border-light);"></i>
+            <p class="mb-0 font-12">No promotional banners yet</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Floating Action Button (FAB) -->
+    <a href="{{ url_for('mobile.promotion_add') }}" class="btn-fab">
+        <i class="fa-solid fa-plus"></i>
+    </a>
+</div>
+
+<script>
+    document.querySelectorAll('.btn-delete-banner').forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            const form = this.closest('form');
+            Swal.fire({
+                title: "តើអ្នកប្រាកដទេ?",
+                text: "Banner នេះនឹងត្រូវលុបជាអចិន្ត្រៃយ៍!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#000000",
+                cancelButtonColor: "#e2e8f0",
+                confirmButtonText: "លុប",
+                cancelButtonText: "<span style='color:#0f172a'>បោះបង់</span>",
+                background: "var(--bg-card)",
+                color: "var(--text-main)"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<script>
+    {% for category, message in messages %}
+        Swal.fire({
+            title: '{{ "ជោគជ័យ" if category == "success" else "បរាជ័យ" }}',
+            text: '{{ message }}',
+            icon: '{{ "error" if category == "error" else category }}',
+            showConfirmButton: false,
+            timer: 1800,
+            timerProgressBar: true,
+            background: "var(--bg-card)",
+            color: "var(--text-main)"
+        });
+    {% endfor %}
+</script>
+{% endif %}
+{% endwith %}
+
+{% endblock %}

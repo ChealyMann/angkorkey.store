@@ -1,0 +1,77 @@
+{% extends 'backend/admin/mobile/mobile_master.html' %}
+
+{% block main %}
+<div class="mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="fw-bold font-16 mb-1 text-main">General Settings</h3>
+            <span class="text-muted font-11">Configure store links and contacts</span>
+        </div>
+    </div>
+
+    <form action="{{ url_for('mobile.settings') }}" method="POST">
+        <div class="card p-3 mb-4">
+            <h6 class="text-muted text-uppercase fw-bold font-11 mb-3">1. Social Links</h6>
+            
+            <div class="mb-3">
+                <label class="keyz-label">Telegram Username</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light border text-muted">@</span>
+                    <input type="text" name="telegram_username" class="form-control keyz-input" placeholder="Username" value="{{ telegram_username }}" style="border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important;">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="keyz-label">Facebook Page URL</label>
+                <input type="url" name="facebook_url" class="form-control keyz-input" placeholder="https://facebook.com/page" value="{{ facebook_url }}">
+            </div>
+
+            <div class="mb-3">
+                <label class="keyz-label">TikTok Profile URL</label>
+                <input type="url" name="tiktok_url" class="form-control keyz-input" placeholder="https://tiktok.com/@username" value="{{ tiktok_url }}">
+            </div>
+        </div>
+
+        <div class="card p-3 mb-5">
+            <h6 class="text-muted text-uppercase fw-bold font-11 mb-3">2. Contact Numbers</h6>
+
+            <div class="mb-3">
+                <label class="keyz-label">Primary Phone</label>
+                <input type="tel" name="phone1" class="form-control keyz-input" placeholder="e.g. 012 345 678" value="{{ phone1 }}">
+            </div>
+
+            <div class="mb-3">
+                <label class="keyz-label">Secondary Phone</label>
+                <input type="tel" name="phone2" class="form-control keyz-input" placeholder="e.g. 098 765 432" value="{{ phone2 }}">
+            </div>
+        </div>
+
+        <!-- Sticky Footer -->
+        <div class="form-sticky-footer d-flex gap-3">
+            <button type="submit" class="btn btn-dark w-100" style="border-radius: 8px; height: 48px; font-weight: 600;">
+                Save Settings
+            </button>
+        </div>
+    </form>
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<script>
+    {% for category, message in messages %}
+        Swal.fire({
+            title: '{{ "ជោគជ័យ" if category == "success" else "បរាជ័យ" }}',
+            text: '{{ message }}',
+            icon: '{{ "error" if category == "error" else category }}',
+            showConfirmButton: false,
+            timer: 1800,
+            timerProgressBar: true,
+            background: "var(--bg-card)",
+            color: "var(--text-main)"
+        });
+    {% endfor %}
+</script>
+{% endif %}
+{% endwith %}
+
+{% endblock %}

@@ -18,6 +18,7 @@ from blueprint.admin.category.category import category_bp
 from blueprint.admin.user.user import user_bp
 from blueprint.admin.promotion.promotion import promotion_bp
 from blueprint.admin.voucher.voucher import voucher_bp
+from blueprint.admin.mobile import mobile_bp
 
 from models import User, Category, Brand, Setting
 from translations import TRANSLATIONS
@@ -97,6 +98,7 @@ app.register_blueprint(user_bp)
 app.register_blueprint(promotion_bp)
 app.register_blueprint(brand_bp)
 app.register_blueprint(voucher_bp)
+app.register_blueprint(mobile_bp)
 
 # ------------------------------------------------------------
 # Database Auto-Initialization for deploys (e.g. Render)

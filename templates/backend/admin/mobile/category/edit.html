@@ -1,0 +1,60 @@
+{% extends 'backend/admin/mobile/mobile_master.html' %}
+
+{% block main %}
+<div class="mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="fw-bold font-16 mb-1 text-main">Edit Category</h3>
+            <span class="text-muted font-11">Editing Category: {{ category.name }}</span>
+        </div>
+        <a href="{{ url_for('mobile.category_list') }}" class="btn btn-link text-decoration-none text-muted font-12 p-0">
+            <i class="fa-solid fa-arrow-left me-1"></i> Back
+        </a>
+    </div>
+
+    <form action="{{ url_for('mobile.category_edit', category_id=category.id) }}" method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="card p-3 mb-4">
+            <div class="mb-3">
+                <label class="keyz-label">Category Name *</label>
+                {{ form.name(class="form-control keyz-input", placeholder="Enter category name") }}
+            </div>
+
+            <div class="mb-3">
+                <label class="keyz-label">Description</label>
+                {{ form.desc(class="form-control keyz-input", style="height: 100px !important;", placeholder="Enter description") }}
+            </div>
+
+            <div class="mb-3">
+                <label class="keyz-label">Status</label>
+                {{ form.status(class="form-select keyz-input") }}
+            </div>
+        </div>
+
+        <div class="card p-3 mb-5">
+            <h6 class="text-muted text-uppercase fw-bold font-11 mb-3">Thumbnail Image</h6>
+            <div class="d-flex align-items-center gap-3 mb-3">
+                <img src="{{ url_for('static', filename='images/' + category.image) }}" alt="Old Thumbnail" class="rounded-3 border" style="width: 60px; height: 60px; object-fit: cover;">
+                <div>
+                    <span class="text-muted font-11 d-block">Current Image</span>
+                    <span class="text-main font-12 fw-semibold text-break">{{ category.image }}</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                {{ form.image(class="form-control keyz-input", type="file", accept="image/*") }}
+            </div>
+        </div>
+
+        <!-- Sticky Footer -->
+        <div class="form-sticky-footer d-flex gap-3">
+            <a href="{{ url_for('mobile.category_list') }}" class="btn btn-outline-dark flex-fill d-flex align-items-center justify-content-center" style="border-radius: 8px; height: 48px; font-weight: 500;">
+                Cancel
+            </a>
+            <button type="submit" class="btn btn-dark flex-fill" style="border-radius: 8px; height: 48px; font-weight: 600;">
+                Update Category
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
