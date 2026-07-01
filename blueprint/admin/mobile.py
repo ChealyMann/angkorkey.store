@@ -120,13 +120,15 @@ def product_list():
         tg_chat_link = f"https://t.me/{tg_chat}" if tg_chat else "https://t.me/Angkorkeyy"
 
     default_template = (
-        "<b>{name}</b>🔥\n\n"
-        "តម្លៃ {price}$\n\n"
-        "🔗 KEYZ STORE – CONTACT\n"
+        "╭━━━ 🎯 <b>NEW PRODUCT</b> ━━━╮\n\n"
+        "✨ <b>{name}</b>\n\n"
+        "💰 <b>Price:</b> <code>{price}$</code>\n\n"
         "━━━━━━━━━━━━━━\n"
-        "⚡️ Order: <a href=\"https://t.me/angkorkeywebsite_bot/angkorkey?startapp=product_{id}\">Website</a>\n"
-        "💬 Chat: <a href=\"http://t.me/{telegram_username}\">Admin</a>\n"
-        "👥 Channel: <a href=\"{telegram_chat_link}\">Group</a>"
+        "🛒 <b>Order Now</b>\n"
+        "⚡️ <a href=\"https://t.me/angkorkeywebsite_bot/angkorkey?startapp=product_{id}\">Visit Website</a>\n\n"
+        "💬 <b>Contact Admin</b>\n"
+        "👉 <a href=\"http://t.me/{telegram_username}\">Click Here</a>\n\n"
+        "╰━━━━━━━━━━━━━━━━━━━╯"
     )
     tg_template = Setting.get_val("telegram_caption_template", default_template)
 
@@ -1059,13 +1061,15 @@ def settings():
         return redirect(url_for("mobile.settings"))
 
     default_template = (
-        "<b>{name}</b>🔥\n\n"
-        "តម្លៃ {price}$\n\n"
-        "🔗 KEYZ STORE – CONTACT\n"
+        "╭━━━ 🎯 <b>NEW PRODUCT</b> ━━━╮\n\n"
+        "✨ <b>{name}</b>\n\n"
+        "💰 <b>Price:</b> <code>{price}$</code>\n\n"
         "━━━━━━━━━━━━━━\n"
-        "⚡️ Order: <a href=\"https://t.me/angkorkeywebsite_bot/angkorkey?startapp=product_{id}\">Website</a>\n"
-        "💬 Chat: <a href=\"http://t.me/{telegram_username}\">Admin</a>\n"
-        "👥 Channel: <a href=\"{telegram_chat_link}\">Group</a>"
+        "🛒 <b>Order Now</b>\n"
+        "⚡️ <a href=\"https://t.me/angkorkeywebsite_bot/angkorkey?startapp=product_{id}\">Visit Website</a>\n\n"
+        "💬 <b>Contact Admin</b>\n"
+        "👉 <a href=\"http://t.me/{telegram_username}\">Click Here</a>\n\n"
+        "╰━━━━━━━━━━━━━━━━━━━╯"
     )
 
     return render_template(
