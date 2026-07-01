@@ -34,6 +34,7 @@
     </script>
 
     <!-- External Scripts & Fonts -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
     <script>
@@ -641,6 +642,12 @@
         const pageCache = {};
         const scrollCache = {};
         let currentLang = localStorage.getItem('lang') || document.documentElement.getAttribute('lang') || 'en';
+
+        // Initialize Telegram WebApp SDK if loaded inside Telegram
+        if (window.Telegram && window.Telegram.WebApp) {
+            window.Telegram.WebApp.ready();
+            window.Telegram.WebApp.expand();
+        }
 
         // Top Loading Progress Bar Controller
         let loadingProgressInterval;
