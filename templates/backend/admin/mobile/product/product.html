@@ -591,7 +591,24 @@
                         selected_images: tgSelectedImages.value
                     })
                 })
-                .then(r => r.json())
+                .then(async r => {
+                    const text = await r.text();
+                    let errMsg = `HTTP Error ${r.status}`;
+                    try {
+                        const parsed = JSON.parse(text);
+                        if (parsed.message) errMsg = parsed.message;
+                    } catch(e) {
+                        if (text && text.length < 150) errMsg = text;
+                    }
+                    if (!r.ok) {
+                        throw new Error(errMsg);
+                    }
+                    try {
+                        return JSON.parse(text);
+                    } catch(e) {
+                        throw new Error("Invalid server response format");
+                    }
+                })
                 .then(data => {
                     sendingTg.value = false;
                     
@@ -626,7 +643,7 @@
                     
                     Swal.fire({
                         title: 'បរាជ័យ',
-                        text: 'Network error occurred',
+                        text: err.message || 'Network error occurred',
                         icon: 'error',
                         background: "var(--bg-card)",
                         color: "var(--text-main)"
