@@ -77,9 +77,9 @@ self.addEventListener('fetch', (event) => {
       })
     );
   } else {
-    // Network-first with 2-second timeout fallback to cache for dynamic content (F5/refreshes)
+    // Network-first with 10-second timeout fallback to cache for dynamic content (F5/refreshes)
     const timeoutPromise = new Promise((_, reject) => {
-      setTimeout(() => reject(new Error('Network timeout')), 2000);
+      setTimeout(() => reject(new Error('Network timeout')), 10000);
     });
 
     event.respondWith(
