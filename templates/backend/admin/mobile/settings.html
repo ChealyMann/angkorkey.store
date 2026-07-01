@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <div class="card p-3 mb-5">
+        <div class="card p-3 mb-4">
             <h6 class="text-muted text-uppercase fw-bold font-11 mb-3">2. Contact Numbers</h6>
 
             <div class="mb-3">
@@ -43,6 +43,22 @@
             <div class="mb-3">
                 <label class="keyz-label">Secondary Phone</label>
                 <input type="tel" name="phone2" class="form-control keyz-input" placeholder="e.g. 098 765 432" value="{{ phone2 }}">
+            </div>
+        </div>
+
+        <div class="card p-3 mb-5">
+            <h6 class="text-muted text-uppercase fw-bold font-11 mb-3">3. Telegram Channel Autopost</h6>
+            
+            <div class="mb-3">
+                <label class="keyz-label">Telegram Bot Token</label>
+                <input type="password" name="telegram_bot_token" class="form-control keyz-input" placeholder="e.g. 123456789:ABCDefGh..." value="{{ telegram_bot_token }}">
+                <span class="text-muted font-10 mt-1 d-block">Create a bot using @BotFather to get this token.</span>
+            </div>
+
+            <div class="mb-3">
+                <label class="keyz-label">Telegram Channel/Group Chat ID</label>
+                <input type="text" name="telegram_chat_id" class="form-control keyz-input" placeholder="e.g. @angkorkey_store or -100..." value="{{ telegram_chat_id }}">
+                <span class="text-muted font-10 mt-1 d-block">Make sure your bot is an Administrator in the channel.</span>
             </div>
         </div>
 

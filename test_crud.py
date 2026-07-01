@@ -178,6 +178,34 @@ def test_crud():
         assert prod.image == resp_data['filename'], "Product image in database did not update"
         print(" -> Product Fast Image Upload: PASS")
 
+        # Test Telegram Post - without config (should return 400)
+        res = client.post(f'/admin/mobile/product/telegram/{prod.id}', json={
+            'caption': 'Test Telegram Post'
+        })
+        assert res.status_code == 400, "Should fail without config"
+        resp_data = json.loads(res.data)
+        assert resp_data['status'] == 'error'
+        assert "configure Telegram" in resp_data['message']
+        print(" -> Telegram Post Config Validation: PASS")
+
+        # Test Telegram Post - with dummy config (should fail on invalid token)
+        from models.Setting import Setting
+        Setting.set_val("telegram_bot_token", "123456:DummyToken")
+        Setting.set_val("telegram_chat_id", "@dummy_channel")
+        
+        res = client.post(f'/admin/mobile/product/telegram/{prod.id}', json={
+            'caption': 'Test Telegram Post'
+        })
+        assert res.status_code == 400, "Should return 400 for invalid token"
+        resp_data = json.loads(res.data)
+        assert resp_data['status'] == 'error'
+        assert "Telegram API" in resp_data['message']
+        print(" -> Telegram API Communication: PASS")
+
+        # Cleanup dummy settings
+        Setting.query.filter(Setting.key.in_(['telegram_bot_token', 'telegram_chat_id'])).delete(synchronize_session=False)
+        db.session.commit()
+
         # ------------------------------------------------------------
         # Test 4: User CRUD
         # ------------------------------------------------------------

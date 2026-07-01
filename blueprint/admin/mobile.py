@@ -215,6 +215,55 @@ def product_fast_image_upload(product_id):
         "filename": unique_filename
     }
 
+@mobile_bp.route("/product/telegram/<int:product_id>", methods=["POST"])
+def product_post_telegram(product_id):
+    import os
+    import requests
+    product = Product.query.get_or_404(product_id)
+    
+    bot_token = Setting.get_val("telegram_bot_token", "").strip()
+    chat_id = Setting.get_val("telegram_chat_id", "").strip()
+    
+    if not bot_token or not chat_id:
+        return {
+            "status": "error",
+            "message": "Please configure Telegram Bot Token and Chat ID in Settings first."
+        }, 400
+
+    data = request.get_json() or {}
+    caption = data.get("caption", "").strip()
+    if not caption:
+        caption = f"<b>{product.name}</b>\n\nPrice: ${product.price:.2f}"
+
+    image_dir = current_app.config.get("UPLOAD_FOLDER", "static/images")
+    image_path = os.path.join(image_dir, product.image) if product.image else ""
+    
+    url = f"https://api.telegram.org/bot{bot_token}/sendPhoto"
+    payload = {
+        "chat_id": chat_id,
+        "caption": caption,
+        "parse_mode": "HTML"
+    }
+
+    try:
+        if image_path and os.path.exists(image_path) and os.path.isfile(image_path) and product.image != "none.jpg":
+            with open(image_path, "rb") as f:
+                res = requests.post(url, data=payload, files={"photo": f}, timeout=15)
+        else:
+            msg_url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+            payload["text"] = caption
+            payload.pop("caption", None)
+            res = requests.post(msg_url, data=payload, timeout=15)
+
+        tg_res = res.json()
+        if not tg_res.get("ok"):
+            error_desc = tg_res.get("description", "Unknown Telegram Error")
+            return {"status": "error", "message": f"Telegram API: {error_desc}"}, 400
+        
+        return {"status": "success", "message": "Product posted to Telegram channel successfully!"}
+    except Exception as e:
+        return {"status": "error", "message": f"Connection Error: {str(e)}"}, 500
+
 @mobile_bp.route("/product/bulk_status", methods=["POST"])
 def bulk_status():
     data = request.get_json() or {}
@@ -867,6 +916,8 @@ def settings():
         tiktok_url = request.form.get("tiktok_url", "").strip()
         phone1 = request.form.get("phone1", "").strip()
         phone2 = request.form.get("phone2", "").strip()
+        telegram_bot_token = request.form.get("telegram_bot_token", "").strip()
+        telegram_chat_id = request.form.get("telegram_chat_id", "").strip()
 
         if telegram_username.startswith("@"):
             telegram_username = telegram_username[1:]
@@ -876,6 +927,8 @@ def settings():
         Setting.set_val("tiktok_url", tiktok_url)
         Setting.set_val("phone1", phone1)
         Setting.set_val("phone2", phone2)
+        Setting.set_val("telegram_bot_token", telegram_bot_token)
+        Setting.set_val("telegram_chat_id", telegram_chat_id)
 
         flash("Settings updated successfully.", "success")
         return redirect(url_for("mobile.settings"))
@@ -887,4 +940,6 @@ def settings():
         tiktok_url=Setting.get_val("tiktok_url", ""),
         phone1=Setting.get_val("phone1", ""),
         phone2=Setting.get_val("phone2", ""),
+        telegram_bot_token=Setting.get_val("telegram_bot_token", ""),
+        telegram_chat_id=Setting.get_val("telegram_chat_id", ""),
     )
