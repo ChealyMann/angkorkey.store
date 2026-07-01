@@ -125,8 +125,8 @@ def product_add():
             old_price=float(form.old_price.data or 0),
             status=form.status.data,
             best_selling=form.best_selling.data,
-            category_id=form.category.data if form.category.data else None,
-            brand_id=form.brand.data if form.brand.data else None
+            category_id=form.category.data.id if form.category.data else None,
+            brand_id=form.brand.data.id if form.brand.data else None
         )
         db.session.add(product)
         db.session.commit()
@@ -153,8 +153,8 @@ def product_edit(product_id):
         product.old_price = float(form.old_price.data or 0)
         product.status = form.status.data.strip()
         product.best_selling = form.best_selling.data
-        product.category_id = form.category.data if form.category.data else None
-        product.brand_id = form.brand.data if form.brand.data else None
+        product.category_id = form.category.data.id if form.category.data else None
+        product.brand_id = form.brand.data.id if form.brand.data else None
 
         db.session.commit()
         flash("Product updated successfully!", "success")
@@ -168,8 +168,8 @@ def product_edit(product_id):
         form.old_price.data = product.old_price
         form.status.data = product.status
         form.best_selling.data = product.best_selling
-        form.category.data = product.category_id
-        form.brand.data = product.brand_id
+        form.category.data = product.category_name
+        form.brand.data = product.brand
 
     return render_template("backend/admin/mobile/product/edit.html", form=form, product=product)
 
