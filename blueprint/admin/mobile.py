@@ -251,8 +251,30 @@ def product_fast_image_upload(product_id):
 def product_post_telegram(product_id):
     import os
     import json
-    import requests
+    import urllib.request
+    import urllib.parse
+    import urllib.error
     
+    def encode_multipart(fields, files):
+        boundary = b'----WebKitFormBoundary7MA4YWxkTrZu0gW'
+        lines = []
+        for key, val in fields.items():
+            lines.append(b'--' + boundary)
+            lines.append(f'Content-Disposition: form-data; name="{key}"'.encode('utf-8'))
+            lines.append(b'')
+            lines.append(str(val).encode('utf-8'))
+        for key, (filename, file_content) in files.items():
+            lines.append(b'--' + boundary)
+            lines.append(f'Content-Disposition: form-data; name="{key}"; filename="{filename}"'.encode('utf-8'))
+            lines.append(b'Content-Type: image/jpeg')
+            lines.append(b'')
+            lines.append(file_content)
+        lines.append(b'--' + boundary + b'--')
+        lines.append(b'')
+        body = b'\r\n'.join(lines)
+        headers = {'Content-Type': f'multipart/form-data; boundary={boundary.decode("utf-8")}'}
+        return headers, body
+
     try:
         product = Product.query.get_or_404(product_id)
         
@@ -273,6 +295,7 @@ def product_post_telegram(product_id):
             caption = f"<b>{product.name}</b>\n\nPrice: ${product.price:.2f}"
 
         image_dir = current_app.config.get("UPLOAD_FOLDER", "static/images")
+        
         # Check which of the selected images exist
         valid_images = []
         for img in selected_images:
@@ -283,32 +306,43 @@ def product_post_telegram(product_id):
                     
         # Send text only if no images selected/valid
         if not valid_images:
-            msg_url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+            url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
             payload = {
                 "chat_id": chat_id,
                 "text": caption,
                 "parse_mode": "HTML"
             }
-            res = requests.post(msg_url, data=payload, timeout=15)
+            encoded_data = urllib.parse.urlencode(payload).encode("utf-8")
+            req = urllib.request.Request(url, data=encoded_data, method="POST")
+            with urllib.request.urlopen(req, timeout=15) as response:
+                tg_res = json.loads(response.read().decode("utf-8"))
         
         # Send single image if only one valid
         elif len(valid_images) == 1:
             url = f"https://api.telegram.org/bot{bot_token}/sendPhoto"
-            payload = {
+            fields = {
                 "chat_id": chat_id,
                 "caption": caption,
                 "parse_mode": "HTML"
             }
             img_path = os.path.join(image_dir, valid_images[0])
-            with open(img_path, "rb") as f:
-                res = requests.post(url, data=payload, files={"photo": f}, timeout=15)
+            with open(img_path, "rb") as img_file:
+                file_content = img_file.read()
+            files = {
+                "photo": (valid_images[0], file_content)
+            }
+            headers, body = encode_multipart(fields, files)
+            req = urllib.request.Request(url, data=body, method="POST")
+            for k, v in headers.items():
+                req.add_header(k, v)
+            with urllib.request.urlopen(req, timeout=15) as response:
+                tg_res = json.loads(response.read().decode("utf-8"))
                 
         # Send media group (album) if multiple images
         else:
             url = f"https://api.telegram.org/bot{bot_token}/sendMediaGroup"
             media_group = []
-            files_payload = {}
-            opened_files = []
+            files = {}
             
             for idx, img_name in enumerate(valid_images):
                 attach_key = f"photo_{idx}"
@@ -316,33 +350,40 @@ def product_post_telegram(product_id):
                     "type": "photo",
                     "media": f"attach://{attach_key}"
                 }
-                # Put the caption on the first item in the group
                 if idx == 0:
                     media_item["caption"] = caption
                     media_item["parse_mode"] = "HTML"
-                    
                 media_group.append(media_item)
-                img_path = os.path.join(image_dir, img_name)
-                f = open(img_path, "rb")
-                opened_files.append(f)
-                files_payload[attach_key] = f
                 
-            payload = {
+                img_path = os.path.join(image_dir, img_name)
+                with open(img_path, "rb") as img_file:
+                    file_content = img_file.read()
+                files[attach_key] = (img_name, file_content)
+                
+            fields = {
                 "chat_id": chat_id,
                 "media": json.dumps(media_group)
             }
-            try:
-                res = requests.post(url, data=payload, files=files_payload, timeout=30)
-            finally:
-                for f in opened_files:
-                    f.close()
-                    
-        tg_res = res.json()
+            headers, body = encode_multipart(fields, files)
+            req = urllib.request.Request(url, data=body, method="POST")
+            for k, v in headers.items():
+                req.add_header(k, v)
+            with urllib.request.urlopen(req, timeout=30) as response:
+                tg_res = json.loads(response.read().decode("utf-8"))
+                
         if not tg_res.get("ok"):
             error_desc = tg_res.get("description", "Unknown Telegram Error")
             return {"status": "error", "message": f"Telegram API: {error_desc}"}, 400
             
         return {"status": "success", "message": "Product posted to Telegram channel successfully!"}
+        
+    except urllib.error.HTTPError as e:
+        try:
+            error_data = json.loads(e.read().decode("utf-8"))
+            desc = error_data.get("description", "Unknown Telegram Error")
+            return {"status": "error", "message": f"Telegram API: {desc}"}, 400
+        except Exception:
+            return {"status": "error", "message": f"HTTP Error {e.code}: {e.reason}"}, 400
     except Exception as e:
         return {"status": "error", "message": f"Connection Error: {str(e)}"}, 500
 
