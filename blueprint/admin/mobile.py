@@ -3,7 +3,7 @@ import re
 from werkzeug.security import generate_password_hash
 from flask import Blueprint, render_template, redirect, url_for, request, flash, session, current_app
 from extensions import db
-from models import Product, ProductImage, Category, Brand, User, Setting
+from models import Product, ProductImage, Category, Brand, User, Setting, TelegramSchedule
 from models.Product import getAllProduct
 from models.ProductVariant import (
     VariantType,
@@ -249,14 +249,69 @@ def product_fast_image_upload(product_id):
         "filename": unique_filename
     }
 
-@mobile_bp.route("/product/telegram/<int:product_id>", methods=["POST"])
-def product_post_telegram(product_id):
+def get_timezone_offset():
+    offset_str = Setting.get_val("telegram_timezone_offset", "+7")
+    try:
+        return float(offset_str)
+    except ValueError:
+        return 7.0
+
+def get_local_now():
+    from datetime import datetime, timedelta, timezone
+    offset = get_timezone_offset()
+    tz = timezone(timedelta(hours=offset))
+    return datetime.now(tz)
+
+def send_telegram_post_helper(product, caption=None, selected_images=None):
     import os
     import json
     import urllib.request
     import urllib.parse
     import urllib.error
     
+    bot_token = (Setting.get_val("telegram_bot_token") or "").strip()
+    chat_id = (Setting.get_val("telegram_chat_id") or "").strip()
+    
+    if not bot_token or not chat_id:
+        return {
+            "status": "error",
+            "message": "Please configure Telegram Bot Token and Chat ID in Settings first."
+        }
+
+    if not caption:
+        tg_user = Setting.get_val("telegram_username", "Angkorkey_Store")
+        default_template = (
+            "╭━━━ 🎯 <b>NEW PRODUCT</b> ━━━╮\n\n"
+            "✨ <b>{name}</b>\n\n"
+            "💰 <b>Price:</b> <code>{price}$</code>\n\n"
+            "━━━━━━━━━━━━━━\n"
+            "🛒 <b>Order Now</b>\n"
+            "⚡️ <a href=\"https://t.me/angkorkeywebsite_bot/angkorkey\">Visit Website</a>\n\n"
+            "💬 <b>Contact Admin</b>\n"
+            "👉 <a href=\"http://t.me/{telegram_username}\">Click Here</a>\n\n"
+            "╰━━━━━━━━━━━━━━━━━━━╯"
+        )
+        tg_template = Setting.get_val("telegram_caption_template", default_template)
+        caption = tg_template.format(
+            name=product.name or "",
+            price=f"{product.price:.2f}" if product.price is not None else "0.00",
+            telegram_username=tg_user
+        )
+
+    image_dir = current_app.config.get("UPLOAD_FOLDER", "static/images")
+    valid_images = []
+    if selected_images:
+        for img in selected_images:
+            if img and img != "none.jpg":
+                path = os.path.join(image_dir, img)
+                if os.path.exists(path) and os.path.isfile(path):
+                    valid_images.append(img)
+    else:
+        if product.image and product.image != "none.jpg":
+            path = os.path.join(image_dir, product.image)
+            if os.path.exists(path) and os.path.isfile(path):
+                valid_images.append(product.image)
+
     def encode_multipart(fields, files):
         boundary = b'----WebKitFormBoundary7MA4YWxkTrZu0gW'
         lines = []
@@ -278,35 +333,6 @@ def product_post_telegram(product_id):
         return headers, body
 
     try:
-        product = Product.query.get_or_404(product_id)
-        
-        bot_token = (Setting.get_val("telegram_bot_token") or "").strip()
-        chat_id = (Setting.get_val("telegram_chat_id") or "").strip()
-        
-        if not bot_token or not chat_id:
-            return {
-                "status": "error",
-                "message": "Please configure Telegram Bot Token and Chat ID in Settings first."
-            }, 400
-
-        data = request.get_json() or {}
-        caption = data.get("caption", "").strip()
-        selected_images = data.get("selected_images", [])
-        
-        if not caption:
-            caption = f"<b>{product.name}</b>\n\nPrice: ${product.price:.2f}"
-
-        image_dir = current_app.config.get("UPLOAD_FOLDER", "static/images")
-        
-        # Check which of the selected images exist
-        valid_images = []
-        for img in selected_images:
-            if img and img != "none.jpg":
-                path = os.path.join(image_dir, img)
-                if os.path.exists(path) and os.path.isfile(path):
-                    valid_images.append(img)
-                    
-        # Send text only if no images selected/valid
         if not valid_images:
             url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
             payload = {
@@ -318,8 +344,6 @@ def product_post_telegram(product_id):
             req = urllib.request.Request(url, data=encoded_data, method="POST")
             with urllib.request.urlopen(req, timeout=15) as response:
                 tg_res = json.loads(response.read().decode("utf-8"))
-        
-        # Send single image if only one valid
         elif len(valid_images) == 1:
             url = f"https://api.telegram.org/bot{bot_token}/sendPhoto"
             fields = {
@@ -339,13 +363,10 @@ def product_post_telegram(product_id):
                 req.add_header(k, v)
             with urllib.request.urlopen(req, timeout=15) as response:
                 tg_res = json.loads(response.read().decode("utf-8"))
-                
-        # Send media group (album) if multiple images
         else:
             url = f"https://api.telegram.org/bot{bot_token}/sendMediaGroup"
             media_group = []
             files = {}
-            
             for idx, img_name in enumerate(valid_images):
                 attach_key = f"photo_{idx}"
                 media_item = {
@@ -356,12 +377,10 @@ def product_post_telegram(product_id):
                     media_item["caption"] = caption
                     media_item["parse_mode"] = "HTML"
                 media_group.append(media_item)
-                
                 img_path = os.path.join(image_dir, img_name)
                 with open(img_path, "rb") as img_file:
                     file_content = img_file.read()
                 files[attach_key] = (img_name, file_content)
-                
             fields = {
                 "chat_id": chat_id,
                 "media": json.dumps(media_group)
@@ -372,22 +391,271 @@ def product_post_telegram(product_id):
                 req.add_header(k, v)
             with urllib.request.urlopen(req, timeout=30) as response:
                 tg_res = json.loads(response.read().decode("utf-8"))
-                
+
         if not tg_res.get("ok"):
             error_desc = tg_res.get("description", "Unknown Telegram Error")
-            return {"status": "error", "message": f"Telegram API: {error_desc}"}, 400
-            
+            return {"status": "error", "message": f"Telegram API: {error_desc}"}
         return {"status": "success", "message": "Product posted to Telegram channel successfully!"}
-        
     except urllib.error.HTTPError as e:
         try:
             error_data = json.loads(e.read().decode("utf-8"))
             desc = error_data.get("description", "Unknown Telegram Error")
-            return {"status": "error", "message": f"Telegram API: {desc}"}, 400
+            return {"status": "error", "message": f"Telegram API: {desc}"}
         except Exception:
-            return {"status": "error", "message": f"HTTP Error {e.code}: {e.reason}"}, 400
+            return {"status": "error", "message": f"HTTP Error {e.code}: {e.reason}"}
     except Exception as e:
-        return {"status": "error", "message": f"Connection Error: {str(e)}"}, 500
+        return {"status": "error", "message": f"Connection Error: {str(e)}"}
+
+@mobile_bp.route("/product/telegram/<int:product_id>", methods=["POST"])
+def product_post_telegram(product_id):
+    product = Product.query.get_or_404(product_id)
+    data = request.get_json() or {}
+    caption = data.get("caption", "").strip()
+    selected_images = data.get("selected_images", [])
+    
+    res = send_telegram_post_helper(product, caption, selected_images)
+    if res.get("status") == "error":
+        return res, 400
+    return res
+
+@mobile_bp.route("/telegram-schedule")
+def telegram_schedule():
+    from datetime import datetime, timedelta
+    import json
+    
+    local_now = get_local_now()
+    local_today = local_now.date()
+    
+    monday_date = local_today - timedelta(days=local_today.weekday())
+    
+    week_days = []
+    for i in range(7):
+        day_date = monday_date + timedelta(days=i)
+        day_name = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i]
+        week_days.append({
+            "date": day_date,
+            "name": day_name,
+            "formatted": day_date.strftime("%Y-%m-%d"),
+            "label": day_date.strftime("%b %d")
+        })
+        
+    offset = get_timezone_offset()
+    monday_start_local = datetime.combine(monday_date, datetime.min.time())
+    monday_start_utc = monday_start_local - timedelta(hours=offset)
+    sunday_end_local = datetime.combine(monday_date + timedelta(days=6), datetime.max.time())
+    sunday_end_utc = sunday_end_local - timedelta(hours=offset)
+    
+    schedules = TelegramSchedule.query.filter(
+        TelegramSchedule.scheduled_time >= monday_start_utc,
+        TelegramSchedule.scheduled_time <= sunday_end_utc
+    ).order_by(TelegramSchedule.scheduled_time.asc()).all()
+    
+    schedules_by_day = {day["formatted"]: [] for day in week_days}
+    for s in schedules:
+        local_time = s.scheduled_time + timedelta(hours=offset)
+        day_str = local_time.strftime("%Y-%m-%d")
+        if day_str in schedules_by_day:
+            schedules_by_day[day_str].append({
+                "id": s.id,
+                "product_id": s.product_id,
+                "product_name": s.product.name if s.product else "Unknown Product",
+                "product_image": s.product.image if (s.product and s.product.image) else "none.jpg",
+                "product_price": s.product.price if s.product else 0,
+                "scheduled_time_local": local_time,
+                "scheduled_time_str": local_time.strftime("%I:%M %p"),
+                "scheduled_time_24": local_time.strftime("%H:%M"),
+                "caption": s.caption or "",
+                "status": s.status,
+                "error_message": s.error_message or "",
+                "images": json.loads(s.images_json) if s.images_json else []
+            })
+            
+    products = Product.query.filter_by(status="true").all()
+    
+    return render_template(
+        "backend/admin/mobile/telegram/schedule.html",
+        week_days=week_days,
+        schedules_by_day=schedules_by_day,
+        products=products,
+        current_day_formatted=local_today.strftime("%Y-%m-%d")
+    )
+
+@mobile_bp.route("/product/images/<int:product_id>")
+def product_images_api(product_id):
+    product = Product.query.get_or_404(product_id)
+    images = []
+    if product.image and product.image != "none.jpg":
+        images.append(product.image)
+    if product.images:
+        for img in product.images:
+            if img.image and img.image != "none.jpg" and img.image not in images:
+                images.append(img.image)
+    for var in product.variants:
+        for vi in var.images:
+            if vi.image and vi.image != "none.jpg" and vi.image not in images:
+                images.append(vi.image)
+    return {"status": "success", "images": images}
+
+@mobile_bp.route("/telegram-schedule/add", methods=["POST"])
+def telegram_schedule_add():
+    from datetime import datetime, timedelta
+    import json
+    
+    product_id = request.form.get("product_id")
+    date_str = request.form.get("date")
+    time_str = request.form.get("time")
+    caption = request.form.get("caption", "").strip()
+    selected_images = request.form.getlist("selected_images")
+    
+    if not product_id or not date_str or not time_str:
+        flash("Product, Date and Time are required.", "danger")
+        return redirect(url_for("mobile.telegram_schedule"))
+        
+    try:
+        local_datetime_str = f"{date_str} {time_str}"
+        local_dt = datetime.strptime(local_datetime_str, "%Y-%m-%d %H:%M")
+        
+        offset = get_timezone_offset()
+        utc_dt = local_dt - timedelta(hours=offset)
+        
+        schedule = TelegramSchedule(
+            product_id=int(product_id),
+            scheduled_time=utc_dt,
+            caption=caption if caption else None,
+            images_json=json.dumps(selected_images) if selected_images else None,
+            status="pending"
+        )
+        db.session.add(schedule)
+        db.session.commit()
+        flash("Post scheduled successfully!", "success")
+    except Exception as e:
+        flash(f"Error scheduling post: {str(e)}", "danger")
+        
+    return redirect(url_for("mobile.telegram_schedule"))
+
+@mobile_bp.route("/telegram-schedule/edit/<int:schedule_id>", methods=["POST"])
+def telegram_schedule_edit(schedule_id):
+    from datetime import datetime, timedelta
+    import json
+    
+    schedule = TelegramSchedule.query.get_or_404(schedule_id)
+    product_id = request.form.get("product_id")
+    date_str = request.form.get("date")
+    time_str = request.form.get("time")
+    caption = request.form.get("caption", "").strip()
+    selected_images = request.form.getlist("selected_images")
+    status = request.form.get("status", "pending")
+    
+    if not product_id or not date_str or not time_str:
+        flash("Product, Date and Time are required.", "danger")
+        return redirect(url_for("mobile.telegram_schedule"))
+        
+    try:
+        local_datetime_str = f"{date_str} {time_str}"
+        local_dt = datetime.strptime(local_datetime_str, "%Y-%m-%d %H:%M")
+        
+        offset = get_timezone_offset()
+        utc_dt = local_dt - timedelta(hours=offset)
+        
+        schedule.product_id = int(product_id)
+        schedule.scheduled_time = utc_dt
+        schedule.caption = caption if caption else None
+        schedule.images_json = json.dumps(selected_images) if selected_images else None
+        schedule.status = status
+        if status == "pending":
+            schedule.error_message = None
+            
+        db.session.commit()
+        flash("Scheduled post updated successfully!", "success")
+    except Exception as e:
+        flash(f"Error updating scheduled post: {str(e)}", "danger")
+        
+    return redirect(url_for("mobile.telegram_schedule"))
+
+@mobile_bp.route("/telegram-schedule/delete/<int:schedule_id>", methods=["POST"])
+def telegram_schedule_delete(schedule_id):
+    schedule = TelegramSchedule.query.get_or_404(schedule_id)
+    try:
+        db.session.delete(schedule)
+        db.session.commit()
+        flash("Scheduled post deleted successfully!", "success")
+    except Exception as e:
+        flash(f"Error deleting post: {str(e)}", "danger")
+    return redirect(url_for("mobile.telegram_schedule"))
+
+@mobile_bp.route("/telegram-schedule/post-now/<int:schedule_id>", methods=["POST"])
+def telegram_schedule_post_now(schedule_id):
+    import json
+    schedule = TelegramSchedule.query.get_or_404(schedule_id)
+    
+    schedule.status = "sending"
+    db.session.commit()
+    
+    selected_images = json.loads(schedule.images_json) if schedule.images_json else []
+    res = send_telegram_post_helper(schedule.product, schedule.caption, selected_images)
+    
+    if res.get("status") == "success":
+        schedule.status = "sent"
+        schedule.error_message = None
+        flash("Product posted to Telegram successfully!", "success")
+    else:
+        schedule.status = "failed"
+        schedule.error_message = res.get("message", "Unknown error")
+        flash(f"Failed to post to Telegram: {res.get('message')}", "danger")
+        
+    db.session.commit()
+    return redirect(url_for("mobile.telegram_schedule"))
+
+@mobile_bp.route("/telegram-schedule/trigger", methods=["POST", "GET"])
+def telegram_schedule_trigger():
+    from datetime import datetime
+    import json
+    
+    cron_key = Setting.get_val("telegram_cron_key", "")
+    request_key = request.args.get("key", "") or request.headers.get("X-Cron-Key", "")
+    if cron_key and cron_key != request_key:
+        return {"status": "error", "message": "Unauthorized trigger key"}, 401
+        
+    scheduler_enabled = Setting.get_val("telegram_scheduler_enabled", "true") == "true"
+    if not scheduler_enabled:
+        return {"status": "ignored", "message": "Scheduler is disabled in settings"}
+        
+    now_utc = datetime.utcnow()
+    due_posts = TelegramSchedule.query.filter(
+        TelegramSchedule.status == "pending",
+        TelegramSchedule.scheduled_time <= now_utc
+    ).all()
+    
+    processed = 0
+    success = 0
+    errors = []
+    
+    for post in due_posts:
+        post.status = "sending"
+        db.session.commit()
+        
+        selected_images = json.loads(post.images_json) if post.images_json else []
+        res = send_telegram_post_helper(post.product, post.caption, selected_images)
+        
+        processed += 1
+        if res.get("status") == "success":
+            post.status = "sent"
+            post.error_message = None
+            success += 1
+        else:
+            post.status = "failed"
+            post.error_message = res.get("message", "Unknown error")
+            errors.append(f"Post {post.id} failed: {res.get('message')}")
+            
+        db.session.commit()
+        
+    return {
+        "status": "success",
+        "processed": processed,
+        "success": success,
+        "failed": processed - success,
+        "errors": errors
+    }
 
 @mobile_bp.route("/product/bulk_status", methods=["POST"])
 def bulk_status():
@@ -1044,6 +1312,8 @@ def settings():
         telegram_bot_token = request.form.get("telegram_bot_token", "").strip()
         telegram_chat_id = request.form.get("telegram_chat_id", "").strip()
         telegram_caption_template = request.form.get("telegram_caption_template", "").strip()
+        telegram_timezone_offset = request.form.get("telegram_timezone_offset", "+7").strip()
+        telegram_scheduler_enabled = request.form.get("telegram_scheduler_enabled", "true").strip()
 
         if telegram_username.startswith("@"):
             telegram_username = telegram_username[1:]
@@ -1056,6 +1326,8 @@ def settings():
         Setting.set_val("telegram_bot_token", telegram_bot_token)
         Setting.set_val("telegram_chat_id", telegram_chat_id)
         Setting.set_val("telegram_caption_template", telegram_caption_template)
+        Setting.set_val("telegram_timezone_offset", telegram_timezone_offset)
+        Setting.set_val("telegram_scheduler_enabled", telegram_scheduler_enabled)
 
         flash("Settings updated successfully.", "success")
         return redirect(url_for("mobile.settings"))
@@ -1082,4 +1354,6 @@ def settings():
         telegram_bot_token=Setting.get_val("telegram_bot_token", ""),
         telegram_chat_id=Setting.get_val("telegram_chat_id", ""),
         telegram_caption_template=Setting.get_val("telegram_caption_template", default_template),
+        telegram_timezone_offset=Setting.get_val("telegram_timezone_offset", "+7"),
+        telegram_scheduler_enabled=Setting.get_val("telegram_scheduler_enabled", "true")
     )

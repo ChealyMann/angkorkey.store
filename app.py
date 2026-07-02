@@ -20,7 +20,7 @@ from blueprint.admin.promotion.promotion import promotion_bp
 from blueprint.admin.voucher.voucher import voucher_bp
 from blueprint.admin.mobile import mobile_bp
 
-from models import User, Category, Brand, Setting
+from models import User, Category, Brand, Setting, TelegramSchedule
 from translations import TRANSLATIONS
 
 
@@ -232,6 +232,53 @@ def page_not_found(error):
 def too_many_requests(error):
     return render_template("frontend/error/429.html"), 429
 
+
+def start_scheduler(app):
+    import threading
+    import time
+    from datetime import datetime
+    import json
+    
+    def run_telegram_scheduler():
+        with app.app_context():
+            # Wait 5 seconds for application database to initialize
+            time.sleep(5)
+            while True:
+                try:
+                    from models import Setting, TelegramSchedule, Product
+                    from extensions import db
+                    from blueprint.admin.mobile import send_telegram_post_helper
+                    
+                    scheduler_enabled = Setting.get_val("telegram_scheduler_enabled", "true") == "true"
+                    if scheduler_enabled:
+                        now_utc = datetime.utcnow()
+                        due_posts = TelegramSchedule.query.filter(
+                            TelegramSchedule.status == "pending",
+                            TelegramSchedule.scheduled_time <= now_utc
+                        ).all()
+                        
+                        for post in due_posts:
+                            post.status = "sending"
+                            db.session.commit()
+                            
+                            selected_images = json.loads(post.images_json) if post.images_json else []
+                            res = send_telegram_post_helper(post.product, post.caption, selected_images)
+                            
+                            if res.get("status") == "success":
+                                post.status = "sent"
+                                post.error_message = None
+                            else:
+                                post.status = "failed"
+                                post.error_message = res.get("message", "Unknown error")
+                            db.session.commit()
+                except Exception as e:
+                    print(f"Background Telegram Scheduler Error: {str(e)}")
+                time.sleep(60)
+
+    t = threading.Thread(target=run_telegram_scheduler, daemon=True)
+    t.start()
+
+start_scheduler(app)
 
 if __name__ == "__main__":
     app.run(debug=True)

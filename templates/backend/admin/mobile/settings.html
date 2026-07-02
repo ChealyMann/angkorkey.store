@@ -66,6 +66,48 @@
                 <textarea name="telegram_caption_template" class="form-control keyz-input font-12" rows="6" placeholder="Configure the default post formatting..." style="height: auto !important; line-height: 1.5;">{{ telegram_caption_template }}</textarea>
                 <span class="text-muted font-10 mt-1 d-block">Supported Placeholders: <code>{name}</code>, <code>{price}</code>, <code>{telegram_username}</code>, <code>{telegram_chat_link}</code>, <code>{desc}</code></span>
             </div>
+
+            <div class="mb-3">
+                <label class="keyz-label">Telegram Scheduler Status</label>
+                <select name="telegram_scheduler_enabled" class="form-select keyz-input">
+                    <option value="true" {% if telegram_scheduler_enabled == 'true' %}selected{% endif %}>Active / Running</option>
+                    <option value="false" {% if telegram_scheduler_enabled == 'false' %}selected{% endif %}>Paused</option>
+                </select>
+                <span class="text-muted font-10 mt-1 d-block">Enable or disable background scheduled postings.</span>
+            </div>
+
+            <div class="mb-3">
+                <label class="keyz-label">Timezone Offset (Hours from UTC)</label>
+                <select name="telegram_timezone_offset" class="form-select keyz-input">
+                    <option value="-12" {% if telegram_timezone_offset == '-12' %}selected{% endif %}>UTC-12</option>
+                    <option value="-11" {% if telegram_timezone_offset == '-11' %}selected{% endif %}>UTC-11</option>
+                    <option value="-10" {% if telegram_timezone_offset == '-10' %}selected{% endif %}>UTC-10</option>
+                    <option value="-9" {% if telegram_timezone_offset == '-9' %}selected{% endif %}>UTC-9</option>
+                    <option value="-8" {% if telegram_timezone_offset == '-8' %}selected{% endif %}>UTC-8</option>
+                    <option value="-7" {% if telegram_timezone_offset == '-7' %}selected{% endif %}>UTC-7</option>
+                    <option value="-6" {% if telegram_timezone_offset == '-6' %}selected{% endif %}>UTC-6</option>
+                    <option value="-5" {% if telegram_timezone_offset == '-5' %}selected{% endif %}>UTC-5</option>
+                    <option value="-4" {% if telegram_timezone_offset == '-4' %}selected{% endif %}>UTC-4</option>
+                    <option value="-3" {% if telegram_timezone_offset == '-3' %}selected{% endif %}>UTC-3</option>
+                    <option value="-2" {% if telegram_timezone_offset == '-2' %}selected{% endif %}>UTC-2</option>
+                    <option value="-1" {% if telegram_timezone_offset == '-1' %}selected{% endif %}>UTC-1</option>
+                    <option value="0" {% if telegram_timezone_offset == '0' %}selected{% endif %}>UTC+0 (GMT)</option>
+                    <option value="1" {% if telegram_timezone_offset == '1' %}selected{% endif %}>UTC+1</option>
+                    <option value="2" {% if telegram_timezone_offset == '2' %}selected{% endif %}>UTC+2</option>
+                    <option value="3" {% if telegram_timezone_offset == '3' %}selected{% endif %}>UTC+3</option>
+                    <option value="4" {% if telegram_timezone_offset == '4' %}selected{% endif %}>UTC+4</option>
+                    <option value="5" {% if telegram_timezone_offset == '5' %}selected{% endif %}>UTC+5</option>
+                    <option value="5.5" {% if telegram_timezone_offset == '5.5' %}selected{% endif %}>UTC+5:30</option>
+                    <option value="6" {% if telegram_timezone_offset == '6' %}selected{% endif %}>UTC+6</option>
+                    <option value="7" {% if telegram_timezone_offset == '7' %}selected{% endif %}>UTC+7 (Cambodia / Indochina)</option>
+                    <option value="8" {% if telegram_timezone_offset == '8' %}selected{% endif %}>UTC+8</option>
+                    <option value="9" {% if telegram_timezone_offset == '9' %}selected{% endif %}>UTC+9</option>
+                    <option value="10" {% if telegram_timezone_offset == '10' %}selected{% endif %}>UTC+10</option>
+                    <option value="11" {% if telegram_timezone_offset == '11' %}selected{% endif %}>UTC+11</option>
+                    <option value="12" {% if telegram_timezone_offset == '12' %}selected{% endif %}>UTC+12</option>
+                </select>
+                <span class="text-muted font-10 mt-1 d-block">Select your local time zone offset for scheduling.</span>
+            </div>
         </div>
 
         <!-- Sticky Footer -->

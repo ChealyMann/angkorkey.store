@@ -8,3 +8,4 @@ from .Promotion import Promotion
 from .Setting import Setting
 from .Voucher import Voucher
 from .VoucherRedemption import VoucherRedemption
+from .TelegramSchedule import TelegramSchedule

@@ -1,0 +1,400 @@
+{% extends 'backend/admin/mobile/mobile_master.html' %}
+
+{% block main %}
+<div class="mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="fw-bold font-16 mb-1 text-main">Telegram Posting Schedule</h3>
+            <span class="text-muted font-11">Plan your social postings for this week</span>
+        </div>
+        <button type="button" class="btn btn-dark btn-sm d-flex align-items-center gap-2" style="border-radius: 8px;" onclick="openAddModal()">
+            <i class="fa-solid fa-plus"></i>
+            <span>Add Slot</span>
+        </button>
+    </div>
+
+    <!-- Weekly Navigation Slider -->
+    <div class="d-flex overflow-auto gap-2 pb-2 mb-3" style="scrollbar-width: none; -ms-overflow-style: none;">
+        {% for day in week_days %}
+        <button type="button" class="btn day-tab-btn flex-fill py-2 px-3 text-center rounded-3 {% if day.formatted == current_day_formatted %}btn-dark active{% else %}btn-outline-custom{% endif %}" data-day-target="{{ day.formatted }}" style="min-width: 65px; border-radius: 12px !important;">
+            <span class="font-11 text-muted d-block text-uppercase" style="letter-spacing: 0.05em;">{{ day.name }}</span>
+            <span class="font-14 fw-bold d-block mt-1">{{ day.label.split(' ')[1] }}</span>
+        </button>
+        {% endfor %}
+    </div>
+
+    <!-- Daily Panes -->
+    {% for day in week_days %}
+    <div class="day-schedule-pane" id="pane-{{ day.formatted }}" style="{% if day.formatted != current_day_formatted %}display: none;{% endif %}">
+        {% set day_posts = schedules_by_day[day.formatted] %}
+        
+        <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2" style="border-color: var(--border-light) !important;">
+            <h6 class="text-muted text-uppercase fw-bold font-12 mb-0" style="letter-spacing: 0.05em;">{{ day.name }}, {{ day.label }}</h6>
+            <span class="badge badge-custom-light">{{ day_posts|length }} Slots</span>
+        </div>
+
+        {% if day_posts|length == 0 %}
+        <!-- Empty State -->
+        <div class="card p-5 text-center border-dashed" style="border-style: dashed !important; border-color: var(--border-light) !important; background: transparent !important;">
+            <div class="mb-3 text-muted" style="font-size: 2.5rem;"><i class="fa-solid fa-calendar-minus"></i></div>
+            <h6 class="fw-bold font-14 mb-1">No postings scheduled</h6>
+            <p class="text-muted font-11 mb-3">Get ahead by planning a Telegram post for this day.</p>
+            <button type="button" class="btn btn-outline-dark btn-sm mx-auto" onclick="openAddModalForDate('{{ day.formatted }}')" style="border-radius: 8px;">
+                Schedule Post
+            </button>
+        </div>
+        {% else %}
+        
+        <!-- Post Slots List -->
+        <div class="d-flex flex-column gap-3">
+            {% for post in day_posts %}
+            <div class="card p-3 mb-0 shadow-sm">
+                <div class="d-flex gap-3">
+                    <div class="rounded border overflow-hidden" style="width: 64px; height: 64px; flex-shrink: 0; border-color: var(--border-light) !important;">
+                        <img src="{{ url_for('static', filename='images/' + post.product_image) }}" class="w-100 h-100" style="object-fit: cover;">
+                    </div>
+                    
+                    <div class="flex-grow-1" style="min-width: 0;">
+                        <div class="d-flex align-items-start justify-content-between mb-1">
+                            <h6 class="fw-bold font-14 mb-0 text-truncate text-main" style="max-width: 80%;">{{ post.product_name }}</h6>
+                            <span class="font-11 text-muted fw-bold">{{ post.scheduled_time_str }}</span>
+                        </div>
+                        
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            {% if post.status == 'pending' %}
+                            <span class="badge badge-custom-light text-warning" style="font-size: 9px;"><i class="fa-solid fa-clock me-1"></i>Pending</span>
+                            {% elif post.status == 'sending' %}
+                            <span class="badge badge-custom-light text-primary" style="font-size: 9px;"><i class="fa-solid fa-spinner fa-spin me-1"></i>Sending</span>
+                            {% elif post.status == 'sent' %}
+                            <span class="badge badge-success-custom" style="font-size: 9px;"><i class="fa-solid fa-circle-check me-1"></i>Sent</span>
+                            {% else %}
+                            <span class="badge badge-danger-custom" style="font-size: 9px;"><i class="fa-solid fa-circle-exclamation me-1"></i>Failed</span>
+                            {% endif %}
+                            
+                            {% if post.caption %}
+                            <span class="badge badge-custom-light text-info" style="font-size: 9px;"><i class="fa-solid fa-pen-fancy me-1"></i>Custom Text</span>
+                            {% endif %}
+                        </div>
+
+                        {% if post.error_message %}
+                        <div class="p-2 bg-light rounded text-danger font-11 mb-2 border border-danger-subtle" style="line-height: 1.3;">
+                            <i class="fa-solid fa-circle-info me-1"></i>{{ post.error_message }}
+                        </div>
+                        {% endif %}
+
+                        <!-- Actions Row -->
+                        <div class="d-flex gap-2">
+                            {% if post.status == 'pending' or post.status == 'failed' %}
+                            <form action="{{ url_for('mobile.telegram_schedule_post_now', schedule_id=post.id) }}" method="POST" class="flex-fill">
+                                <button type="submit" class="btn btn-dark btn-sm w-100 py-1 font-11" style="border-radius: 6px;">
+                                    Post Now
+                                </button>
+                            </form>
+                            {% endif %}
+                            <button type="button" class="btn btn-outline-custom btn-sm py-1 px-3 font-11" onclick='openEditModal({{ {
+                                "id": post.id,
+                                "product_id": post.product_id,
+                                "date": day.formatted,
+                                "time": post.scheduled_time_24,
+                                "caption": post.caption,
+                                "status": post.status,
+                                "images": post.images
+                            }|tojson }})' style="border-radius: 6px;">
+                                Edit
+                            </button>
+                            <form action="{{ url_for('mobile.telegram_schedule_delete', schedule_id=post.id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this scheduled post?');">
+                                <button type="submit" class="btn btn-outline-danger btn-sm py-1 px-2 font-11" style="border-radius: 6px; border-color: rgba(239, 68, 68, 0.3) !important;">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Bottom Drawer: Add Scheduled Post -->
+<div class="offcanvas offcanvas-bottom" tabindex="-1" id="addPostSheet" aria-labelledby="addPostSheetLabel" style="height: 85vh;">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title fw-bold" id="addPostSheetLabel">Schedule Telegram Post</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body" style="background-color: var(--bg-main);">
+        <form action="{{ url_for('mobile.telegram_schedule_add') }}" method="POST" id="addForm">
+            <div class="mb-3">
+                <label class="keyz-label">1. Select Product</label>
+                <select name="product_id" id="addPostProductSelect" class="form-select keyz-input" required>
+                    <option value="">-- Choose Product --</option>
+                    {% for prod in products %}
+                    <option value="{{ prod.id }}">{{ prod.name }} (${{ "%.2f"|format(prod.price) }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="keyz-label">2. Select Images</label>
+                <div class="border rounded p-3 bg-white dark-bg-card" style="background-color: var(--bg-card) !important; border-color: var(--border-light) !important;">
+                    <div id="addPostImagesContainer">
+                        <span class="text-muted font-11">Select a product to view images</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-3 mb-3">
+                <div class="col-6">
+                    <label class="keyz-label">3. Date</label>
+                    <input type="date" name="date" id="addDateInput" class="form-control keyz-input" required>
+                </div>
+                <div class="col-6">
+                    <label class="keyz-label">4. Time</label>
+                    <input type="time" name="time" class="form-control keyz-input" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="keyz-label">5. Custom Caption (Optional)</label>
+                <textarea name="caption" class="form-control keyz-input font-12" rows="4" placeholder="Leave blank to use default settings template..." style="height: auto !important; line-height: 1.5;"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-dark w-100 py-3 mb-2" style="border-radius: 10px; font-weight: 600; height: 50px;">
+                Save Schedule
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Bottom Drawer: Edit Scheduled Post -->
+<div class="offcanvas offcanvas-bottom" tabindex="-1" id="editPostSheet" aria-labelledby="editPostSheetLabel" style="height: 85vh;">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title fw-bold" id="editPostSheetLabel">Edit Scheduled Post</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body" style="background-color: var(--bg-main);">
+        <form action="" method="POST" id="editForm">
+            <div class="mb-3">
+                <label class="keyz-label">1. Select Product</label>
+                <select name="product_id" id="editProductSelect" class="form-select keyz-input" required>
+                    {% for prod in products %}
+                    <option value="{{ prod.id }}">{{ prod.name }} (${{ "%.2f"|format(prod.price) }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="keyz-label">2. Select Images</label>
+                <div class="border rounded p-3 bg-white dark-bg-card" style="background-color: var(--bg-card) !important; border-color: var(--border-light) !important;">
+                    <div id="editPostImagesContainer">
+                        <span class="text-muted font-11">Images loading...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-3 mb-3">
+                <div class="col-6">
+                    <label class="keyz-label">3. Date</label>
+                    <input type="date" name="date" id="editDateInput" class="form-control keyz-input" required>
+                </div>
+                <div class="col-6">
+                    <label class="keyz-label">4. Time</label>
+                    <input type="time" name="time" id="editTimeInput" class="form-control keyz-input" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="keyz-label">5. Custom Caption (Optional)</label>
+                <textarea name="caption" id="editCaptionInput" class="form-control keyz-input font-12" rows="4" placeholder="Leave blank to use default settings template..." style="height: auto !important; line-height: 1.5;"></textarea>
+            </div>
+
+            <div class="mb-4">
+                <label class="keyz-label">6. Status</label>
+                <select name="status" id="editStatusSelect" class="form-select keyz-input">
+                    <option value="pending">Pending</option>
+                    <option value="sent">Sent</option>
+                    <option value="failed">Failed</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-dark w-100 py-3 mb-2" style="border-radius: 10px; font-weight: 600; height: 50px;">
+                Update Schedule
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Tab switching logic
+    document.querySelectorAll('.day-tab-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Remove active classes
+            document.querySelectorAll('.day-tab-btn').forEach(b => {
+                b.classList.remove('btn-dark', 'active');
+                b.classList.add('btn-outline-custom');
+            });
+            
+            // Add active classes
+            this.classList.remove('btn-outline-custom');
+            this.classList.add('btn-dark', 'active');
+            
+            // Hide all panes
+            document.querySelectorAll('.day-schedule-pane').forEach(pane => {
+                pane.style.display = 'none';
+            });
+            
+            // Show target pane
+            const target = this.getAttribute('data-day-target');
+            document.getElementById('pane-' + target).style.display = 'block';
+        });
+    });
+
+    // Toggle images checkbox
+    function toggleCheckbox(id) {
+        const checkbox = document.getElementById(id);
+        if (checkbox) {
+            checkbox.checked = !checkbox.checked;
+        }
+    }
+
+    // Modal triggers
+    function openAddModal() {
+        const activeBtn = document.querySelector('.day-tab-btn.active');
+        const activeDate = activeBtn ? activeBtn.getAttribute('data-day-target') : '{{ current_day_formatted }}';
+        openAddModalForDate(activeDate);
+    }
+
+    function openAddModalForDate(date) {
+        document.getElementById('addForm').reset();
+        document.getElementById('addDateInput').value = date;
+        document.getElementById('addPostImagesContainer').innerHTML = '<span class="text-muted font-11">Select a product to view images</span>';
+        
+        const addSheet = new bootstrap.Offcanvas(document.getElementById('addPostSheet'));
+        addSheet.show();
+    }
+
+    // Dynamic product image load (Add Form)
+    document.getElementById('addPostProductSelect').addEventListener('change', function() {
+        const productId = this.value;
+        const container = document.getElementById('addPostImagesContainer');
+        if (!productId) {
+            container.innerHTML = '<span class="text-muted font-11">Select a product to view images</span>';
+            return;
+        }
+        
+        container.innerHTML = '<div class="text-center py-2"><i class="fa-solid fa-spinner fa-spin text-muted"></i></div>';
+        
+        fetch(`/admin/mobile/product/images/${productId}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success' && data.images.length > 0) {
+                    container.innerHTML = '<div class="row g-2">' + data.images.map((img, idx) => `
+                        <div class="col-4">
+                            <div class="position-relative rounded overflow-hidden border" style="height: 70px; cursor: pointer; border-color: var(--border-light) !important;" onclick="toggleCheckbox('add-img-checkbox-${idx}')">
+                                <img src="/static/images/${img}" class="w-100 h-100" style="object-fit: cover;">
+                                <input type="checkbox" name="selected_images" value="${img}" id="add-img-checkbox-${idx}" class="position-absolute" style="top: 5px; right: 5px; width: 16px; height: 16px;" checked onclick="event.stopPropagation();">
+                            </div>
+                        </div>
+                    `).join('') + '</div>';
+                } else {
+                    container.innerHTML = '<span class="text-muted font-11">No images found for this product</span>';
+                }
+            })
+            .catch(() => {
+                container.innerHTML = '<span class="text-danger font-11">Error loading images</span>';
+            });
+    });
+
+    // Dynamic product image load (Edit Form)
+    document.getElementById('editProductSelect').addEventListener('change', function() {
+        const productId = this.value;
+        const container = document.getElementById('editPostImagesContainer');
+        if (!productId) {
+            container.innerHTML = '<span class="text-muted font-11">No images found</span>';
+            return;
+        }
+        container.innerHTML = '<div class="text-center py-2"><i class="fa-solid fa-spinner fa-spin text-muted"></i></div>';
+        
+        fetch(`/admin/mobile/product/images/${productId}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success' && data.images.length > 0) {
+                    container.innerHTML = '<div class="row g-2">' + data.images.map((img, idx) => `
+                        <div class="col-4">
+                            <div class="position-relative rounded overflow-hidden border" style="height: 70px; cursor: pointer; border-color: var(--border-light) !important;" onclick="toggleCheckbox('edit-img-checkbox-${idx}')">
+                                <img src="/static/images/${img}" class="w-100 h-100" style="object-fit: cover;">
+                                <input type="checkbox" name="selected_images" value="${img}" id="edit-img-checkbox-${idx}" class="position-absolute" style="top: 5px; right: 5px; width: 16px; height: 16px;" checked onclick="event.stopPropagation();">
+                            </div>
+                        </div>
+                    `).join('') + '</div>';
+                } else {
+                    container.innerHTML = '<span class="text-muted font-11">No images found</span>';
+                }
+            })
+            .catch(() => {
+                container.innerHTML = '<span class="text-danger font-11">Error loading images</span>';
+            });
+    });
+
+    // Populate and open edit modal
+    function openEditModal(schedule) {
+        document.getElementById('editForm').action = `/admin/mobile/telegram-schedule/edit/${schedule.id}`;
+        document.getElementById('editProductSelect').value = schedule.product_id;
+        document.getElementById('editDateInput').value = schedule.date;
+        document.getElementById('editTimeInput').value = schedule.time;
+        document.getElementById('editCaptionInput').value = schedule.caption;
+        document.getElementById('editStatusSelect').value = schedule.status;
+        
+        const container = document.getElementById('editPostImagesContainer');
+        container.innerHTML = '<div class="text-center py-2"><i class="fa-solid fa-spinner fa-spin text-muted"></i></div>';
+        
+        fetch(`/admin/mobile/product/images/${schedule.product_id}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success' && data.images.length > 0) {
+                    container.innerHTML = '<div class="row g-2">' + data.images.map((img, idx) => {
+                        const isChecked = schedule.images.includes(img) || (schedule.images.length === 0 && idx === 0);
+                        return `
+                            <div class="col-4">
+                                <div class="position-relative rounded overflow-hidden border" style="height: 70px; cursor: pointer; border-color: var(--border-light) !important;" onclick="toggleCheckbox('edit-img-checkbox-${idx}')">
+                                    <img src="/static/images/${img}" class="w-100 h-100" style="object-fit: cover;">
+                                    <input type="checkbox" name="selected_images" value="${img}" id="edit-img-checkbox-${idx}" class="position-absolute" style="top: 5px; right: 5px; width: 16px; height: 16px;" ${isChecked ? 'checked' : ''} onclick="event.stopPropagation();">
+                                </div>
+                            </div>
+                        `;
+                    }).join('') + '</div>';
+                } else {
+                    container.innerHTML = '<span class="text-muted font-11">No images found</span>';
+                }
+            })
+            .catch(() => {
+                container.innerHTML = '<span class="text-danger font-11">Error loading images</span>';
+            });
+            
+        const editSheet = new bootstrap.Offcanvas(document.getElementById('editPostSheet'));
+        editSheet.show();
+    }
+</script>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<script>
+    {% for category, message in messages %}
+        Swal.fire({
+            title: '{{ "ជោគជ័យ" if category == "success" else "បរាជ័យ" }}',
+            text: '{{ message }}',
+            icon: '{{ "error" if category == "error" else category }}',
+            showConfirmButton: false,
+            timer: 1800,
+            timerProgressBar: true,
+            background: "var(--bg-card)",
+            color: "var(--text-main)"
+        });
+    {% endfor %}
+</script>
+{% endif %}
+{% endwith %}
+
+{% endblock %}
