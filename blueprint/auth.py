@@ -22,6 +22,7 @@ def login():
             session['user_id'] = username_.id
             session['username'] = username_.username
             session['image'] = username_.image
+            session.permanent = True
             flash(category="success", message="Login Successful")
             return redirect(url_for('admin.admin'))
         else:

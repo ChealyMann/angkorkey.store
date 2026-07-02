@@ -66,7 +66,7 @@ app.config["SECRET_KEY"] = os.environ.get(
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(INSTANCE_DIR, "app.db")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=30)
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=1)
 
 # Upload folder
 app.config["UPLOAD_FOLDER"] = UPLOAD_DIR
